@@ -61,7 +61,7 @@
     let loaded = false;
 
     // state requested before the GLB finished loading — applied on load
-    const req = { layers: null, hemisphere: 'both', isolate: null, selected: null };
+    const req = { layers: null, hemisphere: 'both', isolate: null, selected: null, subset: null };
 
     /* ---------------- load the real specimen ---------------- */
     const draco = new T.DRACOLoader().setDecoderPath(DRACO);
@@ -113,6 +113,7 @@
       if (req.layers) setLayers(req.layers);
       setHemisphere(req.hemisphere);
       isolate(req.isolate);
+      setSubset(req.subset);
       if (req.selected != null) selectNode(req.selected); else clearSelect();
       snap();
       if (opts.onReady) opts.onReady();
@@ -252,6 +253,16 @@
       allMeshes.forEach(m => { m.userData.isoHidden = set ? !set.has(m.userData.nodeId) : false; });
     }
 
+    // restrict given categories to a set of node ids (e.g. only the circle-of-Willis
+    // arteries) without touching any other layer — map: { cat: Set(ids) } or null.
+    function setSubset(map) {
+      req.subset = map;
+      allMeshes.forEach(m => {
+        const s = map && map[m.userData.cat];
+        m.userData.subsetHidden = s ? !s.has(m.userData.nodeId) : false;
+      });
+    }
+
     function reset() {
       tgtGoal.set(0, -0.05, 0);
       sphGoal.set(7.6, Math.PI / 2.25, 0.5);
@@ -261,7 +272,7 @@
     function snap() {
       allMeshes.forEach(m => {
         const c = cats[m.userData.cat];
-        const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden;
+        const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden && !m.userData.subsetHidden;
         const cap = m.userData.maxOpacity != null ? m.userData.maxOpacity : 1;
         m.material.opacity = want ? Math.min(cap, c.targetOpacity) : 0;
         m.visible = m.material.opacity > 0.012;
@@ -305,7 +316,7 @@
         const fade = 1 - Math.pow(0.0022, dt);
         allMeshes.forEach(m => {
           const c = cats[m.userData.cat];
-          const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden;
+          const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden && !m.userData.subsetHidden;
           const cap = m.userData.maxOpacity != null ? m.userData.maxOpacity : 1;
           const isSel = selectedIds.has(m);
           // a selected structure is forced fully opaque (even under a faded cortex) and glows
@@ -385,7 +396,7 @@
     return {
       THREE: T, scene, camera, renderer, cats,
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
-      selectNode, clearSelect, reset, frameSphere, snap, isolate,
+      selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset,
       setAutoRotate, setExposure, setBackground, setPalette, capturePoster,
       dispose() { cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); },
     };

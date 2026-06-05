@@ -8,9 +8,10 @@ const SHORT = {
 };
 
 const PRESETS = [
-  { id: 'whole',  label: 'Whole brain',     color: 'var(--c-cortex)',         on: ['cortex','cerebellum','brainstem'], cortex: 0.5,  focus: null },
+  { id: 'whole',  label: 'Whole brain',     color: 'var(--c-cortex)',         on: ['cortex','cerebellum','brainstem'], cortex: 1,    focus: null },
   { id: 'vasc',   label: 'Vasculature',      color: 'var(--c-arteries)',       on: ['arteries','veins_sinuses'],        cortex: 0.12, focus: 'arteries' },
-  { id: 'willis', label: 'Circle of Willis', color: 'var(--c-arteries)',       on: ['arteries'],                        cortex: 0.08, focus: 'arteries' },
+  { id: 'willis', label: 'Circle of Willis', color: 'var(--c-arteries)',       on: ['arteries'],                        cortex: 0.08, focus: 'arteries',
+    subset: { arteries: ['Anterior cerebral artery', 'Anterior communicating artery', 'Internal carotid artery', 'Posterior communicating artery', 'Posterior cerebral artery', 'Basilar artery'] } },
   { id: 'vent',   label: 'Ventricles',       color: 'var(--c-ventricles)',     on: ['ventricles'],                      cortex: 0.10, focus: 'ventricles' },
   { id: 'limbic', label: 'Limbic system',    color: 'var(--c-deep_grey)',      on: ['deep_grey','white_matter','diencephalon'], cortex: 0.12, focus: 'deep_grey' },
   { id: 'deep',   label: 'Deep grey',        color: 'var(--c-deep_grey)',      on: ['deep_grey','diencephalon','ventricles'],   cortex: 0.12, focus: 'deep_grey' },
@@ -68,16 +69,14 @@ function App() {
 
   // ---- state ----
   const [search, setSearch] = React.useState('');
-  const [hemisphere, setHemisphere] = React.useState('both');
-  const [cortexOpacity, setCortexOpacity] = React.useState(0.5);
+  const [hemisphere, setHemisphere] = React.useState('left');
+  const [cortexOpacity, setCortexOpacity] = React.useState(1);
   const [layerOn, setLayerOn] = React.useState(() => { const o = {}; CAT_ORDER.forEach(c => o[c] = ['cortex', 'cerebellum', 'brainstem'].includes(c)); return o; });
   const [expanded, setExpanded] = React.useState(() => new Set());
   const [selectedId, setSelectedId] = React.useState(null);
   const [isolatedIds, setIsolatedIds] = React.useState(null);
   const [activePreset, setActivePreset] = React.useState('whole');
-  const [depthStop, setDepthStop] = React.useState(0);
   const [collapsed, setCollapsed] = React.useState(false);
-  const [railExpanded, setRailExpanded] = React.useState(false);
   const [pos, setPos] = React.useState(() => { try { return JSON.parse(localStorage.getItem('ba_pos')) || { x: 16, y: 16 }; } catch (e) { return { x: 16, y: 16 }; } });
   const [hover, setHover] = React.useState(null); // {id, x, y}
   const [hint, setHint] = React.useState(true);
@@ -137,9 +136,20 @@ function App() {
     s.setLayers(map);
     s.setHemisphere(hemisphere);
     s.isolate(isolatedIds ? [...isolatedIds] : null);
+    // preset-defined sub-selection (e.g. Circle of Willis = only the ring arteries)
+    const preset = PRESETS.find(p => p.id === activePreset);
+    let subsetMap = null;
+    if (preset && preset.subset) {
+      subsetMap = {};
+      Object.keys(preset.subset).forEach(cat => {
+        const labels = new Set(preset.subset[cat]);
+        subsetMap[cat] = new Set(nodes.filter(n => n.category === cat && labels.has(n.label)).map(n => n.id));
+      });
+    }
+    s.setSubset(subsetMap);
     if (selectedId != null) s.selectNode(selectedId); else s.clearSelect();
     if (firstCompose.current) { s.snap(); firstCompose.current = false; }
-  }, [layerOn, cortexOpacity, hemisphere, q, matchedCats, isolatedIds, selectedId]);
+  }, [layerOn, cortexOpacity, hemisphere, q, matchedCats, isolatedIds, selectedId, activePreset]);
 
   React.useEffect(() => { sceneRef.current && sceneRef.current.setAutoRotate(t.autorotate); }, [t.autorotate]);
   React.useEffect(() => { sceneRef.current && sceneRef.current.setExposure(t.glow); }, [t.glow]);
@@ -172,7 +182,7 @@ function App() {
   const focusCat = (cat) => sceneRef.current && sceneRef.current.focusCategory(cat);
   const reset = () => {
     setActivePreset('whole'); applyPreset(PRESETS[0], false);
-    setHemisphere('both'); setIsolatedIds(null); setSearch(''); setSelectedId(null); setDepthStop(0); setFocusedId(null);
+    setHemisphere('left'); setIsolatedIds(null); setSearch(''); setSelectedId(null); setFocusedId(null);
     sceneRef.current && sceneRef.current.reset();
   };
 
@@ -181,14 +191,8 @@ function App() {
     setIsolatedIds(null); setSearch(''); setSelectedId(null); setFocusedId(null);  // close any open selection card
     const o = {}; CAT_ORDER.forEach(c => o[c] = p.on.includes(c) || (c === 'cortex' && p.cortex > 0));
     setLayerOn(o); setCortexOpacity(p.cortex);
-    setDepthStop(0);
     if (doFocus && p.focus) setTimeout(() => sceneRef.current && sceneRef.current.focusCategory(p.focus), 60);
     else if (doFocus) sceneRef.current && sceneRef.current.reset();
-  };
-
-  const setStop = (stop) => {
-    setActivePreset(null); setDepthStop(stop);
-    setLayerOn(() => { const o = {}; CAT_ORDER.forEach((c, i) => o[c] = i >= stop); return o; });
   };
 
   const applyPalette = (pal) => {
@@ -248,15 +252,12 @@ function App() {
     const h = (e) => {
       if (e.target.tagName === 'INPUT') { if (e.key === 'Escape') e.target.blur(); return; }
       if (e.key === '/') { e.preventDefault(); const i = document.querySelector('.glass input'); i && i.focus(); }
-      else if (e.key === 'ArrowDown') { e.preventDefault(); setStop(Math.min(CAT_ORDER.length - 1, depthStop + 1)); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); setStop(Math.max(0, depthStop - 1)); }
       else if (e.key === 'Escape') { if (isolatedIds) clearIsolate(); else setSelectedId(null); }
     };
     window.addEventListener('keydown', h);
     return () => window.removeEventListener('keydown', h);
-  }, [depthStop, isolatedIds]);
+  }, [isolatedIds]);
 
-  const depthLayers = CAT_ORDER.map(c => ({ cat: c, color: PAL[c], short: SHORT[c] }));
   const hoverNode = hover ? nodeById[hover.id] : null;
 
   return (
@@ -294,7 +295,6 @@ function App() {
         q={q}
       />
 
-      <DepthRail layers={depthLayers} stop={depthStop} setStop={setStop} expanded={railExpanded} setExpanded={setRailExpanded} />
 
       <SelectionCard node={selNode} color={selNode ? PAL[selNode.category] : null}
         catLabel={selNode ? cats[selNode.category].label : ''} description={description} related={related}
