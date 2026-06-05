@@ -323,10 +323,15 @@
           const tgt = isSel ? 1 : (want ? Math.min(cap, c.targetOpacity) : 0);
           m.material.opacity += (tgt - m.material.opacity) * (isSel ? 1 : fade);
           m.visible = m.material.opacity > 0.012;
-          let e = m.userData.baseEmiss;
-          if (isSel) e += 0.62;
-          else if (m === hovered) e += 0.2;
-          m.material.emissive.copy(m.userData.baseColor).multiplyScalar(e);
+          if (isSel) {
+            // selected: render as a noticeably DARKER shade of its own colour
+            m.material.color.copy(m.userData.baseColor).multiplyScalar(0.38);
+            m.material.emissive.copy(m.userData.baseColor).multiplyScalar(m.userData.baseEmiss * 0.5);
+          } else {
+            m.material.color.copy(m.userData.baseColor);
+            let e = m.userData.baseEmiss + (m === hovered ? 0.2 : 0);
+            m.material.emissive.copy(m.userData.baseColor).multiplyScalar(e);
+          }
           m.renderOrder = isSel ? 2 : 0;
         });
       }
