@@ -1,0 +1,116 @@
+/* ============================================================
+   Brain Atlas — design system
+   Clinical-precise chrome · dark specimen stage · modern palette
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  /* --- brand / chrome --- */
+  --accent:        #3A66FF;
+  --accent-press:  #2B4FE0;
+  --accent-soft:   rgba(58, 102, 255, 0.12);
+  --accent-ring:   rgba(58, 102, 255, 0.40);
+
+  /* --- ink (on light glass) --- */
+  --ink:        #16181F;
+  --ink-soft:   #444A57;
+  --ink-faint:  #767D8C;
+  --ink-ghost:  #A2A8B4;
+  --hair:       rgba(16, 20, 32, 0.09);
+  --hair-2:     rgba(16, 20, 32, 0.06);
+
+  /* --- light frosted glass --- */
+  --glass:        rgba(249, 250, 252, 0.74);
+  --glass-solid:  rgba(250, 251, 253, 0.96);
+  --glass-hi:     rgba(255, 255, 255, 0.85);
+  --glass-edge:   rgba(255, 255, 255, 0.65);
+  --glass-shadow: 0 1px 2px rgba(10, 14, 28, 0.18),
+                  0 12px 32px -8px rgba(10, 14, 28, 0.42),
+                  0 2px 6px rgba(10, 14, 28, 0.20);
+  --field:        rgba(255, 255, 255, 0.70);
+
+  /* --- specimen stage (dark) --- */
+  --stage-1: #1a2236;   /* center glow */
+  --stage-2: #0c1018;   /* mid */
+  --stage-3: #06080d;   /* edge */
+  --on-stage:        #E9EDF6;
+  --on-stage-soft:   #9aa6bd;
+
+  /* --- 11 subsystem colors (mirror of BRAIN.palette) --- */
+  --c-cortex:        #E7DEC9;
+  --c-white_matter:  #D7DDE8;
+  --c-deep_grey:     #B57BE0;
+  --c-diencephalon:  #7E8CF2;
+  --c-brainstem:     #E8B24A;
+  --c-cerebellum:    #F0894E;
+  --c-ventricles:    #3FC8D6;
+  --c-arteries:      #F05068;
+  --c-veins_sinuses: #5078E8;
+  --c-cranial_nerves:#D9D24A;
+  --c-meninges_dura: #CC63CC;
+
+  --r-lg: 18px;
+  --r-md: 13px;
+  --r-sm: 9px;
+  --font: 'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0; height: 100%;
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+body { overflow: hidden; background: #06080d; color: var(--ink); }
+#root { position: fixed; inset: 0; }
+
+/* ---------- stage ---------- */
+.stage {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 95% at 50% 38%, var(--stage-1) 0%, var(--stage-2) 46%, var(--stage-3) 100%);
+}
+.stage::after {  /* subtle vignette + grain feel */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(130% 100% at 50% 45%, transparent 55%, rgba(0,0,0,0.45) 100%);
+}
+canvas.three { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+
+/* ---------- floating window chrome ---------- */
+.glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(26px) saturate(165%);
+  backdrop-filter: blur(26px) saturate(165%);
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+  border-radius: var(--r-lg);
+}
+.glass-top-hi {
+  background-image: linear-gradient(var(--glass-hi), transparent 64px);
+}
+
+/* scrollbars inside panels */
+.scroll { scrollbar-width: thin; scrollbar-color: rgba(20,24,36,0.22) transparent; }
+.scroll::-webkit-scrollbar { width: 9px; }
+.scroll::-webkit-scrollbar-thumb { background: rgba(20,24,36,0.18); border-radius: 9px; border: 2px solid transparent; background-clip: padding-box; }
+.scroll::-webkit-scrollbar-thumb:hover { background: rgba(20,24,36,0.30); background-clip: padding-box; }
+
+/* ---------- focus ---------- */
+:focus-visible { outline: 2px solid var(--accent-ring); outline-offset: 1px; }
+button { font-family: inherit; cursor: pointer; }
+
+/* ---------- helpers ---------- */
+.mono { font-family: var(--mono); font-feature-settings: "tnum" 1; }
+.eyebrow {
+  font-family: var(--mono); font-weight: 500;
+  font-size: 10px; letter-spacing: 0.13em; text-transform: uppercase;
+  color: var(--ink-faint);
+}
+.noselect { -webkit-user-select: none; user-select: none; }
+
+@keyframes popIn { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.pop { animation: popIn 0.32s cubic-bezier(0.16, 1, 0.3, 1); }

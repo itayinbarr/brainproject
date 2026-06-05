@@ -1,0 +1,330 @@
+/* ============================================================
+   Brain Atlas — REAL specimen scene (Three.js r137 global)
+   Loads the 344-structure Z-Anatomy brain.glb and exposes the
+   exact same window.BrainScene API the procedural mock used —
+   but every mesh carries its real bx_id, so picking, selection,
+   isolate and focus are per-structure, not per-category.
+   ============================================================ */
+(function () {
+  const T = window.THREE;
+
+  const PAL = (window.BRAIN && window.BRAIN.palette) || {};
+  const col = (c, fb) => new T.Color(PAL[c] || fb || '#cccccc');
+  // per-subsystem self-illumination so hues stay vivid on the dark stage
+  const CAT_EMISS = {
+    cortex: 0.05, white_matter: 0.16, deep_grey: 0.44, diencephalon: 0.42, brainstem: 0.22,
+    cerebellum: 0.12, ventricles: 0.54, arteries: 0.6, veins_sinuses: 0.5, cranial_nerves: 0.54, meninges_dura: 0.06,
+  };
+  // structures kept translucent even at full layer opacity (you see through them)
+  const MAX_OPACITY = { meninges_dura: 0.34, ventricles: 0.9 };
+  const VESSEL = new Set(['arteries', 'veins_sinuses', 'cranial_nerves']);
+
+  function extras(o) {
+    if (o.userData && o.userData.bx_cat != null) return o.userData;
+    if (o.parent && o.parent.userData && o.parent.userData.bx_cat != null) return o.parent.userData;
+    return o.userData || {};
+  }
+
+  /* ============================================================ */
+  function create(canvas, opts) {
+    opts = opts || {};
+    const URL = opts.url || './models/brain.glb';
+    const DRACO = opts.dracoPath || './vendor/draco/';
+
+    const renderer = new T.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+    renderer.setClearColor(0x000000, 0);
+    renderer.outputEncoding = T.sRGBEncoding;
+    renderer.toneMapping = T.LinearToneMapping;
+    renderer.toneMappingExposure = opts.exposure || 0.95;
+
+    const scene = new T.Scene();
+    const camera = new T.PerspectiveCamera(38, 1, 0.01, 200);
+
+    // lights — soft clinical key + cool/warm rims for the "designed" stage
+    scene.add(new T.HemisphereLight(0xc6d2ff, 0x14171f, 0.5));
+    const key = new T.DirectionalLight(0xffffff, 1.05); key.position.set(4, 6.5, 7); scene.add(key);
+    const fill = new T.DirectionalLight(0xaebfff, 0.34); fill.position.set(-6, 1, 3); scene.add(fill);
+    const rim = new T.DirectionalLight(0x8ee0ff, 0.8); rim.position.set(-3, 3, -8); scene.add(rim);
+    const rim2 = new T.DirectionalLight(0xff9bb6, 0.3); rim2.position.set(5, -2, -6); scene.add(rim2);
+
+    const root = new T.Group(); root.rotation.y = -0.25; scene.add(root);
+    const model = new T.Group(); root.add(model);   // holds the centered/scaled gltf
+
+    // logical category registry (we never reparent gltf meshes — keep transforms)
+    const cats = {};                       // cat -> { want, targetOpacity, meshes[] }
+    function C(cat) { if (!cats[cat]) cats[cat] = { want: true, targetOpacity: 1, meshes: [] }; return cats[cat]; }
+    const allMeshes = [];
+    const meshById = new Map();             // nodeId -> [meshes]
+    let loaded = false;
+
+    // state requested before the GLB finished loading — applied on load
+    const req = { layers: null, hemisphere: 'both', isolate: null, selected: null };
+
+    /* ---------------- load the real specimen ---------------- */
+    const draco = new T.DRACOLoader().setDecoderPath(DRACO);
+    const loader = new T.GLTFLoader(); loader.setDRACOLoader(draco);
+    loader.load(URL, (gltf) => {
+      model.add(gltf.scene);
+
+      gltf.scene.traverse((o) => {
+        if (!o.isMesh) return;
+        const ex = extras(o);
+        const cat = ex.bx_cat || 'other';
+        const id = ex.bx_id != null ? ex.bx_id : null;
+        const side = ex.bx_side || 'median';
+        const base = col(cat);
+        const be = CAT_EMISS[cat] != null ? CAT_EMISS[cat] : 0.06;
+        const mat = new T.MeshStandardMaterial({
+          color: base.clone(),
+          roughness: VESSEL.has(cat) ? 0.5 : 0.82,
+          metalness: 0.0,
+          transparent: true, opacity: 1,
+          emissive: base.clone().multiplyScalar(be),
+          side: cat === 'meninges_dura' ? T.DoubleSide : T.FrontSide,
+          depthWrite: true,
+        });
+        o.material = mat;
+        o.userData = { cat, side, nodeId: id, baseColor: base.clone(), baseEmiss: be,
+                       maxOpacity: MAX_OPACITY[cat] != null ? MAX_OPACITY[cat] : 1 };
+        C(cat).meshes.push(o); allMeshes.push(o);
+        if (id != null) { if (!meshById.has(id)) meshById.set(id, []); meshById.get(id).push(o); }
+      });
+
+      // center on the CORE brain (ignore descending nerves/vessels) + scale to stage
+      const core = new T.Box3();
+      let anyCore = false;
+      for (const m of allMeshes) {
+        const ex = extras(m);
+        if (ex.bx_core === 1 || ex.bx_core === true) { core.expandByObject(m); anyCore = true; }
+      }
+      if (!anyCore) core.setFromObject(gltf.scene);
+      const center = core.getCenter(new T.Vector3());
+      gltf.scene.position.sub(center);                 // core center -> model origin
+      const r = core.getBoundingSphere(new T.Sphere()).radius || 1;
+      model.scale.setScalar(1.7 / r);                  // fit the design camera framing
+      // anatomical upright: Z-Anatomy exports anterior toward +Z; face the camera
+      model.rotation.y = Math.PI;
+
+      loaded = true;
+      // apply whatever the React app already asked for, then settle instantly
+      if (req.layers) setLayers(req.layers);
+      setHemisphere(req.hemisphere);
+      isolate(req.isolate);
+      if (req.selected != null) selectNode(req.selected); else clearSelect();
+      snap();
+      if (opts.onReady) opts.onReady();
+    }, undefined, (err) => { console.error('[BrainScene] GLB load failed:', err); });
+
+    /* ---------------- camera / orbit (unchanged feel) ---------------- */
+    const target = new T.Vector3(0, -0.05, 0);
+    const sph = new T.Spherical(7.6, Math.PI / 2.25, 0.5);
+    const sphGoal = sph.clone();
+    const tgtGoal = target.clone();
+    let autoRot = opts.autorotate !== false;
+    let idleTimer = 0;
+
+    function applyCamera() {
+      const off = new T.Vector3().setFromSpherical(sph);
+      camera.position.copy(target).add(off);
+      camera.lookAt(target);
+    }
+
+    let dragging = false, panning = false, lastX = 0, lastY = 0, moved = 0;
+    const dom = renderer.domElement;
+    function down(e) {
+      dragging = true; moved = 0;
+      panning = e.button === 2 || e.metaKey || e.ctrlKey;      // ⌘/Ctrl = pan/drift
+      lastX = e.clientX; lastY = e.clientY; idleTimer = 0;
+      dom.setPointerCapture && dom.setPointerCapture(e.pointerId);
+    }
+    function move(e) {
+      hover(e);
+      if (!dragging) return;
+      const dx = e.clientX - lastX, dy = e.clientY - lastY; lastX = e.clientX; lastY = e.clientY;
+      moved += Math.abs(dx) + Math.abs(dy);
+      if (panning) {
+        const s = sph.radius * 0.0016;
+        const right = new T.Vector3().setFromMatrixColumn(camera.matrix, 0);
+        const up = new T.Vector3().setFromMatrixColumn(camera.matrix, 1);
+        tgtGoal.addScaledVector(right, -dx * s).addScaledVector(up, dy * s);
+      } else {
+        sphGoal.theta -= dx * 0.006;
+        sphGoal.phi = Math.max(0.18, Math.min(Math.PI - 0.18, sphGoal.phi - dy * 0.006));
+      }
+      idleTimer = 0;
+    }
+    function up(e) { if (dragging && moved < 6) click(e); dragging = false; panning = false; }
+    function wheel(e) {
+      e.preventDefault();
+      sphGoal.radius = Math.max(2.6, Math.min(16, sphGoal.radius * (1 + e.deltaY * 0.0009)));
+      idleTimer = 0;
+    }
+    // keyboard modifier toggles pan even mid-drag
+    window.addEventListener('keydown', (e) => { if ((e.key === 'Meta' || e.key === 'Control') && dragging) panning = true; });
+    window.addEventListener('keyup', (e) => { if (e.key === 'Meta' || e.key === 'Control') panning = false; });
+    dom.addEventListener('pointerdown', down);
+    dom.addEventListener('pointermove', move);
+    window.addEventListener('pointerup', up);
+    dom.addEventListener('wheel', wheel, { passive: false });
+    dom.addEventListener('contextmenu', e => e.preventDefault());
+
+    /* ---------------- picking / hover (per-structure) ---------------- */
+    const ray = new T.Raycaster();
+    const ndc = new T.Vector2();
+    let hovered = null, selectedIds = new Set();
+    function pickAt(e) {
+      const r = dom.getBoundingClientRect();
+      ndc.x = ((e.clientX - r.left) / r.width) * 2 - 1;
+      ndc.y = -((e.clientY - r.top) / r.height) * 2 + 1;
+      ray.setFromCamera(ndc, camera);
+      const cand = allMeshes.filter(m => m.visible && m.material.opacity > 0.14);
+      const hits = ray.intersectObjects(cand, false);
+      return hits.length ? hits[0].object : null;
+    }
+    function hover(e) {
+      if (dragging) return;
+      const m = pickAt(e);
+      if (m !== hovered) {
+        hovered = m;
+        dom.style.cursor = m ? 'pointer' : 'grab';
+        if (opts.onHover) opts.onHover(m ? m.userData.nodeId : null);
+      }
+    }
+    function click(e) {
+      const m = pickAt(e);
+      if (opts.onPick) opts.onPick(m ? m.userData.nodeId : null, m);
+    }
+
+    /* ---------------- public state API ---------------- */
+    function setLayer(cat, st) {
+      req.layers = req.layers || {}; req.layers[cat] = Object.assign(req.layers[cat] || {}, st);
+      const c = cats[cat]; if (!c) return;
+      if (st.visible != null) c.want = st.visible !== false;
+      if (st.opacity != null) c.targetOpacity = st.opacity;
+      if (st.visible === false) c.targetOpacity = 0;
+      else if (st.opacity == null && st.visible === true) c.targetOpacity = 1;
+    }
+    function setLayers(map) { Object.keys(map).forEach(c => setLayer(c, map[c])); }
+
+    function setHemisphere(side) {
+      req.hemisphere = side;
+      allMeshes.forEach(m => {
+        const sd = m.userData.side;
+        m.userData.hemiHidden = !(side === 'both' || sd === 'median' || sd === side);
+      });
+    }
+
+    function frameBox(box, padScale) {
+      if (!box || box.isEmpty()) return;
+      const c = box.getCenter(new T.Vector3());
+      const r = box.getBoundingSphere(new T.Sphere()).radius;
+      tgtGoal.copy(c);
+      sphGoal.radius = Math.max(2.6, Math.min(16, r * (padScale || 3.0) + 0.4));
+      autoRot = false; idleTimer = 0;
+    }
+    function boxOfMeshes(ms) {
+      const b = new T.Box3();
+      ms.forEach(m => { if (m.geometry) b.expandByObject(m); });
+      return b;
+    }
+    function focusCategory(cat) { const c = cats[cat]; if (c) frameBox(boxOfMeshes(c.meshes), 2.6); }
+    function focusNode(id) {
+      const ms = meshById.get(id);
+      if (ms && ms.length) frameBox(boxOfMeshes(ms), 4.0);
+      else { const n = window.BRAIN.nodes.find(x => x.id === id); if (n) focusCategory(n.category); }
+    }
+
+    function selectNode(id) {
+      req.selected = id;
+      selectedIds = new Set();
+      const ms = meshById.get(id);
+      if (ms) ms.forEach(m => selectedIds.add(m));
+      else { selectedIds = new Set(); }
+    }
+    function clearSelect() { req.selected = null; selectedIds = new Set(); }
+
+    function isolate(ids) {
+      req.isolate = ids;
+      const set = ids ? new Set(ids) : null;
+      allMeshes.forEach(m => { m.userData.isoHidden = set ? !set.has(m.userData.nodeId) : false; });
+    }
+
+    function reset() {
+      tgtGoal.set(0, -0.05, 0);
+      sphGoal.set(7.6, Math.PI / 2.25, 0.5);
+      autoRot = opts.autorotate !== false; idleTimer = 0;
+    }
+
+    function snap() {
+      allMeshes.forEach(m => {
+        const c = cats[m.userData.cat];
+        const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden;
+        const cap = m.userData.maxOpacity != null ? m.userData.maxOpacity : 1;
+        m.material.opacity = want ? Math.min(cap, c.targetOpacity) : 0;
+        m.visible = m.material.opacity > 0.012;
+      });
+    }
+
+    function setAutoRotate(v) { autoRot = v; }
+    function setExposure(v) { renderer.toneMappingExposure = v; }
+    function setBackground() {}
+    function frameSphere(center, radius, dist) {
+      tgtGoal.copy(center);
+      sphGoal.radius = Math.max(2.6, Math.min(16, dist || radius * 3));
+      autoRot = false; idleTimer = 0;
+    }
+
+    /* ---------------- resize + loop ---------------- */
+    function resize() {
+      const r = dom.getBoundingClientRect();
+      const w = Math.max(2, r.width), h = Math.max(2, r.height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h; camera.updateProjectionMatrix();
+    }
+    const ro = new ResizeObserver(resize); ro.observe(dom.parentElement || dom);
+    resize();
+
+    let raf = 0, t0 = performance.now();
+    function loop(now) {
+      raf = requestAnimationFrame(loop);
+      const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
+      idleTimer += dt;
+      if (autoRot && !dragging && idleTimer > 1.2) sphGoal.theta += dt * 0.11;
+      const k = 1 - Math.pow(0.0016, dt);
+      sph.radius += (sphGoal.radius - sph.radius) * k;
+      sph.phi += (sphGoal.phi - sph.phi) * k;
+      sph.theta += (sphGoal.theta - sph.theta) * k;
+      target.lerp(tgtGoal, k);
+      applyCamera();
+
+      if (loaded) {
+        const fade = 1 - Math.pow(0.0022, dt);
+        allMeshes.forEach(m => {
+          const c = cats[m.userData.cat];
+          const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden;
+          const cap = m.userData.maxOpacity != null ? m.userData.maxOpacity : 1;
+          const tgt = want ? Math.min(cap, c.targetOpacity) : 0;
+          m.material.opacity += (tgt - m.material.opacity) * fade;
+          m.visible = m.material.opacity > 0.012;
+          let e = m.userData.baseEmiss;
+          if (selectedIds.has(m)) e += 0.34;
+          else if (m === hovered) e += 0.18;
+          m.material.emissive.copy(m.userData.baseColor).multiplyScalar(e);
+        });
+      }
+      renderer.render(scene, camera);
+    }
+    raf = requestAnimationFrame(loop);
+
+    return {
+      THREE: T, scene, camera, renderer, cats,
+      setLayer, setLayers, setHemisphere, focusCategory, focusNode,
+      selectNode, clearSelect, reset, frameSphere, snap, isolate,
+      setAutoRotate, setExposure, setBackground,
+      dispose() { cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); },
+    };
+  }
+
+  window.BrainScene = { create };
+})();

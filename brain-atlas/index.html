@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Brain Atlas — interactive 3D brain</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Three.js (global build) + GLTF/Draco loaders for the real specimen -->
+  <script src="https://unpkg.com/three@0.137.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.137.0/examples/js/loaders/GLTFLoader.js"></script>
+  <script src="https://unpkg.com/three@0.137.0/examples/js/loaders/DRACOLoader.js"></script>
+
+  <!-- React + Babel (pinned) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <!-- data + scene (plain JS) -->
+  <script src="data.js"></script>
+  <script src="scene.js"></script>
+
+  <!-- UI (Babel/JSX) -->
+  <script type="text/babel" src="tweaks-panel.jsx"></script>
+  <script type="text/babel" src="components.jsx"></script>
+  <script type="text/babel" src="layers-tree.jsx"></script>
+  <script type="text/babel" src="control-panel.jsx"></script>
+  <script type="text/babel" src="depth-rail.jsx"></script>
+  <script type="text/babel" src="selection-card.jsx"></script>
+  <script type="text/babel" src="app.jsx"></script>
+</body>
+</html>

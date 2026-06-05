@@ -1,0 +1,13 @@
+# dependencies
+node_modules/
+
+# large source assets (not needed to run the apps; regenerate with scripts/)
+Z-Anatomy/
+Z-Anatomy.zip
+
+# blender inspection dumps
+**/build_inspect/
+
+# os / editor
+.DS_Store
+*.log

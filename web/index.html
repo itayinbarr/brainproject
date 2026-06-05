@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Brain Atlas — Z-Anatomy 3D</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "./vendor/three.module.js",
+      "three/addons/": "./vendor/addons/"
+    }
+  }
+  </script>
+</head>
+<body>
+  <div id="app">
+    <aside id="panel">
+      <header>
+        <h1>Brain Atlas</h1>
+        <p class="sub">Z-Anatomy · <span id="count">…</span> structures</p>
+        <div class="searchwrap">
+          <input id="search" type="search" placeholder="Search (e.g. calcarine, thalamus, M2)…" autocomplete="off" />
+          <button id="clear" title="Clear">×</button>
+        </div>
+        <div class="toolbar">
+          <button id="isolate" title="Show only the matches / selection">Isolate</button>
+          <button id="reset" title="Show everything again">Reset</button>
+          <button id="focus" title="Frame the current selection">Focus</button>
+        </div>
+        <label class="slider">
+          Cortex opacity
+          <input id="cortexOpacity" type="range" min="0" max="100" value="100" />
+        </label>
+        <div class="sides">
+          <button data-side="left">Left</button>
+          <button data-side="right">Right</button>
+          <button data-side="both" class="active">Both</button>
+        </div>
+      </header>
+      <div id="groups"></div>
+    </aside>
+
+    <main id="viewport">
+      <canvas id="c"></canvas>
+      <div id="hud">
+        <div id="selName">Click a structure or search</div>
+        <div id="selPath"></div>
+      </div>
+      <div id="loading">Loading brain model…</div>
+    </main>
+  </div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
