@@ -15,7 +15,27 @@ real, TA2‑named anatomical structure.
 
 ---
 
-## Quick start
+## Two front-ends in this repo
+
+| Folder | What it is |
+|---|---|
+| **`brain-atlas/`** | The **designed prototype** (from Claude Design) implemented for real — a frosted-glass floating control panel, live search, hemisphere toggle, cortex-opacity fader, a build-your-own layer tree, **cinematic presets** (Vasculature, Circle of Willis, Ventricles, Limbic…), a vertical **depth scrubber**, and a **selection card** with the full TA2 breadcrumb, plain-language description and related structures. Wired to the real `brain.glb` with true **per-structure** picking, focus and isolate. |
+| **`web/`** | A minimal, dependency-light Three.js viewer (search + layer toggles + hemisphere + isolate). Good as a reference / embed. |
+
+Both read the **same** `brain.glb` + `manifest.json`. To run the designed prototype:
+
+```bash
+cd brain-atlas
+python3 -m http.server 8861
+# open http://localhost:8861/
+```
+
+`brain-atlas/` pulls Three.js + React from a CDN and loads the Draco decoder from
+`brain-atlas/vendor/draco/`; everything else (model, data, UI) is local.
+
+---
+
+## Quick start (minimal viewer)
 
 No build step. Just serve the `web/` folder over HTTP (ES modules + `fetch` need a
 server; opening the file directly won't work) and open it.
