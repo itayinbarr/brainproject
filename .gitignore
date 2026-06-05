@@ -11,3 +11,5 @@ Z-Anatomy.zip
 # os / editor
 .DS_Store
 *.log
+scripts/shot_ba*.mjs
+scripts/shot_v*.mjs

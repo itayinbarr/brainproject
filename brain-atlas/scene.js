@@ -18,6 +18,9 @@
   // structures kept translucent even at full layer opacity (you see through them)
   const MAX_OPACITY = { meninges_dura: 0.34, ventricles: 0.9 };
   const VESSEL = new Set(['arteries', 'veins_sinuses', 'cranial_nerves']);
+  // tone down the very light masses so the cortex doesn't read as neon-white on the dark stage
+  const CAT_SHADE = { cortex: 0.62, white_matter: 0.8 };
+  function shade(cat, hex) { const c = new T.Color(hex || '#cccccc'); if (CAT_SHADE[cat]) c.multiplyScalar(CAT_SHADE[cat]); return c; }
 
   function extras(o) {
     if (o.userData && o.userData.bx_cat != null) return o.userData;
@@ -72,7 +75,7 @@
         const cat = ex.bx_cat || 'other';
         const id = ex.bx_id != null ? ex.bx_id : null;
         const side = ex.bx_side || 'median';
-        const base = col(cat);
+        const base = shade(cat, PAL[cat]);
         const be = CAT_EMISS[cat] != null ? CAT_EMISS[cat] : 0.06;
         const mat = new T.MeshStandardMaterial({
           color: base.clone(),
@@ -304,24 +307,86 @@
           const c = cats[m.userData.cat];
           const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden;
           const cap = m.userData.maxOpacity != null ? m.userData.maxOpacity : 1;
-          const tgt = want ? Math.min(cap, c.targetOpacity) : 0;
-          m.material.opacity += (tgt - m.material.opacity) * fade;
+          const isSel = selectedIds.has(m);
+          // a selected structure is forced fully opaque (even under a faded cortex) and glows
+          const tgt = isSel ? 1 : (want ? Math.min(cap, c.targetOpacity) : 0);
+          m.material.opacity += (tgt - m.material.opacity) * (isSel ? 1 : fade);
           m.visible = m.material.opacity > 0.012;
           let e = m.userData.baseEmiss;
-          if (selectedIds.has(m)) e += 0.34;
-          else if (m === hovered) e += 0.18;
+          if (isSel) e += 0.62;
+          else if (m === hovered) e += 0.2;
           m.material.emissive.copy(m.userData.baseColor).multiplyScalar(e);
+          m.renderOrder = isSel ? 2 : 0;
         });
       }
       renderer.render(scene, camera);
     }
     raf = requestAnimationFrame(loop);
 
+    /* ---------------- live re-palette ---------------- */
+    function setPalette(map) {
+      allMeshes.forEach(m => {
+        const hex = map[m.userData.cat]; if (!hex) return;
+        const c = shade(m.userData.cat, hex);
+        m.userData.baseColor = c.clone();
+        m.material.color.copy(c);           // emissive is recomputed each frame from baseColor
+      });
+    }
+
+    /* ---------------- high-definition poster ---------------- */
+    function capturePoster(W, H, meta) {
+      meta = meta || {};
+      const SS = 1.5;                                   // supersample for clean edges
+      const rw = Math.round(W * SS), rh = Math.round(H * SS);
+      const rt = new T.WebGLRenderTarget(rw, rh, { minFilter: T.LinearFilter, magFilter: T.LinearFilter, format: T.RGBAFormat });
+      const oldA = camera.aspect;
+      camera.aspect = W / H; camera.updateProjectionMatrix();
+      renderer.setRenderTarget(rt); renderer.setClearColor(0x000000, 0); renderer.clear(); renderer.render(scene, camera);
+      const buf = new Uint8Array(rw * rh * 4);
+      renderer.readRenderTargetPixels(rt, 0, 0, rw, rh, buf);
+      renderer.setRenderTarget(null);
+      camera.aspect = oldA; camera.updateProjectionMatrix(); rt.dispose();
+
+      const tmp = document.createElement('canvas'); tmp.width = rw; tmp.height = rh;
+      tmp.getContext('2d').putImageData(new ImageData(new Uint8ClampedArray(buf), rw, rh), 0, 0);
+
+      const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+      const ctx = cv.getContext('2d');
+      const cs = getComputedStyle(document.documentElement);
+      const gv = (n, f) => (cs.getPropertyValue(n) || f).trim();
+      const s1 = gv('--stage-1', '#1a2236'), s2 = gv('--stage-2', '#0c1018'), s3 = gv('--stage-3', '#06080d');
+      const onc = gv('--on-stage', '#E9EDF6'), ons = gv('--on-stage-soft', '#9aa6bd');
+      const g = ctx.createRadialGradient(W * 0.5, H * 0.4, 0, W * 0.5, H * 0.4, Math.max(W, H) * 0.72);
+      g.addColorStop(0, s1); g.addColorStop(0.5, s2); g.addColorStop(1, s3);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+      ctx.save(); ctx.translate(0, H); ctx.scale(1, -1); ctx.imageSmoothingQuality = 'high'; ctx.drawImage(tmp, 0, 0, W, H); ctx.restore();
+
+      // top wordmark
+      ctx.textBaseline = 'alphabetic';
+      ctx.font = '600 26px "JetBrains Mono", monospace'; ctx.fillStyle = ons; ctx.globalAlpha = 0.85;
+      ctx.fillText('BRAIN ATLAS', 64, 86); ctx.globalAlpha = 1;
+      // bottom scrim
+      const sg = ctx.createLinearGradient(0, H - 380, 0, H);
+      sg.addColorStop(0, 'rgba(0,0,0,0)'); sg.addColorStop(1, 'rgba(0,0,0,0.55)');
+      ctx.fillStyle = sg; ctx.fillRect(0, H - 380, W, 380);
+      // accent dot + title
+      const accent = meta.color || '#3A66FF';
+      ctx.beginPath(); ctx.arc(64 + 13, H - 150, 13, 0, Math.PI * 2); ctx.fillStyle = accent; ctx.fill();
+      ctx.font = '800 78px "Hanken Grotesk", sans-serif'; ctx.fillStyle = onc;
+      ctx.fillText(meta.title || 'Whole brain', 64 + 44, H - 124);
+      ctx.font = '500 28px "Hanken Grotesk", sans-serif'; ctx.fillStyle = ons;
+      let sub = (meta.subtitle || '');
+      while (sub && ctx.measureText(sub).width > W - 128) sub = sub.slice(0, -2);
+      if (sub !== (meta.subtitle || '')) sub = sub.replace(/\s+\S*$/, '') + ' …';
+      ctx.fillText(sub, 64 + 44, H - 80);
+      return cv.toDataURL('image/png');
+    }
+
     return {
       THREE: T, scene, camera, renderer, cats,
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
       selectNode, clearSelect, reset, frameSphere, snap, isolate,
-      setAutoRotate, setExposure, setBackground,
+      setAutoRotate, setExposure, setBackground, setPalette, capturePoster,
       dispose() { cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); },
     };
   }

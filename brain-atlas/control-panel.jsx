@@ -29,6 +29,8 @@ function Slider({ value, min = 0, max = 1, step = 0.01, onChange, color, label, 
 function ControlPanel(props) {
   const { pos, setPos, collapsed, setCollapsed } = props;
   const dragRef = React.useRef(null);
+  const [layersOpen, setLayersOpen] = React.useState(false);
+  const layersShown = layersOpen || !!props.q;   // a search always reveals the matched tree
 
   const startDrag = (e) => {
     if (e.target.closest('button') || e.target.closest('input')) return;
@@ -52,9 +54,8 @@ function ControlPanel(props) {
         <div style={{ width: 30, height: 30, borderRadius: 9, display: 'grid', placeItems: 'center', background: 'var(--ink)', color: '#fff', flex: '0 0 auto' }}>
           <Icon name="brain" size={17} sw={1.6} />
         </div>
-        <div style={{ flex: 1, lineHeight: 1.1 }}>
-          <div style={{ fontSize: 14.5, fontWeight: 800, letterSpacing: '-0.01em', color: 'var(--ink)' }}>Brain Atlas</div>
-          <div className="mono" style={{ fontSize: 9.5, color: 'var(--ink-faint)', marginTop: 2, letterSpacing: '0.04em' }}>{props.totalCount} STRUCTURES · Z-ANATOMY</div>
+        <div style={{ flex: 1, lineHeight: 1.1, display: 'flex', alignItems: 'center' }}>
+          <div style={{ fontSize: 15.5, fontWeight: 800, letterSpacing: '-0.01em', color: 'var(--ink)' }}>Brain Atlas</div>
         </div>
         <Icon name="grip" size={16} style={{ color: 'var(--ink-ghost)' }} />
         <IconBtn name={collapsed ? 'chevDown' : 'chevUp'} title={collapsed ? 'Expand' : 'Collapse'} onClick={() => setCollapsed(!collapsed)} />
@@ -82,21 +83,21 @@ function ControlPanel(props) {
               options={[{ value: 'left', label: 'Left' }, { value: 'both', label: 'Both' }, { value: 'right', label: 'Right' }]} />
           </div>
 
-          {/* presets */}
+          {/* presets — all visible, two columns */}
           <div style={{ padding: '0 12px 12px' }}>
-            <div className="eyebrow" style={{ marginBottom: 8, display: 'flex', alignItems: 'center', gap: 5, whiteSpace: 'nowrap' }}><Icon name="sparkles" size={12} /> Cinematic presets</div>
-            <div className="scroll" style={{ display: 'flex', gap: 7, overflowX: 'auto', paddingBottom: 4, margin: '0 -2px', paddingLeft: 2, paddingRight: 2 }}>
+            <div className="eyebrow" style={{ marginBottom: 8 }}>Cinematic presets</div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
               {props.presets.map(p => {
                 const on = props.activePreset === p.id;
                 return (
                   <button key={p.id} onClick={() => props.onPreset(p.id)} style={{
-                    flex: '0 0 auto', display: 'flex', alignItems: 'center', gap: 6, padding: '7px 11px', borderRadius: 9,
-                    border: '1px solid ' + (on ? 'transparent' : 'var(--hair)'), cursor: 'pointer', whiteSpace: 'nowrap',
+                    display: 'flex', alignItems: 'center', gap: 7, padding: '8px 10px', borderRadius: 9, minWidth: 0,
+                    border: '1px solid ' + (on ? 'transparent' : 'var(--hair)'), cursor: 'pointer', textAlign: 'left',
                     background: on ? 'var(--ink)' : 'rgba(255,255,255,0.5)', color: on ? '#fff' : 'var(--ink-soft)',
                     fontFamily: 'var(--font)', fontSize: 12, fontWeight: 600, transition: 'all .15s',
                   }}>
-                    <span style={{ width: 7, height: 7, borderRadius: 99, background: p.color || 'var(--accent)' }} />
-                    {p.label}
+                    <span style={{ width: 7, height: 7, borderRadius: 99, background: p.color || 'var(--accent)', flex: '0 0 auto' }} />
+                    <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{p.label}</span>
                   </button>
                 );
               })}
@@ -108,24 +109,29 @@ function ControlPanel(props) {
             <Slider label="Cortex opacity" value={props.cortexOpacity} onChange={props.setCortexOpacity} color="var(--c-cortex)" />
           </div>
 
-          {/* layers header */}
+          {/* layers header — collapsed by default so presets stay the spotlight */}
           <div style={{ display: 'flex', alignItems: 'center', padding: '0 14px 8px', gap: 8 }}>
-            <Icon name="layers" size={13} style={{ color: 'var(--ink-faint)' }} />
-            <span className="eyebrow" style={{ flex: 1 }}>Layers · build your view</span>
-            <button onClick={props.onShowAll} style={ghostBtn}>All</button>
-            <button onClick={props.onHideAll} style={ghostBtn}>None</button>
+            <button onClick={() => setLayersOpen(o => !o)} style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, border: 'none', background: 'transparent', cursor: 'pointer', padding: 0 }}>
+              <Icon name="layers" size={13} style={{ color: 'var(--ink-faint)' }} />
+              <span className="eyebrow">{layersShown ? 'Layers · build your view' : 'View all ' + props.totalCount + ' layers'}</span>
+              <Icon name={layersShown ? 'chevUp' : 'chevDown'} size={14} style={{ color: 'var(--ink-ghost)' }} />
+            </button>
+            {layersShown && <button onClick={props.onShowAll} style={ghostBtn}>All</button>}
+            {layersShown && <button onClick={props.onHideAll} style={ghostBtn}>None</button>}
           </div>
 
           {/* tree */}
-          <div className="scroll" style={{ overflowY: 'auto', padding: '0 8px 8px', flex: 1, minHeight: 120 }}>
-            <LayersTree {...props} />
-          </div>
+          {layersShown && (
+            <div className="scroll" style={{ overflowY: 'auto', padding: '0 8px 8px', flex: 1, minHeight: 120 }}>
+              <LayersTree {...props} />
+            </div>
+          )}
 
           {/* footer */}
           <div style={{ display: 'flex', gap: 8, padding: '10px 12px', borderTop: '1px solid var(--hair-2)' }}>
             <button onClick={props.onReset} style={footBtn}><Icon name="reset" size={14} /> Reset view</button>
             {props.isolated
-              ? <button onClick={props.onClearIsolate} style={{ ...footBtn, background: 'var(--accent)', color: '#fff', borderColor: 'transparent' }}><Icon name="isolate" size={14} /> Exit isolate</button>
+              ? <button onClick={props.onClearIsolate} style={{ ...footBtn, background: 'var(--accent)', color: '#fff', border: '1px solid transparent' }}><Icon name="isolate" size={14} /> Exit isolate</button>
               : <button onClick={props.onIsolateMatches} disabled={!props.canIsolate} style={{ ...footBtn, opacity: props.canIsolate ? 1 : 0.4 }}><Icon name="isolate" size={14} /> Isolate</button>}
           </div>
         </React.Fragment>

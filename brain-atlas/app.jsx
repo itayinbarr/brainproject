@@ -8,7 +8,7 @@ const SHORT = {
 };
 
 const PRESETS = [
-  { id: 'whole',  label: 'Whole brain',     color: 'var(--c-cortex)',         on: ['cortex','cerebellum','brainstem'], cortex: 1,    focus: null },
+  { id: 'whole',  label: 'Whole brain',     color: 'var(--c-cortex)',         on: ['cortex','cerebellum','brainstem'], cortex: 0.5,  focus: null },
   { id: 'vasc',   label: 'Vasculature',      color: 'var(--c-arteries)',       on: ['arteries','veins_sinuses'],        cortex: 0.12, focus: 'arteries' },
   { id: 'willis', label: 'Circle of Willis', color: 'var(--c-arteries)',       on: ['arteries'],                        cortex: 0.08, focus: 'arteries' },
   { id: 'vent',   label: 'Ventricles',       color: 'var(--c-ventricles)',     on: ['ventricles'],                      cortex: 0.10, focus: 'ventricles' },
@@ -16,6 +16,19 @@ const PRESETS = [
   { id: 'deep',   label: 'Deep grey',        color: 'var(--c-deep_grey)',      on: ['deep_grey','diencephalon','ventricles'],   cortex: 0.12, focus: 'deep_grey' },
   { id: 'nerves', label: 'Cranial nerves',   color: 'var(--c-cranial_nerves)', on: ['cranial_nerves','brainstem'],      cortex: 0.12, focus: 'cranial_nerves' },
   { id: 'dura',   label: 'Meninges & dura',  color: 'var(--c-meninges_dura)',  on: ['meninges_dura','veins_sinuses'],   cortex: 0.30, focus: null },
+];
+
+// Curated 11-subsystem palettes. Each keeps loose clinical conventions (arteries warm,
+// veins/sinuses cool-blue, ventricles cyan/CSF, nerves yellow, cortex light-neutral) while
+// staying internally harmonious — consistent chroma/value, hues spread around the wheel.
+const PALETTES = [
+  { name: 'Jewel',   colors: { cortex:'#E7DEC9', white_matter:'#D7DDE8', deep_grey:'#B57BE0', diencephalon:'#7E8CF2', brainstem:'#E8B24A', cerebellum:'#F0894E', ventricles:'#3FC8D6', arteries:'#F05068', veins_sinuses:'#5078E8', cranial_nerves:'#D9D24A', meninges_dura:'#CC63CC' } },
+  { name: 'Candy',   colors: { cortex:'#F0DCC8', white_matter:'#E3DCEA', deep_grey:'#A86CF0', diencephalon:'#5C7CFF', brainstem:'#FFC23D', cerebellum:'#FF8A5C', ventricles:'#2BD9D9', arteries:'#FF5573', veins_sinuses:'#5A78FF', cranial_nerves:'#FFE04A', meninges_dura:'#E85CD0' } },
+  { name: 'Aurora',  colors: { cortex:'#DCE3D8', white_matter:'#D2E0E6', deep_grey:'#7C8BE0', diencephalon:'#4FA0E0', brainstem:'#E8C24A', cerebellum:'#F09B5A', ventricles:'#34D6B0', arteries:'#F25C7A', veins_sinuses:'#4A7BE0', cranial_nerves:'#CFE04A', meninges_dura:'#B566D6' } },
+  { name: 'Sunset',  colors: { cortex:'#ECD9C2', white_matter:'#E0D6DA', deep_grey:'#9D6BD6', diencephalon:'#6E7BE6', brainstem:'#F2A93C', cerebellum:'#F2734E', ventricles:'#39C2C8', arteries:'#F0455F', veins_sinuses:'#5C6FE0', cranial_nerves:'#F0C84A', meninges_dura:'#D85AA8' } },
+  { name: 'Neon',    colors: { cortex:'#DDE6EE', white_matter:'#CCD6E2', deep_grey:'#9A7CF5', diencephalon:'#5B8DF5', brainstem:'#F5C24A', cerebellum:'#F58A4A', ventricles:'#33E0E0', arteries:'#FF4D6D', veins_sinuses:'#4D7AFF', cranial_nerves:'#E8E04A', meninges_dura:'#D24DD2' } },
+  { name: 'Muted',   colors: { cortex:'#D8CBB6', white_matter:'#C9D0D8', deep_grey:'#9685C0', diencephalon:'#7C8AC0', brainstem:'#D4A94E', cerebellum:'#D88A5E', ventricles:'#5AB6BE', arteries:'#D85C70', veins_sinuses:'#6E80C8', cranial_nerves:'#C6BE5A', meninges_dura:'#B673B6' } },
+  { name: 'Spectrum',colors: { cortex:'#E8DAC0', white_matter:'#D6DEE8', deep_grey:'#A35CE0', diencephalon:'#5C6CE8', brainstem:'#F0B23C', cerebellum:'#F07A3C', ventricles:'#2CC8C8', arteries:'#F0405C', veins_sinuses:'#3C6CE8', cranial_nerves:'#E0D43C', meninges_dura:'#D44CC4' } },
 ];
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -50,13 +63,13 @@ function App() {
       }));
       return { cat, label: cats[cat].label, count: ns.length, color: PAL[cat], regions };
     });
-  }, []);
+  }, [palVer]);
   const nodeById = React.useMemo(() => { const m = {}; nodes.forEach(n => m[n.id] = n); return m; }, []);
 
   // ---- state ----
   const [search, setSearch] = React.useState('');
   const [hemisphere, setHemisphere] = React.useState('both');
-  const [cortexOpacity, setCortexOpacity] = React.useState(1);
+  const [cortexOpacity, setCortexOpacity] = React.useState(0.5);
   const [layerOn, setLayerOn] = React.useState(() => { const o = {}; CAT_ORDER.forEach(c => o[c] = ['cortex', 'cerebellum', 'brainstem'].includes(c)); return o; });
   const [expanded, setExpanded] = React.useState(() => new Set());
   const [selectedId, setSelectedId] = React.useState(null);
@@ -68,6 +81,10 @@ function App() {
   const [pos, setPos] = React.useState(() => { try { return JSON.parse(localStorage.getItem('ba_pos')) || { x: 16, y: 16 }; } catch (e) { return { x: 16, y: 16 }; } });
   const [hover, setHover] = React.useState(null); // {id, x, y}
   const [hint, setHint] = React.useState(true);
+  const [posterBusy, setPosterBusy] = React.useState(false);
+  const [palVer, setPalVer] = React.useState(0);  // bumps when the color palette changes
+  const palIdxRef = React.useRef(0);
+  const [focusedId, setFocusedId] = React.useState(null); // which node the camera is focused on
 
   React.useEffect(() => { try { localStorage.setItem('ba_pos', JSON.stringify(pos)); } catch (e) {} }, [pos]);
 
@@ -114,7 +131,7 @@ function App() {
       let visible = layerOn[cat];
       let opacity = cat === 'cortex' ? cortexOpacity : 1;
       if (q && !matchedCats.has(cat)) opacity *= 0.12;
-      if (isoCats && !isoCats.has(cat)) visible = false;
+      if (isoCats) { if (!isoCats.has(cat)) visible = false; else opacity = 1; } // isolated layer fully opaque
       map[cat] = { visible, opacity };
     });
     s.setLayers(map);
@@ -146,17 +163,22 @@ function App() {
   const showAll = () => { setActivePreset(null); setLayerOn(() => { const o = {}; CAT_ORDER.forEach(c => o[c] = true); return o; }); setDepthStop(0); };
   const hideAll = () => { setActivePreset(null); setLayerOn(() => { const o = {}; CAT_ORDER.forEach(c => o[c] = false); return o; }); };
   const selectNode = (id) => { setSelectedId(id); setHint(false); };
-  const focusNode = (id) => { sceneRef.current && sceneRef.current.focusNode(id); setSelectedId(id); setHint(false); };
+  const focusNode = (id) => { sceneRef.current && sceneRef.current.focusNode(id); setSelectedId(id); setFocusedId(id); setHint(false); };
+  // toggling focus for the selection card: a second press is its own undo (reset view)
+  const toggleFocus = (id) => {
+    if (focusedId === id) { sceneRef.current && sceneRef.current.reset(); setFocusedId(null); }
+    else { sceneRef.current && sceneRef.current.focusNode(id); setFocusedId(id); }
+  };
   const focusCat = (cat) => sceneRef.current && sceneRef.current.focusCategory(cat);
   const reset = () => {
     setActivePreset('whole'); applyPreset(PRESETS[0], false);
-    setHemisphere('both'); setIsolatedIds(null); setSearch(''); setSelectedId(null); setDepthStop(0);
+    setHemisphere('both'); setIsolatedIds(null); setSearch(''); setSelectedId(null); setDepthStop(0); setFocusedId(null);
     sceneRef.current && sceneRef.current.reset();
   };
 
   const applyPreset = (p, doFocus = true) => {
     setActivePreset(p.id);
-    setIsolatedIds(null); setSearch('');
+    setIsolatedIds(null); setSearch(''); setSelectedId(null); setFocusedId(null);  // close any open selection card
     const o = {}; CAT_ORDER.forEach(c => o[c] = p.on.includes(c) || (c === 'cortex' && p.cortex > 0));
     setLayerOn(o); setCortexOpacity(p.cortex);
     setDepthStop(0);
@@ -169,12 +191,26 @@ function App() {
     setLayerOn(() => { const o = {}; CAT_ORDER.forEach((c, i) => o[c] = i >= stop); return o; });
   };
 
+  const applyPalette = (pal) => {
+    Object.assign(window.BRAIN.palette, pal);                       // mutate in place so PAL ref sees it
+    const r = document.documentElement.style;
+    Object.keys(pal).forEach(k => r.setProperty('--c-' + k, pal[k]));
+    sceneRef.current && sceneRef.current.setPalette(pal);
+    setPalVer(v => v + 1);                                          // re-render dots/legend/tree
+  };
+  const randomizePalette = () => {
+    let j; do { j = Math.floor(Math.random() * PALETTES.length); } while (j === palIdxRef.current && PALETTES.length > 1);
+    palIdxRef.current = j;
+    applyPalette(PALETTES[j].colors);
+  };
+
   const isolateMatches = () => { if (matchedIds.size) setIsolatedIds(new Set(matchedIds)); };
   const isolateNode = (id) => {
+    // isolate exactly the clicked structure (both sides if it is one of a pair)
     const n = nodeById[id];
-    const ids = nodes.filter(x => x.category === n.category).map(x => x.id);
-    setIsolatedIds(new Set(ids));
-    setTimeout(() => sceneRef.current && sceneRef.current.focusCategory(n.category), 60);
+    const ids = nodes.filter(x => x.label === n.label && x.category === n.category).map(x => x.id);
+    setIsolatedIds(new Set(ids.length ? ids : [id]));
+    setTimeout(() => sceneRef.current && sceneRef.current.focusNode(id), 60);
   };
   const clearIsolate = () => setIsolatedIds(null);
 
@@ -186,6 +222,26 @@ function App() {
       .slice(0, 5).map(n => ({ id: n.id, label: n.label, side: n.side }));
   }, [selectedId]);
   const description = selNode ? (DESC[selNode.label] || ('A structure of the ' + cats[selNode.category].label.toLowerCase() + ', located in the ' + selNode.region.replace(/_/g, ' ') + '.')) : '';
+
+  // ---- high-definition poster export (features the selection if any) ----
+  const savePoster = async () => {
+    const s = sceneRef.current; if (!s || posterBusy) return;
+    setPosterBusy(true);
+    try {
+      if (selectedId != null) { s.focusNode(selectedId); await new Promise(r => setTimeout(r, 750)); }
+      const title = selNode ? selNode.label : 'Whole brain';
+      const sub = selNode
+        ? ((selNode.crumb && selNode.crumb.length ? selNode.crumb.join('  ·  ') : cats[selNode.category].label)
+           + (selNode.side !== 'median' ? '  ·  ' + (selNode.side === 'left' ? 'Left' : 'Right') : ''))
+        : 'Interactive 3D brain atlas';
+      const url = s.capturePoster(2400, 1500, { title, subtitle: sub, color: selNode ? PAL[selNode.category] : t.accent });
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'brain-atlas-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+    } catch (e) { console.error('poster failed', e); }
+    setPosterBusy(false);
+  };
 
   // ---- keyboard ----
   React.useEffect(() => {
@@ -208,8 +264,8 @@ function App() {
       <div className="stage" />
       <canvas ref={canvasRef} className="three" />
 
-      {/* corner brand / legend toggle */}
-      <Legend groups={groups} layerOn={layerOn} />
+      {/* corner toolbar: save poster · credits · shuffle palette · subsystem key */}
+      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onRandomPalette={randomizePalette} />
 
       {hint && (
         <div className="pop" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 12,
@@ -242,8 +298,8 @@ function App() {
 
       <SelectionCard node={selNode} color={selNode ? PAL[selNode.category] : null}
         catLabel={selNode ? cats[selNode.category].label : ''} description={description} related={related}
-        onSelect={selectNode} onFocus={focusNode} onIsolate={isolateNode} onClose={() => setSelectedId(null)}
-        isolated={!!isolatedIds} />
+        onSelect={selectNode} onRelated={focusNode} onFocus={toggleFocus} onIsolate={isolateNode} onClose={() => setSelectedId(null)}
+        isolated={!!isolatedIds} focused={selNode && focusedId === selNode.id} onClearIsolate={clearIsolate} />
 
       {/* hover tooltip */}
       {hoverNode && !selNode && (
@@ -268,10 +324,19 @@ function App() {
   );
 }
 
-/* small bottom-left-of-stage legend that reflects visible subsystems */
-function Legend({ groups, layerOn }) {
-  const [open, setOpen] = React.useState(false);
+/* bottom-right stage toolbar: subsystem key \u00b7 save poster \u00b7 credits */
+function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette }) {
+  const [open, setOpen] = React.useState(false);     // subsystem key
+  const [cred, setCred] = React.useState(false);     // credits
   const visible = groups.filter(g => layerOn[g.cat]);
+  const pill = {
+    display: 'flex', alignItems: 'center', gap: 7, padding: '8px 13px', borderRadius: 99, border: '1px solid var(--glass-edge)',
+    color: 'var(--ink-soft)', fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 600, cursor: 'pointer',
+  };
+  const credLink = {
+    display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: 'var(--ink-soft)',
+    fontSize: 12, fontWeight: 600, padding: '6px 8px', borderRadius: 8, border: '1px solid var(--hair)', background: 'rgba(255,255,255,0.5)',
+  };
   return (
     <div style={{ position: 'absolute', right: 16, bottom: 16, zIndex: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
       {open && (
@@ -288,15 +353,33 @@ function Legend({ groups, layerOn }) {
           </div>
         </div>
       )}
-      <button onClick={() => setOpen(o => !o)} className="glass" style={{
-        display: 'flex', alignItems: 'center', gap: 7, padding: '8px 13px', borderRadius: 99, border: '1px solid var(--glass-edge)',
-        color: 'var(--ink-soft)', fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 600, cursor: 'pointer',
-      }}>
-        <Icon name="info" size={14} /> Key
-        <span style={{ display: 'flex', marginLeft: 2 }}>
-          {visible.slice(0, 6).map((g, i) => <span key={g.cat} style={{ width: 9, height: 9, borderRadius: 99, background: g.color, marginLeft: i ? -3 : 0, boxShadow: '0 0 0 1.5px var(--glass)' }} />)}
-        </span>
-      </button>
+      {cred && (
+        <div className="glass pop" style={{ padding: '14px 15px', width: 282 }}>
+          <div className="eyebrow" style={{ marginBottom: 9 }}>Credits</div>
+          <a href="https://github.com/itayinbarr" target="_blank" rel="noopener noreferrer" style={{ ...credLink, marginBottom: 11 }}><Icon name="github" size={14} /> Built by Itay Inbar</a>
+          <p style={{ margin: '0 0 9px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
+            3D anatomy from <b style={{ color: 'var(--ink)' }}>Z-Anatomy</b>, built on BodyParts3D / DBCLS \u2014 licensed <span className="mono" style={{ fontSize: 11 }}>CC&nbsp;BY-SA&nbsp;4.0</span>.
+          </p>
+          <a href="https://www.z-anatomy.com/" target="_blank" rel="noopener noreferrer" style={credLink}><Icon name="globe" size={14} /> z-anatomy.com</a>
+        </div>
+      )}
+      <div style={{ display: 'flex', gap: 8 }}>
+        <button onClick={onPoster} disabled={posterBusy} className="glass" style={{ ...pill, opacity: posterBusy ? 0.6 : 1 }} title="Save a high-definition poster (features the selected structure)">
+          <Icon name={posterBusy ? 'reset' : 'image'} size={14} /> {posterBusy ? 'Rendering\u2026' : 'Save poster'}
+        </button>
+        <button onClick={() => { setCred(c => !c); setOpen(false); }} className="glass" style={pill} title="Credits & licence">
+          <Icon name="github" size={14} /> Credits
+        </button>
+        <button onClick={onRandomPalette} className="glass" style={pill} title="Shuffle the colour palette">
+          <Icon name="palette" size={14} /> Palette
+        </button>
+        <button onClick={() => { setOpen(o => !o); setCred(false); }} className="glass" style={pill}>
+          <Icon name="info" size={14} /> Key
+          <span style={{ display: 'flex', marginLeft: 2 }}>
+            {visible.slice(0, 6).map((g, i) => <span key={g.cat} style={{ width: 9, height: 9, borderRadius: 99, background: g.color, marginLeft: i ? -3 : 0, boxShadow: '0 0 0 1.5px var(--glass)' }} />)}
+          </span>
+        </button>
+      </div>
     </div>
   );
 }

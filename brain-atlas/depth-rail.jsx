@@ -15,7 +15,7 @@ function DepthRail({ layers, stop, setStop, expanded, setExpanded }) {
   return (
     <div className="glass" onMouseEnter={() => setExpanded(true)} onMouseLeave={() => setExpanded(false)}
       style={{
-        position: 'absolute', right: 16, top: '50%', transform: 'translateY(-50%)', width: W,
+        position: 'absolute', right: 16, top: '58%', transform: 'translateY(-50%)', width: W,
         padding: '10px 10px 8px', display: 'flex', flexDirection: 'column', alignItems: 'stretch',
         zIndex: 18, transition: 'width .22s cubic-bezier(.2,.9,.3,1)', overflow: 'hidden',
       }}>
