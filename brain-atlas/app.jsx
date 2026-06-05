@@ -84,6 +84,9 @@ function App() {
   const [palVer, setPalVer] = React.useState(0);  // bumps when the color palette changes
   const palIdxRef = React.useRef(0);
   const [focusedId, setFocusedId] = React.useState(null); // which node the camera is focused on
+  const [consent, setConsent] = React.useState(() => (window.BrainAnalytics ? window.BrainAnalytics.consent() : 'denied'));
+  const acceptCookies = () => { window.BrainAnalytics && window.BrainAnalytics.grant(); setConsent('granted'); };
+  const declineCookies = () => { window.BrainAnalytics && window.BrainAnalytics.deny(); setConsent('denied'); };
 
   React.useEffect(() => { try { localStorage.setItem('ba_pos', JSON.stringify(pos)); } catch (e) {} }, [pos]);
 
@@ -268,7 +271,7 @@ function App() {
       {/* corner toolbar: save poster · credits · shuffle palette · subsystem key */}
       <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onRandomPalette={randomizePalette} />
 
-      {hint && (
+      {hint && consent && (
         <div className="pop" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 12,
           display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 99,
           background: 'rgba(8,11,18,0.55)', color: 'var(--on-stage)', fontSize: 12.5, fontWeight: 500, backdropFilter: 'blur(8px)',
@@ -295,6 +298,7 @@ function App() {
         q={q}
       />
 
+      {!consent && <ConsentBanner onAccept={acceptCookies} onDecline={declineCookies} />}
 
       <SelectionCard node={selNode} color={selNode ? PAL[selNode.category] : null}
         catLabel={selNode ? cats[selNode.category].label : ''} description={description} related={related}
@@ -321,6 +325,32 @@ function App() {
         <TweakSlider label="Specimen glow" value={t.glow} min={0.8} max={1.4} step={0.02} unit="×" onChange={v => setTweak('glow', v)} />
       </TweaksPanel>
     </React.Fragment>
+  );
+}
+
+/* bottom-center cookie-consent popup (gates Firebase/Google Analytics) */
+function ConsentBanner({ onAccept, onDecline }) {
+  return (
+    <div className="glass glass-top-hi pop" style={{
+      position: 'absolute', bottom: 16, left: '50%', transform: 'translateX(-50%)', zIndex: 50,
+      width: 'min(560px, calc(100vw - 32px))', padding: '12px 14px',
+      display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap',
+    }}>
+      <Icon name="info" size={16} style={{ color: 'var(--ink-faint)', flex: '0 0 auto' }} />
+      <span style={{ flex: 1, minWidth: 220, fontSize: 12.5, lineHeight: 1.45, color: 'var(--ink-soft)' }}>
+        We use cookies for anonymous usage analytics (Google&nbsp;Analytics via Firebase) to see how the atlas is used. No tracking until you agree.
+      </span>
+      <div style={{ display: 'flex', gap: 8, flex: '0 0 auto' }}>
+        <button onClick={onDecline} style={{
+          padding: '8px 14px', borderRadius: 10, border: '1px solid var(--hair)', background: 'rgba(255,255,255,0.5)',
+          color: 'var(--ink-soft)', fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 600, cursor: 'pointer',
+        }}>Decline</button>
+        <button onClick={onAccept} style={{
+          padding: '8px 16px', borderRadius: 10, border: '1px solid transparent', background: 'var(--accent)',
+          color: '#fff', fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 700, cursor: 'pointer',
+        }}>Accept</button>
+      </div>
+    </div>
   );
 }
 
