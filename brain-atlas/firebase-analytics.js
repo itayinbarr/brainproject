@@ -1,9 +1,10 @@
 /* ============================================================
-   Brain Atlas — Firebase / Google Analytics, gated on consent.
-   No analytics SDK loads and NO cookies are set until the visitor
-   explicitly accepts (see the consent banner in app.jsx).
-   getAnalytics() auto-logs page_view + session_start + engagement
-   time, which gives the enter-counts and duration-of-stay metrics.
+   Brain Atlas — Firebase / Google Analytics with Consent Mode v2.
+   Analytics initialises immediately but with consent DEFAULTED TO
+   DENIED, so a visitor who declines still produces anonymous,
+   cookieless pings (rough enter counts) — no cookies/identifiers
+   are stored. Accepting upgrades analytics_storage to "granted"
+   (full analytics with cookies + duration of stay).
    ============================================================ */
 (function () {
   const KEY = 'ba_cookie_consent';            // 'granted' | 'denied'
@@ -19,19 +20,32 @@
     measurementId: "G-HM19NK6Z6V"
   };
 
+  const stored = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
+  let setConsentFn = null;
   let started = false;
-  async function init() {
+
+  async function start() {
     if (started) return;
     started = true;
     try {
-      const [{ initializeApp }, analyticsMod] = await Promise.all([
+      const [{ initializeApp }, am] = await Promise.all([
         import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-app.js`),
         import(`https://www.gstatic.com/firebasejs/${FB_VER}/firebase-analytics.js`),
       ]);
-      const { getAnalytics, isSupported, logEvent } = analyticsMod;
-      if (!(await isSupported())) return;       // e.g. cookies disabled / unsupported env
+      const { getAnalytics, isSupported, logEvent, setConsent } = am;
+      if (!(await isSupported())) return;
+      setConsentFn = setConsent;
+
       const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);      // auto: page_view, session_start, engagement
+      // Consent Mode v2 defaults — everything denied until the visitor grants.
+      // analytics_storage denied => cookieless pings; granted => full analytics.
+      setConsent({
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: stored() === 'granted' ? 'granted' : 'denied',
+      });
+      const analytics = getAnalytics(app);     // auto: page_view, session_start, engagement
       window.BrainAnalytics.analytics = analytics;
       window.BrainAnalytics.log = (name, params) => { try { logEvent(analytics, name, params || {}); } catch (e) {} };
     } catch (e) {
@@ -39,12 +53,15 @@
     }
   }
 
-  const consent = () => { try { return localStorage.getItem(KEY); } catch (e) { return null; } };
-  function grant() { try { localStorage.setItem(KEY, 'granted'); } catch (e) {} init(); }
-  function deny() { try { localStorage.setItem(KEY, 'denied'); } catch (e) {} }
+  function applyConsent(granted) {
+    if (setConsentFn) { try { setConsentFn({ analytics_storage: granted ? 'granted' : 'denied' }); } catch (e) {} }
+  }
 
-  window.BrainAnalytics = { consent, grant, deny, log: () => {} };
+  function grant() { try { localStorage.setItem(KEY, 'granted'); } catch (e) {} applyConsent(true); }
+  function deny() { try { localStorage.setItem(KEY, 'denied'); } catch (e) {} applyConsent(false); }
 
-  // returning visitor who already accepted -> start straight away
-  if (consent() === 'granted') init();
+  window.BrainAnalytics = { consent: stored, grant, deny, log: () => {} };
+
+  // Always start so Consent Mode can send cookieless pings; cookies only on grant.
+  start();
 })();

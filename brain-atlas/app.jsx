@@ -338,7 +338,7 @@ function ConsentBanner({ onAccept, onDecline }) {
     }}>
       <Icon name="info" size={16} style={{ color: 'var(--ink-faint)', flex: '0 0 auto' }} />
       <span style={{ flex: 1, minWidth: 220, fontSize: 12.5, lineHeight: 1.45, color: 'var(--ink-soft)' }}>
-        We use cookies for anonymous usage analytics (Google&nbsp;Analytics via Firebase) to see how the atlas is used. No tracking until you agree.
+        We use Google&nbsp;Analytics to understand usage. <b style={{ color: 'var(--ink)', fontWeight: 600 }}>Decline</b> keeps it anonymous &amp; cookieless.
       </span>
       <div style={{ display: 'flex', gap: 8, flex: '0 0 auto' }}>
         <button onClick={onDecline} style={{
