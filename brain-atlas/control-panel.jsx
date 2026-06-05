@@ -44,12 +44,14 @@ function ControlPanel(props) {
     window.addEventListener('pointermove', mv); window.addEventListener('pointerup', up);
   };
 
+  const mobile = props.mobile;
+  const containerStyle = mobile
+    ? { position: 'absolute', left: 8, right: 8, bottom: 58, maxHeight: '44vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 }
+    : { position: 'absolute', left: pos.x, top: pos.y, width: 326, maxHeight: 'calc(100vh - 32px)', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 };
   return (
-    <div className="glass glass-top-hi pop" style={{
-      position: 'absolute', left: pos.x, top: pos.y, width: 326, maxHeight: 'calc(100vh - 32px)',
-      display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20,
-    }}>
-      {/* header */}
+    <div className="glass glass-top-hi pop" style={containerStyle}>
+      {/* header (hidden on mobile — bottom sheet shows only the cinematic views) */}
+      {!mobile && (
       <div onPointerDown={startDrag} className="noselect" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 12px 12px 14px', cursor: 'grab' }}>
         <div style={{ width: 30, height: 30, borderRadius: 9, display: 'grid', placeItems: 'center', background: 'var(--ink)', color: '#fff', flex: '0 0 auto' }}>
           <Icon name="brain" size={17} sw={1.6} />
@@ -60,10 +62,12 @@ function ControlPanel(props) {
         <Icon name="grip" size={16} style={{ color: 'var(--ink-ghost)' }} />
         <IconBtn name={collapsed ? 'chevDown' : 'chevUp'} title={collapsed ? 'Expand' : 'Collapse'} onClick={() => setCollapsed(!collapsed)} />
       </div>
+      )}
 
       {!collapsed && (
         <React.Fragment>
           {/* search */}
+          {!mobile && (
           <div style={{ padding: '0 12px 12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 11px', borderRadius: 11, background: 'var(--field)', border: '1px solid var(--hair)' }}>
               <Icon name="search" size={15} style={{ color: 'var(--ink-faint)', flex: '0 0 auto' }} />
@@ -75,17 +79,20 @@ function ControlPanel(props) {
             </div>
             {props.search && <div className="mono" style={{ fontSize: 10.5, color: 'var(--ink-faint)', marginTop: 7, paddingLeft: 2 }}>{props.matchCount} match{props.matchCount === 1 ? '' : 'es'} · others dimmed in 3D</div>}
           </div>
+          )}
 
           {/* hemisphere */}
+          {!mobile && (
           <div style={{ padding: '0 12px 12px' }}>
             <div className="eyebrow" style={{ marginBottom: 7 }}>Hemisphere</div>
             <Segmented value={props.hemisphere} onChange={props.setHemisphere}
               options={[{ value: 'left', label: 'Left' }, { value: 'both', label: 'Both' }, { value: 'right', label: 'Right' }]} />
           </div>
+          )}
 
-          {/* presets — all visible, two columns */}
-          <div style={{ padding: '0 12px 12px' }}>
-            <div className="eyebrow" style={{ marginBottom: 8 }}>Cinematic presets</div>
+          {/* presets — always shown (the only control on mobile) */}
+          <div style={{ padding: mobile ? '12px 12px' : '0 12px 12px' }}>
+            <div className="eyebrow" style={{ marginBottom: 8 }}>Cinematic views</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
               {props.presets.map(p => {
                 const on = props.activePreset === p.id;
@@ -105,11 +112,14 @@ function ControlPanel(props) {
           </div>
 
           {/* cortex opacity */}
+          {!mobile && (
           <div style={{ padding: '0 14px 14px' }}>
             <Slider label="Cortex opacity" value={props.cortexOpacity} onChange={props.setCortexOpacity} color="var(--c-cortex)" />
           </div>
+          )}
 
           {/* layers header — collapsed by default so presets stay the spotlight */}
+          {!mobile && (
           <div style={{ display: 'flex', alignItems: 'center', padding: '0 14px 8px', gap: 8 }}>
             <button onClick={() => setLayersOpen(o => !o)} style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, border: 'none', background: 'transparent', cursor: 'pointer', padding: 0 }}>
               <Icon name="layers" size={13} style={{ color: 'var(--ink-faint)' }} />
@@ -119,21 +129,24 @@ function ControlPanel(props) {
             {layersShown && <button onClick={props.onShowAll} style={ghostBtn}>All</button>}
             {layersShown && <button onClick={props.onHideAll} style={ghostBtn}>None</button>}
           </div>
+          )}
 
           {/* tree */}
-          {layersShown && (
+          {!mobile && layersShown && (
             <div className="scroll" style={{ overflowY: 'auto', padding: '0 8px 8px', flex: 1, minHeight: 120 }}>
               <LayersTree {...props} />
             </div>
           )}
 
           {/* footer */}
+          {!mobile && (
           <div style={{ display: 'flex', gap: 8, padding: '10px 12px', borderTop: '1px solid var(--hair-2)' }}>
             <button onClick={props.onReset} style={footBtn}><Icon name="reset" size={14} /> Reset view</button>
             {props.isolated
               ? <button onClick={props.onClearIsolate} style={{ ...footBtn, background: 'var(--accent)', color: '#fff', border: '1px solid transparent' }}><Icon name="isolate" size={14} /> Exit isolate</button>
               : <button onClick={props.onIsolateMatches} disabled={!props.canIsolate} style={{ ...footBtn, opacity: props.canIsolate ? 1 : 0.4 }}><Icon name="isolate" size={14} /> Isolate</button>}
           </div>
+          )}
         </React.Fragment>
       )}
     </div>

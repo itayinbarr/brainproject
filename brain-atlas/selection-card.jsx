@@ -14,14 +14,14 @@ function Breadcrumb({ crumb, leaf, color }) {
   );
 }
 
-function SelectionCard({ node, color, catLabel, description, related, onSelect, onRelated, onFocus, onIsolate, onClose, isolated, focused, onClearIsolate }) {
+function SelectionCard({ node, color, catLabel, description, related, onSelect, onRelated, onFocus, onIsolate, onClose, isolated, focused, onClearIsolate, mobile }) {
   if (!node) return null;
   const sideLabel = node.side === 'median' ? 'Midline' : (node.side === 'left' ? 'Left' : 'Right');
+  const cardStyle = mobile
+    ? { position: 'absolute', left: 8, right: 8, bottom: 8, maxHeight: '64vh', overflowY: 'auto', padding: '16px 16px 14px', zIndex: 45 }
+    : { position: 'absolute', right: 16, top: 16, width: 372, maxWidth: 'min(372px, calc(100vw - 32px))', padding: '16px 16px 14px', zIndex: 30 };
   return (
-    <div className="glass glass-top-hi pop" key={node.id} style={{
-      position: 'absolute', right: 16, top: 16, width: 372, maxWidth: 'min(372px, calc(100vw - 32px))',
-      padding: '16px 16px 14px', zIndex: 30,
-    }}>
+    <div className="glass glass-top-hi pop scroll" key={node.id} style={cardStyle}>
       <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10 }}>
         <span style={{ width: 12, height: 12, borderRadius: 99, background: color, marginTop: 6, flex: '0 0 auto', boxShadow: '0 0 0 3px ' + color + '22' }} />
         <div style={{ flex: 1 }}>

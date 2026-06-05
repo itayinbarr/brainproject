@@ -46,8 +46,22 @@ const STAGES = {
   'clinical':   ['#dfe6f0', '#c4cedd', '#aebccf', '#1a2030', '#5a667a'],
 };
 
+function useIsMobile(bp) {
+  bp = bp || 640;
+  const q = '(max-width: ' + bp + 'px)';
+  const [m, setM] = React.useState(() => window.matchMedia(q).matches);
+  React.useEffect(() => {
+    const mq = window.matchMedia(q);
+    const h = (e) => setM(e.matches);
+    mq.addEventListener ? mq.addEventListener('change', h) : mq.addListener(h);
+    return () => { mq.removeEventListener ? mq.removeEventListener('change', h) : mq.removeListener(h); };
+  }, []);
+  return m;
+}
+
 function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+  const mobile = useIsMobile();
   const nodes = window.BRAIN.nodes;
   const cats = window.BRAIN.categories;
   const PAL = window.BRAIN.palette;
@@ -269,9 +283,9 @@ function App() {
       <canvas ref={canvasRef} className="three" />
 
       {/* corner toolbar: save poster · credits · shuffle palette · subsystem key */}
-      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onRandomPalette={randomizePalette} />
+      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onRandomPalette={randomizePalette} mobile={mobile} />
 
-      {hint && consent && (
+      {hint && consent && !mobile && (
         <div className="pop" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 12,
           display: 'flex', alignItems: 'center', gap: 8, padding: '8px 14px', borderRadius: 99,
           background: 'rgba(8,11,18,0.55)', color: 'var(--on-stage)', fontSize: 12.5, fontWeight: 500, backdropFilter: 'blur(8px)',
@@ -295,7 +309,7 @@ function App() {
         onIsolateMatches={isolateMatches} canIsolate={matchedIds.size > 0}
         isolated={!!isolatedIds} onClearIsolate={clearIsolate}
         pos={pos} setPos={setPos} collapsed={collapsed} setCollapsed={setCollapsed}
-        q={q}
+        q={q} mobile={mobile}
       />
 
       {!consent && <ConsentBanner onAccept={acceptCookies} onDecline={declineCookies} />}
@@ -303,7 +317,7 @@ function App() {
       <SelectionCard node={selNode} color={selNode ? PAL[selNode.category] : null}
         catLabel={selNode ? cats[selNode.category].label : ''} description={description} related={related}
         onSelect={selectNode} onRelated={focusNode} onFocus={toggleFocus} onIsolate={isolateNode} onClose={() => setSelectedId(null)}
-        isolated={!!isolatedIds} focused={selNode && focusedId === selNode.id} onClearIsolate={clearIsolate} />
+        isolated={!!isolatedIds} focused={selNode && focusedId === selNode.id} onClearIsolate={clearIsolate} mobile={mobile} />
 
       {/* hover tooltip */}
       {hoverNode && !selNode && (
@@ -355,7 +369,7 @@ function ConsentBanner({ onAccept, onDecline }) {
 }
 
 /* bottom-right stage toolbar: subsystem key \u00b7 save poster \u00b7 credits */
-function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette }) {
+function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette, mobile }) {
   const [open, setOpen] = React.useState(false);     // subsystem key
   const [cred, setCred] = React.useState(false);     // credits
   const visible = groups.filter(g => layerOn[g.cat]);
@@ -394,21 +408,27 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette }) {
         </div>
       )}
       <div style={{ display: 'flex', gap: 8 }}>
-        <button onClick={onPoster} disabled={posterBusy} className="glass" style={{ ...pill, opacity: posterBusy ? 0.6 : 1 }} title="Save a high-definition poster (features the selected structure)">
-          <Icon name={posterBusy ? 'reset' : 'image'} size={14} /> {posterBusy ? 'Rendering\u2026' : 'Save poster'}
-        </button>
+        {!mobile && (
+          <button onClick={onPoster} disabled={posterBusy} className="glass" style={{ ...pill, opacity: posterBusy ? 0.6 : 1 }} title="Save a high-definition poster (features the selected structure)">
+            <Icon name={posterBusy ? 'reset' : 'image'} size={14} /> {posterBusy ? 'Rendering\u2026' : 'Save poster'}
+          </button>
+        )}
         <button onClick={() => { setCred(c => !c); setOpen(false); }} className="glass" style={pill} title="Credits & licence">
           <Icon name="github" size={14} /> Credits
         </button>
-        <button onClick={onRandomPalette} className="glass" style={pill} title="Shuffle the colour palette">
-          <Icon name="palette" size={14} /> Palette
-        </button>
-        <button onClick={() => { setOpen(o => !o); setCred(false); }} className="glass" style={pill}>
-          <Icon name="info" size={14} /> Key
-          <span style={{ display: 'flex', marginLeft: 2 }}>
-            {visible.slice(0, 6).map((g, i) => <span key={g.cat} style={{ width: 9, height: 9, borderRadius: 99, background: g.color, marginLeft: i ? -3 : 0, boxShadow: '0 0 0 1.5px var(--glass)' }} />)}
-          </span>
-        </button>
+        {!mobile && (
+          <button onClick={onRandomPalette} className="glass" style={pill} title="Shuffle the colour palette">
+            <Icon name="palette" size={14} /> Palette
+          </button>
+        )}
+        {!mobile && (
+          <button onClick={() => { setOpen(o => !o); setCred(false); }} className="glass" style={pill}>
+            <Icon name="info" size={14} /> Key
+            <span style={{ display: 'flex', marginLeft: 2 }}>
+              {visible.slice(0, 6).map((g, i) => <span key={g.cat} style={{ width: 9, height: 9, borderRadius: 99, background: g.color, marginLeft: i ? -3 : 0, boxShadow: '0 0 0 1.5px var(--glass)' }} />)}
+            </span>
+          </button>
+        )}
       </div>
     </div>
   );
