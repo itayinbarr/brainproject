@@ -1,8 +1,8 @@
 /* ============================================================
-   Brain Atlas — Firebase / Google Analytics with Consent Mode v2.
+   Brain Atlas - Firebase / Google Analytics with Consent Mode v2.
    Analytics initialises immediately but with consent DEFAULTED TO
    DENIED, so a visitor who declines still produces anonymous,
-   cookieless pings (rough enter counts) — no cookies/identifiers
+   cookieless pings (rough enter counts) - no cookies/identifiers
    are stored. Accepting upgrades analytics_storage to "granted"
    (full analytics with cookies + duration of stay).
    ============================================================ */
@@ -37,7 +37,7 @@
       setConsentFn = setConsent;
 
       const app = initializeApp(firebaseConfig);
-      // Consent Mode v2 defaults — everything denied until the visitor grants.
+      // Consent Mode v2 defaults - everything denied until the visitor grants.
       // analytics_storage denied => cookieless pings; granted => full analytics.
       setConsent({
         ad_storage: 'denied',

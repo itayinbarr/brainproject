@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 # Publishes the brain-atlas/ app to GitHub Pages on every push to main.
 # The app is fully static (JSX is transpiled in-browser via Babel), so there
-# is no build step — we just upload the folder as the Pages site root.
+# is no build step - we just upload the folder as the Pages site root.
 
 on:
   push:

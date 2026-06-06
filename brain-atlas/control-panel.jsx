@@ -1,4 +1,4 @@
-/* Brain Atlas — floating frosted control panel */
+/* Brain Atlas - floating frosted control panel */
 
 function Slider({ value, min = 0, max = 1, step = 0.01, onChange, color, label, suffix }) {
   const ref = React.useRef(null);
@@ -50,7 +50,7 @@ function ControlPanel(props) {
     : { position: 'absolute', left: pos.x, top: pos.y, width: 326, maxHeight: 'calc(100vh - 32px)', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 };
   return (
     <div className="glass glass-top-hi pop" style={containerStyle}>
-      {/* header (hidden on mobile — bottom sheet shows only the cinematic views) */}
+      {/* header (hidden on mobile - bottom sheet shows only the cinematic views) */}
       {!mobile && (
       <div onPointerDown={startDrag} className="noselect" style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '12px 12px 12px 14px', cursor: 'grab' }}>
         <div style={{ width: 30, height: 30, borderRadius: 9, display: 'grid', placeItems: 'center', background: 'var(--ink)', color: '#fff', flex: '0 0 auto' }}>
@@ -90,7 +90,7 @@ function ControlPanel(props) {
           </div>
           )}
 
-          {/* presets — always shown (the only control on mobile) */}
+          {/* presets - always shown (the only control on mobile) */}
           <div style={{ padding: mobile ? '12px 12px' : '0 12px 12px' }}>
             <div className="eyebrow" style={{ marginBottom: 8 }}>Cinematic views</div>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
@@ -118,7 +118,7 @@ function ControlPanel(props) {
           </div>
           )}
 
-          {/* layers header — collapsed by default so presets stay the spotlight */}
+          {/* layers header - collapsed by default so presets stay the spotlight */}
           {!mobile && (
           <div style={{ display: 'flex', alignItems: 'center', padding: '0 14px 8px', gap: 8 }}>
             <button onClick={() => setLayersOpen(o => !o)} style={{ flex: 1, display: 'flex', alignItems: 'center', gap: 8, border: 'none', background: 'transparent', cursor: 'pointer', padding: 0 }}>

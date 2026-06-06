@@ -1,7 +1,7 @@
 import { NodeIO } from '@gltf-transform/core';
 import { ALL_EXTENSIONS } from '@gltf-transform/extensions';
 const io = new NodeIO().registerExtensions(ALL_EXTENSIONS);
-const doc = await io.read(process.argv[2] || 'web/models/brain.glb');
+const doc = await io.read(process.argv[2] || 'brain-atlas/models/brain.glb');
 const root = doc.getRoot();
 
 function worldMatrix(node){

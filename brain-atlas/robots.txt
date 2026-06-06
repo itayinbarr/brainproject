@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://itayinbarr.github.io/brainproject/sitemap.xml

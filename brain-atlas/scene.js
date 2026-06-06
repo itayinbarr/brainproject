@@ -1,8 +1,7 @@
 /* ============================================================
-   Brain Atlas — REAL specimen scene (Three.js r137 global)
+   Brain Atlas - REAL specimen scene (Three.js r137 global)
    Loads the 344-structure Z-Anatomy brain.glb and exposes the
-   exact same window.BrainScene API the procedural mock used —
-   but every mesh carries its real bx_id, so picking, selection,
+   exact same window.BrainScene API the procedural mock used -    but every mesh carries its real bx_id, so picking, selection,
    isolate and focus are per-structure, not per-category.
    ============================================================ */
 (function () {
@@ -43,7 +42,7 @@
     const scene = new T.Scene();
     const camera = new T.PerspectiveCamera(38, 1, 0.01, 200);
 
-    // lights — soft clinical key + cool/warm rims for the "designed" stage
+    // lights - soft clinical key + cool/warm rims for the "designed" stage
     scene.add(new T.HemisphereLight(0xc6d2ff, 0x14171f, 0.5));
     const key = new T.DirectionalLight(0xffffff, 1.05); key.position.set(4, 6.5, 7); scene.add(key);
     const fill = new T.DirectionalLight(0xaebfff, 0.34); fill.position.set(-6, 1, 3); scene.add(fill);
@@ -53,14 +52,14 @@
     const root = new T.Group(); root.rotation.y = -0.25; scene.add(root);
     const model = new T.Group(); root.add(model);   // holds the centered/scaled gltf
 
-    // logical category registry (we never reparent gltf meshes — keep transforms)
+    // logical category registry (we never reparent gltf meshes - keep transforms)
     const cats = {};                       // cat -> { want, targetOpacity, meshes[] }
     function C(cat) { if (!cats[cat]) cats[cat] = { want: true, targetOpacity: 1, meshes: [] }; return cats[cat]; }
     const allMeshes = [];
     const meshById = new Map();             // nodeId -> [meshes]
     let loaded = false;
 
-    // state requested before the GLB finished loading — applied on load
+    // state requested before the GLB finished loading - applied on load
     const req = { layers: null, hemisphere: 'both', isolate: null, selected: null, subset: null };
 
     /* ---------------- load the real specimen ---------------- */
@@ -260,7 +259,7 @@
     }
 
     // restrict given categories to a set of node ids (e.g. only the circle-of-Willis
-    // arteries) without touching any other layer — map: { cat: Set(ids) } or null.
+    // arteries) without touching any other layer - map: { cat: Set(ids) } or null.
     function setSubset(map) {
       req.subset = map;
       allMeshes.forEach(m => {

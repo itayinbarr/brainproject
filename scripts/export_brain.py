@@ -17,7 +17,7 @@ import bpy, bmesh, json, os, re, math, mathutils
 from collections import defaultdict
 
 BLEND_DIR = os.path.dirname(bpy.data.filepath)
-OUT_DIR   = os.path.join(BLEND_DIR, "..", "web", "models")
+OUT_DIR   = os.path.join(BLEND_DIR, "..", "brain-atlas", "models")
 OUT_DIR   = os.path.normpath(OUT_DIR)
 os.makedirs(OUT_DIR, exist_ok=True)
 GLB  = os.path.join(OUT_DIR, "brain.glb")

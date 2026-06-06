@@ -1,4 +1,4 @@
-/* Brain Atlas — app composition, state & scene wiring */
+/* Brain Atlas - app composition, state & scene wiring */
 
 const CAT_ORDER = window.BRAIN.depth; // outer -> inner peel order
 const SHORT = {
@@ -21,7 +21,7 @@ const PRESETS = [
 
 // Curated 11-subsystem palettes. Each keeps loose clinical conventions (arteries warm,
 // veins/sinuses cool-blue, ventricles cyan/CSF, nerves yellow, cortex light-neutral) while
-// staying internally harmonious — consistent chroma/value, hues spread around the wheel.
+// staying internally harmonious - consistent chroma/value, hues spread around the wheel.
 const PALETTES = [
   { name: 'Jewel',   colors: { cortex:'#E7DEC9', white_matter:'#D7DDE8', deep_grey:'#B57BE0', diencephalon:'#7E8CF2', brainstem:'#E8B24A', cerebellum:'#F0894E', ventricles:'#3FC8D6', arteries:'#F05068', veins_sinuses:'#5078E8', cranial_nerves:'#D9D24A', meninges_dura:'#CC63CC' } },
   { name: 'Candy',   colors: { cortex:'#F0DCC8', white_matter:'#E3DCEA', deep_grey:'#A86CF0', diencephalon:'#5C7CFF', brainstem:'#FFC23D', cerebellum:'#FF8A5C', ventricles:'#2BD9D9', arteries:'#FF5573', veins_sinuses:'#5A78FF', cranial_nerves:'#FFE04A', meninges_dura:'#E85CD0' } },
@@ -386,22 +386,21 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette, onZoom
     <div className="glass pop scroll" style={{ padding: '14px 15px', width: 290, maxHeight: '70vh', overflowY: 'auto' }}>
       <div className="eyebrow" style={{ marginBottom: 9 }}>About</div>
       <p style={{ margin: '0 0 12px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
-        An open 3D brain you can spin, search and peel apart — built to make neuroanatomy
-        easy to <b style={{ color: 'var(--ink)' }}>learn and explore</b>, and to share that
-        knowledge freely. Most brain maps stop at the major regions; here all
-        <b style={{ color: 'var(--ink)' }}> 344 structures</b> are individually named and
-        toggleable — the granularity neuroscientists actually need.
+        I'm a visual learner, and I always wished for a tool to <b style={{ color: 'var(--ink)' }}>see
+        and explore</b> the brain myself - deeper than just its main components. So I built it.
+        An open 3D brain you can spin, search and peel apart: all
+        <b style={{ color: 'var(--ink)' }}> 344 structures</b> individually named and toggleable -         the granularity neuroscientists actually need, free for everyone.
       </p>
       <div className="eyebrow" style={{ marginBottom: 9 }}>Credits</div>
       <a href="https://github.com/itayinbarr" target="_blank" rel="noopener noreferrer" style={{ ...credLink, marginBottom: 11 }}><Icon name="github" size={14} /> Built by Itay Inbar</a>
       <p style={{ margin: '0 0 9px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
-        3D anatomy from <b style={{ color: 'var(--ink)' }}>Z-Anatomy</b>, built on BodyParts3D / DBCLS — licensed <span className="mono" style={{ fontSize: 11 }}>CC&nbsp;BY-SA&nbsp;4.0</span>.
+        3D anatomy from <b style={{ color: 'var(--ink)' }}>Z-Anatomy</b>, built on BodyParts3D / DBCLS - licensed <span className="mono" style={{ fontSize: 11 }}>CC&nbsp;BY-SA&nbsp;4.0</span>.
       </p>
       <a href="https://www.z-anatomy.com/" target="_blank" rel="noopener noreferrer" style={credLink}><Icon name="globe" size={14} /> z-anatomy.com</a>
     </div>
   );
 
-  // mobile: pinned top-right — zoom −/+ then About, with the panel opening downward
+  // mobile: pinned top-right - zoom −/+ then About, with the panel opening downward
   if (mobile) {
     const zoomBtn = { width: 38, height: 38, display: 'grid', placeItems: 'center', borderRadius: 99, border: '1px solid var(--glass-edge)', color: 'var(--ink-soft)', cursor: 'pointer' };
     return (

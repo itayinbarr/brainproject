@@ -1,4 +1,4 @@
-/* Brain Atlas — layers tree (subsystem accordion + structure browser) */
+/* Brain Atlas - layers tree (subsystem accordion + structure browser) */
 
 function hl(text, q) {
   if (!q) return text;
@@ -60,7 +60,7 @@ function CategoryBlock({ g, on, expanded, onToggle, onExpand, onSelect, onFocus,
       {showItems && (
         <div style={{ paddingBottom: 4 }}>
           {filtered.length > 60 && !q && (
-            <div style={{ padding: '2px 8px 6px 30px', fontSize: 10.5, color: 'var(--ink-ghost)' }} className="mono">{filtered.length} structures — scroll</div>
+            <div style={{ padding: '2px 8px 6px 30px', fontSize: 10.5, color: 'var(--ink-ghost)' }} className="mono">{filtered.length} structures - scroll</div>
           )}
           {filtered.slice(0, q ? 999 : 120).map(it => (
             <StructureRow key={it.id} node={it} onSelect={onSelect} onFocus={onFocus} selected={selectedId === it.id} q={q} />

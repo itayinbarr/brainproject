@@ -3,10 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Brain Atlas — interactive 3D brain</title>
+
+  <!-- Primary SEO -->
+  <title>Brain Atlas - Interactive 3D Brain Anatomy (344 structures)</title>
+  <meta name="description" content="A free, interactive 3D brain you can spin, search and peel apart in your browser. 344 individually-named structures - cortical gyri & sulci, deep grey nuclei, ventricles, brainstem, cerebellum, the circle of Willis, dural sinuses and cranial nerves - each labelled with its anatomical path. Built to make neuroanatomy easy to learn and explore." />
+  <meta name="keywords" content="3D brain, brain atlas, brain anatomy, interactive brain model, neuroanatomy, neuroscience, brain map, cortex, gyri, sulci, basal ganglia, thalamus, ventricles, circle of Willis, cranial nerves, brainstem, cerebellum, learn neuroanatomy" />
+  <meta name="author" content="Itay Inbar" />
+  <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#0c1018" />
+  <link rel="canonical" href="https://itayinbarr.github.io/brainproject/" />
+
+  <!-- Open Graph (Facebook, LinkedIn, Slack, …) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Brain Atlas" />
+  <meta property="og:title" content="Brain Atlas - Interactive 3D Brain Anatomy" />
+  <meta property="og:description" content="Spin, search and peel apart a 3D brain in your browser. 344 individually-named structures - the granularity neuroscientists and students actually need. Free and open." />
+  <meta property="og:url" content="https://itayinbarr.github.io/brainproject/" />
+  <meta property="og:image" content="https://itayinbarr.github.io/brainproject/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="A 3D brain rendered in Brain Atlas, with a structure selected and its anatomical details shown." />
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Brain Atlas - Interactive 3D Brain Anatomy" />
+  <meta name="twitter:description" content="Spin, search and peel apart a 3D brain in your browser - 344 individually-named structures. Free and open." />
+  <meta name="twitter:image" content="https://itayinbarr.github.io/brainproject/og-image.png" />
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="favicon.svg" />
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Speed up the third-party model/runtime fetches a touch -->
+  <link rel="preconnect" href="https://unpkg.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+
+  <!-- Structured data: helps search engines understand what this is -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Brain Atlas",
+    "url": "https://itayinbarr.github.io/brainproject/",
+    "applicationCategory": "EducationalApplication",
+    "operatingSystem": "Any (web browser)",
+    "browserRequirements": "Requires WebGL",
+    "description": "A free, interactive 3D brain you can spin, search and peel apart. 344 individually-named anatomical structures, each labelled with its anatomical path - built to make neuroanatomy easy to learn and explore.",
+    "inLanguage": "en",
+    "isAccessibleForFree": true,
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "author": { "@type": "Person", "name": "Itay Inbar", "url": "https://github.com/itayinbarr" },
+    "license": "https://creativecommons.org/licenses/by-sa/4.0/"
+  }
+  </script>
 </head>
 <body>
   <div id="root"></div>
@@ -16,9 +65,9 @@
   <script src="https://unpkg.com/three@0.137.0/examples/js/loaders/GLTFLoader.js"></script>
   <script src="https://unpkg.com/three@0.137.0/examples/js/loaders/DRACOLoader.js"></script>
 
-  <!-- React + Babel (pinned) -->
-  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+  <!-- React + Babel (pinned, production builds) -->
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
 
   <!-- data + scene + analytics (plain JS) -->

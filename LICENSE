@@ -26,9 +26,9 @@ NOTE ON THE 3D ANATOMY ASSETS (separate licence)
 The MIT licence above covers the viewer SOURCE CODE only (HTML/CSS/JS/JSX,
 build and export scripts).
 
-The 3D geometry shipped with this project — the brain model and its derived
-files, e.g. brain-atlas/models/brain.glb, web/models/brain.glb, and the
-manifest/metadata derived from them — is NOT MIT licensed. It is derived from
+The 3D geometry shipped with this project - the brain model and its derived
+files, e.g. brain-atlas/models/brain.glb and the manifest/metadata derived
+from it - is NOT MIT licensed. It is derived from
 Z-Anatomy, which is built on BodyParts3D / DBCLS, and is licensed under
 
     Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
@@ -37,6 +37,6 @@ Z-Anatomy, which is built on BodyParts3D / DBCLS, and is licensed under
 If you redistribute a modified version of the model, it must remain under
 CC BY-SA 4.0 and keep this attribution. See README.md ("Attribution & licence").
 
-  - Z-Anatomy — https://www.z-anatomy.com/  ·  https://github.com/Z-Anatomy
+  - Z-Anatomy - https://www.z-anatomy.com/  ·  https://github.com/Z-Anatomy
   - BodyParts3D, © The Database Center for Life Science (DBCLS)
     https://lifesciencedb.jp/bp3d/
