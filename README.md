@@ -1,10 +1,17 @@
-# Brain Atlas — interactive 3D brain (Z‑Anatomy)
+# Brain Atlas — an interactive 3D brain you can learn from
 
-An anatomically‑accurate, fully open‑source 3D brain you can spin, search, and dissect
-in the browser. **344 individually‑named structures** — every cortical gyrus and sulcus,
-the deep grey nuclei, ventricles, brainstem, cerebellum, the dural venous sinuses, the
-circle of Willis, the dural reflections, and the cranial nerves — each one a separate,
-labelled, toggleable mesh.
+**A 3D map of the brain that's easy to learn from and explore — built to share knowledge,
+freely and openly.**
+
+Spin it, search it, fade the cortex away, isolate a single structure, peel the brain apart
+system by system. The brain maps I could find online showed only the **major regions** — a
+dozen blobs. That's not enough to actually study from. This one resolves
+**344 individually‑named structures** — every cortical gyrus and sulcus, the deep grey
+nuclei, the ventricles, brainstem, cerebellum, the dural venous sinuses, the circle of
+Willis, the dural reflections, and the cranial nerves — each a separate, labelled,
+toggleable mesh, with its full anatomical (TA2) path and a plain‑language description. The
+granularity neuroscientists and students actually need, in something anyone can open in a
+browser.
 
 The geometry comes from **[Z‑Anatomy](https://www.z-anatomy.com/)**, which is built on
 **[BodyParts3D](https://lifesciencedb.jp/bp3d/)** (DBCLS, Japan). Both are released under
@@ -12,6 +19,15 @@ The geometry comes from **[Z‑Anatomy](https://www.z-anatomy.com/)**, which is 
 real, TA2‑named anatomical structure.
 
 ![default view](docs/default.png)
+
+## Live demo
+
+- **GitHub Pages:** https://itayinbarr.github.io/brainproject/
+- **Firebase Hosting:** https://brain-atlas-7f5fe.web.app
+
+Runs entirely in the browser — no install, works on desktop and mobile (pinch‑free zoom
+buttons on touch). Optional, consent‑gated Google Analytics; declining keeps it anonymous
+and cookieless.
 
 ---
 
@@ -49,6 +65,22 @@ python3 -m http.server 8847
 Any static server works (`npx serve web`, `php -S`, nginx, GitHub Pages, …).
 Everything it needs — Three.js, the Draco decoder, the model — is vendored locally under
 `web/`, so it runs offline.
+
+---
+
+## Deploying
+
+The app is **fully static** — JSX is transpiled in‑browser by Babel, so there is no build
+step. Every asset path is relative, so it works at a site root *or* under a subpath.
+
+- **GitHub Pages** — handled automatically by
+  [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml): every push to
+  `main` publishes the `brain-atlas/` folder. Enable it once in **Settings → Pages →
+  Build and deployment → Source: GitHub Actions**.
+- **Firebase Hosting** — config in [`firebase.json`](firebase.json) (serves `brain-atlas/`,
+  with long‑cache headers for `.glb`/`.wasm`). Deploy with `firebase deploy --only hosting`.
+
+Google Analytics (consent‑gated) reports into the same property from either domain.
 
 ---
 
@@ -148,12 +180,22 @@ The model here deliberately doesn't fake geometry it doesn't have.
 ```
 brainmodel/
 ├── README.md                     ← this file
-├── web/                          ← the app (serve this folder)
+├── LICENSE                       ← MIT (code) + CC BY‑SA 4.0 (3D assets)
+├── firebase.json                 ← Firebase Hosting config (serves brain-atlas/)
+├── .github/workflows/
+│   └── deploy-pages.yml          ← publishes brain-atlas/ to GitHub Pages on push
+├── brain-atlas/                  ← the designed app (deployed; React + Three.js, CDN)
+│   ├── index.html
+│   ├── app.jsx · scene.js · control-panel.jsx · selection-card.jsx · …
+│   ├── firebase-analytics.js     ← consent‑gated Google Analytics (Consent Mode v2)
+│   ├── models/                   ← brain.glb + manifest.json
+│   └── vendor/draco/             ← Draco decoder (vendored)
+├── web/                          ← minimal dependency‑light viewer / embed reference
 │   ├── index.html
 │   ├── app.js                    ← viewer logic (Three.js, search, layers, picking)
 │   ├── style.css
 │   ├── models/
-│   │   ├── brain.glb             ← 3.9 MB Draco‑compressed, 344 named structures
+│   │   ├── brain.glb             ← Draco‑compressed, 344 named structures
 │   │   └── manifest.json         ← per‑structure metadata (id, label, category, side, TA2 path)
 │   └── vendor/                   ← Three.js + Draco decoder (vendored, offline‑ready)
 ├── scripts/
@@ -226,12 +268,24 @@ What `export_brain.py` does, in order:
 
 ## Attribution & licence
 
-The 3D geometry is **© Z‑Anatomy contributors and BodyParts3D / DBCLS**, licensed under
-**Creative Commons Attribution‑ShareAlike 4.0 (CC BY‑SA 4.0)**.
+This project is **dual‑licensed** — see [`LICENSE`](LICENSE) for the full text:
+
+- **Viewer source code** (HTML/CSS/JS/JSX, build & export scripts) — **MIT**. Use it,
+  fork it, embed it, do what you like.
+- **3D anatomy assets** (the `brain.glb` models and the metadata derived from them) —
+  **Creative Commons Attribution‑ShareAlike 4.0 (CC BY‑SA 4.0)**, © Z‑Anatomy contributors
+  and BodyParts3D / DBCLS.
+
+**CC BY‑SA is share‑alike:** if you distribute a modified version of the *model*, it must
+stay under CC BY‑SA and keep this attribution. The MIT code licence does **not** relicense
+the model — keep this notice with the `.glb`.
 
 - Z‑Anatomy — https://www.z-anatomy.com/  ·  https://github.com/Z-Anatomy
 - BodyParts3D, © The Database Center for Life Science (DBCLS) — https://lifesciencedb.jp/bp3d/
 
-**CC BY‑SA is share‑alike:** if you distribute a modified version of the *model*, it must
-stay under CC BY‑SA and keep this attribution. That applies to the 3D asset; you can
-license the surrounding viewer code as you like. Keep this notice with the `.glb`.
+## Contributing
+
+Issues and PRs are welcome — corrections to anatomy/labels, accessibility, and new
+"cinematic" presets especially. By contributing you agree your changes are released under
+the same dual licence above. Please don't add fabricated geometry; this atlas only ships
+real, source‑derived structures.

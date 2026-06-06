@@ -163,6 +163,12 @@
       sphGoal.radius = Math.max(2.6, Math.min(16, sphGoal.radius * (1 + e.deltaY * 0.0009)));
       idleTimer = 0;
     }
+    // stepped zoom for on-screen +/- buttons (pinch-zoom is unreliable on mobile);
+    // the loop eases sph.radius toward the goal, so each tap glides in/out smoothly
+    function zoom(dir) {
+      sphGoal.radius = Math.max(2.6, Math.min(16, sphGoal.radius * (1 + dir * 0.22)));
+      idleTimer = 0;
+    }
     // keyboard modifier toggles pan even mid-drag
     window.addEventListener('keydown', (e) => { if ((e.key === 'Meta' || e.key === 'Control') && dragging) panning = true; });
     window.addEventListener('keyup', (e) => { if (e.key === 'Meta' || e.key === 'Control') panning = false; });
@@ -401,7 +407,7 @@
     return {
       THREE: T, scene, camera, renderer, cats,
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
-      selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset,
+      selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset, zoom,
       setAutoRotate, setExposure, setBackground, setPalette, capturePoster,
       dispose() { cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); },
     };

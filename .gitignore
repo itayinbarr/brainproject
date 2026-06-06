@@ -12,3 +12,6 @@ Z-Anatomy.zip
 .DS_Store
 *.log
 scripts/shot_*.mjs
+
+# firebase deploy cache
+.firebase/

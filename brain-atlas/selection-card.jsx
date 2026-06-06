@@ -22,12 +22,9 @@ function SelectionCard({ node, color, catLabel, description, related, onSelect, 
     : { position: 'absolute', right: 16, top: 16, width: 372, maxWidth: 'min(372px, calc(100vw - 32px))', padding: '16px 16px 14px', zIndex: 30 };
   return (
     <div className="glass glass-top-hi pop scroll" key={node.id} style={cardStyle}>
-      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, marginBottom: 10 }}>
-        <span style={{ width: 12, height: 12, borderRadius: 99, background: color, marginTop: 6, flex: '0 0 auto', boxShadow: '0 0 0 3px ' + color + '22' }} />
-        <div style={{ flex: 1 }}>
-          <div className="eyebrow" style={{ color: 'var(--accent)', marginBottom: 3 }}>{catLabel}</div>
-          <h2 style={{ margin: 0, fontSize: 21, lineHeight: 1.1, fontWeight: 800, letterSpacing: '-0.015em', color: 'var(--ink)', textWrap: 'pretty' }}>{node.label}</h2>
-        </div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+        <span style={{ width: 12, height: 12, borderRadius: 99, background: color, flex: '0 0 auto', boxShadow: '0 0 0 3px ' + color + '22' }} />
+        <h2 style={{ flex: 1, margin: 0, fontSize: 21, lineHeight: 1.1, fontWeight: 800, letterSpacing: '-0.015em', color: 'var(--ink)', textWrap: 'pretty' }}>{node.label}</h2>
         <span style={{ fontSize: 11, fontWeight: 600, color: 'var(--ink-soft)', background: 'rgba(16,20,32,0.05)', padding: '3px 9px', borderRadius: 99, flex: '0 0 auto' }}>{sideLabel}</span>
         <IconBtn name="x" title="Close" onClick={onClose} dim={28} size={15} />
       </div>

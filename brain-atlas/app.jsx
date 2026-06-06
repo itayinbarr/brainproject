@@ -197,6 +197,7 @@ function App() {
     else { sceneRef.current && sceneRef.current.focusNode(id); setFocusedId(id); }
   };
   const focusCat = (cat) => sceneRef.current && sceneRef.current.focusCategory(cat);
+  const zoom = (dir) => sceneRef.current && sceneRef.current.zoom(dir);
   const reset = () => {
     setActivePreset('whole'); applyPreset(PRESETS[0], false);
     setHemisphere('left'); setIsolatedIds(null); setSearch(''); setSelectedId(null); setFocusedId(null);
@@ -283,7 +284,7 @@ function App() {
       <canvas ref={canvasRef} className="three" />
 
       {/* corner toolbar: save poster · credits · shuffle palette · subsystem key */}
-      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onRandomPalette={randomizePalette} mobile={mobile} />
+      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onRandomPalette={randomizePalette} onZoom={zoom} mobile={mobile} />
 
       {hint && consent && !mobile && (
         <div className="pop" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 12,
@@ -368,8 +369,8 @@ function ConsentBanner({ onAccept, onDecline }) {
   );
 }
 
-/* bottom-right stage toolbar: subsystem key \u00b7 save poster \u00b7 credits */
-function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette, mobile }) {
+/* stage toolbar: subsystem key, save poster, palette, about (mobile: zoom + about, top-right) */
+function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette, onZoom, mobile }) {
   const [open, setOpen] = React.useState(false);     // subsystem key
   const [cred, setCred] = React.useState(false);     // credits
   const visible = groups.filter(g => layerOn[g.cat]);
@@ -381,6 +382,40 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette, mobile
     display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none', color: 'var(--ink-soft)',
     fontSize: 12, fontWeight: 600, padding: '6px 8px', borderRadius: 8, border: '1px solid var(--hair)', background: 'rgba(255,255,255,0.5)',
   };
+  const about = (
+    <div className="glass pop scroll" style={{ padding: '14px 15px', width: 290, maxHeight: '70vh', overflowY: 'auto' }}>
+      <div className="eyebrow" style={{ marginBottom: 9 }}>About</div>
+      <p style={{ margin: '0 0 12px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
+        An open 3D brain you can spin, search and peel apart — built to make neuroanatomy
+        easy to <b style={{ color: 'var(--ink)' }}>learn and explore</b>, and to share that
+        knowledge freely. Most brain maps stop at the major regions; here all
+        <b style={{ color: 'var(--ink)' }}> 344 structures</b> are individually named and
+        toggleable — the granularity neuroscientists actually need.
+      </p>
+      <div className="eyebrow" style={{ marginBottom: 9 }}>Credits</div>
+      <a href="https://github.com/itayinbarr" target="_blank" rel="noopener noreferrer" style={{ ...credLink, marginBottom: 11 }}><Icon name="github" size={14} /> Built by Itay Inbar</a>
+      <p style={{ margin: '0 0 9px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
+        3D anatomy from <b style={{ color: 'var(--ink)' }}>Z-Anatomy</b>, built on BodyParts3D / DBCLS — licensed <span className="mono" style={{ fontSize: 11 }}>CC&nbsp;BY-SA&nbsp;4.0</span>.
+      </p>
+      <a href="https://www.z-anatomy.com/" target="_blank" rel="noopener noreferrer" style={credLink}><Icon name="globe" size={14} /> z-anatomy.com</a>
+    </div>
+  );
+
+  // mobile: pinned top-right — zoom −/+ then About, with the panel opening downward
+  if (mobile) {
+    const zoomBtn = { width: 38, height: 38, display: 'grid', placeItems: 'center', borderRadius: 99, border: '1px solid var(--glass-edge)', color: 'var(--ink-soft)', cursor: 'pointer' };
+    return (
+      <div style={{ position: 'absolute', right: 8, top: 8, zIndex: 22, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
+        <div style={{ display: 'flex', gap: 8 }}>
+          <button onClick={() => onZoom(-1)} className="glass" style={zoomBtn} title="Zoom in"><Icon name="plus" size={16} /></button>
+          <button onClick={() => onZoom(1)} className="glass" style={zoomBtn} title="Zoom out"><Icon name="minus" size={16} /></button>
+          <button onClick={() => setCred(c => !c)} className="glass" style={pill}><Icon name="info" size={14} /> About</button>
+        </div>
+        {cred && about}
+      </div>
+    );
+  }
+
   return (
     <div style={{ position: 'absolute', right: 16, bottom: 16, zIndex: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
       {open && (
@@ -397,24 +432,15 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onRandomPalette, mobile
           </div>
         </div>
       )}
-      {cred && (
-        <div className="glass pop" style={{ padding: '14px 15px', width: 282 }}>
-          <div className="eyebrow" style={{ marginBottom: 9 }}>Credits</div>
-          <a href="https://github.com/itayinbarr" target="_blank" rel="noopener noreferrer" style={{ ...credLink, marginBottom: 11 }}><Icon name="github" size={14} /> Built by Itay Inbar</a>
-          <p style={{ margin: '0 0 9px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
-            3D anatomy from <b style={{ color: 'var(--ink)' }}>Z-Anatomy</b>, built on BodyParts3D / DBCLS \u2014 licensed <span className="mono" style={{ fontSize: 11 }}>CC&nbsp;BY-SA&nbsp;4.0</span>.
-          </p>
-          <a href="https://www.z-anatomy.com/" target="_blank" rel="noopener noreferrer" style={credLink}><Icon name="globe" size={14} /> z-anatomy.com</a>
-        </div>
-      )}
+      {cred && about}
       <div style={{ display: 'flex', gap: 8 }}>
         {!mobile && (
           <button onClick={onPoster} disabled={posterBusy} className="glass" style={{ ...pill, opacity: posterBusy ? 0.6 : 1 }} title="Save a high-definition poster (features the selected structure)">
             <Icon name={posterBusy ? 'reset' : 'image'} size={14} /> {posterBusy ? 'Rendering\u2026' : 'Save poster'}
           </button>
         )}
-        <button onClick={() => { setCred(c => !c); setOpen(false); }} className="glass" style={pill} title="Credits & licence">
-          <Icon name="github" size={14} /> Credits
+        <button onClick={() => { setCred(c => !c); setOpen(false); }} className="glass" style={pill} title="About this project · credits & licence">
+          <Icon name="info" size={14} /> About
         </button>
         {!mobile && (
           <button onClick={onRandomPalette} className="glass" style={pill} title="Shuffle the colour palette">
