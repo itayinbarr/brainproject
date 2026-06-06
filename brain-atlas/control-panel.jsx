@@ -45,8 +45,11 @@ function ControlPanel(props) {
   };
 
   const mobile = props.mobile;
+  // on mobile the controls live in the bottom sheet; when a structure is selected the
+  // selection card takes that same spot, so we hide the controls behind it
+  if (mobile && props.selectedId != null) return null;
   const containerStyle = mobile
-    ? { position: 'absolute', left: 8, right: 8, top: 54, maxHeight: '44vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 }
+    ? { position: 'absolute', left: 8, right: 8, bottom: 8, maxHeight: '44vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 }
     : { position: 'absolute', left: pos.x, top: pos.y, width: 326, maxHeight: 'calc(100vh - 32px)', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 };
   return (
     <div className="glass glass-top-hi pop" style={containerStyle}>
