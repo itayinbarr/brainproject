@@ -20,7 +20,7 @@ const PRESETS = [
       white_matter: ['Fornix', 'Hippocampal commissure', 'Stria terminalis', 'Anterior commissure'],
       diencephalon: ['Mamillary body', 'Hypothalamus', 'Habenula', 'Stria medullaris thalami'],
     } },
-  { id: 'deep',   label: 'Deep grey',        color: 'var(--c-deep_grey)',      on: ['deep_grey','diencephalon','ventricles'],   cortex: 0.12, focus: 'deep_grey' },
+  { id: 'deep',   label: 'Deep grey',        color: 'var(--c-deep_grey)',      on: ['deep_grey','diencephalon'],   cortex: 0.12, focus: 'deep_grey' },
   { id: 'nerves', label: 'Cranial nerves',   color: 'var(--c-cranial_nerves)', on: ['cranial_nerves','brainstem'],      cortex: 0.12, focus: 'cranial_nerves' },
   { id: 'dura',   label: 'Meninges & dura',  color: 'var(--c-meninges_dura)',  on: ['meninges_dura','veins_sinuses'],   cortex: 0.30, focus: null },
 ];
