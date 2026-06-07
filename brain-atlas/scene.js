@@ -280,6 +280,9 @@
         const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden && !m.userData.subsetHidden;
         const cap = m.userData.maxOpacity != null ? m.userData.maxOpacity : 1;
         m.material.opacity = want ? Math.min(cap, c.targetOpacity) : 0;
+        // only solid meshes write depth - a translucent ghost (e.g. faded cortex)
+        // must not occlude the structures behind it
+        m.material.depthWrite = m.material.opacity >= 0.98;
         m.visible = m.material.opacity > 0.012;
       });
     }
@@ -327,6 +330,8 @@
           // a selected structure is forced fully opaque (even under a faded cortex) and glows
           const tgt = isSel ? 1 : (want ? Math.min(cap, c.targetOpacity) : 0);
           m.material.opacity += (tgt - m.material.opacity) * (isSel ? 1 : fade);
+          // translucent meshes must not write depth, or they cull what's behind them
+          m.material.depthWrite = m.material.opacity >= 0.98;
           m.visible = m.material.opacity > 0.012;
           if (isSel) {
             // selected: render as a noticeably DARKER shade of its own colour
