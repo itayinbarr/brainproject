@@ -33,7 +33,7 @@ const PRESETS = [
       brainstem: ['Red nucleus'],
     } },
   { id: 'thalnuc', label: 'Thalamic nuclei', color: 'var(--c-diencephalon)',   on: ['diencephalon'],                    cortex: 0.10, focus: 'diencephalon',
-    subset: { diencephalon: ['Pulvinar', 'Anterior nuclei of thalamus', 'Mediodorsal nucleus', 'Ventral laterodorsal nucleus', 'Ventral lateroventral nucleus', 'Ventral anterior nucleus', 'Intralaminar and lateral posterior nuclei'] } },
+    subset: { diencephalon: ['Pulvinar', 'Anterior nuclei of thalamus', 'Mediodorsal nucleus', 'Ventral laterodorsal nucleus', 'Ventral lateroventral nucleus', 'Ventral anterior nucleus', 'Intralaminar and lateral posterior nuclei', 'Lateral geniculate body', 'Medial geniculate body'] } },
   { id: 'nerves', label: 'Cranial nerves',   color: 'var(--c-cranial_nerves)', on: ['cranial_nerves','brainstem'],      cortex: 0.12, focus: 'cranial_nerves' },
   { id: 'dura',   label: 'Meninges & dura',  color: 'var(--c-meninges_dura)',  on: ['meninges_dura','veins_sinuses'],   cortex: 0.30, focus: null },
 ];

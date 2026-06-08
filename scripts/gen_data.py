@@ -36,7 +36,13 @@ CRUMB_BY_LABEL = {
     "Subthalamic nucleus": ["Brain", "Cerebrum", "Diencephalon", "Subthalamus"],
     "Substantia nigra":    ["Brain", "Brainstem", "Midbrain"],
     "Nucleus accumbens":   ["Brain", "Cerebrum", "Telencephalon", "Ventral striatum"],
+    # endocrine glands + structures rescued from the non-neural filter
+    "Pineal gland":              ["Brain", "Cerebrum", "Diencephalon", "Epithalamus"],
+    "Straight gyrus (Gyrus rectus)": ["Brain", "Cerebrum", "Telencephalon", "Frontal lobe"],
+    "Uvula of vermis":           ["Brain", "Cerebellum", "Vermis"],
+    "Anterior cochlear nucleus": ["Brain", "Brainstem", "Medulla oblongata"],
 }
+CRUMB_PITUITARY = ["Brain", "Cerebrum", "Diencephalon", "Hypophysis"]
 
 # Plain-language descriptions for the new sub-structures.
 descriptions.update({
@@ -103,6 +109,23 @@ descriptions.update({
         "Lateral zone driving arousal, feeding and motivation via orexin neurons.",
     "Posterior hypothalamus":
         "Posterior zone coordinating sympathetic arousal and heat conservation.",
+    # Endocrine glands + rescued structures
+    "Adenohypophysis":
+        "Anterior pituitary; secretes growth hormone, prolactin, ACTH, TSH and the "
+        "gonadotropins under hypothalamic control.",
+    "Neurohypophysis":
+        "Posterior pituitary; releases hypothalamic oxytocin and vasopressin (ADH) "
+        "into the blood.",
+    "Pineal gland":
+        "Midline epithalamic gland that secretes melatonin and sets the circadian "
+        "sleep-wake rhythm.",
+    "Straight gyrus (Gyrus rectus)":
+        "Gyrus rectus, on the medial orbital surface of the frontal lobe, part of the "
+        "orbitofrontal cortex.",
+    "Uvula of vermis":
+        "Lobule IX of the cerebellar vermis, part of the spinocerebellum.",
+    "Anterior cochlear nucleus":
+        "First brainstem relay of the auditory nerve, in the rostral medulla.",
 })
 
 
@@ -116,6 +139,8 @@ def crumb_for(n):
         return CRUMB_AMY
     if parent == "Hypothalamus":
         return CRUMB_HYP
+    if parent == "Pituitary gland":
+        return CRUMB_PITUITARY
     if n["label"] in CRUMB_BY_LABEL:
         return CRUMB_BY_LABEL[n["label"]]
     return old_crumb.get((n["label"], n["side"]), [])

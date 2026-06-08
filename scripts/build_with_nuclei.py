@@ -121,6 +121,30 @@ for base_name in ("Lateral geniculate body", "Medial geniculate body"):
         o.matrix_world.translation += d
         print(f"[align] {base_name}.{s} moved {d.length/SCALE:.1f} mm")
 
+# ---------------------------------------------------------------------------
+# 1c. Pull in the brain endocrine glands (pituitary + pineal). Z-Anatomy files them
+# under "Endocrine glands", outside the Brain tree, so the exporter's gland filter
+# drops them. Give them a diencephalic sibling's collections (so they gain view-layer
+# visibility and Diencephalon ancestry -> diencephalon category) and tag the pituitary
+# lobes under a shared parent. They keep their original Z-Anatomy positions.
+# ---------------------------------------------------------------------------
+mam_coll = list(bpy.data.objects["Mamillary body.l"].users_collection)
+for nm, parent in (("Adenohypophysis", "Pituitary gland"),
+                   ("Neurohypophysis", "Pituitary gland"),
+                   ("Pineal gland", None)):
+    o = bpy.data.objects.get(nm)
+    if not o:
+        continue
+    for c in mam_coll:
+        try:
+            c.objects.link(o)
+        except RuntimeError:
+            pass
+    o["_nuc_region"] = "Diencephalon"
+    if parent:
+        o["_nuc_parent"] = parent
+    print(f"[endocrine] linked {nm}")
+
 # Size sanity (mm) for the geniculate question.
 for n in ("Lateral geniculate body.l", "Medial geniculate body.l", "Pulvinar.l"):
     o = bpy.data.objects.get(n)

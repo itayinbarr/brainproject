@@ -91,15 +91,29 @@ NON_NEURAL = re.compile(
 NEURAL = re.compile(r"nerve|ganglio|nucleus|tract\b|\broot\b|chiasm|funiculus|"
                     r"lemniscus|peduncle|reticular|raphe|colliculus", re.I)
 
+# Brain endocrine glands that Z-Anatomy files under "Endocrine glands" (outside the
+# Brain collection) and that the gland/non-neural filter would otherwise drop.
+BRAIN_ENDOCRINE = {"Adenohypophysis", "Neurohypophysis", "Pineal gland"}
+
+
 def in_scope(o):
     name = o.name
     if o.type not in ("MESH", "CURVE"):
         return False
+    anc = ancestors(name)
+    # The cochlear nuclei are filed inconsistently in Z-Anatomy (only 1 of the 4 sits
+    # under Brain, the rest under "Head") and are very coarse, so skip them rather than
+    # ship a lopsided pair.
+    if re.search(r"cochlear nucleus", name, re.I):
+        return False
+    # Anything under the Brain collection is brain tissue, so include it BEFORE the
+    # non-neural filter runs. That filter is meant for the muscles/organs the cranial
+    # nerves supply; applied to brain tissue it wrongly drops structures whose names
+    # trip it by substring (e.g. "Gyrus rectus", "Uvula of vermis").
+    if "Brain" in anc or name in BRAIN_ENDOCRINE:   # + pituitary/pineal (filed outside Brain)
+        return True
     if SKIP_NAME.search(name) or NON_NEURAL.search(name):
         return False
-    anc = ancestors(name)
-    if "Brain" in anc:
-        return True
     if "Cranial nerves" in anc:
         # keep only the neural structures, not the muscles/organs they supply
         return bool(NEURAL.search(name))
