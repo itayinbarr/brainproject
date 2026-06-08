@@ -113,4 +113,33 @@ button { font-family: inherit; cursor: pointer; }
 
 @keyframes popIn { from { opacity: 0; transform: translateY(8px) scale(0.98); } to { opacity: 1; transform: none; } }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes riseIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
 .pop { animation: popIn 0.32s cubic-bezier(0.16, 1, 0.3, 1); }
+.rise { animation: riseIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) both; }
+.fade { animation: fadeIn 0.3s ease both; }   /* opacity-only - safe for translateX-centred cards */
+
+@media (prefers-reduced-motion: reduce) {
+  .pop, .rise { animation: none; }
+}
+
+/* ---------- cinematic narration / lesson cards (dark glass over the stage) ---------- */
+.glass-dark {
+  background: rgba(13, 17, 26, 0.66);
+  -webkit-backdrop-filter: blur(22px) saturate(150%);
+  backdrop-filter: blur(22px) saturate(150%);
+  border: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 18px 48px -10px rgba(0,0,0,0.6);
+  border-radius: var(--r-lg);
+  color: var(--on-stage);
+}
+.eyebrow-light { color: var(--on-stage-soft); }
+
+/* fade hint at the bottom of a scrollable panel body (Systems / Learn) */
+.panel-fade {
+  position: absolute; left: 1px; right: 1px; bottom: 0; height: 34px;
+  pointer-events: none; border-radius: 0 0 var(--r-lg) var(--r-lg);
+  background: linear-gradient(to bottom, rgba(249,250,252,0), var(--glass));
+}
+.scroll-dark { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.22) transparent; }
+.scroll-dark::-webkit-scrollbar { width: 8px; }
+.scroll-dark::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 9px; }

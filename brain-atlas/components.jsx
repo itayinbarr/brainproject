@@ -29,6 +29,24 @@ const ICONS = {
   download: '<path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/>',
   github: '<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>',
   palette: '<rect x="3" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="3" width="7" height="7" rx="1.6"/><rect x="14" y="14" width="7" height="7" rx="1.6"/><rect x="3" y="14" width="7" height="7" rx="1.6"/>',
+  /* --- Systems & Lessons expansion --- */
+  chevLeft: '<path d="m15 6-6 6 6 6"/>',
+  play: '<path d="M6 4l14 8-14 8V4Z"/>',
+  pause: '<path d="M7 4h3v16H7zM14 4h3v16h-3z"/>',
+  skipBack: '<path d="M19 5v14L9 12l10-7ZM6 5v14"/>',
+  route: '<circle cx="6" cy="19" r="3"/><circle cx="18" cy="5" r="3"/><path d="M9 19h5a4 4 0 0 0 4-4V9"/>',
+  book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/>',
+  compass: '<circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6 6-2Z"/>',
+  graduation: '<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c0 1 2.5 3 6 3s6-2 6-3v-5"/>',
+  check: '<path d="M5 12l5 5L20 6"/>',
+  checkCircle: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12 2.5 2.5 4.5-5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  helpCircle: '<circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.5 1.5c0 1.5-2 2-2 3M12 17h.01"/>',
+  list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+  grid: '<rect x="3" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="3" width="7" height="7" rx="1.4"/><rect x="14" y="14" width="7" height="7" rx="1.4"/><rect x="3" y="14" width="7" height="7" rx="1.4"/>',
+  rotate: '<path d="M21 2v6h-6M3 12a9 9 0 0 1 15-6.7L21 8M3 22v-6h6M21 12a9 9 0 0 1-15 6.7L3 16"/>',
+  link: '<path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1.5-1.5"/>',
+  share: '<circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5 8.6 10.5"/>',
 };
 
 function Icon({ name, size = 18, sw = 1.8, style, className }) {
@@ -39,16 +57,17 @@ function Icon({ name, size = 18, sw = 1.8, style, className }) {
   );
 }
 
-/* round icon button */
-function IconBtn({ name, onClick, title, active, size = 16, dim = 30, sw = 1.8, style }) {
+/* round icon button (dark = sits on the cinematic dark-glass card) */
+function IconBtn({ name, onClick, title, active, size = 16, dim = 30, sw = 1.8, style, dark }) {
   const [h, setH] = React.useState(false);
+  const hoverBg = dark ? 'rgba(255,255,255,0.10)' : 'rgba(16,20,32,0.05)';
   return (
     <button title={title} onClick={onClick} onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}
       style={{
         width: dim, height: dim, display: 'grid', placeItems: 'center', borderRadius: 9,
-        border: '1px solid ' + (active ? 'transparent' : 'var(--hair)'),
-        background: active ? 'var(--accent)' : (h ? 'rgba(16,20,32,0.05)' : 'transparent'),
-        color: active ? '#fff' : 'var(--ink-soft)', transition: 'background .14s, color .14s, border-color .14s',
+        border: '1px solid ' + (active ? 'transparent' : (dark ? 'rgba(255,255,255,0.14)' : 'var(--hair)')),
+        background: active ? 'var(--accent)' : (h ? hoverBg : 'transparent'),
+        color: active ? '#fff' : (dark ? 'var(--on-stage)' : 'var(--ink-soft)'), transition: 'background .14s, color .14s, border-color .14s',
         flex: '0 0 auto', ...style,
       }}>
       <Icon name={name} size={size} sw={sw} />

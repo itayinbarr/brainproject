@@ -181,6 +181,15 @@
     const ray = new T.Raycaster();
     const ndc = new T.Vector2();
     let hovered = null, selectedIds = new Set();
+
+    // ---- functional-system highlight mode (Systems / Learn) ----
+    // when on, the loop ignores the per-category layer state and instead
+    // glows the active pathway structures, dims the already-seen ones, and
+    // keeps cortex/cerebellum/brainstem as a faint ghost for spatial context.
+    let hiOn = false;
+    let hiActive = new Set();   // nodeIds glowing now
+    let hiSeen = new Set();     // nodeIds lit earlier in the pathway
+    const GHOST_CATS = new Set(['cortex', 'cerebellum', 'brainstem']);
     function pickAt(e) {
       const r = dom.getBoundingClientRect();
       ndc.x = ((e.clientX - r.left) / r.width) * 2 - 1;
@@ -268,6 +277,25 @@
       });
     }
 
+    // ---- functional-system highlight (drives Systems & Learn) ----
+    function setHighlight(activeIds, seenIds) {
+      hiOn = true;
+      hiActive = new Set(activeIds || []);
+      hiSeen = new Set(seenIds || []);
+    }
+    function clearHighlight() { hiOn = false; hiActive = new Set(); hiSeen = new Set(); }
+    // frame a set of nodeIds (only the meshes currently shown by hemisphere)
+    function frameNodes(ids, padScale) {
+      const b = new T.Box3();
+      let any = false;
+      (ids || []).forEach(id => {
+        const ms = meshById.get(id);
+        if (ms) ms.forEach(m => { if (m.geometry && !m.userData.hemiHidden) { b.expandByObject(m); any = true; } });
+      });
+      if (!any) { (ids || []).forEach(id => { const ms = meshById.get(id); if (ms) ms.forEach(m => { if (m.geometry) { b.expandByObject(m); any = true; } }); }); }
+      if (any) frameBox(b, padScale || 3.2);
+    }
+
     function reset() {
       tgtGoal.set(0, -0.05, 0);
       sphGoal.set(7.6, Math.PI / 2.25, 0.5);
@@ -320,7 +348,37 @@
       target.lerp(tgtGoal, k);
       applyCamera();
 
-      if (loaded) {
+      if (loaded && hiOn) {
+        // ---- functional-system highlight pass ----
+        const fade = 1 - Math.pow(0.0022, dt);
+        const pulse = 0.5 + 0.5 * Math.sin(now * 0.004);   // gentle breathing glow
+        allMeshes.forEach(m => {
+          const ud = m.userData;
+          const hemiOk = !ud.hemiHidden;
+          const cap = ud.maxOpacity != null ? ud.maxOpacity : 1;
+          const isActive = hemiOk && hiActive.has(ud.nodeId);
+          const isSeen = hemiOk && !isActive && hiSeen.has(ud.nodeId);
+          let tgt;
+          if (isActive) tgt = Math.min(cap, 1);
+          else if (isSeen) tgt = Math.min(cap, 0.62);
+          else if (hemiOk && GHOST_CATS.has(ud.cat)) tgt = 0.05;   // faint context
+          else tgt = 0;
+          m.material.opacity += (tgt - m.material.opacity) * (isActive ? 1 : fade);
+          m.material.depthWrite = m.material.opacity >= 0.98;
+          m.visible = m.material.opacity > 0.012;
+          m.material.color.copy(ud.baseColor);
+          if (isActive) {
+            m.material.emissive.copy(ud.baseColor).multiplyScalar(Math.min(1.1, ud.baseEmiss * 2.4 + 0.30 + pulse * 0.22));
+            m.renderOrder = 3;
+          } else if (isSeen) {
+            m.material.emissive.copy(ud.baseColor).multiplyScalar(ud.baseEmiss + 0.05);
+            m.renderOrder = 1;
+          } else {
+            m.material.emissive.copy(ud.baseColor).multiplyScalar(ud.baseEmiss * 0.4);
+            m.renderOrder = 0;
+          }
+        });
+      } else if (loaded) {
         const fade = 1 - Math.pow(0.0022, dt);
         allMeshes.forEach(m => {
           const c = cats[m.userData.cat];
@@ -412,6 +470,7 @@
       THREE: T, scene, camera, renderer, cats,
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
       selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset, zoom,
+      setHighlight, clearHighlight, frameNodes,
       setAutoRotate, setExposure, setBackground, setPalette, capturePoster,
       dispose() { cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); },
     };

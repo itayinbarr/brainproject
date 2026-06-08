@@ -26,8 +26,111 @@ function Slider({ value, min = 0, max = 1, step = 0.01, onChange, color, label, 
   );
 }
 
+const LEVEL_COLOR = { Intro: 'var(--c-ventricles)', Core: 'var(--accent)', Advanced: 'var(--c-deep_grey)' };
+
+/* ---------------- Systems (functional views) ---------------- */
+function SystemsMode({ activeSystem, onStartSystem }) {
+  return (
+    <div style={{ padding: '0 10px 10px' }}>
+      <p style={{ margin: '0 10px 12px', fontSize: 12, lineHeight: 1.5, color: 'var(--ink-faint)' }}>
+        Watch a functional pathway light up on the specimen, stage by stage. Pick a system to step through it.
+      </p>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+        {window.SYS.SYSTEMS.map(s => {
+          const on = activeSystem === s.id;
+          const accent = 'var(--c-' + (s.cat || 'cortex') + ')';
+          return (
+            <button key={s.id} onClick={() => onStartSystem(s.id)} style={{
+              display: 'flex', alignItems: 'center', gap: 11, padding: '11px 12px', borderRadius: 12, textAlign: 'left', cursor: 'pointer',
+              border: '1px solid ' + (on ? 'transparent' : 'var(--hair)'), background: on ? 'var(--ink)' : 'rgba(255,255,255,0.5)',
+              color: on ? '#fff' : 'var(--ink)', transition: 'all .15s',
+            }}>
+              <span style={{ width: 26, height: 26, borderRadius: 8, flex: '0 0 auto', display: 'grid', placeItems: 'center',
+                background: on ? 'rgba(255,255,255,0.14)' : accent + '33' }}>
+                <span style={{ width: 9, height: 9, borderRadius: 99, background: accent, boxShadow: '0 0 8px ' + accent }} />
+              </span>
+              <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
+                <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
+                  <span style={{ fontSize: 13.5, fontWeight: 700, letterSpacing: '-0.01em' }}>{s.label}</span>
+                  {s.flagship && <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: on ? '#fff' : 'var(--accent)', background: on ? 'rgba(255,255,255,0.16)' : 'var(--accent-soft)', padding: '1px 6px', borderRadius: 99 }}>Full</span>}
+                </span>
+                <span style={{ display: 'block', fontSize: 11.5, lineHeight: 1.4, color: on ? 'rgba(255,255,255,0.7)' : 'var(--ink-faint)', textWrap: 'pretty' }}>{s.blurb}</span>
+              </span>
+              <span style={{ flex: '0 0 auto', display: 'grid', placeItems: 'center', width: 28, height: 28, borderRadius: 99, background: on ? 'var(--accent)' : 'transparent', color: on ? '#fff' : 'var(--ink-ghost)' }}>
+                <Icon name={on ? 'pause' : 'play'} size={13} />
+              </span>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- Learn (lesson library) ---------------- */
+function LessonCard({ lesson, layout, completed, onOpen }) {
+  const sys = window.SYS.SYSTEMS.find(s => s.id === lesson.system);
+  const accent = sys ? 'var(--c-' + sys.cat + ')' : 'var(--accent)';
+  const steps = sys ? sys.stages.length : 0;
+  const lvlColor = LEVEL_COLOR[lesson.level] || 'var(--accent)';
+
+  if (layout === 'list') {
+    return (
+      <button onClick={onOpen} style={{ display: 'flex', alignItems: 'center', gap: 11, width: '100%', padding: '10px 11px', borderRadius: 11, textAlign: 'left', cursor: 'pointer', border: '1px solid var(--hair)', background: 'rgba(255,255,255,0.5)' }}>
+        <span style={{ width: 30, height: 30, borderRadius: 8, flex: '0 0 auto', display: 'grid', placeItems: 'center', background: accent + '33' }}>
+          {completed ? <Icon name="checkCircle" size={16} style={{ color: '#3aa564' }} /> : <span style={{ width: 9, height: 9, borderRadius: 99, background: accent }} />}
+        </span>
+        <span style={{ flex: 1, minWidth: 0 }}>
+          <span style={{ display: 'block', fontSize: 13, fontWeight: 700, color: 'var(--ink)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{lesson.title}</span>
+          <span className="mono" style={{ fontSize: 10, color: 'var(--ink-faint)' }}>{lesson.minutes} min · {steps} stages</span>
+        </span>
+        <Icon name="chevRight" size={15} style={{ color: 'var(--ink-ghost)', flex: '0 0 auto' }} />
+      </button>
+    );
+  }
+  return (
+    <button onClick={onOpen} style={{ display: 'block', width: '100%', padding: '13px 14px 14px', borderRadius: 14, textAlign: 'left', cursor: 'pointer', border: '1px solid var(--hair)', background: 'rgba(255,255,255,0.55)', position: 'relative', overflow: 'hidden' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9 }}>
+        <span className="eyebrow" style={{ color: accent, letterSpacing: '0.1em' }}>{lesson.kicker}</span>
+        <span style={{ flex: 1 }} />
+        {lesson.flagship && <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--accent)', background: 'var(--accent-soft)', padding: '2px 7px', borderRadius: 99 }}>Flagship</span>}
+        {completed && <Icon name="checkCircle" size={16} style={{ color: '#3aa564' }} />}
+      </div>
+      <div style={{ fontSize: 15.5, fontWeight: 800, letterSpacing: '-0.015em', color: 'var(--ink)', lineHeight: 1.18, marginBottom: 5, textWrap: 'pretty' }}>{lesson.title}</div>
+      <div style={{ fontSize: 12.5, lineHeight: 1.45, color: 'var(--ink-soft)', marginBottom: 11, textWrap: 'pretty' }}>{lesson.subtitle}</div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5, fontSize: 11, fontWeight: 600, color: lvlColor, background: 'rgba(16,20,32,0.04)', padding: '3px 9px', borderRadius: 99 }}>
+          <span style={{ width: 6, height: 6, borderRadius: 99, background: lvlColor }} />{lesson.level}
+        </span>
+        <span className="mono" style={{ fontSize: 10.5, color: 'var(--ink-faint)', display: 'inline-flex', alignItems: 'center', gap: 4 }}><Icon name="clock" size={11} />{lesson.minutes} min</span>
+        <span className="mono" style={{ fontSize: 10.5, color: 'var(--ink-faint)' }}>· {steps} stages</span>
+      </div>
+    </button>
+  );
+}
+
+function LearnMode({ completedSet, onOpenLesson }) {
+  const [layout, setLayout] = React.useState('cards');
+  const LESSONS = window.SYS.LESSONS;
+  const done = LESSONS.filter(l => completedSet.has(l.id)).length;
+  return (
+    <div style={{ padding: '0 12px 12px' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 12 }}>
+        <span className="eyebrow" style={{ flex: 1 }}>{done} of {LESSONS.length} completed</span>
+        <Segmented style={{ width: 70 }} value={layout} onChange={setLayout}
+          options={[{ value: 'cards', icon: 'grid', label: '' }, { value: 'list', icon: 'list', label: '' }]} />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: layout === 'list' ? 7 : 10 }}>
+        {LESSONS.map(l => (
+          <LessonCard key={l.id} lesson={l} layout={layout} completed={completedSet.has(l.id)} onOpen={() => onOpenLesson(l.id)} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function ControlPanel(props) {
-  const { pos, setPos, collapsed, setCollapsed } = props;
+  const { pos, setPos, collapsed, setCollapsed, mode, setMode } = props;
   const dragRef = React.useRef(null);
   const [layersOpen, setLayersOpen] = React.useState(false);
   const [viewsOpen, setViewsOpen] = React.useState(true);   // collapse presets to free space for results
@@ -55,7 +158,9 @@ function ControlPanel(props) {
   if (mobile && props.selectedId != null) return null;
   const containerStyle = mobile
     ? { position: 'absolute', left: 8, right: 8, bottom: 8, maxHeight: '44vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 }
-    : { position: 'absolute', left: pos.x, top: pos.y, width: 326, maxHeight: 'calc(100vh - 32px)', display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 };
+    : { position: 'absolute', left: pos.x, top: pos.y, width: 326,
+        height: collapsed ? undefined : 'min(760px, calc(100vh - 32px))', maxHeight: 'calc(100vh - 32px)',
+        display: 'flex', flexDirection: 'column', overflow: 'hidden', zIndex: 20 };
   return (
     <div className="glass glass-top-hi pop" style={containerStyle}>
       {/* header (hidden on mobile - bottom sheet shows only the cinematic views) */}
@@ -74,6 +179,28 @@ function ControlPanel(props) {
 
       {!collapsed && (
         <React.Fragment>
+          {/* mode tabs - Explore · Systems · Learn */}
+          <div style={{ padding: mobile ? '12px 12px 10px' : '0 12px 12px' }}>
+            <Segmented value={mode} onChange={setMode}
+              options={[
+                { value: 'explore', label: 'Explore', icon: 'compass' },
+                { value: 'systems', label: 'Systems', icon: 'route' },
+                { value: 'learn', label: 'Learn', icon: 'graduation' },
+              ]} />
+          </div>
+
+          {(mode === 'systems' || mode === 'learn') && (
+            <div style={{ position: 'relative', flex: 1, minHeight: 0, display: 'flex' }}>
+              <div className="scroll" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
+                {mode === 'systems' && <SystemsMode activeSystem={props.activeSystem} onStartSystem={props.onStartSystem} />}
+                {mode === 'learn' && <LearnMode completedSet={props.completedSet} onOpenLesson={props.onOpenLesson} />}
+              </div>
+              <div className="panel-fade" />
+            </div>
+          )}
+
+          {mode === 'explore' && (
+          <React.Fragment>
           {/* search */}
           {!mobile && (
           <div style={{ padding: '0 12px 12px' }}>
@@ -163,6 +290,9 @@ function ControlPanel(props) {
             </div>
           )}
 
+          {/* spacer so the footer sits at the bottom (matches Systems/Learn height) */}
+          {!mobile && !layersShown && <div style={{ flex: 1, minHeight: 0 }} />}
+
           {/* footer */}
           {!mobile && (
           <div style={{ display: 'flex', gap: 8, padding: '10px 12px', borderTop: '1px solid var(--hair-2)' }}>
@@ -171,6 +301,8 @@ function ControlPanel(props) {
               ? <button onClick={props.onClearIsolate} style={{ ...footBtn, background: 'var(--accent)', color: '#fff', border: '1px solid transparent' }}><Icon name="isolate" size={14} /> Exit isolate</button>
               : <button onClick={props.onIsolateMatches} disabled={!props.canIsolate} style={{ ...footBtn, opacity: props.canIsolate ? 1 : 0.4 }}><Icon name="isolate" size={14} /> Isolate</button>}
           </div>
+          )}
+          </React.Fragment>
           )}
         </React.Fragment>
       )}

@@ -14,7 +14,7 @@ function Breadcrumb({ crumb, leaf, color }) {
   );
 }
 
-function SelectionCard({ node, color, catLabel, description, related, onSelect, onRelated, onFocus, onIsolate, onClose, isolated, focused, onClearIsolate, mobile }) {
+function SelectionCard({ node, color, catLabel, description, related, lessons, onOpenLesson, onSelect, onRelated, onFocus, onIsolate, onClose, isolated, focused, onClearIsolate, mobile }) {
   if (!node) return null;
   const sideLabel = node.side === 'median' ? 'Midline' : (node.side === 'left' ? 'Left' : 'Right');
   const cardStyle = mobile
@@ -54,6 +54,30 @@ function SelectionCard({ node, color, catLabel, description, related, onSelect, 
                 {r.side !== 'median' && <span className="mono" style={{ fontSize: 9, color: 'var(--ink-ghost)' }}>{r.side === 'left' ? 'L' : 'R'}</span>}
               </button>
             ))}
+          </div>
+        </div>
+      )}
+
+      {lessons && lessons.length > 0 && (
+        <div style={{ marginBottom: 14 }}>
+          <div className="eyebrow" style={{ marginBottom: 8 }}>Featured in lessons</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
+            {lessons.slice(0, 3).map(l => {
+              const sys = window.SYS.SYSTEMS.find(s => s.id === l.system);
+              const accent = sys ? 'var(--c-' + sys.cat + ')' : 'var(--accent)';
+              return (
+                <button key={l.id} onClick={() => onOpenLesson(l.id)} style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '9px 11px', borderRadius: 10, cursor: 'pointer', border: '1px solid var(--hair)', background: 'rgba(255,255,255,0.5)', textAlign: 'left' }}>
+                  <span style={{ width: 24, height: 24, borderRadius: 7, flex: '0 0 auto', display: 'grid', placeItems: 'center', background: accent + '33' }}>
+                    <Icon name="graduation" size={13} style={{ color: accent }} />
+                  </span>
+                  <span style={{ flex: 1, minWidth: 0 }}>
+                    <span style={{ display: 'block', fontSize: 12.5, fontWeight: 700, color: 'var(--ink)' }}>{l.title}</span>
+                    <span className="mono" style={{ fontSize: 10, color: 'var(--ink-faint)' }}>{l.minutes} min · {l.kicker}</span>
+                  </span>
+                  <Icon name="arrowRight" size={15} style={{ color: 'var(--ink-ghost)', flex: '0 0 auto' }} />
+                </button>
+              );
+            })}
           </div>
         </div>
       )}
