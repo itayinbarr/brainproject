@@ -16,11 +16,16 @@ const PRESETS = [
   { id: 'limbic', label: 'Limbic system',    color: 'var(--c-deep_grey)',      on: ['deep_grey','white_matter','diencephalon'], cortex: 0.12, focus: 'deep_grey',
     // Only the true limbic structures - excludes corpus callosum, basal ganglia, thalamus, geniculate/optic relays, etc.
     subset: {
-      deep_grey:    ['Amygdaloid body', 'Septal nuclei'],
+      deep_grey:    ['Lateral nucleus', 'Basolateral complex', 'Central nucleus', 'Corticomedial group', 'Septal nuclei'],
       white_matter: ['Fornix', 'Hippocampal commissure', 'Stria terminalis', 'Anterior commissure'],
-      diencephalon: ['Mamillary body', 'Hypothalamus', 'Habenula', 'Stria medullaris thalami'],
+      diencephalon: ['Mamillary body', 'Preoptic hypothalamus', 'Anterior hypothalamus', 'Tuberal hypothalamus', 'Lateral hypothalamus', 'Posterior hypothalamus', 'Habenula', 'Stria medullaris thalami'],
     } },
   { id: 'deep',   label: 'Deep grey',        color: 'var(--c-deep_grey)',      on: ['deep_grey','diencephalon'],   cortex: 0.12, focus: 'deep_grey' },
+  { id: 'amyhyp', label: 'Amygdala & hypothalamus', color: 'var(--c-deep_grey)', on: ['deep_grey','diencephalon'], cortex: 0.10, focus: 'deep_grey',
+    subset: {
+      deep_grey:    ['Lateral nucleus', 'Basolateral complex', 'Central nucleus', 'Corticomedial group'],
+      diencephalon: ['Preoptic hypothalamus', 'Anterior hypothalamus', 'Tuberal hypothalamus', 'Lateral hypothalamus', 'Posterior hypothalamus'],
+    } },
   { id: 'bgnuc',  label: 'Basal ganglia',    color: 'var(--c-deep_grey)',      on: ['deep_grey','brainstem'],           cortex: 0.10, focus: 'deep_grey',
     // Caudate/putamen/accumbens + the atlas-derived pallidal & subthalamic nuclei (GPe/GPi, STN, SN) and the brainstem red nucleus.
     subset: {

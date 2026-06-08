@@ -245,16 +245,20 @@ relicense the model - keep this notice with the `.glb`.
 - BodyParts3D, © The Database Center for Life Science (DBCLS) - https://lifesciencedb.jp/bp3d/
 
 **Deep‑brain nuclei (added by atlas‑guided registration).** The globus pallidus
-internal/external split, the seven thalamic nuclei groups, and the subthalamic
-nucleus, substantia nigra and nucleus accumbens are not in the source model; they
-were registered from open MNI‑space atlases and remain **CC BY‑SA 4.0**. They are
-**approximate** (about 7 mm, educational, not for clinical use). How it is done and
-how to extend it: [`docs/registration.md`](docs/registration.md).
+internal/external split, the seven thalamic nuclei groups, the subthalamic
+nucleus, substantia nigra, nucleus accumbens, the amygdala functional groups and
+the hypothalamus zones are not in the source model; they were registered from open
+MNI‑space atlases and remain **CC BY‑SA 4.0**. They are **approximate** (about
+7 mm, educational, not for clinical use). How it is done and how to extend it:
+[`docs/registration.md`](docs/registration.md).
 
 - CIT168 subcortical atlas - Pauli, Nili & Tyszka 2018, *Scientific Data*
   (**CC BY 4.0**) - https://osf.io/jkzwp/
+- CIT168 amygdala atlas - Tyszka & Pauli 2016 (**CC BY‑SA 4.0**) - https://osf.io/hksa6/
 - Najdenovska et al. 2018, in‑vivo probabilistic thalamic atlas, *Scientific Data*
   (**CC BY‑SA 4.0**) - https://doi.org/10.5281/zenodo.1405484
+- Neudorfer et al. 2020, hypothalamic region atlas, *Scientific Data*
+  (**CC BY 4.0**) - https://doi.org/10.5281/zenodo.3942115
 
 ## Contributing
 

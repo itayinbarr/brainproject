@@ -189,3 +189,35 @@ surface to line up better.
 > normalisation if you need millimetre cortical accuracy. If you go that route, the
 > clean upgrade is to replace `T` with a nonlinear warp (mesh <-> MNI) and keep the
 > rest of the pipeline unchanged.
+
+## 6. What has been added, and what was deferred (and why)
+
+Built so far, all as **closed solids** (see the closed-surface note in section 4):
+- Basal ganglia: GPe/GPi, subthalamic nucleus, substantia nigra, nucleus accumbens
+  (CIT168 subcortical, CC BY 4.0).
+- Thalamus: seven nuclei groups (Najdenovska 2018, CC BY-SA 4.0).
+- Amygdala: four functional groups - lateral, basolateral complex, central,
+  corticomedial - merged from the 9-subnucleus CIT168 amygdala atlas
+  (Tyszka & Pauli 2016, CC BY-SA 4.0, OSF `hksa6`). Adding the whole amygdala as a
+  registration landmark dropped its local residual to ~1 mm.
+- Hypothalamus: five zones - preoptic, anterior, tuberal, lateral, posterior -
+  merged from the Neudorfer 2020 atlas (CC BY 4.0, Zenodo `3942115`); only the 13
+  true hypothalamic nuclei are used (its commissures, fornix, mammillary, STN/SN/RN,
+  BNST, nucleus basalis etc. are dropped to avoid duplicating model structures).
+
+Two requested regions were deliberately **not** added:
+- **Cerebellar deep nuclei** (dentate, interposed, fastigial): the standard atlas
+  (SUIT, Diedrichsen) is **CC BY-NC 3.0** (NonCommercial), which is incompatible with
+  this project's open licence and CC BY-SA assets. The Julich cerebellar-nuclei maps
+  are likewise NC/SA-restricted. Revisit only if a CC BY / CC BY-SA, MNI-space
+  cerebellar-nuclei atlas appears. (A separate cerebellum-anchored affine would also
+  be needed, since the global fit is anchored on cerebral deep grey.)
+- **Hippocampal subfields** (CA1-4, subiculum, DG): available atlases are either
+  FreeSurfer-licensed (restricted) or unlicensed (e.g. CoBrA), and the subfields are
+  sub-millimetre laminae along a curved structure that ~7 mm affine registration
+  would misrepresent. A defensible non-atlas alternative is a geometric head/body/
+  tail split of the existing hippocampus mesh, if that is ever wanted.
+
+When merging atlas labels into a functional group, union the label masks first and
+march the **single** combined mask, so each group is one watertight solid rather
+than several overlapping shells.

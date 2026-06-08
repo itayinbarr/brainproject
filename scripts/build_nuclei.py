@@ -27,8 +27,25 @@ CIT_PROB = os.path.join(DATA, "CIT168toMNI152-2009c_prob.nii.gz")   # 4D, 16 lab
 CIT_DET  = os.path.join(DATA, "CIT168toMNI152-2009c_det.nii.gz")    # 3D, labels 1..16
 THAL_SPAM = os.path.join(DATA, "Thalamus_Nuclei-HCP-4DSPAMs.nii.gz")  # 4D, 14 maps
 THAL_MAX  = os.path.join(DATA, "Thalamus_Nuclei-HCP-MaxProb.nii.gz")  # 3D, labels 1..14
+AMYG = os.path.join(DATA, "amyg_iAmyNuc_1mm_MNI.nii.gz")              # CIT168 amygdala, labels 1..9 (bilateral)
+HYP  = os.path.join(DATA, "hypothal_labels_MNI152b_0.5mm.nii.gz")     # Neudorfer, hemisphere-explicit labels
 REG_IN = os.path.join(DATA, "registration_input.json")
 OUT = os.path.join(DATA, "nuclei_artifacts.json")
+
+AMY_SRC = "CIT168 amygdala (Tyszka 2016)"
+HYP_SRC = "Neudorfer 2020"
+# CIT168 amygdala (9 subnuclei, bilateral) -> 4 merged functional groups.
+AMY_GROUPS = {"Lateral nucleus": [1], "Basolateral complex": [2, 3, 6],
+              "Central nucleus": [4], "Corticomedial group": [5, 7, 8, 9]}
+# Neudorfer hypothalamus: true hypothalamic nuclei only (right-hemisphere label ids;
+# left = id+1). Context structures (commissures, fornix, mammillary, STN/SN/RN, BNST,
+# nucleus basalis, zona incerta, etc.) are excluded - several already in the model.
+# Merged into the classic zones.
+HYP_GROUPS = {"Preoptic hypothalamus": [19],
+              "Anterior hypothalamus": [53, 21, 45, 47, 31, 23],
+              "Tuberal hypothalamus": [29, 27, 37, 49],
+              "Lateral hypothalamus": [25],
+              "Posterior hypothalamus": [51]}
 
 # CIT168 label -> 1-based index (verified against MNI centroids).
 CIT = {"putamen":1, "caudate":2, "accumbens":3, "gpe":5, "gpi":6,
@@ -76,6 +93,8 @@ cit_det = np.asanyarray(nib.load(CIT_DET).dataobj).astype(int)
 thal_spam_img = nib.load(THAL_SPAM); thal_spam = np.asanyarray(thal_spam_img.dataobj)
 thal_aff = thal_spam_img.affine
 thal_max = np.asanyarray(nib.load(THAL_MAX).dataobj).astype(int)
+amyg_img = nib.load(AMYG); amyg = np.asanyarray(amyg_img.dataobj).astype(int); amyg_aff = amyg_img.affine
+hyp_img = nib.load(HYP); hyp = np.asanyarray(hyp_img.dataobj).astype(int); hyp_aff = hyp_img.affine
 
 reg = json.load(open(REG_IN))
 mesh_c = reg["centroids"]
@@ -98,6 +117,8 @@ for side, suf in (("left", ".l"), ("right", ".r")):
     add(f"mammillary{suf}", f"Mamillary body{suf}", label_centroid(cit_det, cit_aff, CIT["mammillary"], side))
     add(f"thalamus{suf}", f"Thalamus{suf}",
         union_centroid(thal_max, thal_aff, list(range(1, 8)) if side == "left" else list(range(8, 15)), side))
+    add(f"amygdala{suf}", f"Amygdaloid body{suf}",
+        union_centroid(amyg, amyg_aff, list(range(1, 10)), side))   # anchor medial temporal
 # hypothalamus is a single midline mesh object
 add("hypothalamus", "Hypothalamus", label_centroid(cit_det, cit_aff, CIT["hypothalamus"]))
 
@@ -203,6 +224,34 @@ for label, cit_labs, region, parent, source, naj_base in plan:
             node["category"] = "diencephalon" if parent == "Thalamus" else "deep_grey"
         artifacts["meshes"][f"{label}{suf}"] = node
         print(f"[gen] {label}{suf}: {len(verts)} v, {len(faces)} f  ({source})")
+
+
+def add_group(label, suf, side, out, region, category, parent, source):
+    if out is None:
+        print(f"[gen] {label}{suf}: EMPTY (skipped)")
+        return
+    verts, faces = out
+    artifacts["meshes"][f"{label}{suf}"] = {
+        "verts": verts, "faces": faces, "label": label, "side": side,
+        "region": region, "category": category, "source": source, "parent": parent}
+    print(f"[gen] {label}{suf}: {len(verts)} v, {len(faces)} f  ({source})")
+
+
+# Amygdala: deterministic bilateral atlas -> binary mask per group, split by x.
+amyg_x, _, _ = mm_grid(amyg_aff, amyg.shape)
+for label, ids in AMY_GROUPS.items():
+    mask = np.isin(amyg, ids).astype(float)
+    for side, suf in (("left", ".l"), ("right", ".r")):
+        out = solid(mask, amyg_aff, [0.5], side=side, x_grid=amyg_x)
+        add_group(label, suf, side, out, "Telencephalon", "deep_grey", "Amygdaloid body", AMY_SRC)
+
+# Hypothalamus: hemisphere-explicit labels (right=odd id, left=id+1) -> binary mask.
+for label, rids in HYP_GROUPS.items():
+    for side, suf in (("left", ".l"), ("right", ".r")):
+        ids = [r + 1 for r in rids] if side == "left" else rids
+        mask = np.isin(hyp, ids).astype(float)
+        out = solid(mask, hyp_aff, [0.5]) if mask.max() > 0 else None
+        add_group(label, suf, side, out, "Diencephalon", "diencephalon", "Hypothalamus", HYP_SRC)
 
 with open(OUT, "w") as fh:
     json.dump(artifacts, fh)

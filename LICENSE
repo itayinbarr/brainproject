@@ -222,14 +222,20 @@ CC BY-SA 4.0 and keep this attribution. See README.md ("Attribution & licence").
     https://lifesciencedb.jp/bp3d/
 
 The deep-brain nuclei (globus pallidus internal/external; the seven thalamic
-nuclei groups; subthalamic nucleus, substantia nigra, nucleus accumbens) are
-ADDITIONALLY derived, by atlas-guided registration, from:
+nuclei groups; subthalamic nucleus, substantia nigra, nucleus accumbens; the
+amygdala functional groups; the hypothalamus zones) are ADDITIONALLY derived, by
+atlas-guided registration, from:
 
   - CIT168 subcortical atlas, Pauli, Nili & Tyszka 2018, Scientific Data,
     licensed CC BY 4.0 - https://osf.io/jkzwp/
+  - CIT168 amygdala atlas, Tyszka & Pauli 2016, licensed CC BY-SA 4.0
+    https://osf.io/hksa6/
   - Najdenovska et al. 2018, "In-vivo probabilistic atlas of human thalamic
     nuclei...", Scientific Data, licensed CC BY-SA 4.0
     https://doi.org/10.5281/zenodo.1405484
+  - Neudorfer et al. 2020, "A high-resolution in vivo MRI atlas of the human
+    hypothalamic region", Scientific Data, licensed CC BY 4.0
+    https://doi.org/10.5281/zenodo.3942115
 
 These derived nuclei remain under CC BY-SA 4.0 (CC BY 4.0 source material is
 compatible with redistribution inside a CC BY-SA 4.0 work). They are

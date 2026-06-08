@@ -30,6 +30,8 @@ descriptions = dict(old["descriptions"])
 # Crumbs for the structures introduced by the nuclei pipeline.
 CRUMB_GP = ["Brain", "Cerebrum", "Telencephalon", "Corpus striatum", "Globus pallidus"]
 CRUMB_THAL = ["Brain", "Cerebrum", "Diencephalon", "Thalamus"]
+CRUMB_AMY = ["Brain", "Cerebrum", "Telencephalon", "Amygdala"]
+CRUMB_HYP = ["Brain", "Cerebrum", "Diencephalon", "Hypothalamus"]
 CRUMB_BY_LABEL = {
     "Subthalamic nucleus": ["Brain", "Cerebrum", "Diencephalon", "Subthalamus"],
     "Substantia nigra":    ["Brain", "Brainstem", "Midbrain"],
@@ -74,6 +76,33 @@ descriptions.update({
     "Intralaminar and lateral posterior nuclei":
         "Intralaminar and posterior thalamic group involved in arousal, attention and "
         "sensorimotor integration.",
+    # Amygdala functional groups (CIT168)
+    "Lateral nucleus":
+        "Main sensory input gateway of the amygdala, where emotional associations "
+        "(notably fear conditioning) are first formed.",
+    "Basolateral complex":
+        "Largest amygdala division (basolateral and basomedial nuclei); links sensory "
+        "input to emotional value and feeds the cortex, hippocampus and striatum.",
+    "Central nucleus":
+        "Main output of the amygdala, driving autonomic and behavioural fear and "
+        "stress responses via the brainstem and hypothalamus.",
+    "Corticomedial group":
+        "Cortical, medial and transition nuclei; processes olfactory and pheromonal "
+        "cues and links the amygdala to social and reproductive behaviour.",
+    # Hypothalamus functional zones (Neudorfer)
+    "Preoptic hypothalamus":
+        "Preoptic region governing thermoregulation, sleep onset and reproductive "
+        "and parental behaviour.",
+    "Anterior hypothalamus":
+        "Anterior zone (incl. paraventricular, supraoptic, suprachiasmatic nuclei); "
+        "sets circadian rhythm and drives the neuroendocrine stress and fluid axes.",
+    "Tuberal hypothalamus":
+        "Middle zone (arcuate, ventromedial, dorsomedial nuclei) controlling appetite, "
+        "satiety and pituitary hormone release.",
+    "Lateral hypothalamus":
+        "Lateral zone driving arousal, feeding and motivation via orexin neurons.",
+    "Posterior hypothalamus":
+        "Posterior zone coordinating sympathetic arousal and heat conservation.",
 })
 
 
@@ -83,6 +112,10 @@ def crumb_for(n):
         return CRUMB_THAL
     if parent == "Globus pallidus":
         return CRUMB_GP
+    if parent == "Amygdaloid body":
+        return CRUMB_AMY
+    if parent == "Hypothalamus":
+        return CRUMB_HYP
     if n["label"] in CRUMB_BY_LABEL:
         return CRUMB_BY_LABEL[n["label"]]
     return old_crumb.get((n["label"], n["side"]), [])

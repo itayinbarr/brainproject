@@ -27,6 +27,7 @@ LANDMARKS = [
     "Thalamus.l", "Thalamus.r",
     "Hypothalamus",
     "Mamillary body.l", "Mamillary body.r",
+    "Amygdaloid body.l", "Amygdaloid body.r",   # anchors the medial-temporal fit
 ]
 # Meshes we partition into sub-parts (need full geometry, vertex-index stable).
 PARTITION = ["Globus pallidus.l", "Globus pallidus.r", "Thalamus.l", "Thalamus.r"]
