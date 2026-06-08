@@ -21,7 +21,8 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 1,
@@ -44,7 +45,8 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 2,
@@ -64,7 +66,8 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 3,
@@ -84,7 +87,8 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 4,
@@ -109,7 +113,8 @@
     "Scene Collection",
     "Spinal nerves",
     "Trunk"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 5,
@@ -134,7 +139,8 @@
     "Scene Collection",
     "Spinal nerves",
     "Trunk"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 6,
@@ -159,7 +165,8 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 7,
@@ -184,7 +191,8 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 8,
@@ -208,7 +216,8 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 9,
@@ -232,7 +241,8 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 10,
@@ -257,7 +267,8 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 11,
@@ -282,7 +293,8 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 12,
@@ -302,7 +314,8 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 13,
@@ -322,7 +335,8 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 14,
@@ -346,7 +360,8 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 15,
@@ -364,7 +379,8 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 16,
@@ -385,7 +401,8 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 17,
@@ -406,7 +423,8 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 18,
@@ -426,7 +444,8 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 19,
@@ -446,7 +465,8 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 20,
@@ -464,10 +484,59 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
    "id": 21,
+   "name": "Anterior nuclei of thalamus.l",
+   "label": "Anterior nuclei of thalamus",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 22,
+   "name": "Anterior nuclei of thalamus.r",
+   "label": "Anterior nuclei of thalamus",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 23,
    "name": "Anterior occipital sulcus*.l",
    "label": "Anterior occipital sulcus",
    "category": "cortex",
@@ -488,10 +557,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 22,
+   "id": 24,
    "name": "Anterior occipital sulcus*.r",
    "label": "Anterior occipital sulcus",
    "category": "cortex",
@@ -512,10 +582,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 23,
+   "id": 25,
    "name": "Anterior quadrangular lobule.l",
    "label": "Anterior quadrangular lobule",
    "category": "cerebellum",
@@ -532,10 +603,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 24,
+   "id": 26,
    "name": "Anterior quadrangular lobule.r",
    "label": "Anterior quadrangular lobule",
    "category": "cerebellum",
@@ -552,10 +624,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 25,
+   "id": 27,
    "name": "Anterior spinal artery.l",
    "label": "Anterior spinal artery",
    "category": "arteries",
@@ -570,10 +643,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 26,
+   "id": 28,
    "name": "Anterior spinal artery.r",
    "label": "Anterior spinal artery",
    "category": "arteries",
@@ -588,10 +662,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 27,
+   "id": 29,
    "name": "Aqueduct of midbrain",
    "label": "Aqueduct of midbrain",
    "category": "brainstem",
@@ -610,10 +685,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 28,
+   "id": 30,
    "name": "Basilar artery",
    "label": "Basilar artery",
    "category": "arteries",
@@ -630,10 +706,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 29,
+   "id": 31,
    "name": "Basilar venous plexus",
    "label": "Basilar venous plexus",
    "category": "veins_sinuses",
@@ -645,10 +722,11 @@
     "Cardiovascular system",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 30,
+   "id": 32,
    "name": "Biventral lobule.l",
    "label": "Biventral lobule",
    "category": "cerebellum",
@@ -665,10 +743,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 31,
+   "id": 33,
    "name": "Biventral lobule.r",
    "label": "Biventral lobule",
    "category": "cerebellum",
@@ -685,10 +764,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 32,
+   "id": 34,
    "name": "Buccal nerve.l",
    "label": "Buccal nerve",
    "category": "cranial_nerves",
@@ -706,10 +786,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 33,
+   "id": 35,
    "name": "Buccal nerve.r",
    "label": "Buccal nerve",
    "category": "cranial_nerves",
@@ -727,10 +808,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 34,
+   "id": 36,
    "name": "Calcarine sulcus.l",
    "label": "Calcarine sulcus",
    "category": "cortex",
@@ -751,10 +833,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 35,
+   "id": 37,
    "name": "Calcarine sulcus.r",
    "label": "Calcarine sulcus",
    "category": "cortex",
@@ -775,10 +858,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 36,
+   "id": 38,
    "name": "Callosomarginal artery.l",
    "label": "Callosomarginal artery",
    "category": "arteries",
@@ -795,10 +879,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 37,
+   "id": 39,
    "name": "Callosomarginal artery.r",
    "label": "Callosomarginal artery",
    "category": "arteries",
@@ -815,10 +900,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 38,
+   "id": 40,
    "name": "Caudate nucleus.l",
    "label": "Caudate nucleus",
    "category": "deep_grey",
@@ -840,10 +926,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 39,
+   "id": 41,
    "name": "Caudate nucleus.r",
    "label": "Caudate nucleus",
    "category": "deep_grey",
@@ -865,10 +952,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 40,
+   "id": 42,
    "name": "Cavernous sinus.l",
    "label": "Cavernous sinus",
    "category": "veins_sinuses",
@@ -880,10 +968,11 @@
     "Cardiovascular system",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 41,
+   "id": 43,
    "name": "Cavernous sinus.r",
    "label": "Cavernous sinus",
    "category": "veins_sinuses",
@@ -895,10 +984,11 @@
     "Cardiovascular system",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 42,
+   "id": 44,
    "name": "Central lobule",
    "label": "Central lobule",
    "category": "cerebellum",
@@ -915,10 +1005,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 43,
+   "id": 45,
    "name": "Central sulcus.l",
    "label": "Central sulcus",
    "category": "cortex",
@@ -939,10 +1030,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 44,
+   "id": 46,
    "name": "Central sulcus.r",
    "label": "Central sulcus",
    "category": "cortex",
@@ -963,10 +1055,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 45,
+   "id": 47,
    "name": "Choroid plexus.l",
    "label": "Choroid plexus",
    "category": "ventricles",
@@ -985,10 +1078,11 @@
     "Pia",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 46,
+   "id": 48,
    "name": "Choroid plexus.r",
    "label": "Choroid plexus",
    "category": "ventricles",
@@ -1007,10 +1101,11 @@
     "Pia",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 47,
+   "id": 49,
    "name": "Cingulate gyrus (Posteroventral part*).l",
    "label": "Cingulate gyrus (Posteroventral part)",
    "category": "cortex",
@@ -1033,10 +1128,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 48,
+   "id": 50,
    "name": "Cingulate gyrus (Posteroventral part*).r",
    "label": "Cingulate gyrus (Posteroventral part)",
    "category": "cortex",
@@ -1059,10 +1155,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 49,
+   "id": 51,
    "name": "Cingulate gyrus and sulcus (Middle anterior part).l",
    "label": "Cingulate gyrus and sulcus (Middle anterior part)",
    "category": "cortex",
@@ -1085,10 +1182,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 50,
+   "id": 52,
    "name": "Cingulate gyrus and sulcus (Middle anterior part).r",
    "label": "Cingulate gyrus and sulcus (Middle anterior part)",
    "category": "cortex",
@@ -1111,10 +1209,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 51,
+   "id": 53,
    "name": "Cingulate gyrus and sulcus (Middle posterior part).l",
    "label": "Cingulate gyrus and sulcus (Middle posterior part)",
    "category": "cortex",
@@ -1137,10 +1236,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 52,
+   "id": 54,
    "name": "Cingulate gyrus and sulcus (Middle posterior part).r",
    "label": "Cingulate gyrus and sulcus (Middle posterior part)",
    "category": "cortex",
@@ -1163,10 +1263,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 53,
+   "id": 55,
    "name": "Cingulate gyrus and sulcus (Posterior dorsal part).l",
    "label": "Cingulate gyrus and sulcus (Posterior dorsal part)",
    "category": "cortex",
@@ -1189,10 +1290,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 54,
+   "id": 56,
    "name": "Cingulate gyrus and sulcus (Posterior dorsal part).r",
    "label": "Cingulate gyrus and sulcus (Posterior dorsal part)",
    "category": "cortex",
@@ -1215,10 +1317,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 55,
+   "id": 57,
    "name": "Cingulate sulcus (Marginal part*).l",
    "label": "Cingulate sulcus (Marginal part)",
    "category": "cortex",
@@ -1240,10 +1343,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 56,
+   "id": 58,
    "name": "Cingulate sulcus (Marginal part*).r",
    "label": "Cingulate sulcus (Marginal part)",
    "category": "cortex",
@@ -1265,10 +1369,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 57,
+   "id": 59,
    "name": "Circular sulcus of insula.l",
    "label": "Circular sulcus of insula",
    "category": "cortex",
@@ -1289,10 +1394,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 58,
+   "id": 60,
    "name": "Circular sulcus of insula.r",
    "label": "Circular sulcus of insula",
    "category": "cortex",
@@ -1313,10 +1419,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 59,
+   "id": 61,
    "name": "Collateral sulcus.l",
    "label": "Collateral sulcus",
    "category": "cortex",
@@ -1337,10 +1444,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 60,
+   "id": 62,
    "name": "Collateral sulcus.r",
    "label": "Collateral sulcus",
    "category": "cortex",
@@ -1361,10 +1469,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 61,
+   "id": 63,
    "name": "Corpus callosum",
    "label": "Corpus callosum",
    "category": "white_matter",
@@ -1385,10 +1494,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 62,
+   "id": 64,
    "name": "Culmen",
    "label": "Culmen",
    "category": "cerebellum",
@@ -1405,10 +1515,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 63,
+   "id": 65,
    "name": "Cuneus.l",
    "label": "Cuneus",
    "category": "cortex",
@@ -1429,10 +1540,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 64,
+   "id": 66,
    "name": "Cuneus.r",
    "label": "Cuneus",
    "category": "cortex",
@@ -1453,10 +1565,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 65,
+   "id": 67,
    "name": "Declive",
    "label": "Declive",
    "category": "cerebellum",
@@ -1473,10 +1586,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 66,
+   "id": 68,
    "name": "Distal lateral striate branches.l",
    "label": "Distal lateral striate branches",
    "category": "arteries",
@@ -1493,10 +1607,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 67,
+   "id": 69,
    "name": "Distal lateral striate branches.r",
    "label": "Distal lateral striate branches",
    "category": "arteries",
@@ -1513,10 +1628,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 68,
+   "id": 70,
    "name": "Facial nerve (VII).l",
    "label": "Facial nerve (VII)",
    "category": "cranial_nerves",
@@ -1534,10 +1650,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 69,
+   "id": 71,
    "name": "Facial nerve (VII).r",
    "label": "Facial nerve (VII)",
    "category": "cranial_nerves",
@@ -1555,10 +1672,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 70,
+   "id": 72,
    "name": "Falx cerebri",
    "label": "Falx cerebri",
    "category": "meninges_dura",
@@ -1576,10 +1694,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 71,
+   "id": 73,
    "name": "Flocculus.l",
    "label": "Flocculus",
    "category": "cerebellum",
@@ -1596,10 +1715,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 72,
+   "id": 74,
    "name": "Flocculus.r",
    "label": "Flocculus",
    "category": "cerebellum",
@@ -1616,10 +1736,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 73,
+   "id": 75,
    "name": "Folium of vermis",
    "label": "Folium of vermis",
    "category": "cerebellum",
@@ -1636,10 +1757,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 74,
+   "id": 76,
    "name": "Fornix.l",
    "label": "Fornix",
    "category": "white_matter",
@@ -1661,10 +1783,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 75,
+   "id": 77,
    "name": "Fornix.r",
    "label": "Fornix",
    "category": "white_matter",
@@ -1686,10 +1809,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 76,
+   "id": 78,
    "name": "Fourth ventricle",
    "label": "Fourth ventricle",
    "category": "ventricles",
@@ -1707,10 +1831,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 77,
+   "id": 79,
    "name": "Frontal branches of callosomarginal artery.l",
    "label": "Frontal branches of callosomarginal artery",
    "category": "arteries",
@@ -1727,10 +1852,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 78,
+   "id": 80,
    "name": "Frontal branches of callosomarginal artery.r",
    "label": "Frontal branches of callosomarginal artery",
    "category": "arteries",
@@ -1747,12 +1873,13 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 79,
-   "name": "Globus pallidus.l",
-   "label": "Globus pallidus",
+   "id": 81,
+   "name": "Globus pallidus external.l",
+   "label": "Globus pallidus external",
    "category": "deep_grey",
    "side": "left",
    "region": "Telencephalon",
@@ -1771,12 +1898,14 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "CIT168 (Pauli 2018)",
+   "parent": "Globus pallidus"
   },
   {
-   "id": 80,
-   "name": "Globus pallidus.r",
-   "label": "Globus pallidus",
+   "id": 82,
+   "name": "Globus pallidus external.r",
+   "label": "Globus pallidus external",
    "category": "deep_grey",
    "side": "right",
    "region": "Telencephalon",
@@ -1789,16 +1918,70 @@
     "Corpus striatum",
     "Globus pallidus",
     "Head",
+    "Left cerebral hemisphere",
     "Main divisions",
     "Nervous system",
     "Regions of human body",
-    "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "CIT168 (Pauli 2018)",
+   "parent": "Globus pallidus"
   },
   {
-   "id": 81,
+   "id": 83,
+   "name": "Globus pallidus internal.l",
+   "label": "Globus pallidus internal",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)",
+   "parent": "Globus pallidus"
+  },
+  {
+   "id": 84,
+   "name": "Globus pallidus internal.r",
+   "label": "Globus pallidus internal",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)",
+   "parent": "Globus pallidus"
+  },
+  {
+   "id": 85,
    "name": "Gracile lobule.l",
    "label": "Gracile lobule",
    "category": "cerebellum",
@@ -1815,10 +1998,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 82,
+   "id": 86,
    "name": "Gracile lobule.r",
    "label": "Gracile lobule",
    "category": "cerebellum",
@@ -1835,10 +2019,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 83,
+   "id": 87,
    "name": "Habenula",
    "label": "Habenula",
    "category": "diencephalon",
@@ -1857,10 +2042,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 84,
+   "id": 88,
    "name": "Hippocampal commissure",
    "label": "Hippocampal commissure",
    "category": "white_matter",
@@ -1880,10 +2066,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 85,
+   "id": 89,
    "name": "Hippocampus.l",
    "label": "Hippocampus",
    "category": "cortex",
@@ -1904,10 +2091,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 86,
+   "id": 90,
    "name": "Hippocampus.r",
    "label": "Hippocampus",
    "category": "cortex",
@@ -1928,10 +2116,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 87,
+   "id": 91,
    "name": "Hypoglossal nerve (XII).l",
    "label": "Hypoglossal nerve (XII)",
    "category": "cranial_nerves",
@@ -1949,10 +2138,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 88,
+   "id": 92,
    "name": "Hypoglossal nerve (XII).r",
    "label": "Hypoglossal nerve (XII)",
    "category": "cranial_nerves",
@@ -1970,10 +2160,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 89,
+   "id": 93,
    "name": "Hypothalamus",
    "label": "Hypothalamus",
    "category": "diencephalon",
@@ -1992,10 +2183,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 90,
+   "id": 94,
    "name": "Inferior alveolar nerve.l",
    "label": "Inferior alveolar nerve",
    "category": "cranial_nerves",
@@ -2013,10 +2205,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 91,
+   "id": 95,
    "name": "Inferior alveolar nerve.r",
    "label": "Inferior alveolar nerve",
    "category": "cranial_nerves",
@@ -2034,10 +2227,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 92,
+   "id": 96,
    "name": "Inferior colliculus.l",
    "label": "Inferior colliculus",
    "category": "brainstem",
@@ -2057,10 +2251,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tectum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 93,
+   "id": 97,
    "name": "Inferior colliculus.r",
    "label": "Inferior colliculus",
    "category": "brainstem",
@@ -2080,10 +2275,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tectum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 94,
+   "id": 98,
    "name": "Inferior occipital gyrus and sulcus*.l",
    "label": "Inferior occipital gyrus and sulcus",
    "category": "cortex",
@@ -2104,10 +2300,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 95,
+   "id": 99,
    "name": "Inferior occipital gyrus and sulcus*.r",
    "label": "Inferior occipital gyrus and sulcus",
    "category": "cortex",
@@ -2128,10 +2325,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 96,
+   "id": 100,
    "name": "Inferior petrosal sinus.l",
    "label": "Inferior petrosal sinus",
    "category": "veins_sinuses",
@@ -2146,10 +2344,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 97,
+   "id": 101,
    "name": "Inferior petrosal sinus.r",
    "label": "Inferior petrosal sinus",
    "category": "veins_sinuses",
@@ -2164,10 +2363,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 98,
+   "id": 102,
    "name": "Inferior sagittal sinus",
    "label": "Inferior sagittal sinus",
    "category": "veins_sinuses",
@@ -2182,10 +2382,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 99,
+   "id": 103,
    "name": "Inferior semilunar lobule.l",
    "label": "Inferior semilunar lobule",
    "category": "cerebellum",
@@ -2202,10 +2403,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 100,
+   "id": 104,
    "name": "Inferior semilunar lobule.r",
    "label": "Inferior semilunar lobule",
    "category": "cerebellum",
@@ -2222,10 +2424,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 101,
+   "id": 105,
    "name": "Inferior temporal gyrus.l",
    "label": "Inferior temporal gyrus",
    "category": "cortex",
@@ -2246,10 +2449,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 102,
+   "id": 106,
    "name": "Inferior temporal gyrus.r",
    "label": "Inferior temporal gyrus",
    "category": "cortex",
@@ -2270,10 +2474,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 103,
+   "id": 107,
    "name": "Insula (Subcentral gyrus and ant. and post. sulci*).l",
    "label": "Insula (Subcentral gyrus and ant. and post. sulci)",
    "category": "cortex",
@@ -2294,10 +2499,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 104,
+   "id": 108,
    "name": "Insula (Subcentral gyrus and ant. and post. sulci*).r",
    "label": "Insula (Subcentral gyrus and ant. and post. sulci)",
    "category": "cortex",
@@ -2318,10 +2524,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 105,
+   "id": 109,
    "name": "Insular branches of middle cerebral artery (M2).r",
    "label": "Insular branches of middle cerebral artery (M2)",
    "category": "arteries",
@@ -2338,10 +2545,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 106,
+   "id": 110,
    "name": "Insular branches of middle cerebral artery (M2-segment).l",
    "label": "Insular branches of middle cerebral artery (M2-segment)",
    "category": "arteries",
@@ -2358,10 +2566,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 107,
+   "id": 111,
    "name": "Internal carotid artery.l",
    "label": "Internal carotid artery",
    "category": "arteries",
@@ -2379,10 +2588,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 108,
+   "id": 112,
    "name": "Internal carotid artery.r",
    "label": "Internal carotid artery",
    "category": "arteries",
@@ -2400,10 +2610,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 109,
+   "id": 113,
    "name": "Interpeduncular fossa.l",
    "label": "Interpeduncular fossa",
    "category": "brainstem",
@@ -2421,10 +2632,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 110,
+   "id": 114,
    "name": "Interpeduncular fossa.r",
    "label": "Interpeduncular fossa",
    "category": "brainstem",
@@ -2442,10 +2654,59 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 111,
+   "id": 115,
+   "name": "Intralaminar and lateral posterior nuclei.l",
+   "label": "Intralaminar and lateral posterior nuclei",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 116,
+   "name": "Intralaminar and lateral posterior nuclei.r",
+   "label": "Intralaminar and lateral posterior nuclei",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 117,
    "name": "Lat_Fis-ant-Horizont.l",
    "label": "Lat Fis-ant-Horizont",
    "category": "cortex",
@@ -2466,10 +2727,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 112,
+   "id": 118,
    "name": "Lat_Fis-ant-Horizont.r",
    "label": "Lat Fis-ant-Horizont",
    "category": "cortex",
@@ -2490,10 +2752,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 113,
+   "id": 119,
    "name": "Lat_Fis-ant-Vertical.l",
    "label": "Lat Fis-ant-Vertical",
    "category": "cortex",
@@ -2514,10 +2777,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 114,
+   "id": 120,
    "name": "Lat_Fis-ant-Vertical.r",
    "label": "Lat Fis-ant-Vertical",
    "category": "cortex",
@@ -2538,10 +2802,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 115,
+   "id": 121,
    "name": "Lat_Fis-post.l",
    "label": "Lat Fis-post",
    "category": "cortex",
@@ -2562,10 +2827,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 116,
+   "id": 122,
    "name": "Lat_Fis-post.r",
    "label": "Lat Fis-post",
    "category": "cortex",
@@ -2586,10 +2852,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 117,
+   "id": 123,
    "name": "Lateral geniculate body.l",
    "label": "Lateral geniculate body",
    "category": "diencephalon",
@@ -2607,10 +2874,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 118,
+   "id": 124,
    "name": "Lateral geniculate body.r",
    "label": "Lateral geniculate body",
    "category": "diencephalon",
@@ -2628,10 +2896,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 119,
+   "id": 125,
    "name": "Lateral occipital gyrus (Middle occipital gyrus*).l",
    "label": "Lateral occipital gyrus (Middle occipital gyrus)",
    "category": "cortex",
@@ -2652,10 +2921,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 120,
+   "id": 126,
    "name": "Lateral occipital gyrus (Middle occipital gyrus*).r",
    "label": "Lateral occipital gyrus (Middle occipital gyrus)",
    "category": "cortex",
@@ -2676,10 +2946,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 121,
+   "id": 127,
    "name": "Lateral occipitotemporal gyrus.l",
    "label": "Lateral occipitotemporal gyrus",
    "category": "cortex",
@@ -2701,10 +2972,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 122,
+   "id": 128,
    "name": "Lateral occipitotemporal gyrus.r",
    "label": "Lateral occipitotemporal gyrus",
    "category": "cortex",
@@ -2726,10 +2998,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 123,
+   "id": 129,
    "name": "Lateral pontine branches of basilar artery.l",
    "label": "Lateral pontine branches of basilar artery",
    "category": "arteries",
@@ -2746,10 +3019,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 124,
+   "id": 130,
    "name": "Lateral pontine branches of basilar artery.r",
    "label": "Lateral pontine branches of basilar artery",
    "category": "arteries",
@@ -2766,10 +3040,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 125,
+   "id": 131,
    "name": "Lateral ventricle.l",
    "label": "Lateral ventricle",
    "category": "ventricles",
@@ -2789,10 +3064,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 126,
+   "id": 132,
    "name": "Lateral ventricle.r",
    "label": "Lateral ventricle",
    "category": "ventricles",
@@ -2812,58 +3088,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 127,
-   "name": "Lentiform nucleus.l",
-   "label": "Lentiform nucleus",
-   "category": "deep_grey",
-   "side": "left",
-   "region": "Telencephalon",
-   "core": true,
-   "ta2": [
-    "Bonus collection",
-    "Brain",
-    "Central nervous system",
-    "Cerebrum",
-    "Head",
-    "Internal capsule",
-    "Left cerebral hemisphere",
-    "Main divisions",
-    "Nervous system",
-    "Regions of human body",
-    "Scene Collection",
-    "Telencephalon",
-    "White matter of telencephalon"
-   ]
-  },
-  {
-   "id": 128,
-   "name": "Lentiform nucleus.r",
-   "label": "Lentiform nucleus",
-   "category": "deep_grey",
-   "side": "right",
-   "region": "Telencephalon",
-   "core": true,
-   "ta2": [
-    "Bonus collection",
-    "Brain",
-    "Central nervous system",
-    "Cerebrum",
-    "Head",
-    "Internal capsule",
-    "Main divisions",
-    "Nervous system",
-    "Regions of human body",
-    "Right cerebal hemisphere",
-    "Scene Collection",
-    "Telencephalon",
-    "White matter of telencephalon"
-   ]
-  },
-  {
-   "id": 129,
+   "id": 133,
    "name": "Lingual gyrus.l",
    "label": "Lingual gyrus",
    "category": "cortex",
@@ -2884,10 +3113,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 130,
+   "id": 134,
    "name": "Lingual gyrus.r",
    "label": "Lingual gyrus",
    "category": "cortex",
@@ -2908,10 +3138,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 131,
+   "id": 135,
    "name": "Lingual nerve.l",
    "label": "Lingual nerve",
    "category": "cranial_nerves",
@@ -2929,10 +3160,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 132,
+   "id": 136,
    "name": "Lingual nerve.r",
    "label": "Lingual nerve",
    "category": "cranial_nerves",
@@ -2950,10 +3182,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 133,
+   "id": 137,
    "name": "Lingula of cerebellum",
    "label": "Lingula of cerebellum",
    "category": "cerebellum",
@@ -2970,10 +3203,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 134,
+   "id": 138,
    "name": "Lunate sulcus.l",
    "label": "Lunate sulcus",
    "category": "cortex",
@@ -2994,10 +3228,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 135,
+   "id": 139,
    "name": "Lunate sulcus.r",
    "label": "Lunate sulcus",
    "category": "cortex",
@@ -3018,10 +3253,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 136,
+   "id": 140,
    "name": "Mamillary body.l",
    "label": "Mamillary body",
    "category": "diencephalon",
@@ -3039,10 +3275,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 137,
+   "id": 141,
    "name": "Mamillary body.r",
    "label": "Mamillary body",
    "category": "diencephalon",
@@ -3060,10 +3297,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 138,
+   "id": 142,
    "name": "Maxillary nerve.l",
    "label": "Maxillary nerve",
    "category": "cranial_nerves",
@@ -3081,10 +3319,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 139,
+   "id": 143,
    "name": "Maxillary nerve.r",
    "label": "Maxillary nerve",
    "category": "cranial_nerves",
@@ -3102,10 +3341,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 140,
+   "id": 144,
    "name": "Medial geniculate body.l",
    "label": "Medial geniculate body",
    "category": "diencephalon",
@@ -3123,10 +3363,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 141,
+   "id": 145,
    "name": "Medial geniculate body.r",
    "label": "Medial geniculate body",
    "category": "diencephalon",
@@ -3144,10 +3385,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 142,
+   "id": 146,
    "name": "Medial occipitotemporal gyrus (Parahippocampal*).l",
    "label": "Medial occipitotemporal gyrus (Parahippocampal)",
    "category": "cortex",
@@ -3169,10 +3411,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 143,
+   "id": 147,
    "name": "Medial occipitotemporal gyrus (Parahippocampal*).r",
    "label": "Medial occipitotemporal gyrus (Parahippocampal)",
    "category": "cortex",
@@ -3194,10 +3437,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 144,
+   "id": 148,
    "name": "Medial pontine branches of basilar artery.l",
    "label": "Medial pontine branches of basilar artery",
    "category": "arteries",
@@ -3214,10 +3458,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 145,
+   "id": 149,
    "name": "Medial pontine branches of basilar artery.r",
    "label": "Medial pontine branches of basilar artery",
    "category": "arteries",
@@ -3234,10 +3479,59 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 146,
+   "id": 150,
+   "name": "Mediodorsal nucleus.l",
+   "label": "Mediodorsal nucleus",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 151,
+   "name": "Mediodorsal nucleus.r",
+   "label": "Mediodorsal nucleus",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 152,
    "name": "Medulla oblongata.l",
    "label": "Medulla oblongata",
    "category": "brainstem",
@@ -3255,10 +3549,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 147,
+   "id": 153,
    "name": "Meningeal branch of maxillary nerve.l",
    "label": "Meningeal branch of maxillary nerve",
    "category": "cranial_nerves",
@@ -3276,10 +3571,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 148,
+   "id": 154,
    "name": "Meningeal branch of maxillary nerve.r",
    "label": "Meningeal branch of maxillary nerve",
    "category": "cranial_nerves",
@@ -3297,10 +3593,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 149,
+   "id": 155,
    "name": "Mental nerve.l",
    "label": "Mental nerve",
    "category": "cranial_nerves",
@@ -3318,10 +3615,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 150,
+   "id": 156,
    "name": "Mental nerve.r",
    "label": "Mental nerve",
    "category": "cranial_nerves",
@@ -3339,10 +3637,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 151,
+   "id": 157,
    "name": "Midbrain.l",
    "label": "Midbrain",
    "category": "brainstem",
@@ -3360,10 +3659,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 152,
+   "id": 158,
    "name": "Midbrain.r",
    "label": "Midbrain",
    "category": "brainstem",
@@ -3381,10 +3681,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 153,
+   "id": 159,
    "name": "Middle cerebral artery (M1-segment).l",
    "label": "Middle cerebral artery (M1-segment)",
    "category": "arteries",
@@ -3401,10 +3702,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 154,
+   "id": 160,
    "name": "Middle cerebral artery (M1-segment).r",
    "label": "Middle cerebral artery (M1-segment)",
    "category": "arteries",
@@ -3421,10 +3723,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 155,
+   "id": 161,
    "name": "Middle cerebral artery (M3 segment).l",
    "label": "Middle cerebral artery (M3 segment)",
    "category": "arteries",
@@ -3441,10 +3744,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 156,
+   "id": 162,
    "name": "Middle cerebral artery (M3-segment).r",
    "label": "Middle cerebral artery (M3-segment)",
    "category": "arteries",
@@ -3461,10 +3765,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 157,
+   "id": 163,
    "name": "Middle frontal gyrus.l",
    "label": "Middle frontal gyrus",
    "category": "cortex",
@@ -3485,10 +3790,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 158,
+   "id": 164,
    "name": "Middle frontal gyrus.r",
    "label": "Middle frontal gyrus",
    "category": "cortex",
@@ -3509,10 +3815,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 159,
+   "id": 165,
    "name": "Middle temporal gyrus.l",
    "label": "Middle temporal gyrus",
    "category": "cortex",
@@ -3533,10 +3840,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 160,
+   "id": 166,
    "name": "Middle temporal gyrus.r",
    "label": "Middle temporal gyrus",
    "category": "cortex",
@@ -3557,10 +3865,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 161,
+   "id": 167,
    "name": "Motor nucleus of facial nerve.l",
    "label": "Motor nucleus of facial nerve",
    "category": "brainstem",
@@ -3580,10 +3889,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of pons"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 162,
+   "id": 168,
    "name": "Motor nucleus of facial nerve.r",
    "label": "Motor nucleus of facial nerve",
    "category": "brainstem",
@@ -3603,10 +3913,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of pons"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 163,
+   "id": 169,
    "name": "Motor root of trigeminal nerve.l",
    "label": "Motor root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -3623,10 +3934,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 164,
+   "id": 170,
    "name": "Motor root of trigeminal nerve.r",
    "label": "Motor root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -3643,10 +3955,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 165,
+   "id": 171,
    "name": "Nodule of vermis",
    "label": "Nodule of vermis",
    "category": "cerebellum",
@@ -3663,10 +3976,61 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 166,
+   "id": 172,
+   "name": "Nucleus accumbens.l",
+   "label": "Nucleus accumbens",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)"
+  },
+  {
+   "id": 173,
+   "name": "Nucleus accumbens.r",
+   "label": "Nucleus accumbens",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)"
+  },
+  {
+   "id": 174,
    "name": "Nucleus of abducens nerve.l",
    "label": "Nucleus of abducens nerve",
    "category": "brainstem",
@@ -3686,10 +4050,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of pons"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 167,
+   "id": 175,
    "name": "Nucleus of abducens nerve.r",
    "label": "Nucleus of abducens nerve",
    "category": "brainstem",
@@ -3709,10 +4074,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of pons"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 168,
+   "id": 176,
    "name": "Nucleus of oculomotor nerve.l",
    "label": "Nucleus of oculomotor nerve",
    "category": "brainstem",
@@ -3734,10 +4100,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 169,
+   "id": 177,
    "name": "Nucleus of oculomotor nerve.r",
    "label": "Nucleus of oculomotor nerve",
    "category": "brainstem",
@@ -3759,10 +4126,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 170,
+   "id": 178,
    "name": "Occipital pole.l",
    "label": "Occipital pole",
    "category": "cortex",
@@ -3784,10 +4152,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 171,
+   "id": 179,
    "name": "Occipital pole.r",
    "label": "Occipital pole",
    "category": "cortex",
@@ -3808,10 +4177,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 172,
+   "id": 180,
    "name": "Occipital sinus",
    "label": "Occipital sinus",
    "category": "veins_sinuses",
@@ -3826,10 +4196,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 173,
+   "id": 181,
    "name": "Occipitotemporal sulcus (Lateral part*).l",
    "label": "Occipitotemporal sulcus (Lateral part)",
    "category": "cortex",
@@ -3850,10 +4221,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 174,
+   "id": 182,
    "name": "Occipitotemporal sulcus (Lateral part*).r",
    "label": "Occipitotemporal sulcus (Lateral part)",
    "category": "cortex",
@@ -3874,10 +4246,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 175,
+   "id": 183,
    "name": "Oculomotor nerve (III).l",
    "label": "Oculomotor nerve (III)",
    "category": "cranial_nerves",
@@ -3895,10 +4268,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 176,
+   "id": 184,
    "name": "Oculomotor nerve (III).r",
    "label": "Oculomotor nerve (III)",
    "category": "cranial_nerves",
@@ -3916,10 +4290,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 177,
+   "id": 185,
    "name": "Olfactory nerve (I).l",
    "label": "Olfactory nerve (I)",
    "category": "cranial_nerves",
@@ -3937,10 +4312,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 178,
+   "id": 186,
    "name": "Olfactory nerve (I).r",
    "label": "Olfactory nerve (I)",
    "category": "cranial_nerves",
@@ -3958,10 +4334,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 179,
+   "id": 187,
    "name": "Olive.l",
    "label": "Olive",
    "category": "brainstem",
@@ -3979,10 +4356,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 180,
+   "id": 188,
    "name": "Olive.r",
    "label": "Olive",
    "category": "brainstem",
@@ -4000,10 +4378,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 181,
+   "id": 189,
    "name": "Ophthalmic artery.l",
    "label": "Ophthalmic artery",
    "category": "arteries",
@@ -4020,10 +4399,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 182,
+   "id": 190,
    "name": "Ophthalmic artery.r",
    "label": "Ophthalmic artery",
    "category": "arteries",
@@ -4040,10 +4420,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 183,
+   "id": 191,
    "name": "Ophthalmic nerve.l",
    "label": "Ophthalmic nerve",
    "category": "cranial_nerves",
@@ -4061,10 +4442,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 184,
+   "id": 192,
    "name": "Ophthalmic nerve.r",
    "label": "Ophthalmic nerve",
    "category": "cranial_nerves",
@@ -4082,10 +4464,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 185,
+   "id": 193,
    "name": "Optic chiasm.l",
    "label": "Optic chiasm",
    "category": "diencephalon",
@@ -4103,10 +4486,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 186,
+   "id": 194,
    "name": "Optic chiasm.r",
    "label": "Optic chiasm",
    "category": "diencephalon",
@@ -4124,10 +4508,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 187,
+   "id": 195,
    "name": "Optic nerve (II).l",
    "label": "Optic nerve (II)",
    "category": "cranial_nerves",
@@ -4145,10 +4530,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 188,
+   "id": 196,
    "name": "Optic nerve (II).r",
    "label": "Optic nerve (II)",
    "category": "cranial_nerves",
@@ -4166,10 +4552,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 189,
+   "id": 197,
    "name": "Optic tract.l",
    "label": "Optic tract",
    "category": "diencephalon",
@@ -4188,10 +4575,11 @@
     "Optic tract",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 190,
+   "id": 198,
    "name": "Optic tract.r",
    "label": "Optic tract",
    "category": "diencephalon",
@@ -4210,10 +4598,11 @@
     "Optic tract",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 191,
+   "id": 199,
    "name": "Orbital gyri (Frontomarginal gyrus and sulcus*).l",
    "label": "Orbital gyri (Frontomarginal gyrus and sulcus)",
    "category": "cortex",
@@ -4234,10 +4623,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 192,
+   "id": 200,
    "name": "Orbital gyri (Frontomarginal gyrus and sulcus*).r",
    "label": "Orbital gyri (Frontomarginal gyrus and sulcus)",
    "category": "cortex",
@@ -4258,10 +4648,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 193,
+   "id": 201,
    "name": "Orbital gyri.l",
    "label": "Orbital gyri",
    "category": "cortex",
@@ -4282,10 +4673,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 194,
+   "id": 202,
    "name": "Orbital gyri.r",
    "label": "Orbital gyri",
    "category": "cortex",
@@ -4306,10 +4698,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 195,
+   "id": 203,
    "name": "Orbital part of  inferior frontal gyrus.l",
    "label": "Orbital part of inferior frontal gyrus",
    "category": "cortex",
@@ -4331,10 +4724,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 196,
+   "id": 204,
    "name": "Orbital part of  inferior frontal gyrus.r",
    "label": "Orbital part of inferior frontal gyrus",
    "category": "cortex",
@@ -4356,10 +4750,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 197,
+   "id": 205,
    "name": "Orbital sulci (H-shaped orbital sulci*).l",
    "label": "Orbital sulci (H-shaped orbital sulci)",
    "category": "cortex",
@@ -4380,10 +4775,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 198,
+   "id": 206,
    "name": "Orbital sulci (H-shaped orbital sulci*).r",
    "label": "Orbital sulci (H-shaped orbital sulci)",
    "category": "cortex",
@@ -4404,10 +4800,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 199,
+   "id": 207,
    "name": "Orbital sulci (Lateral Orbital sulcus*).l",
    "label": "Orbital sulci (Lateral Orbital sulcus)",
    "category": "cortex",
@@ -4428,10 +4825,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 200,
+   "id": 208,
    "name": "Orbital sulci (Lateral Orbital sulcus*).r",
    "label": "Orbital sulci (Lateral Orbital sulcus)",
    "category": "cortex",
@@ -4452,10 +4850,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 201,
+   "id": 209,
    "name": "Orbitofrontal branches of anterior cerebral artery.l",
    "label": "Orbitofrontal branches of anterior cerebral artery",
    "category": "arteries",
@@ -4472,10 +4871,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 202,
+   "id": 210,
    "name": "Orbitofrontal branches of anterior cerebral artery.r",
    "label": "Orbitofrontal branches of anterior cerebral artery",
    "category": "arteries",
@@ -4492,10 +4892,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 203,
+   "id": 211,
    "name": "Paracentral gyrus and sulcus*.l",
    "label": "Paracentral gyrus and sulcus",
    "category": "cortex",
@@ -4516,10 +4917,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 204,
+   "id": 212,
    "name": "Paracentral gyrus and sulcus*.r",
    "label": "Paracentral gyrus and sulcus",
    "category": "cortex",
@@ -4540,10 +4942,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 205,
+   "id": 213,
    "name": "Parietal branches of middle cerebral artery.l",
    "label": "Parietal branches of middle cerebral artery",
    "category": "arteries",
@@ -4560,10 +4963,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 206,
+   "id": 214,
    "name": "Parietal branches of middle cerebral artery.r",
    "label": "Parietal branches of middle cerebral artery",
    "category": "arteries",
@@ -4580,10 +4984,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 207,
+   "id": 215,
    "name": "Peduncle of flocculus.l",
    "label": "Peduncle of flocculus",
    "category": "cerebellum",
@@ -4600,10 +5005,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 208,
+   "id": 216,
    "name": "Peduncle of flocculus.r",
    "label": "Peduncle of flocculus",
    "category": "cerebellum",
@@ -4620,10 +5026,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 209,
+   "id": 217,
    "name": "Pericallosal artery.l",
    "label": "Pericallosal artery",
    "category": "arteries",
@@ -4640,10 +5047,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 210,
+   "id": 218,
    "name": "Pericallosal artery.r",
    "label": "Pericallosal artery",
    "category": "arteries",
@@ -4660,10 +5068,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 211,
+   "id": 219,
    "name": "Postcentral gyrus.l",
    "label": "Postcentral gyrus",
    "category": "cortex",
@@ -4684,10 +5093,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 212,
+   "id": 220,
    "name": "Postcentral gyrus.r",
    "label": "Postcentral gyrus",
    "category": "cortex",
@@ -4708,10 +5118,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 213,
+   "id": 221,
    "name": "Posterior cerebral artery.l",
    "label": "Posterior cerebral artery",
    "category": "arteries",
@@ -4728,10 +5139,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 214,
+   "id": 222,
    "name": "Posterior cerebral artery.r",
    "label": "Posterior cerebral artery",
    "category": "arteries",
@@ -4748,10 +5160,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 215,
+   "id": 223,
    "name": "Posterior commissure",
    "label": "Posterior commissure",
    "category": "diencephalon",
@@ -4770,10 +5183,11 @@
     "Regions of human body",
     "Scene Collection",
     "White matter of diencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 216,
+   "id": 224,
    "name": "Posterior communicating artery.l",
    "label": "Posterior communicating artery",
    "category": "arteries",
@@ -4788,10 +5202,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 217,
+   "id": 225,
    "name": "Posterior communicating artery.r",
    "label": "Posterior communicating artery",
    "category": "arteries",
@@ -4806,10 +5221,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 218,
+   "id": 226,
    "name": "Posterior division of mandibular nerve.l",
    "label": "Posterior division of mandibular nerve",
    "category": "cranial_nerves",
@@ -4827,10 +5243,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 219,
+   "id": 227,
    "name": "Posterior division of mandibular nerve.r",
    "label": "Posterior division of mandibular nerve",
    "category": "cranial_nerves",
@@ -4848,10 +5265,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 220,
+   "id": 228,
    "name": "Posterior inferior cerebellar artery.l",
    "label": "Posterior inferior cerebellar artery",
    "category": "arteries",
@@ -4868,10 +5286,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 221,
+   "id": 229,
    "name": "Posterior inferior cerebellar artery.r",
    "label": "Posterior inferior cerebellar artery",
    "category": "arteries",
@@ -4888,10 +5307,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 222,
+   "id": 230,
    "name": "Precentral gyrus.l",
    "label": "Precentral gyrus",
    "category": "cortex",
@@ -4912,10 +5332,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 223,
+   "id": 231,
    "name": "Precentral gyrus.r",
    "label": "Precentral gyrus",
    "category": "cortex",
@@ -4936,10 +5357,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 224,
+   "id": 232,
    "name": "Precuneus.l",
    "label": "Precuneus",
    "category": "cortex",
@@ -4960,10 +5382,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 225,
+   "id": 233,
    "name": "Precuneus.r",
    "label": "Precuneus",
    "category": "cortex",
@@ -4984,10 +5407,59 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 226,
+   "id": 234,
+   "name": "Pulvinar.l",
+   "label": "Pulvinar",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 235,
+   "name": "Pulvinar.r",
+   "label": "Pulvinar",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 236,
    "name": "Red nucleus.l",
    "label": "Red nucleus",
    "category": "brainstem",
@@ -5008,10 +5480,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 227,
+   "id": 237,
    "name": "Red nucleus.r",
    "label": "Red nucleus",
    "category": "brainstem",
@@ -5032,10 +5505,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 228,
+   "id": 238,
    "name": "Septal nuclei",
    "label": "Septal nuclei",
    "category": "deep_grey",
@@ -5054,10 +5528,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 229,
+   "id": 239,
    "name": "Inferior frontal sulcus.l",
    "label": "Inferior frontal sulcus",
    "category": "cortex",
@@ -5078,10 +5553,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 230,
+   "id": 240,
    "name": "Inferior frontal sulcus.r",
    "label": "Inferior frontal sulcus",
    "category": "cortex",
@@ -5102,10 +5578,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 231,
+   "id": 241,
    "name": "Inferior temporal sulcus.l",
    "label": "Inferior temporal sulcus",
    "category": "cortex",
@@ -5126,10 +5603,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 232,
+   "id": 242,
    "name": "Inferior temporal sulcus.r",
    "label": "Inferior temporal sulcus",
    "category": "cortex",
@@ -5150,10 +5628,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 233,
+   "id": 243,
    "name": "Intraparietal sulcus.l",
    "label": "Intraparietal sulcus",
    "category": "cortex",
@@ -5174,10 +5653,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 234,
+   "id": 244,
    "name": "Intraparietal sulcus.r",
    "label": "Intraparietal sulcus",
    "category": "cortex",
@@ -5198,10 +5678,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 235,
+   "id": 245,
    "name": "Olfactory sulcus.l",
    "label": "Olfactory sulcus",
    "category": "cortex",
@@ -5222,10 +5703,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 236,
+   "id": 246,
    "name": "Olfactory sulcus.r",
    "label": "Olfactory sulcus",
    "category": "cortex",
@@ -5246,10 +5728,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 237,
+   "id": 247,
    "name": "Opercular part of inferior frontal gyrus.l",
    "label": "Opercular part of inferior frontal gyrus",
    "category": "cortex",
@@ -5271,10 +5754,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 238,
+   "id": 248,
    "name": "Opercular part of inferior frontal gyrus.r",
    "label": "Opercular part of inferior frontal gyrus",
    "category": "cortex",
@@ -5296,10 +5780,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 239,
+   "id": 249,
    "name": "Paracentral sulcus.l",
    "label": "Paracentral sulcus",
    "category": "cortex",
@@ -5320,10 +5805,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 240,
+   "id": 250,
    "name": "Paracentral sulcus.r",
    "label": "Paracentral sulcus",
    "category": "cortex",
@@ -5344,10 +5830,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 241,
+   "id": 251,
    "name": "Parieto-occipital sulcus.l",
    "label": "Parieto-occipital sulcus",
    "category": "cortex",
@@ -5368,10 +5855,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 242,
+   "id": 252,
    "name": "Parieto-occipital sulcus.r",
    "label": "Parieto-occipital sulcus",
    "category": "cortex",
@@ -5392,10 +5880,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 243,
+   "id": 253,
    "name": "Pons.l",
    "label": "Pons",
    "category": "brainstem",
@@ -5413,10 +5902,11 @@
     "Pons",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 244,
+   "id": 254,
    "name": "Pons.r",
    "label": "Pons",
    "category": "brainstem",
@@ -5434,10 +5924,11 @@
     "Pons",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 245,
+   "id": 255,
    "name": "Postcentral sulcus.l",
    "label": "Postcentral sulcus",
    "category": "cortex",
@@ -5458,10 +5949,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 246,
+   "id": 256,
    "name": "Postcentral sulcus.r",
    "label": "Postcentral sulcus",
    "category": "cortex",
@@ -5482,10 +5974,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 247,
+   "id": 257,
    "name": "Posterior intercavernous sinus",
    "label": "Posterior intercavernous sinus",
    "category": "veins_sinuses",
@@ -5500,10 +5993,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 248,
+   "id": 258,
    "name": "Posterior quadrangular lobule.l",
    "label": "Posterior quadrangular lobule",
    "category": "cerebellum",
@@ -5520,10 +6014,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 249,
+   "id": 259,
    "name": "Posterior quadrangular lobule.r",
    "label": "Posterior quadrangular lobule",
    "category": "cerebellum",
@@ -5540,10 +6035,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 250,
+   "id": 260,
    "name": "Precentral sulcus (inferior part)*.l",
    "label": "Precentral sulcus (inferior part)",
    "category": "cortex",
@@ -5564,10 +6060,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 251,
+   "id": 261,
    "name": "Precentral sulcus (inferior part)*.r",
    "label": "Precentral sulcus (inferior part)",
    "category": "cortex",
@@ -5588,10 +6085,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 252,
+   "id": 262,
    "name": "Precentral sulcus (Superior part)*.l",
    "label": "Precentral sulcus (Superior part)",
    "category": "cortex",
@@ -5612,10 +6110,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 253,
+   "id": 263,
    "name": "Precentral sulcus (Superior part)*.r",
    "label": "Precentral sulcus (Superior part)",
    "category": "cortex",
@@ -5636,10 +6135,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 254,
+   "id": 264,
    "name": "Proximal lateral striate branches.l",
    "label": "Proximal lateral striate branches",
    "category": "arteries",
@@ -5656,10 +6156,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 255,
+   "id": 265,
    "name": "Proximal lateral striate branches.r",
    "label": "Proximal lateral striate branches",
    "category": "arteries",
@@ -5676,10 +6177,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 256,
+   "id": 266,
    "name": "Putamen.l",
    "label": "Putamen",
    "category": "deep_grey",
@@ -5700,10 +6202,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 257,
+   "id": 267,
    "name": "Putamen.r",
    "label": "Putamen",
    "category": "deep_grey",
@@ -5724,10 +6227,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 258,
+   "id": 268,
    "name": "Pyramid of medulla oblongata.l",
    "label": "Pyramid of medulla oblongata",
    "category": "brainstem",
@@ -5745,10 +6249,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 259,
+   "id": 269,
    "name": "Pyramid of medulla oblongata.r",
    "label": "Pyramid of medulla oblongata",
    "category": "brainstem",
@@ -5766,10 +6271,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 260,
+   "id": 270,
    "name": "Pyramis of vermis",
    "label": "Pyramis of vermis",
    "category": "cerebellum",
@@ -5786,10 +6292,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 261,
+   "id": 271,
    "name": "Sensory root of trigeminal nerve.l",
    "label": "Sensory root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -5807,10 +6314,11 @@
     "Scene Collection",
     "Sensory root of trigeminal nerve",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 262,
+   "id": 272,
    "name": "Sensory root of trigeminal nerve.r",
    "label": "Sensory root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -5828,10 +6336,11 @@
     "Scene Collection",
     "Sensory root of trigeminal nerve",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 263,
+   "id": 273,
    "name": "Septum pellucidum",
    "label": "Septum pellucidum",
    "category": "ventricles",
@@ -5851,10 +6360,11 @@
     "Septum pellucidum",
     "Telencephalon",
     "Walls of lateral ventricle"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 264,
+   "id": 274,
    "name": "Sigmoid sinus.l",
    "label": "Sigmoid sinus",
    "category": "veins_sinuses",
@@ -5869,10 +6379,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 265,
+   "id": 275,
    "name": "Sigmoid sinus.r",
    "label": "Sigmoid sinus",
    "category": "veins_sinuses",
@@ -5887,10 +6398,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 266,
+   "id": 276,
    "name": "Straight sinus",
    "label": "Straight sinus",
    "category": "veins_sinuses",
@@ -5905,10 +6417,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 267,
+   "id": 277,
    "name": "Stria medullaris thalami.l",
    "label": "Stria medullaris thalami",
    "category": "diencephalon",
@@ -5927,10 +6440,11 @@
     "Regions of human body",
     "Scene Collection",
     "White matter of diencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 268,
+   "id": 278,
    "name": "Stria medullaris thalami.r",
    "label": "Stria medullaris thalami",
    "category": "diencephalon",
@@ -5949,10 +6463,11 @@
     "Regions of human body",
     "Scene Collection",
     "White matter of diencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 269,
+   "id": 279,
    "name": "Stria terminalis.l",
    "label": "Stria terminalis",
    "category": "white_matter",
@@ -5972,10 +6487,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 270,
+   "id": 280,
    "name": "Stria terminalis.r",
    "label": "Stria terminalis",
    "category": "white_matter",
@@ -5995,10 +6511,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 271,
+   "id": 281,
    "name": "Subparietal sulcus.l",
    "label": "Subparietal sulcus",
    "category": "cortex",
@@ -6019,10 +6536,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 272,
+   "id": 282,
    "name": "Subparietal sulcus.r",
    "label": "Subparietal sulcus",
    "category": "cortex",
@@ -6043,10 +6561,111 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 273,
+   "id": 283,
+   "name": "Substantia nigra.l",
+   "label": "Substantia nigra",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Mesencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)"
+  },
+  {
+   "id": 284,
+   "name": "Substantia nigra.r",
+   "label": "Substantia nigra",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Mesencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)"
+  },
+  {
+   "id": 285,
+   "name": "Subthalamic nucleus.l",
+   "label": "Subthalamic nucleus",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)"
+  },
+  {
+   "id": 286,
+   "name": "Subthalamic nucleus.r",
+   "label": "Subthalamic nucleus",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Corpus striatum",
+    "Globus pallidus",
+    "Head",
+    "Left cerebral hemisphere",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon"
+   ],
+   "source": "CIT168 (Pauli 2018)"
+  },
+  {
+   "id": 287,
    "name": "Sulcus interm_prim-Jensen.l",
    "label": "Sulcus interm prim-Jensen",
    "category": "cortex",
@@ -6067,10 +6686,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 274,
+   "id": 288,
    "name": "Sulcus interm_prim-Jensen.r",
    "label": "Sulcus interm prim-Jensen",
    "category": "cortex",
@@ -6091,10 +6711,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 275,
+   "id": 289,
    "name": "Superior cerebellar artery.l",
    "label": "Superior cerebellar artery",
    "category": "arteries",
@@ -6111,10 +6732,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 276,
+   "id": 290,
    "name": "Superior cerebellar artery.r",
    "label": "Superior cerebellar artery",
    "category": "arteries",
@@ -6131,10 +6753,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 277,
+   "id": 291,
    "name": "Base of peduncle.l",
    "label": "Base of peduncle",
    "category": "cerebellum",
@@ -6153,10 +6776,11 @@
     "Regions of human body",
     "Scene Collection",
     "Superior cerebellar peduncle"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 278,
+   "id": 292,
    "name": "Base of peduncle.r",
    "label": "Base of peduncle",
    "category": "cerebellum",
@@ -6175,10 +6799,11 @@
     "Regions of human body",
     "Scene Collection",
     "Superior cerebellar peduncle"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 279,
+   "id": 293,
    "name": "Superior cerebellar peduncle.l",
    "label": "Superior cerebellar peduncle",
    "category": "cerebellum",
@@ -6195,10 +6820,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 280,
+   "id": 294,
    "name": "Superior cerebellar peduncle.r",
    "label": "Superior cerebellar peduncle",
    "category": "cerebellum",
@@ -6215,10 +6841,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 281,
+   "id": 295,
    "name": "Superior colliculus.l",
    "label": "Superior colliculus",
    "category": "brainstem",
@@ -6238,10 +6865,11 @@
     "Scene Collection",
     "Superior colliculus",
     "Tectum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 282,
+   "id": 296,
    "name": "Superior colliculus.r",
    "label": "Superior colliculus",
    "category": "brainstem",
@@ -6261,10 +6889,11 @@
     "Scene Collection",
     "Superior colliculus",
     "Tectum of midbrain"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 283,
+   "id": 297,
    "name": "Superior frontal gyrus.l",
    "label": "Superior frontal gyrus",
    "category": "cortex",
@@ -6285,10 +6914,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 284,
+   "id": 298,
    "name": "Superior frontal gyrus.r",
    "label": "Superior frontal gyrus",
    "category": "cortex",
@@ -6309,10 +6939,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 285,
+   "id": 299,
    "name": "Superior frontal sulcus.l",
    "label": "Superior frontal sulcus",
    "category": "cortex",
@@ -6333,10 +6964,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 286,
+   "id": 300,
    "name": "Superior frontal sulcus.r",
    "label": "Superior frontal sulcus",
    "category": "cortex",
@@ -6357,10 +6989,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 287,
+   "id": 301,
    "name": "Superior occipital gyri.l",
    "label": "Superior occipital gyri",
    "category": "cortex",
@@ -6381,10 +7014,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 288,
+   "id": 302,
    "name": "Superior occipital gyri.r",
    "label": "Superior occipital gyri",
    "category": "cortex",
@@ -6405,10 +7039,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 289,
+   "id": 303,
    "name": "Superior parietal lobule.l",
    "label": "Superior parietal lobule",
    "category": "cortex",
@@ -6429,10 +7064,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 290,
+   "id": 304,
    "name": "Superior parietal lobule.r",
    "label": "Superior parietal lobule",
    "category": "cortex",
@@ -6453,10 +7089,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 291,
+   "id": 305,
    "name": "Superior petrosal sinus.l",
    "label": "Superior petrosal sinus",
    "category": "veins_sinuses",
@@ -6471,10 +7108,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 292,
+   "id": 306,
    "name": "Superior petrosal sinus.r",
    "label": "Superior petrosal sinus",
    "category": "veins_sinuses",
@@ -6489,10 +7127,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 293,
+   "id": 307,
    "name": "Superior sagittal sinus",
    "label": "Superior sagittal sinus",
    "category": "veins_sinuses",
@@ -6507,10 +7146,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 294,
+   "id": 308,
    "name": "Superior salivatory nucleus.l",
    "label": "Superior salivatory nucleus",
    "category": "brainstem",
@@ -6530,10 +7170,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of pons"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 295,
+   "id": 309,
    "name": "Superior salivatory nucleus.r",
    "label": "Superior salivatory nucleus",
    "category": "brainstem",
@@ -6553,10 +7194,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tegmentum of pons"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 296,
+   "id": 310,
    "name": "Superior semilunar lobule.l",
    "label": "Superior semilunar lobule",
    "category": "cerebellum",
@@ -6573,10 +7215,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 297,
+   "id": 311,
    "name": "Superior semilunar lobule.r",
    "label": "Superior semilunar lobule",
    "category": "cerebellum",
@@ -6593,10 +7236,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 298,
+   "id": 312,
    "name": "Superior temporal gyrus (Lateral part).l",
    "label": "Superior temporal gyrus (Lateral part)",
    "category": "cortex",
@@ -6618,10 +7262,11 @@
     "Superior temporal gyrus",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 299,
+   "id": 313,
    "name": "Superior temporal gyrus (Lateral part).r",
    "label": "Superior temporal gyrus (Lateral part)",
    "category": "cortex",
@@ -6643,10 +7288,11 @@
     "Superior temporal gyrus",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 300,
+   "id": 314,
    "name": "Superior temporal sulcus.l",
    "label": "Superior temporal sulcus",
    "category": "cortex",
@@ -6667,10 +7313,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 301,
+   "id": 315,
    "name": "Superior temporal sulcus.r",
    "label": "Superior temporal sulcus",
    "category": "cortex",
@@ -6691,10 +7338,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 302,
+   "id": 316,
    "name": "Supramarginal gyrus.l",
    "label": "Supramarginal gyrus",
    "category": "cortex",
@@ -6716,10 +7364,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 303,
+   "id": 317,
    "name": "Supramarginal gyrus.r",
    "label": "Supramarginal gyrus",
    "category": "cortex",
@@ -6741,10 +7390,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 304,
+   "id": 318,
    "name": "Temporal branches of middle cerebral artery.l",
    "label": "Temporal branches of middle cerebral artery",
    "category": "arteries",
@@ -6761,10 +7411,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 305,
+   "id": 319,
    "name": "Temporal branches of middle cerebral artery.r",
    "label": "Temporal branches of middle cerebral artery",
    "category": "arteries",
@@ -6781,10 +7432,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic arteries"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 306,
+   "id": 320,
    "name": "Temporal plane.l",
    "label": "Temporal plane",
    "category": "cortex",
@@ -6806,10 +7458,11 @@
     "Superior temporal gyrus",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 307,
+   "id": 321,
    "name": "Temporal plane.r",
    "label": "Temporal plane",
    "category": "cortex",
@@ -6831,10 +7484,11 @@
     "Superior temporal gyrus",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 308,
+   "id": 322,
    "name": "Temporal pole.l",
    "label": "Temporal pole",
    "category": "cortex",
@@ -6856,10 +7510,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 309,
+   "id": 323,
    "name": "Temporal pole.r",
    "label": "Temporal pole",
    "category": "cortex",
@@ -6880,10 +7535,11 @@
     "Scene Collection",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 310,
+   "id": 324,
    "name": "Tentorium cerebelli.l",
    "label": "Tentorium cerebelli",
    "category": "meninges_dura",
@@ -6902,10 +7558,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tentorium cerebelli"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 311,
+   "id": 325,
    "name": "Tentorium cerebelli.r",
    "label": "Tentorium cerebelli",
    "category": "meninges_dura",
@@ -6924,54 +7581,11 @@
     "Regions of human body",
     "Scene Collection",
     "Tentorium cerebelli"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 312,
-   "name": "Thalamus.l",
-   "label": "Thalamus",
-   "category": "diencephalon",
-   "side": "left",
-   "region": "Diencephalon",
-   "core": true,
-   "ta2": [
-    "Bonus collection",
-    "Brain",
-    "Central nervous system",
-    "Cerebrum",
-    "Diencephalon",
-    "Head",
-    "Main divisions",
-    "Nervous system",
-    "Regions of human body",
-    "Scene Collection",
-    "Thalamus"
-   ]
-  },
-  {
-   "id": 313,
-   "name": "Thalamus.r",
-   "label": "Thalamus",
-   "category": "diencephalon",
-   "side": "right",
-   "region": "Diencephalon",
-   "core": true,
-   "ta2": [
-    "Bonus collection",
-    "Brain",
-    "Central nervous system",
-    "Cerebrum",
-    "Diencephalon",
-    "Head",
-    "Main divisions",
-    "Nervous system",
-    "Regions of human body",
-    "Scene Collection",
-    "Thalamus"
-   ]
-  },
-  {
-   "id": 314,
+   "id": 326,
    "name": "Third ventricle",
    "label": "Third ventricle",
    "category": "ventricles",
@@ -6990,10 +7604,11 @@
     "Regions of human body",
     "Scene Collection",
     "Third ventricle"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 315,
+   "id": 327,
    "name": "Tonsil of cerebellum.l",
    "label": "Tonsil of cerebellum",
    "category": "cerebellum",
@@ -7010,10 +7625,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 316,
+   "id": 328,
    "name": "Tonsil of cerebellum.r",
    "label": "Tonsil of cerebellum",
    "category": "cerebellum",
@@ -7030,10 +7646,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 317,
+   "id": 329,
    "name": "Transverse frontopolar gyrus and sulcus*.l",
    "label": "Transverse frontopolar gyrus and sulcus",
    "category": "cortex",
@@ -7054,10 +7671,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 318,
+   "id": 330,
    "name": "Transverse frontopolar gyrus and sulcus*.r",
    "label": "Transverse frontopolar gyrus and sulcus",
    "category": "cortex",
@@ -7078,10 +7696,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 319,
+   "id": 331,
    "name": "Transverse occipital sulcus.l",
    "label": "Transverse occipital sulcus",
    "category": "cortex",
@@ -7102,10 +7721,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 320,
+   "id": 332,
    "name": "Transverse occipital sulcus.r",
    "label": "Transverse occipital sulcus",
    "category": "cortex",
@@ -7126,10 +7746,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 321,
+   "id": 333,
    "name": "Transverse sinus.l",
    "label": "Transverse sinus",
    "category": "veins_sinuses",
@@ -7144,10 +7765,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 322,
+   "id": 334,
    "name": "Transverse sinus.r",
    "label": "Transverse sinus",
    "category": "veins_sinuses",
@@ -7162,10 +7784,11 @@
     "Regions of human body",
     "Scene Collection",
     "Systemic veins"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 323,
+   "id": 335,
    "name": "Transverse temporal gyri.l",
    "label": "Transverse temporal gyri",
    "category": "cortex",
@@ -7187,10 +7810,11 @@
     "Superior temporal gyrus",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 324,
+   "id": 336,
    "name": "Transverse temporal gyri.r",
    "label": "Transverse temporal gyri",
    "category": "cortex",
@@ -7212,10 +7836,11 @@
     "Superior temporal gyrus",
     "Telencephalon",
     "Temporal lobe"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 325,
+   "id": 337,
    "name": "Triangular part of inferior frontal gyrus.l",
    "label": "Triangular part of inferior frontal gyrus",
    "category": "cortex",
@@ -7237,10 +7862,11 @@
     "Regions of human body",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 326,
+   "id": 338,
    "name": "Triangular part of inferior frontal gyrus.r",
    "label": "Triangular part of inferior frontal gyrus",
    "category": "cortex",
@@ -7262,10 +7888,11 @@
     "Right cerebal hemisphere",
     "Scene Collection",
     "Telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 327,
+   "id": 339,
    "name": "Trigeminal nerve (V).l",
    "label": "Trigeminal nerve (V)",
    "category": "cranial_nerves",
@@ -7283,10 +7910,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 328,
+   "id": 340,
    "name": "Trigeminal nerve (V).r",
    "label": "Trigeminal nerve (V)",
    "category": "cranial_nerves",
@@ -7304,10 +7932,11 @@
     "Regions of human body",
     "Scene Collection",
     "Trigeminal nerve (V)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 329,
+   "id": 341,
    "name": "Trochlear nerve (IV).l",
    "label": "Trochlear nerve (IV)",
    "category": "cranial_nerves",
@@ -7324,10 +7953,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 330,
+   "id": 342,
    "name": "Trochlear nerve (IV).r",
    "label": "Trochlear nerve (IV)",
    "category": "cranial_nerves",
@@ -7344,10 +7974,11 @@
     "Peripheral nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 331,
+   "id": 343,
    "name": "Tuber of vermis",
    "label": "Tuber of vermis",
    "category": "cerebellum",
@@ -7364,10 +7995,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 332,
+   "id": 344,
    "name": "Vagus nerve (X).l",
    "label": "Vagus nerve (X)",
    "category": "cranial_nerves",
@@ -7387,10 +8019,11 @@
     "Scene Collection",
     "Trunk",
     "Vagus nerve (X)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 333,
+   "id": 345,
    "name": "Vagus nerve (X).r",
    "label": "Vagus nerve (X)",
    "category": "cranial_nerves",
@@ -7410,10 +8043,155 @@
     "Scene Collection",
     "Trunk",
     "Vagus nerve (X)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 334,
+   "id": 346,
+   "name": "Ventral anterior nucleus.l",
+   "label": "Ventral anterior nucleus",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 347,
+   "name": "Ventral anterior nucleus.r",
+   "label": "Ventral anterior nucleus",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 348,
+   "name": "Ventral laterodorsal nucleus.l",
+   "label": "Ventral laterodorsal nucleus",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 349,
+   "name": "Ventral laterodorsal nucleus.r",
+   "label": "Ventral laterodorsal nucleus",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 350,
+   "name": "Ventral lateroventral nucleus.l",
+   "label": "Ventral lateroventral nucleus",
+   "category": "diencephalon",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 351,
+   "name": "Ventral lateroventral nucleus.r",
+   "label": "Ventral lateroventral nucleus",
+   "category": "diencephalon",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": true,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Diencephalon",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Thalamus"
+   ],
+   "source": "Najdenovska 2018",
+   "parent": "Thalamus"
+  },
+  {
+   "id": 352,
    "name": "Vertebral artery.l",
    "label": "Vertebral artery",
    "category": "arteries",
@@ -7431,10 +8209,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 335,
+   "id": 353,
    "name": "Vertebral artery.r",
    "label": "Vertebral artery",
    "category": "arteries",
@@ -7452,10 +8231,11 @@
     "Subclavian artery",
     "Systemic arteries",
     "Vertebral artery'"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 336,
+   "id": 354,
    "name": "Vestibular nerve.l",
    "label": "Vestibular nerve",
    "category": "cranial_nerves",
@@ -7474,10 +8254,11 @@
     "Scene Collection",
     "Vestibular nerve",
     "Vestibulocochlear nerve (VIII)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 337,
+   "id": 355,
    "name": "Vestibular nerve.r",
    "label": "Vestibular nerve",
    "category": "cranial_nerves",
@@ -7495,10 +8276,11 @@
     "Regions of human body",
     "Scene Collection",
     "Vestibulocochlear nerve (VIII)"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 338,
+   "id": 356,
    "name": "Vestibular nuclei.l",
    "label": "Vestibular nuclei",
    "category": "brainstem",
@@ -7519,10 +8301,11 @@
     "Scene Collection",
     "Tegmentum of pons",
     "Vestibular nuclei"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 339,
+   "id": 357,
    "name": "Vestibular nuclei.r",
    "label": "Vestibular nuclei",
    "category": "brainstem",
@@ -7543,10 +8326,11 @@
     "Scene Collection",
     "Tegmentum of pons",
     "Vestibular nuclei"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 340,
+   "id": 358,
    "name": "White matter of telencephalon.l",
    "label": "White matter of telencephalon",
    "category": "white_matter",
@@ -7566,10 +8350,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 341,
+   "id": 359,
    "name": "White matter of telencephalon.r",
    "label": "White matter of telencephalon",
    "category": "white_matter",
@@ -7589,10 +8374,11 @@
     "Scene Collection",
     "Telencephalon",
     "White matter of telencephalon"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 342,
+   "id": 360,
    "name": "Wing of central lobule.l",
    "label": "Wing of central lobule",
    "category": "cerebellum",
@@ -7609,10 +8395,11 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 343,
+   "id": 361,
    "name": "Wing of central lobule.r",
    "label": "Wing of central lobule",
    "category": "cerebellum",
@@ -7629,7 +8416,8 @@
     "Nervous system",
     "Regions of human body",
     "Scene Collection"
-   ]
+   ],
+   "source": "Z-Anatomy / BodyParts3D"
   }
  ],
  "categories": {
@@ -7647,7 +8435,7 @@
   },
   "deep_grey": {
    "label": "Deep grey / basal ganglia",
-   "count": 11
+   "count": 17
   },
   "arteries": {
    "label": "Arteries (circle of Willis)",
@@ -7661,6 +8449,10 @@
    "label": "Dural venous sinuses & veins",
    "count": 17
   },
+  "diencephalon": {
+   "label": "Diencephalon (thalamus, hypothalamus)",
+   "count": 29
+  },
   "cerebellum": {
    "label": "Cerebellum",
    "count": 32
@@ -7672,10 +8464,6 @@
   "meninges_dura": {
    "label": "Meninges & dura (falx, tentorium)",
    "count": 3
-  },
-  "diencephalon": {
-   "label": "Diencephalon (thalamus, hypothalamus)",
-   "count": 17
   }
  }
 }

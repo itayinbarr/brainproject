@@ -15,3 +15,6 @@ scripts/shot_*.mjs
 
 # firebase deploy cache
 .firebase/
+
+# Raw reference atlases (CC BY) - not redistributed; only derived meshes ship
+scripts/atlas_data/

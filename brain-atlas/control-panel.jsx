@@ -30,7 +30,12 @@ function ControlPanel(props) {
   const { pos, setPos, collapsed, setCollapsed } = props;
   const dragRef = React.useRef(null);
   const [layersOpen, setLayersOpen] = React.useState(false);
+  const [viewsOpen, setViewsOpen] = React.useState(true);   // collapse presets to free space for results
   const layersShown = layersOpen || !!props.q;   // a search always reveals the matched tree
+  // typing in search auto-collapses the cinematic views (results take the space);
+  // clearing it reopens them. Manual toggling still works while a query is active.
+  const hasSearch = !!props.search;
+  React.useEffect(() => { setViewsOpen(!hasSearch); }, [hasSearch]);
 
   const startDrag = (e) => {
     if (e.target.closest('button') || e.target.closest('input')) return;
@@ -74,13 +79,21 @@ function ControlPanel(props) {
           <div style={{ padding: '0 12px 12px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '9px 11px', borderRadius: 11, background: 'var(--field)', border: '1px solid var(--hair)' }}>
               <Icon name="search" size={15} style={{ color: 'var(--ink-faint)', flex: '0 0 auto' }} />
-              <input value={props.search} onChange={e => props.setSearch(e.target.value)} placeholder="Search 344 structures…"
+              <input value={props.search} onChange={e => props.setSearch(e.target.value)} placeholder={`Search ${window.BRAIN.nodes.length} structures…`}
                 style={{ flex: 1, border: 'none', background: 'transparent', outline: 'none', fontFamily: 'var(--font)', fontSize: 13, color: 'var(--ink)', minWidth: 0 }} />
               {props.search ? (
                 <button onClick={() => props.setSearch('')} style={{ border: 'none', background: 'transparent', color: 'var(--ink-faint)', display: 'grid', placeItems: 'center', cursor: 'pointer', padding: 0 }}><Icon name="x" size={14} /></button>
               ) : <kbd className="mono" style={{ fontSize: 9.5, color: 'var(--ink-ghost)', border: '1px solid var(--hair)', borderRadius: 5, padding: '1px 5px' }}>/</kbd>}
             </div>
-            {props.search && <div className="mono" style={{ fontSize: 10.5, color: 'var(--ink-faint)', marginTop: 7, paddingLeft: 2 }}>{props.matchCount} match{props.matchCount === 1 ? '' : 'es'} · others dimmed in 3D</div>}
+            {props.search && (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginTop: 8 }}>
+                <div className="mono" style={{ fontSize: 10.5, color: 'var(--ink-faint)', flex: 1, paddingLeft: 2 }}>{props.matchCount} match{props.matchCount === 1 ? '' : 'es'}</div>
+                <div style={{ width: 132 }}>
+                  <Segmented value={props.searchSide} onChange={props.setSearchSide}
+                    options={[{ value: 'both', label: 'L+R' }, { value: 'left', label: 'L' }, { value: 'right', label: 'R' }]} />
+                </div>
+              </div>
+            )}
           </div>
           )}
 
@@ -93,9 +106,17 @@ function ControlPanel(props) {
           </div>
           )}
 
-          {/* presets - always shown (the only control on mobile) */}
+          {/* presets - collapsible on desktop so search results can take the space */}
           <div style={{ padding: mobile ? '12px 12px' : '0 12px 12px' }}>
-            <div className="eyebrow" style={{ marginBottom: 8 }}>Cinematic views</div>
+            {mobile ? (
+              <div className="eyebrow" style={{ marginBottom: 8 }}>Cinematic views</div>
+            ) : (
+              <button onClick={() => setViewsOpen(o => !o)} style={{ display: 'flex', alignItems: 'center', gap: 8, width: '100%', border: 'none', background: 'transparent', cursor: 'pointer', padding: 0, marginBottom: viewsOpen ? 8 : 0 }}>
+                <span className="eyebrow" style={{ flex: 1, textAlign: 'left' }}>Cinematic views</span>
+                <Icon name={viewsOpen ? 'chevUp' : 'chevDown'} size={14} style={{ color: 'var(--ink-ghost)' }} />
+              </button>
+            )}
+            {(mobile || viewsOpen) && (
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 7 }}>
               {props.presets.map(p => {
                 const on = props.activePreset === p.id;
@@ -112,6 +133,7 @@ function ControlPanel(props) {
                 );
               })}
             </div>
+            )}
           </div>
 
           {/* cortex opacity */}

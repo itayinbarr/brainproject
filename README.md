@@ -144,7 +144,7 @@ The model here deliberately doesn't fake geometry it doesn't have.
 ```
 brainmodel/
 ├── README.md                     ← this file
-├── LICENSE                       ← MIT (code) + CC BY‑SA 4.0 (3D assets)
+├── LICENSE                       ← Apache 2.0 (code) + CC BY‑SA 4.0 (3D assets)
 ├── firebase.json                 ← Firebase Hosting config (serves brain-atlas/)
 ├── .github/workflows/
 │   └── deploy-pages.yml          ← publishes brain-atlas/ to GitHub Pages on push
@@ -231,18 +231,30 @@ What `export_brain.py` does, in order:
 
 This project is **dual‑licensed** - see [`LICENSE`](LICENSE) for the full text:
 
-- **Viewer source code** (HTML/CSS/JS/JSX, build & export scripts) - **MIT**. Use it,
-  fork it, embed it, do what you like.
+- **Viewer source code** (HTML/CSS/JS/JSX, build & export scripts) - **Apache License 2.0**.
+  Use it, fork it, embed it, do what you like.
 - **3D anatomy assets** (the `brain.glb` model and the metadata derived from it):
   **Creative Commons Attribution‑ShareAlike 4.0 (CC BY‑SA 4.0)**, © Z‑Anatomy contributors
   and BodyParts3D / DBCLS.
 
 **CC BY‑SA is share‑alike:** if you distribute a modified version of the *model*, it must
-stay under CC BY‑SA and keep this attribution. The MIT code licence does **not** relicense
-the model - keep this notice with the `.glb`.
+stay under CC BY‑SA and keep this attribution. The Apache 2.0 code licence does **not**
+relicense the model - keep this notice with the `.glb`.
 
 - Z‑Anatomy - https://www.z-anatomy.com/  ·  https://github.com/Z-Anatomy
 - BodyParts3D, © The Database Center for Life Science (DBCLS) - https://lifesciencedb.jp/bp3d/
+
+**Deep‑brain nuclei (added by atlas‑guided registration).** The globus pallidus
+internal/external split, the seven thalamic nuclei groups, and the subthalamic
+nucleus, substantia nigra and nucleus accumbens are not in the source model; they
+were registered from open MNI‑space atlases and remain **CC BY‑SA 4.0**. They are
+**approximate** (about 7 mm, educational, not for clinical use). How it is done and
+how to extend it: [`docs/registration.md`](docs/registration.md).
+
+- CIT168 subcortical atlas - Pauli, Nili & Tyszka 2018, *Scientific Data*
+  (**CC BY 4.0**) - https://osf.io/jkzwp/
+- Najdenovska et al. 2018, in‑vivo probabilistic thalamic atlas, *Scientific Data*
+  (**CC BY‑SA 4.0**) - https://doi.org/10.5281/zenodo.1405484
 
 ## Contributing
 

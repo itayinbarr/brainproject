@@ -33,6 +33,13 @@ function SelectionCard({ node, color, catLabel, description, related, onSelect, 
 
       <p style={{ margin: '0 0 14px', fontSize: 13.5, lineHeight: 1.5, color: 'var(--ink-soft)', textWrap: 'pretty' }}>{description}</p>
 
+      {node.source && node.source.indexOf('Z-Anatomy') === -1 && (
+        <p style={{ margin: '-6px 0 14px', fontSize: 11.5, lineHeight: 1.45, color: 'var(--ink-faint)', textWrap: 'pretty' }}>
+          <Icon name="info" size={11} style={{ verticalAlign: '-1px', marginRight: 4, color: 'var(--ink-ghost)' }} />
+          Approximate boundary{node.parent ? ' of the ' + node.parent : ''}, registered from {node.source} (MNI atlas, about 7 mm). Educational, not for clinical use.
+        </p>
+      )}
+
       {related && related.length > 0 && (
         <div style={{ marginBottom: 14 }}>
           <div className="eyebrow" style={{ marginBottom: 7 }}>Related structures</div>

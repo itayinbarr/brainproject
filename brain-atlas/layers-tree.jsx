@@ -8,8 +8,14 @@ function hl(text, q) {
 }
 
 function SideChip({ side }) {
-  if (side === 'median') return <span className="mono" style={{ fontSize: 9, color: 'var(--ink-ghost)' }}>M</span>;
-  return <span className="mono" style={{ fontSize: 9, color: 'var(--ink-ghost)' }}>{side === 'left' ? 'L' : 'R'}</span>;
+  const txt = side === 'median' ? 'M' : (side === 'left' ? 'L' : 'R');
+  return (
+    <span className="mono" style={{
+      fontSize: 9.5, fontWeight: 700, lineHeight: 1, letterSpacing: '0.02em',
+      color: 'var(--ink-faint)', background: 'rgba(16,20,32,0.06)',
+      border: '1px solid var(--hair)', borderRadius: 5, padding: '2px 5px', flex: '0 0 auto',
+    }}>{txt}</span>
+  );
 }
 
 function StructureRow({ node, onSelect, onFocus, selected, q }) {

@@ -21,6 +21,14 @@ const PRESETS = [
       diencephalon: ['Mamillary body', 'Hypothalamus', 'Habenula', 'Stria medullaris thalami'],
     } },
   { id: 'deep',   label: 'Deep grey',        color: 'var(--c-deep_grey)',      on: ['deep_grey','diencephalon'],   cortex: 0.12, focus: 'deep_grey' },
+  { id: 'bgnuc',  label: 'Basal ganglia',    color: 'var(--c-deep_grey)',      on: ['deep_grey','brainstem'],           cortex: 0.10, focus: 'deep_grey',
+    // Caudate/putamen/accumbens + the atlas-derived pallidal & subthalamic nuclei (GPe/GPi, STN, SN) and the brainstem red nucleus.
+    subset: {
+      deep_grey: ['Caudate nucleus', 'Putamen', 'Nucleus accumbens', 'Globus pallidus external', 'Globus pallidus internal', 'Subthalamic nucleus', 'Substantia nigra'],
+      brainstem: ['Red nucleus'],
+    } },
+  { id: 'thalnuc', label: 'Thalamic nuclei', color: 'var(--c-diencephalon)',   on: ['diencephalon'],                    cortex: 0.10, focus: 'diencephalon',
+    subset: { diencephalon: ['Pulvinar', 'Anterior nuclei of thalamus', 'Mediodorsal nucleus', 'Ventral laterodorsal nucleus', 'Ventral lateroventral nucleus', 'Ventral anterior nucleus', 'Intralaminar and lateral posterior nuclei'] } },
   { id: 'nerves', label: 'Cranial nerves',   color: 'var(--c-cranial_nerves)', on: ['cranial_nerves','brainstem'],      cortex: 0.12, focus: 'cranial_nerves' },
   { id: 'dura',   label: 'Meninges & dura',  color: 'var(--c-meninges_dura)',  on: ['meninges_dura','veins_sinuses'],   cortex: 0.30, focus: null },
 ];
@@ -89,6 +97,7 @@ function App() {
 
   // ---- state ----
   const [search, setSearch] = React.useState('');
+  const [searchSide, setSearchSide] = React.useState('both');  // filter results to one side
   const [hemisphere, setHemisphere] = React.useState('left');
   const [cortexOpacity, setCortexOpacity] = React.useState(1);
   const [layerOn, setLayerOn] = React.useState(() => { const o = {}; CAT_ORDER.forEach(c => o[c] = ['cortex', 'cerebellum', 'brainstem'].includes(c)); return o; });
@@ -120,11 +129,13 @@ function App() {
     if (!q) return s;
     const lq = q.toLowerCase();
     nodes.forEach(n => {
+      // side filter: midline structures have no L/R counterpart, so keep them on either side
+      if (searchSide !== 'both' && n.side !== 'median' && n.side !== searchSide) return;
       if (n.label.toLowerCase().includes(lq) || n.region.toLowerCase().includes(lq) ||
           (n.crumb || []).some(c => c.toLowerCase().includes(lq)) || n.category.includes(lq)) s.add(n.id);
     });
     return s;
-  }, [q]);
+  }, [q, searchSide]);
   const matchedCats = React.useMemo(() => { const c = new Set(); matchedIds.forEach(id => c.add(nodeById[id].category)); return c; }, [matchedIds]);
 
   // auto-expand categories with matches
@@ -309,6 +320,7 @@ function App() {
         onSelect={selectNode} onFocus={focusNode} onFocusCat={focusCat}
         selectedId={selectedId}
         search={search} setSearch={(v) => { setSearch(v); setActivePreset(null); }} matchedIds={matchedIds} matchCount={matchedIds.size}
+        searchSide={searchSide} setSearchSide={setSearchSide}
         hemisphere={hemisphere} setHemisphere={(v) => { setHemisphere(v); }}
         cortexOpacity={cortexOpacity} setCortexOpacity={(v) => { setCortexOpacity(v); setActivePreset(null); }}
         presets={PRESETS} activePreset={activePreset} onPreset={(id) => applyPreset(PRESETS.find(p => p.id === id))}

@@ -135,7 +135,8 @@ def categorize(o):
     if "Diencephalon" in anc:
         return "diencephalon"
     if anc & {"Corpus striatum", "Basal forebrain"} or re.search(
-            r"caudate|putamen|globus pallidus|lentiform|amygdal|accumbens|claustrum", n, re.I):
+            r"caudate|putamen|globus pallidus|lentiform|amygdal|accumbens|claustrum|"
+            r"subthalamic|substantia nigra|red nucleus", n, re.I):
         return "deep_grey"
     if "White matter of telencephalon" in anc or re.search(
             r"corpus callosum|internal capsule|fornix|commissure|association fibre|"
@@ -296,6 +297,19 @@ for i, o in enumerate(sel):
                   "Occipital lobe","Limbic lobe","Insula","Brainstem","Cerebellum",
                   "Diencephalon","Telencephalon") if a in anc), cat)
     is_core = cat in CORE_CATS
+    # Provenance for atlas-derived nuclei (build_with_nuclei.py tags them); plain
+    # Z-Anatomy structures default to the base dataset. _nuc_* are temp props and
+    # must not leak into the exported glTF extras, so pop them here.
+    def take(key):
+        val = o.get(key)
+        if key in o.keys():
+            del o[key]
+        return val
+    source = take("_nuc_source") or "Z-Anatomy / BodyParts3D"
+    parent = take("_nuc_parent")
+    reg_override = take("_nuc_region")
+    if reg_override:
+        region = reg_override
     # glTF extras -> three.js object.userData (survives name sanitization & dedup)
     o["bx_id"]    = i
     o["bx_cat"]   = cat
@@ -303,10 +317,17 @@ for i, o in enumerate(sel):
     o["bx_side"]  = sd
     o["bx_region"]= region
     o["bx_core"]  = 1 if is_core else 0
-    manifest["nodes"].append({
+    o["bx_source"]= source
+    if parent:
+        o["bx_parent"] = parent
+    node = {
         "id": i, "name": raw, "label": lab, "category": cat,
         "side": sd, "region": region, "core": is_core, "ta2": anc,
-    })
+        "source": source,
+    }
+    if parent:
+        node["parent"] = parent
+    manifest["nodes"].append(node)
 
 by_cat = defaultdict(list)
 for nd in manifest["nodes"]:
