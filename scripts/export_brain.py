@@ -238,7 +238,17 @@ print(f"[scope] {len(sel)} renderable meshes after curve conversion")
 def bake_and_clean(o):
     if o.data.users > 1:
         o.data = o.data.copy()
-    o.data.transform(o.matrix_world)           # bake world pose into vertices
+    mw = o.matrix_world.copy()
+    o.data.transform(mw)                       # bake world pose into vertices
+    # Right-hemisphere structures are negative-scale mirrors of the left. Baking a
+    # mirror (det < 0) into the vertices reverses the effective face winding without
+    # flipping it back, so the mesh ends up wound inside-out: the viewer's front-face
+    # culling then renders only its inner surface. Reverse the winding (this also flips
+    # the normals) so mirrored meshes stay outward-facing, matching the left.
+    if mw.determinant() < 0:
+        bm = bmesh.new(); bm.from_mesh(o.data)
+        bmesh.ops.reverse_faces(bm, faces=bm.faces)
+        bm.to_mesh(o.data); bm.free(); o.data.update()
     o.parent = None
     o.matrix_world = mathutils.Matrix.Identity(4)
     me = o.data
