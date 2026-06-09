@@ -416,7 +416,10 @@ function App() {
     else {
       if (activePreset && activePreset !== 'whole') p.set('preset', activePreset);
       if (hemisphere !== 'left') p.set('hemi', hemisphere);
-      if (selectedId != null) p.set('sel', String(selectedId));
+      if (selectedId != null) {
+        p.set('sel', String(selectedId));
+        if (focusedId === selectedId) p.set('focus', '1');   // shared from focused mode -> reopen focused
+      }
     }
     return location.origin + location.pathname + '?' + p.toString();
   };
@@ -426,8 +429,11 @@ function App() {
     catch (e) { window.prompt('Copy this link', url); }
   };
 
-  // restore state from a shared link (once, on mount)
+  // restore state from a shared link (once, on mount). The deep-linked structure is
+  // applied later, once the specimen has loaded, since the camera can't frame a mesh
+  // before then - see the sceneReady effect below.
   const didRestore = React.useRef(false);
+  const pendingDeep = React.useRef(null);   // { id, focus } parsed from the link
   React.useEffect(() => {
     if (didRestore.current) return; didRestore.current = true;
     let p; try { p = new URLSearchParams(location.search); } catch (e) { return; }
@@ -444,9 +450,18 @@ function App() {
       if (p.get('mode')) setMode(p.get('mode'));
       if (p.get('preset')) { const pr = PRESETS.find(x => x.id === p.get('preset')); if (pr) applyPreset(pr); }
       if (p.get('hemi')) setHemisphere(p.get('hemi'));
-      if (p.get('sel')) { const id = parseInt(p.get('sel'), 10); if (!isNaN(id) && nodeById[id]) setTimeout(() => focusNode(id), 200); }
+      if (p.get('sel')) { const id = parseInt(p.get('sel'), 10); if (!isNaN(id) && nodeById[id]) pendingDeep.current = { id, focus: p.get('focus') === '1' }; }
     }
   }, []);
+
+  // apply the deep-linked structure once the specimen is loaded: if the link was shared
+  // from focused mode, focus it (camera + select + active focus toggle); otherwise just
+  // select it, exactly as a click would.
+  React.useEffect(() => {
+    if (!sceneReady || !pendingDeep.current) return;
+    const { id, focus } = pendingDeep.current; pendingDeep.current = null;
+    if (focus) focusNode(id); else selectNode(id);
+  }, [sceneReady]);
 
   // ---- keyboard ----
   React.useEffect(() => {
