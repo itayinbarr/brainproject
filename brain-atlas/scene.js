@@ -27,6 +27,18 @@
     return o.userData || {};
   }
 
+  // The right hemisphere in the Z-Anatomy source is a negative-scale mirror of the
+  // left; the export bakes that mirror straight into the vertices, which leaves the
+  // right cortex shells wound inside-out. With front-face culling that renders only
+  // their inner surface ("corrupt"-looking) while the left renders normally. Reverse
+  // the triangle winding and flip the normals so the right cortex matches the left.
+  function flipInsideOut(geo) {
+    const idx = geo.index;
+    if (idx) { const a = idx.array; for (let i = 0; i < a.length; i += 3) { const t = a[i + 1]; a[i + 1] = a[i + 2]; a[i + 2] = t; } idx.needsUpdate = true; }
+    const nrm = geo.attributes.normal;
+    if (nrm) { const a = nrm.array; for (let i = 0; i < a.length; i++) a[i] = -a[i]; nrm.needsUpdate = true; }
+  }
+
   /* ============================================================ */
   function create(canvas, opts) {
     opts = opts || {};
@@ -86,6 +98,7 @@
           depthWrite: true,
         });
         o.material = mat;
+        if (cat === 'cortex' && side === 'right') flipInsideOut(o.geometry);
         o.userData = { cat, side, nodeId: id, baseColor: base.clone(), baseEmiss: be,
                        maxOpacity: MAX_OPACITY[cat] != null ? MAX_OPACITY[cat] : 1 };
         C(cat).meshes.push(o); allMeshes.push(o);

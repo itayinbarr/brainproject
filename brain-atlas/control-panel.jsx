@@ -52,7 +52,6 @@ function SystemsMode({ activeSystem, onStartSystem }) {
               <span style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 2 }}>
                 <span style={{ display: 'flex', alignItems: 'center', gap: 7 }}>
                   <span style={{ fontSize: 13.5, fontWeight: 700, letterSpacing: '-0.01em' }}>{s.label}</span>
-                  {s.flagship && <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: on ? '#fff' : 'var(--accent)', background: on ? 'rgba(255,255,255,0.16)' : 'var(--accent-soft)', padding: '1px 6px', borderRadius: 99 }}>Full</span>}
                 </span>
                 <span style={{ display: 'block', fontSize: 11.5, lineHeight: 1.4, color: on ? 'rgba(255,255,255,0.7)' : 'var(--ink-faint)', textWrap: 'pretty' }}>{s.blurb}</span>
               </span>
@@ -93,7 +92,6 @@ function LessonCard({ lesson, layout, completed, onOpen }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 9 }}>
         <span className="eyebrow" style={{ color: accent, letterSpacing: '0.1em' }}>{lesson.kicker}</span>
         <span style={{ flex: 1 }} />
-        {lesson.flagship && <span style={{ fontSize: 9, fontWeight: 700, letterSpacing: '0.04em', textTransform: 'uppercase', color: 'var(--accent)', background: 'var(--accent-soft)', padding: '2px 7px', borderRadius: 99 }}>Flagship</span>}
         {completed && <Icon name="checkCircle" size={16} style={{ color: '#3aa564' }} />}
       </div>
       <div style={{ fontSize: 15.5, fontWeight: 800, letterSpacing: '-0.015em', color: 'var(--ink)', lineHeight: 1.18, marginBottom: 5, textWrap: 'pretty' }}>{lesson.title}</div>
