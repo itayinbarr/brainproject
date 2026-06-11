@@ -13,10 +13,11 @@
   const CAT_EMISS = {
     cortex: 0.05, white_matter: 0.16, deep_grey: 0.44, diencephalon: 0.42, brainstem: 0.22,
     cerebellum: 0.12, ventricles: 0.54, arteries: 0.6, veins_sinuses: 0.5, cranial_nerves: 0.54, meninges_dura: 0.06,
+    tracts: 0.5,
   };
   // structures kept translucent even at full layer opacity (you see through them)
   const MAX_OPACITY = { meninges_dura: 0.34, ventricles: 0.9 };
-  const VESSEL = new Set(['arteries', 'veins_sinuses', 'cranial_nerves']);
+  const VESSEL = new Set(['arteries', 'veins_sinuses', 'cranial_nerves', 'tracts']);
   // tone down the very light masses so the cortex doesn't read as neon-white on the dark stage
   const CAT_SHADE = { cortex: 0.62, white_matter: 0.8 };
   function shade(cat, hex) { const c = new T.Color(hex || '#cccccc'); if (CAT_SHADE[cat]) c.multiplyScalar(CAT_SHADE[cat]); return c; }

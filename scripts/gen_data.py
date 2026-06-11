@@ -153,15 +153,30 @@ for n in manifest["nodes"]:
             "source": n.get("source", "Z-Anatomy / BodyParts3D")}
     if n.get("parent"):
         node["parent"] = n["parent"]
+    if n.get("decussation"):
+        node["decussation"] = n["decussation"]
     nodes.append(node)
+
+# White-matter tracts (centerline tubes) get their own palette colour + draw depth,
+# and a Learn-mode description seeded from the crossing note. Injected here so the
+# hand-tuned data.js palette/depth need not be edited by hand.
+palette = dict(old["palette"])
+palette.setdefault("tracts", "#5FB6C9")              # teal, distinct from white_matter
+depth = list(old["depth"])
+if "tracts" not in depth:
+    anchor = depth.index("white_matter") if "white_matter" in depth else len(depth)
+    depth.insert(anchor + 1, "tracts")
+for n in manifest["nodes"]:
+    if n["category"] == "tracts" and n.get("decussation"):   # always (re)generated, never hand-curated
+        descriptions[n["label"]] = n["decussation"]
 
 brain = {
     "generatedFrom": "Z-Anatomy / BodyParts3D (CC BY-SA 4.0); deep nuclei "
                      "registered from CIT168 (CC BY 4.0) and Najdenovska 2018 (CC BY-SA 4.0)",
     "categories": {c: {"label": v["label"], "count": v["count"]}
                    for c, v in manifest["categories"].items()},
-    "palette": old["palette"],
-    "depth": old["depth"],
+    "palette": palette,
+    "depth": depth,
     "descriptions": descriptions,
     "nodes": nodes,
 }

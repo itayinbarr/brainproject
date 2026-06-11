@@ -196,6 +196,58 @@
   },
   {
    "id": 8,
+   "name": "Acoustic radiation.l",
+   "label": "Acoustic radiation",
+   "category": "tracts",
+   "side": "left",
+   "region": "Temporal lobe",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical leg (medial geniculate to Heschl's gyrus); the auditory pathway is already bilaterally distributed in the brainstem."
+  },
+  {
+   "id": 9,
+   "name": "Acoustic radiation.r",
+   "label": "Acoustic radiation",
+   "category": "tracts",
+   "side": "right",
+   "region": "Temporal lobe",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical leg (medial geniculate to Heschl's gyrus); the auditory pathway is already bilaterally distributed in the brainstem."
+  },
+  {
+   "id": 10,
    "name": "Adenohypophysis",
    "label": "Adenohypophysis",
    "category": "diencephalon",
@@ -220,7 +272,7 @@
    "parent": "Pituitary gland"
   },
   {
-   "id": 9,
+   "id": 11,
    "name": "Angular gyrus.l",
    "label": "Angular gyrus",
    "category": "cortex",
@@ -246,7 +298,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 10,
+   "id": 12,
    "name": "Angular gyrus.r",
    "label": "Angular gyrus",
    "category": "cortex",
@@ -272,7 +324,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 11,
+   "id": 13,
    "name": "Anterior cerebral artery.l",
    "label": "Anterior cerebral artery",
    "category": "arteries",
@@ -293,7 +345,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 12,
+   "id": 14,
    "name": "Anterior cerebral artery.r",
    "label": "Anterior cerebral artery",
    "category": "arteries",
@@ -314,7 +366,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 13,
+   "id": 15,
    "name": "Anterior commissure",
    "label": "Anterior commissure",
    "category": "white_matter",
@@ -339,7 +391,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 14,
+   "id": 16,
    "name": "Anterior communicating artery",
    "label": "Anterior communicating artery",
    "category": "arteries",
@@ -358,7 +410,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 15,
+   "id": 17,
    "name": "Anterior division of mandibular nerve.l",
    "label": "Anterior division of mandibular nerve",
    "category": "cranial_nerves",
@@ -380,7 +432,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 16,
+   "id": 18,
    "name": "Anterior division of mandibular nerve.r",
    "label": "Anterior division of mandibular nerve",
    "category": "cranial_nerves",
@@ -402,7 +454,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 17,
+   "id": 19,
    "name": "Anterior hypothalamus.l",
    "label": "Anterior hypothalamus",
    "category": "diencephalon",
@@ -426,7 +478,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 18,
+   "id": 20,
    "name": "Anterior hypothalamus.r",
    "label": "Anterior hypothalamus",
    "category": "diencephalon",
@@ -450,7 +502,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 19,
+   "id": 21,
    "name": "Anterior inferior cerebellar artery.l",
    "label": "Anterior inferior cerebellar artery",
    "category": "arteries",
@@ -471,7 +523,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 20,
+   "id": 22,
    "name": "Anterior inferior cerebellar artery.r",
    "label": "Anterior inferior cerebellar artery",
    "category": "arteries",
@@ -492,7 +544,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 21,
+   "id": 23,
    "name": "Anterior intercavernous sinus",
    "label": "Anterior intercavernous sinus",
    "category": "veins_sinuses",
@@ -511,7 +563,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 22,
+   "id": 24,
    "name": "Anterior nuclei of thalamus.l",
    "label": "Anterior nuclei of thalamus",
    "category": "diencephalon",
@@ -535,7 +587,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 23,
+   "id": 25,
    "name": "Anterior nuclei of thalamus.r",
    "label": "Anterior nuclei of thalamus",
    "category": "diencephalon",
@@ -559,7 +611,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 24,
+   "id": 26,
    "name": "Anterior occipital sulcus*.l",
    "label": "Anterior occipital sulcus",
    "category": "cortex",
@@ -584,7 +636,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 25,
+   "id": 27,
    "name": "Anterior occipital sulcus*.r",
    "label": "Anterior occipital sulcus",
    "category": "cortex",
@@ -609,7 +661,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 26,
+   "id": 28,
    "name": "Anterior quadrangular lobule.l",
    "label": "Anterior quadrangular lobule",
    "category": "cerebellum",
@@ -630,7 +682,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 27,
+   "id": 29,
    "name": "Anterior quadrangular lobule.r",
    "label": "Anterior quadrangular lobule",
    "category": "cerebellum",
@@ -651,7 +703,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 28,
+   "id": 30,
    "name": "Anterior spinal artery.l",
    "label": "Anterior spinal artery",
    "category": "arteries",
@@ -670,7 +722,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 29,
+   "id": 31,
    "name": "Anterior spinal artery.r",
    "label": "Anterior spinal artery",
    "category": "arteries",
@@ -689,7 +741,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 30,
+   "id": 32,
+   "name": "Anterior thalamic radiation.l",
+   "label": "Anterior thalamic radiation",
+   "category": "tracts",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical projection; does not cross the midline."
+  },
+  {
+   "id": 33,
+   "name": "Anterior thalamic radiation.r",
+   "label": "Anterior thalamic radiation",
+   "category": "tracts",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical projection; does not cross the midline."
+  },
+  {
+   "id": 34,
    "name": "Aqueduct of midbrain",
    "label": "Aqueduct of midbrain",
    "category": "brainstem",
@@ -712,7 +816,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 31,
+   "id": 35,
+   "name": "Arcuate fasciculus.l",
+   "label": "Arcuate fasciculus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract (arching from temporal to frontal cortex); does not cross the midline."
+  },
+  {
+   "id": 36,
+   "name": "Arcuate fasciculus.r",
+   "label": "Arcuate fasciculus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract (arching from temporal to frontal cortex); does not cross the midline."
+  },
+  {
+   "id": 37,
    "name": "Basilar artery",
    "label": "Basilar artery",
    "category": "arteries",
@@ -733,7 +889,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 32,
+   "id": 38,
    "name": "Basilar venous plexus",
    "label": "Basilar venous plexus",
    "category": "veins_sinuses",
@@ -749,7 +905,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 33,
+   "id": 39,
    "name": "Basolateral complex.l",
    "label": "Basolateral complex",
    "category": "deep_grey",
@@ -775,7 +931,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 34,
+   "id": 40,
    "name": "Basolateral complex.r",
    "label": "Basolateral complex",
    "category": "deep_grey",
@@ -801,7 +957,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 35,
+   "id": 41,
    "name": "Biventral lobule.l",
    "label": "Biventral lobule",
    "category": "cerebellum",
@@ -822,7 +978,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 36,
+   "id": 42,
    "name": "Biventral lobule.r",
    "label": "Biventral lobule",
    "category": "cerebellum",
@@ -843,7 +999,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 37,
+   "id": 43,
    "name": "Buccal nerve.l",
    "label": "Buccal nerve",
    "category": "cranial_nerves",
@@ -865,7 +1021,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 38,
+   "id": 44,
    "name": "Buccal nerve.r",
    "label": "Buccal nerve",
    "category": "cranial_nerves",
@@ -887,7 +1043,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 39,
+   "id": 45,
    "name": "Calcarine sulcus.l",
    "label": "Calcarine sulcus",
    "category": "cortex",
@@ -912,7 +1068,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 40,
+   "id": 46,
    "name": "Calcarine sulcus.r",
    "label": "Calcarine sulcus",
    "category": "cortex",
@@ -937,7 +1093,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 41,
+   "id": 47,
    "name": "Callosomarginal artery.l",
    "label": "Callosomarginal artery",
    "category": "arteries",
@@ -958,7 +1114,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 42,
+   "id": 48,
    "name": "Callosomarginal artery.r",
    "label": "Callosomarginal artery",
    "category": "arteries",
@@ -979,7 +1135,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 43,
+   "id": 49,
    "name": "Caudate nucleus.l",
    "label": "Caudate nucleus",
    "category": "deep_grey",
@@ -1005,7 +1161,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 44,
+   "id": 50,
    "name": "Caudate nucleus.r",
    "label": "Caudate nucleus",
    "category": "deep_grey",
@@ -1031,7 +1187,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 45,
+   "id": 51,
    "name": "Cavernous sinus.l",
    "label": "Cavernous sinus",
    "category": "veins_sinuses",
@@ -1047,7 +1203,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 46,
+   "id": 52,
    "name": "Cavernous sinus.r",
    "label": "Cavernous sinus",
    "category": "veins_sinuses",
@@ -1063,7 +1219,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 47,
+   "id": 53,
    "name": "Central lobule",
    "label": "Central lobule",
    "category": "cerebellum",
@@ -1084,7 +1240,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 48,
+   "id": 54,
    "name": "Central nucleus.l",
    "label": "Central nucleus",
    "category": "deep_grey",
@@ -1110,7 +1266,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 49,
+   "id": 55,
    "name": "Central nucleus.r",
    "label": "Central nucleus",
    "category": "deep_grey",
@@ -1136,7 +1292,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 50,
+   "id": 56,
    "name": "Central sulcus.l",
    "label": "Central sulcus",
    "category": "cortex",
@@ -1161,7 +1317,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 51,
+   "id": 57,
    "name": "Central sulcus.r",
    "label": "Central sulcus",
    "category": "cortex",
@@ -1186,7 +1342,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 52,
+   "id": 58,
    "name": "Choroid plexus.l",
    "label": "Choroid plexus",
    "category": "ventricles",
@@ -1209,7 +1365,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 53,
+   "id": 59,
    "name": "Choroid plexus.r",
    "label": "Choroid plexus",
    "category": "ventricles",
@@ -1232,7 +1388,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 54,
+   "id": 60,
    "name": "Cingulate gyrus (Posteroventral part*).l",
    "label": "Cingulate gyrus (Posteroventral part)",
    "category": "cortex",
@@ -1259,7 +1415,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 55,
+   "id": 61,
    "name": "Cingulate gyrus (Posteroventral part*).r",
    "label": "Cingulate gyrus (Posteroventral part)",
    "category": "cortex",
@@ -1286,7 +1442,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 56,
+   "id": 62,
    "name": "Cingulate gyrus and sulcus (Middle anterior part).l",
    "label": "Cingulate gyrus and sulcus (Middle anterior part)",
    "category": "cortex",
@@ -1313,7 +1469,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 57,
+   "id": 63,
    "name": "Cingulate gyrus and sulcus (Middle anterior part).r",
    "label": "Cingulate gyrus and sulcus (Middle anterior part)",
    "category": "cortex",
@@ -1340,7 +1496,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 58,
+   "id": 64,
    "name": "Cingulate gyrus and sulcus (Middle posterior part).l",
    "label": "Cingulate gyrus and sulcus (Middle posterior part)",
    "category": "cortex",
@@ -1367,7 +1523,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 59,
+   "id": 65,
    "name": "Cingulate gyrus and sulcus (Middle posterior part).r",
    "label": "Cingulate gyrus and sulcus (Middle posterior part)",
    "category": "cortex",
@@ -1394,7 +1550,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 60,
+   "id": 66,
    "name": "Cingulate gyrus and sulcus (Posterior dorsal part).l",
    "label": "Cingulate gyrus and sulcus (Posterior dorsal part)",
    "category": "cortex",
@@ -1421,7 +1577,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 61,
+   "id": 67,
    "name": "Cingulate gyrus and sulcus (Posterior dorsal part).r",
    "label": "Cingulate gyrus and sulcus (Posterior dorsal part)",
    "category": "cortex",
@@ -1448,7 +1604,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 62,
+   "id": 68,
    "name": "Cingulate sulcus (Marginal part*).l",
    "label": "Cingulate sulcus (Marginal part)",
    "category": "cortex",
@@ -1474,7 +1630,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 63,
+   "id": 69,
    "name": "Cingulate sulcus (Marginal part*).r",
    "label": "Cingulate sulcus (Marginal part)",
    "category": "cortex",
@@ -1500,7 +1656,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 64,
+   "id": 70,
    "name": "Circular sulcus of insula.l",
    "label": "Circular sulcus of insula",
    "category": "cortex",
@@ -1525,7 +1681,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 65,
+   "id": 71,
    "name": "Circular sulcus of insula.r",
    "label": "Circular sulcus of insula",
    "category": "cortex",
@@ -1550,7 +1706,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 66,
+   "id": 72,
    "name": "Collateral sulcus.l",
    "label": "Collateral sulcus",
    "category": "cortex",
@@ -1575,7 +1731,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 67,
+   "id": 73,
    "name": "Collateral sulcus.r",
    "label": "Collateral sulcus",
    "category": "cortex",
@@ -1600,7 +1756,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 68,
+   "id": 74,
    "name": "Corpus callosum",
    "label": "Corpus callosum",
    "category": "white_matter",
@@ -1625,7 +1781,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 69,
+   "id": 75,
+   "name": "Corticobulbar tract.l",
+   "label": "Corticobulbar tract",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Bilateral: fibres cross near each brainstem motor nucleus, so most cranial-nerve motor nuclei receive both hemispheres (lower face and tongue are mainly contralateral)."
+  },
+  {
+   "id": 76,
+   "name": "Corticobulbar tract.r",
+   "label": "Corticobulbar tract",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Bilateral: fibres cross near each brainstem motor nucleus, so most cranial-nerve motor nuclei receive both hemispheres (lower face and tongue are mainly contralateral)."
+  },
+  {
+   "id": 77,
    "name": "Corticomedial group.l",
    "label": "Corticomedial group",
    "category": "deep_grey",
@@ -1651,7 +1859,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 70,
+   "id": 78,
    "name": "Corticomedial group.r",
    "label": "Corticomedial group",
    "category": "deep_grey",
@@ -1677,7 +1885,371 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 71,
+   "id": 79,
+   "name": "Corticopontine tract (frontal).l",
+   "label": "Corticopontine tract (frontal)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Descends ipsilaterally to the pontine nuclei; the relayed pontocerebellar fibres then cross the midline in the middle cerebellar peduncle."
+  },
+  {
+   "id": 80,
+   "name": "Corticopontine tract (frontal).r",
+   "label": "Corticopontine tract (frontal)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Descends ipsilaterally to the pontine nuclei; the relayed pontocerebellar fibres then cross the midline in the middle cerebellar peduncle."
+  },
+  {
+   "id": 81,
+   "name": "Corticopontine tract (occipital).l",
+   "label": "Corticopontine tract (occipital)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Descends ipsilaterally to the pontine nuclei; relayed pontocerebellar fibres cross in the middle cerebellar peduncle."
+  },
+  {
+   "id": 82,
+   "name": "Corticopontine tract (occipital).r",
+   "label": "Corticopontine tract (occipital)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Descends ipsilaterally to the pontine nuclei; relayed pontocerebellar fibres cross in the middle cerebellar peduncle."
+  },
+  {
+   "id": 83,
+   "name": "Corticopontine tract (parietal).l",
+   "label": "Corticopontine tract (parietal)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Descends ipsilaterally to the pontine nuclei; relayed pontocerebellar fibres cross in the middle cerebellar peduncle."
+  },
+  {
+   "id": 84,
+   "name": "Corticopontine tract (parietal).r",
+   "label": "Corticopontine tract (parietal)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Descends ipsilaterally to the pontine nuclei; relayed pontocerebellar fibres cross in the middle cerebellar peduncle."
+  },
+  {
+   "id": 85,
+   "name": "Corticospinal tract.l",
+   "label": "Corticospinal tract",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Pyramidal decussation in the caudal medulla; ~85-90% of fibres cross to form the lateral corticospinal tract, the rest descend as the anterior corticospinal tract and cross segmentally."
+  },
+  {
+   "id": 86,
+   "name": "Corticospinal tract.r",
+   "label": "Corticospinal tract",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Pyramidal decussation in the caudal medulla; ~85-90% of fibres cross to form the lateral corticospinal tract, the rest descend as the anterior corticospinal tract and cross segmentally."
+  },
+  {
+   "id": 87,
+   "name": "Corticostriatal tract (anterior).l",
+   "label": "Corticostriatal tract (anterior)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral corticostriatal projection; does not cross the midline."
+  },
+  {
+   "id": 88,
+   "name": "Corticostriatal tract (anterior).r",
+   "label": "Corticostriatal tract (anterior)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral corticostriatal projection; does not cross the midline."
+  },
+  {
+   "id": 89,
+   "name": "Corticostriatal tract (posterior).l",
+   "label": "Corticostriatal tract (posterior)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral corticostriatal projection; does not cross the midline."
+  },
+  {
+   "id": 90,
+   "name": "Corticostriatal tract (posterior).r",
+   "label": "Corticostriatal tract (posterior)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral corticostriatal projection; does not cross the midline."
+  },
+  {
+   "id": 91,
+   "name": "Corticostriatal tract (superior).l",
+   "label": "Corticostriatal tract (superior)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral corticostriatal projection; does not cross the midline."
+  },
+  {
+   "id": 92,
+   "name": "Corticostriatal tract (superior).r",
+   "label": "Corticostriatal tract (superior)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral corticostriatal projection; does not cross the midline."
+  },
+  {
+   "id": 93,
    "name": "Culmen",
    "label": "Culmen",
    "category": "cerebellum",
@@ -1698,7 +2270,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 72,
+   "id": 94,
    "name": "Cuneus.l",
    "label": "Cuneus",
    "category": "cortex",
@@ -1723,7 +2295,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 73,
+   "id": 95,
    "name": "Cuneus.r",
    "label": "Cuneus",
    "category": "cortex",
@@ -1748,7 +2320,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 74,
+   "id": 96,
    "name": "Declive",
    "label": "Declive",
    "category": "cerebellum",
@@ -1769,7 +2341,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 75,
+   "id": 97,
+   "name": "Dentatorubrothalamic tract.l",
+   "label": "Dentatorubrothalamic tract",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Crosses at the decussation of the superior cerebellar peduncle (caudal midbrain) to reach the contralateral red nucleus and thalamus - the principal cerebellar output to the cortex."
+  },
+  {
+   "id": 98,
+   "name": "Dentatorubrothalamic tract.r",
+   "label": "Dentatorubrothalamic tract",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Crosses at the decussation of the superior cerebellar peduncle (caudal midbrain) to reach the contralateral red nucleus and thalamus - the principal cerebellar output to the cortex."
+  },
+  {
+   "id": 99,
    "name": "Distal lateral striate branches.l",
    "label": "Distal lateral striate branches",
    "category": "arteries",
@@ -1790,7 +2414,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 76,
+   "id": 100,
    "name": "Distal lateral striate branches.r",
    "label": "Distal lateral striate branches",
    "category": "arteries",
@@ -1811,7 +2435,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 77,
+   "id": 101,
    "name": "Facial nerve (VII).l",
    "label": "Facial nerve (VII)",
    "category": "cranial_nerves",
@@ -1833,7 +2457,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 78,
+   "id": 102,
    "name": "Facial nerve (VII).r",
    "label": "Facial nerve (VII)",
    "category": "cranial_nerves",
@@ -1855,7 +2479,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 79,
+   "id": 103,
    "name": "Falx cerebri",
    "label": "Falx cerebri",
    "category": "meninges_dura",
@@ -1877,7 +2501,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 80,
+   "id": 104,
    "name": "Flocculus.l",
    "label": "Flocculus",
    "category": "cerebellum",
@@ -1898,7 +2522,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 81,
+   "id": 105,
    "name": "Flocculus.r",
    "label": "Flocculus",
    "category": "cerebellum",
@@ -1919,7 +2543,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 82,
+   "id": 106,
    "name": "Folium of vermis",
    "label": "Folium of vermis",
    "category": "cerebellum",
@@ -1940,7 +2564,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 83,
+   "id": 107,
    "name": "Fornix.l",
    "label": "Fornix",
    "category": "white_matter",
@@ -1966,7 +2590,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 84,
+   "id": 108,
    "name": "Fornix.r",
    "label": "Fornix",
    "category": "white_matter",
@@ -1992,7 +2616,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 85,
+   "id": 109,
    "name": "Fourth ventricle",
    "label": "Fourth ventricle",
    "category": "ventricles",
@@ -2014,7 +2638,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 86,
+   "id": 110,
+   "name": "Frontal aslant tract.l",
+   "label": "Frontal aslant tract",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 111,
+   "name": "Frontal aslant tract.r",
+   "label": "Frontal aslant tract",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 112,
    "name": "Frontal branches of callosomarginal artery.l",
    "label": "Frontal branches of callosomarginal artery",
    "category": "arteries",
@@ -2035,7 +2711,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 87,
+   "id": 113,
    "name": "Frontal branches of callosomarginal artery.r",
    "label": "Frontal branches of callosomarginal artery",
    "category": "arteries",
@@ -2056,7 +2732,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 88,
+   "id": 114,
    "name": "Globus pallidus external.l",
    "label": "Globus pallidus external",
    "category": "deep_grey",
@@ -2082,7 +2758,7 @@
    "parent": "Globus pallidus"
   },
   {
-   "id": 89,
+   "id": 115,
    "name": "Globus pallidus external.r",
    "label": "Globus pallidus external",
    "category": "deep_grey",
@@ -2108,7 +2784,7 @@
    "parent": "Globus pallidus"
   },
   {
-   "id": 90,
+   "id": 116,
    "name": "Globus pallidus internal.l",
    "label": "Globus pallidus internal",
    "category": "deep_grey",
@@ -2134,7 +2810,7 @@
    "parent": "Globus pallidus"
   },
   {
-   "id": 91,
+   "id": 117,
    "name": "Globus pallidus internal.r",
    "label": "Globus pallidus internal",
    "category": "deep_grey",
@@ -2160,7 +2836,7 @@
    "parent": "Globus pallidus"
   },
   {
-   "id": 92,
+   "id": 118,
    "name": "Gracile lobule.l",
    "label": "Gracile lobule",
    "category": "cerebellum",
@@ -2181,7 +2857,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 93,
+   "id": 119,
    "name": "Gracile lobule.r",
    "label": "Gracile lobule",
    "category": "cerebellum",
@@ -2202,7 +2878,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 94,
+   "id": 120,
    "name": "Habenula",
    "label": "Habenula",
    "category": "diencephalon",
@@ -2225,7 +2901,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 95,
+   "id": 121,
    "name": "Hippocampal commissure",
    "label": "Hippocampal commissure",
    "category": "white_matter",
@@ -2249,7 +2925,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 96,
+   "id": 122,
    "name": "Hippocampus.l",
    "label": "Hippocampus",
    "category": "cortex",
@@ -2274,7 +2950,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 97,
+   "id": 123,
    "name": "Hippocampus.r",
    "label": "Hippocampus",
    "category": "cortex",
@@ -2299,7 +2975,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 98,
+   "id": 124,
    "name": "Hypoglossal nerve (XII).l",
    "label": "Hypoglossal nerve (XII)",
    "category": "cranial_nerves",
@@ -2321,7 +2997,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 99,
+   "id": 125,
    "name": "Hypoglossal nerve (XII).r",
    "label": "Hypoglossal nerve (XII)",
    "category": "cranial_nerves",
@@ -2343,7 +3019,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 100,
+   "id": 126,
    "name": "Inferior alveolar nerve.l",
    "label": "Inferior alveolar nerve",
    "category": "cranial_nerves",
@@ -2365,7 +3041,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 101,
+   "id": 127,
    "name": "Inferior alveolar nerve.r",
    "label": "Inferior alveolar nerve",
    "category": "cranial_nerves",
@@ -2387,7 +3063,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 102,
+   "id": 128,
+   "name": "Inferior cerebellar peduncle.l",
+   "label": "Inferior cerebellar peduncle",
+   "category": "tracts",
+   "side": "left",
+   "region": "Cerebellum",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Mixed: olivocerebellar fibres are crossed, while the posterior spinocerebellar input is largely uncrossed."
+  },
+  {
+   "id": 129,
+   "name": "Inferior cerebellar peduncle.r",
+   "label": "Inferior cerebellar peduncle",
+   "category": "tracts",
+   "side": "right",
+   "region": "Cerebellum",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Mixed: olivocerebellar fibres are crossed, while the posterior spinocerebellar input is largely uncrossed."
+  },
+  {
+   "id": 130,
    "name": "Inferior colliculus.l",
    "label": "Inferior colliculus",
    "category": "brainstem",
@@ -2411,7 +3139,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 103,
+   "id": 131,
    "name": "Inferior colliculus.r",
    "label": "Inferior colliculus",
    "category": "brainstem",
@@ -2435,7 +3163,111 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 104,
+   "id": 132,
+   "name": "Inferior fronto-occipital fasciculus.l",
+   "label": "Inferior fronto-occipital fasciculus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 133,
+   "name": "Inferior fronto-occipital fasciculus.r",
+   "label": "Inferior fronto-occipital fasciculus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 134,
+   "name": "Inferior longitudinal fasciculus.l",
+   "label": "Inferior longitudinal fasciculus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 135,
+   "name": "Inferior longitudinal fasciculus.r",
+   "label": "Inferior longitudinal fasciculus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 136,
    "name": "Inferior occipital gyrus and sulcus*.l",
    "label": "Inferior occipital gyrus and sulcus",
    "category": "cortex",
@@ -2460,7 +3292,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 105,
+   "id": 137,
    "name": "Inferior occipital gyrus and sulcus*.r",
    "label": "Inferior occipital gyrus and sulcus",
    "category": "cortex",
@@ -2485,7 +3317,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 106,
+   "id": 138,
    "name": "Inferior petrosal sinus.l",
    "label": "Inferior petrosal sinus",
    "category": "veins_sinuses",
@@ -2504,7 +3336,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 107,
+   "id": 139,
    "name": "Inferior petrosal sinus.r",
    "label": "Inferior petrosal sinus",
    "category": "veins_sinuses",
@@ -2523,7 +3355,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 108,
+   "id": 140,
    "name": "Inferior sagittal sinus",
    "label": "Inferior sagittal sinus",
    "category": "veins_sinuses",
@@ -2542,7 +3374,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 109,
+   "id": 141,
    "name": "Inferior semilunar lobule.l",
    "label": "Inferior semilunar lobule",
    "category": "cerebellum",
@@ -2563,7 +3395,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 110,
+   "id": 142,
    "name": "Inferior semilunar lobule.r",
    "label": "Inferior semilunar lobule",
    "category": "cerebellum",
@@ -2584,7 +3416,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 111,
+   "id": 143,
    "name": "Inferior temporal gyrus.l",
    "label": "Inferior temporal gyrus",
    "category": "cortex",
@@ -2609,7 +3441,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 112,
+   "id": 144,
    "name": "Inferior temporal gyrus.r",
    "label": "Inferior temporal gyrus",
    "category": "cortex",
@@ -2634,7 +3466,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 113,
+   "id": 145,
    "name": "Insula (Subcentral gyrus and ant. and post. sulci*).l",
    "label": "Insula (Subcentral gyrus and ant. and post. sulci)",
    "category": "cortex",
@@ -2659,7 +3491,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 114,
+   "id": 146,
    "name": "Insula (Subcentral gyrus and ant. and post. sulci*).r",
    "label": "Insula (Subcentral gyrus and ant. and post. sulci)",
    "category": "cortex",
@@ -2684,7 +3516,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 115,
+   "id": 147,
    "name": "Insular branches of middle cerebral artery (M2).r",
    "label": "Insular branches of middle cerebral artery (M2)",
    "category": "arteries",
@@ -2705,7 +3537,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 116,
+   "id": 148,
    "name": "Insular branches of middle cerebral artery (M2-segment).l",
    "label": "Insular branches of middle cerebral artery (M2-segment)",
    "category": "arteries",
@@ -2726,7 +3558,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 117,
+   "id": 149,
    "name": "Internal carotid artery.l",
    "label": "Internal carotid artery",
    "category": "arteries",
@@ -2748,7 +3580,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 118,
+   "id": 150,
    "name": "Internal carotid artery.r",
    "label": "Internal carotid artery",
    "category": "arteries",
@@ -2770,7 +3602,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 119,
+   "id": 151,
    "name": "Interpeduncular fossa.l",
    "label": "Interpeduncular fossa",
    "category": "brainstem",
@@ -2792,7 +3624,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 120,
+   "id": 152,
    "name": "Interpeduncular fossa.r",
    "label": "Interpeduncular fossa",
    "category": "brainstem",
@@ -2814,7 +3646,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 121,
+   "id": 153,
    "name": "Intralaminar and lateral posterior nuclei.l",
    "label": "Intralaminar and lateral posterior nuclei",
    "category": "diencephalon",
@@ -2838,7 +3670,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 122,
+   "id": 154,
    "name": "Intralaminar and lateral posterior nuclei.r",
    "label": "Intralaminar and lateral posterior nuclei",
    "category": "diencephalon",
@@ -2862,7 +3694,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 123,
+   "id": 155,
    "name": "Lat_Fis-ant-Horizont.l",
    "label": "Lat Fis-ant-Horizont",
    "category": "cortex",
@@ -2887,7 +3719,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 124,
+   "id": 156,
    "name": "Lat_Fis-ant-Horizont.r",
    "label": "Lat Fis-ant-Horizont",
    "category": "cortex",
@@ -2912,7 +3744,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 125,
+   "id": 157,
    "name": "Lat_Fis-ant-Vertical.l",
    "label": "Lat Fis-ant-Vertical",
    "category": "cortex",
@@ -2937,7 +3769,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 126,
+   "id": 158,
    "name": "Lat_Fis-ant-Vertical.r",
    "label": "Lat Fis-ant-Vertical",
    "category": "cortex",
@@ -2962,7 +3794,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 127,
+   "id": 159,
    "name": "Lat_Fis-post.l",
    "label": "Lat Fis-post",
    "category": "cortex",
@@ -2987,7 +3819,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 128,
+   "id": 160,
    "name": "Lat_Fis-post.r",
    "label": "Lat Fis-post",
    "category": "cortex",
@@ -3012,7 +3844,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 129,
+   "id": 161,
    "name": "Lateral geniculate body.l",
    "label": "Lateral geniculate body",
    "category": "diencephalon",
@@ -3034,7 +3866,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 130,
+   "id": 162,
    "name": "Lateral geniculate body.r",
    "label": "Lateral geniculate body",
    "category": "diencephalon",
@@ -3056,7 +3888,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 131,
+   "id": 163,
    "name": "Lateral hypothalamus.l",
    "label": "Lateral hypothalamus",
    "category": "diencephalon",
@@ -3080,7 +3912,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 132,
+   "id": 164,
    "name": "Lateral hypothalamus.r",
    "label": "Lateral hypothalamus",
    "category": "diencephalon",
@@ -3104,7 +3936,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 133,
+   "id": 165,
    "name": "Lateral nucleus.l",
    "label": "Lateral nucleus",
    "category": "deep_grey",
@@ -3130,7 +3962,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 134,
+   "id": 166,
    "name": "Lateral nucleus.r",
    "label": "Lateral nucleus",
    "category": "deep_grey",
@@ -3156,7 +3988,7 @@
    "parent": "Amygdaloid body"
   },
   {
-   "id": 135,
+   "id": 167,
    "name": "Lateral occipital gyrus (Middle occipital gyrus*).l",
    "label": "Lateral occipital gyrus (Middle occipital gyrus)",
    "category": "cortex",
@@ -3181,7 +4013,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 136,
+   "id": 168,
    "name": "Lateral occipital gyrus (Middle occipital gyrus*).r",
    "label": "Lateral occipital gyrus (Middle occipital gyrus)",
    "category": "cortex",
@@ -3206,7 +4038,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 137,
+   "id": 169,
    "name": "Lateral occipitotemporal gyrus.l",
    "label": "Lateral occipitotemporal gyrus",
    "category": "cortex",
@@ -3232,7 +4064,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 138,
+   "id": 170,
    "name": "Lateral occipitotemporal gyrus.r",
    "label": "Lateral occipitotemporal gyrus",
    "category": "cortex",
@@ -3258,7 +4090,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 139,
+   "id": 171,
    "name": "Lateral pontine branches of basilar artery.l",
    "label": "Lateral pontine branches of basilar artery",
    "category": "arteries",
@@ -3279,7 +4111,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 140,
+   "id": 172,
    "name": "Lateral pontine branches of basilar artery.r",
    "label": "Lateral pontine branches of basilar artery",
    "category": "arteries",
@@ -3300,7 +4132,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 141,
+   "id": 173,
    "name": "Lateral ventricle.l",
    "label": "Lateral ventricle",
    "category": "ventricles",
@@ -3324,7 +4156,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 142,
+   "id": 174,
    "name": "Lateral ventricle.r",
    "label": "Lateral ventricle",
    "category": "ventricles",
@@ -3348,7 +4180,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 143,
+   "id": 175,
    "name": "Lingual gyrus.l",
    "label": "Lingual gyrus",
    "category": "cortex",
@@ -3373,7 +4205,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 144,
+   "id": 176,
    "name": "Lingual gyrus.r",
    "label": "Lingual gyrus",
    "category": "cortex",
@@ -3398,7 +4230,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 145,
+   "id": 177,
    "name": "Lingual nerve.l",
    "label": "Lingual nerve",
    "category": "cranial_nerves",
@@ -3420,7 +4252,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 146,
+   "id": 178,
    "name": "Lingual nerve.r",
    "label": "Lingual nerve",
    "category": "cranial_nerves",
@@ -3442,7 +4274,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 147,
+   "id": 179,
    "name": "Lingula of cerebellum",
    "label": "Lingula of cerebellum",
    "category": "cerebellum",
@@ -3463,7 +4295,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 148,
+   "id": 180,
    "name": "Lunate sulcus.l",
    "label": "Lunate sulcus",
    "category": "cortex",
@@ -3488,7 +4320,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 149,
+   "id": 181,
    "name": "Lunate sulcus.r",
    "label": "Lunate sulcus",
    "category": "cortex",
@@ -3513,7 +4345,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 150,
+   "id": 182,
    "name": "Mamillary body.l",
    "label": "Mamillary body",
    "category": "diencephalon",
@@ -3535,7 +4367,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 151,
+   "id": 183,
    "name": "Mamillary body.r",
    "label": "Mamillary body",
    "category": "diencephalon",
@@ -3557,7 +4389,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 152,
+   "id": 184,
    "name": "Maxillary nerve.l",
    "label": "Maxillary nerve",
    "category": "cranial_nerves",
@@ -3579,7 +4411,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 153,
+   "id": 185,
    "name": "Maxillary nerve.r",
    "label": "Maxillary nerve",
    "category": "cranial_nerves",
@@ -3601,7 +4433,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 154,
+   "id": 186,
    "name": "Medial geniculate body.l",
    "label": "Medial geniculate body",
    "category": "diencephalon",
@@ -3623,7 +4455,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 155,
+   "id": 187,
    "name": "Medial geniculate body.r",
    "label": "Medial geniculate body",
    "category": "diencephalon",
@@ -3645,7 +4477,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 156,
+   "id": 188,
+   "name": "Medial lemniscus.l",
+   "label": "Medial lemniscus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Carries already-crossed fibres: the sensory (internal arcuate) decussation is in the caudal medulla, so the lemniscus is contralateral to its dorsal-column origin."
+  },
+  {
+   "id": 189,
+   "name": "Medial lemniscus.r",
+   "label": "Medial lemniscus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Carries already-crossed fibres: the sensory (internal arcuate) decussation is in the caudal medulla, so the lemniscus is contralateral to its dorsal-column origin."
+  },
+  {
+   "id": 190,
    "name": "Medial occipitotemporal gyrus (Parahippocampal*).l",
    "label": "Medial occipitotemporal gyrus (Parahippocampal)",
    "category": "cortex",
@@ -3671,7 +4555,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 157,
+   "id": 191,
    "name": "Medial occipitotemporal gyrus (Parahippocampal*).r",
    "label": "Medial occipitotemporal gyrus (Parahippocampal)",
    "category": "cortex",
@@ -3697,7 +4581,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 158,
+   "id": 192,
    "name": "Medial pontine branches of basilar artery.l",
    "label": "Medial pontine branches of basilar artery",
    "category": "arteries",
@@ -3718,7 +4602,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 159,
+   "id": 193,
    "name": "Medial pontine branches of basilar artery.r",
    "label": "Medial pontine branches of basilar artery",
    "category": "arteries",
@@ -3739,7 +4623,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 160,
+   "id": 194,
    "name": "Mediodorsal nucleus.l",
    "label": "Mediodorsal nucleus",
    "category": "diencephalon",
@@ -3763,7 +4647,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 161,
+   "id": 195,
    "name": "Mediodorsal nucleus.r",
    "label": "Mediodorsal nucleus",
    "category": "diencephalon",
@@ -3787,7 +4671,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 162,
+   "id": 196,
    "name": "Medulla oblongata.l",
    "label": "Medulla oblongata",
    "category": "brainstem",
@@ -3809,7 +4693,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 163,
+   "id": 197,
    "name": "Meningeal branch of maxillary nerve.l",
    "label": "Meningeal branch of maxillary nerve",
    "category": "cranial_nerves",
@@ -3831,7 +4715,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 164,
+   "id": 198,
    "name": "Meningeal branch of maxillary nerve.r",
    "label": "Meningeal branch of maxillary nerve",
    "category": "cranial_nerves",
@@ -3853,7 +4737,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 165,
+   "id": 199,
    "name": "Mental nerve.l",
    "label": "Mental nerve",
    "category": "cranial_nerves",
@@ -3875,7 +4759,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 166,
+   "id": 200,
    "name": "Mental nerve.r",
    "label": "Mental nerve",
    "category": "cranial_nerves",
@@ -3897,7 +4781,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 167,
+   "id": 201,
    "name": "Midbrain.l",
    "label": "Midbrain",
    "category": "brainstem",
@@ -3919,7 +4803,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 168,
+   "id": 202,
    "name": "Midbrain.r",
    "label": "Midbrain",
    "category": "brainstem",
@@ -3941,7 +4825,33 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 169,
+   "id": 203,
+   "name": "Middle cerebellar peduncle",
+   "label": "Middle cerebellar peduncle",
+   "category": "tracts",
+   "side": "median",
+   "region": "Cerebellum",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Carries pontocerebellar fibres that have already crossed the midline in the pons, linking each pontine nucleus to the contralateral cerebellar hemisphere."
+  },
+  {
+   "id": 204,
    "name": "Middle cerebral artery (M1-segment).l",
    "label": "Middle cerebral artery (M1-segment)",
    "category": "arteries",
@@ -3962,7 +4872,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 170,
+   "id": 205,
    "name": "Middle cerebral artery (M1-segment).r",
    "label": "Middle cerebral artery (M1-segment)",
    "category": "arteries",
@@ -3983,7 +4893,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 171,
+   "id": 206,
    "name": "Middle cerebral artery (M3 segment).l",
    "label": "Middle cerebral artery (M3 segment)",
    "category": "arteries",
@@ -4004,7 +4914,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 172,
+   "id": 207,
    "name": "Middle cerebral artery (M3-segment).r",
    "label": "Middle cerebral artery (M3-segment)",
    "category": "arteries",
@@ -4025,7 +4935,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 173,
+   "id": 208,
    "name": "Middle frontal gyrus.l",
    "label": "Middle frontal gyrus",
    "category": "cortex",
@@ -4050,7 +4960,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 174,
+   "id": 209,
    "name": "Middle frontal gyrus.r",
    "label": "Middle frontal gyrus",
    "category": "cortex",
@@ -4075,7 +4985,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 175,
+   "id": 210,
+   "name": "Middle longitudinal fasciculus.l",
+   "label": "Middle longitudinal fasciculus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 211,
+   "name": "Middle longitudinal fasciculus.r",
+   "label": "Middle longitudinal fasciculus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 212,
    "name": "Middle temporal gyrus.l",
    "label": "Middle temporal gyrus",
    "category": "cortex",
@@ -4100,7 +5062,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 176,
+   "id": 213,
    "name": "Middle temporal gyrus.r",
    "label": "Middle temporal gyrus",
    "category": "cortex",
@@ -4125,7 +5087,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 177,
+   "id": 214,
    "name": "Motor nucleus of facial nerve.l",
    "label": "Motor nucleus of facial nerve",
    "category": "brainstem",
@@ -4149,7 +5111,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 178,
+   "id": 215,
    "name": "Motor nucleus of facial nerve.r",
    "label": "Motor nucleus of facial nerve",
    "category": "brainstem",
@@ -4173,7 +5135,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 179,
+   "id": 216,
    "name": "Motor root of trigeminal nerve.l",
    "label": "Motor root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -4194,7 +5156,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 180,
+   "id": 217,
    "name": "Motor root of trigeminal nerve.r",
    "label": "Motor root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -4215,7 +5177,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 181,
+   "id": 218,
    "name": "Neurohypophysis",
    "label": "Neurohypophysis",
    "category": "diencephalon",
@@ -4240,7 +5202,7 @@
    "parent": "Pituitary gland"
   },
   {
-   "id": 182,
+   "id": 219,
    "name": "Nodule of vermis",
    "label": "Nodule of vermis",
    "category": "cerebellum",
@@ -4261,7 +5223,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 183,
+   "id": 220,
    "name": "Nucleus accumbens.l",
    "label": "Nucleus accumbens",
    "category": "deep_grey",
@@ -4286,7 +5248,7 @@
    "source": "CIT168 (Pauli 2018)"
   },
   {
-   "id": 184,
+   "id": 221,
    "name": "Nucleus accumbens.r",
    "label": "Nucleus accumbens",
    "category": "deep_grey",
@@ -4311,7 +5273,7 @@
    "source": "CIT168 (Pauli 2018)"
   },
   {
-   "id": 185,
+   "id": 222,
    "name": "Nucleus of abducens nerve.l",
    "label": "Nucleus of abducens nerve",
    "category": "brainstem",
@@ -4335,7 +5297,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 186,
+   "id": 223,
    "name": "Nucleus of abducens nerve.r",
    "label": "Nucleus of abducens nerve",
    "category": "brainstem",
@@ -4359,7 +5321,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 187,
+   "id": 224,
    "name": "Nucleus of oculomotor nerve.l",
    "label": "Nucleus of oculomotor nerve",
    "category": "brainstem",
@@ -4385,7 +5347,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 188,
+   "id": 225,
    "name": "Nucleus of oculomotor nerve.r",
    "label": "Nucleus of oculomotor nerve",
    "category": "brainstem",
@@ -4411,7 +5373,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 189,
+   "id": 226,
    "name": "Occipital pole.l",
    "label": "Occipital pole",
    "category": "cortex",
@@ -4437,7 +5399,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 190,
+   "id": 227,
    "name": "Occipital pole.r",
    "label": "Occipital pole",
    "category": "cortex",
@@ -4462,7 +5424,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 191,
+   "id": 228,
    "name": "Occipital sinus",
    "label": "Occipital sinus",
    "category": "veins_sinuses",
@@ -4481,7 +5443,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 192,
+   "id": 229,
    "name": "Occipitotemporal sulcus (Lateral part*).l",
    "label": "Occipitotemporal sulcus (Lateral part)",
    "category": "cortex",
@@ -4506,7 +5468,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 193,
+   "id": 230,
    "name": "Occipitotemporal sulcus (Lateral part*).r",
    "label": "Occipitotemporal sulcus (Lateral part)",
    "category": "cortex",
@@ -4531,7 +5493,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 194,
+   "id": 231,
    "name": "Oculomotor nerve (III).l",
    "label": "Oculomotor nerve (III)",
    "category": "cranial_nerves",
@@ -4553,7 +5515,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 195,
+   "id": 232,
    "name": "Oculomotor nerve (III).r",
    "label": "Oculomotor nerve (III)",
    "category": "cranial_nerves",
@@ -4575,7 +5537,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 196,
+   "id": 233,
    "name": "Olfactory nerve (I).l",
    "label": "Olfactory nerve (I)",
    "category": "cranial_nerves",
@@ -4597,7 +5559,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 197,
+   "id": 234,
    "name": "Olfactory nerve (I).r",
    "label": "Olfactory nerve (I)",
    "category": "cranial_nerves",
@@ -4619,7 +5581,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 198,
+   "id": 235,
    "name": "Olive.l",
    "label": "Olive",
    "category": "brainstem",
@@ -4641,7 +5603,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 199,
+   "id": 236,
    "name": "Olive.r",
    "label": "Olive",
    "category": "brainstem",
@@ -4663,7 +5625,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 200,
+   "id": 237,
    "name": "Ophthalmic artery.l",
    "label": "Ophthalmic artery",
    "category": "arteries",
@@ -4684,7 +5646,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 201,
+   "id": 238,
    "name": "Ophthalmic artery.r",
    "label": "Ophthalmic artery",
    "category": "arteries",
@@ -4705,7 +5667,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 202,
+   "id": 239,
    "name": "Ophthalmic nerve.l",
    "label": "Ophthalmic nerve",
    "category": "cranial_nerves",
@@ -4727,7 +5689,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 203,
+   "id": 240,
    "name": "Ophthalmic nerve.r",
    "label": "Ophthalmic nerve",
    "category": "cranial_nerves",
@@ -4749,7 +5711,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 204,
+   "id": 241,
    "name": "Optic chiasm.l",
    "label": "Optic chiasm",
    "category": "diencephalon",
@@ -4771,7 +5733,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 205,
+   "id": 242,
    "name": "Optic chiasm.r",
    "label": "Optic chiasm",
    "category": "diencephalon",
@@ -4793,7 +5755,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 206,
+   "id": 243,
    "name": "Optic nerve (II).l",
    "label": "Optic nerve (II)",
    "category": "cranial_nerves",
@@ -4815,7 +5777,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 207,
+   "id": 244,
    "name": "Optic nerve (II).r",
    "label": "Optic nerve (II)",
    "category": "cranial_nerves",
@@ -4837,7 +5799,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 208,
+   "id": 245,
+   "name": "Optic radiation.l",
+   "label": "Optic radiation",
+   "category": "tracts",
+   "side": "left",
+   "region": "Occipital lobe",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Post-chiasmal: the hemidecussation is at the optic chiasm, upstream of this tract, so each radiation carries the contralateral visual hemifield."
+  },
+  {
+   "id": 246,
+   "name": "Optic radiation.r",
+   "label": "Optic radiation",
+   "category": "tracts",
+   "side": "right",
+   "region": "Occipital lobe",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Post-chiasmal: the hemidecussation is at the optic chiasm, upstream of this tract, so each radiation carries the contralateral visual hemifield."
+  },
+  {
+   "id": 247,
    "name": "Optic tract.l",
    "label": "Optic tract",
    "category": "diencephalon",
@@ -4860,7 +5874,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 209,
+   "id": 248,
    "name": "Optic tract.r",
    "label": "Optic tract",
    "category": "diencephalon",
@@ -4883,7 +5897,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 210,
+   "id": 249,
    "name": "Orbital gyri (Frontomarginal gyrus and sulcus*).l",
    "label": "Orbital gyri (Frontomarginal gyrus and sulcus)",
    "category": "cortex",
@@ -4908,7 +5922,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 211,
+   "id": 250,
    "name": "Orbital gyri (Frontomarginal gyrus and sulcus*).r",
    "label": "Orbital gyri (Frontomarginal gyrus and sulcus)",
    "category": "cortex",
@@ -4933,7 +5947,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 212,
+   "id": 251,
    "name": "Orbital gyri.l",
    "label": "Orbital gyri",
    "category": "cortex",
@@ -4958,7 +5972,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 213,
+   "id": 252,
    "name": "Orbital gyri.r",
    "label": "Orbital gyri",
    "category": "cortex",
@@ -4983,7 +5997,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 214,
+   "id": 253,
    "name": "Orbital part of  inferior frontal gyrus.l",
    "label": "Orbital part of inferior frontal gyrus",
    "category": "cortex",
@@ -5009,7 +6023,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 215,
+   "id": 254,
    "name": "Orbital part of  inferior frontal gyrus.r",
    "label": "Orbital part of inferior frontal gyrus",
    "category": "cortex",
@@ -5035,7 +6049,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 216,
+   "id": 255,
    "name": "Orbital sulci (H-shaped orbital sulci*).l",
    "label": "Orbital sulci (H-shaped orbital sulci)",
    "category": "cortex",
@@ -5060,7 +6074,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 217,
+   "id": 256,
    "name": "Orbital sulci (H-shaped orbital sulci*).r",
    "label": "Orbital sulci (H-shaped orbital sulci)",
    "category": "cortex",
@@ -5085,7 +6099,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 218,
+   "id": 257,
    "name": "Orbital sulci (Lateral Orbital sulcus*).l",
    "label": "Orbital sulci (Lateral Orbital sulcus)",
    "category": "cortex",
@@ -5110,7 +6124,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 219,
+   "id": 258,
    "name": "Orbital sulci (Lateral Orbital sulcus*).r",
    "label": "Orbital sulci (Lateral Orbital sulcus)",
    "category": "cortex",
@@ -5135,7 +6149,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 220,
+   "id": 259,
    "name": "Orbitofrontal branches of anterior cerebral artery.l",
    "label": "Orbitofrontal branches of anterior cerebral artery",
    "category": "arteries",
@@ -5156,7 +6170,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 221,
+   "id": 260,
    "name": "Orbitofrontal branches of anterior cerebral artery.r",
    "label": "Orbitofrontal branches of anterior cerebral artery",
    "category": "arteries",
@@ -5177,7 +6191,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 222,
+   "id": 261,
    "name": "Paracentral gyrus and sulcus*.l",
    "label": "Paracentral gyrus and sulcus",
    "category": "cortex",
@@ -5202,7 +6216,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 223,
+   "id": 262,
    "name": "Paracentral gyrus and sulcus*.r",
    "label": "Paracentral gyrus and sulcus",
    "category": "cortex",
@@ -5227,7 +6241,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 224,
+   "id": 263,
    "name": "Parietal branches of middle cerebral artery.l",
    "label": "Parietal branches of middle cerebral artery",
    "category": "arteries",
@@ -5248,7 +6262,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 225,
+   "id": 264,
    "name": "Parietal branches of middle cerebral artery.r",
    "label": "Parietal branches of middle cerebral artery",
    "category": "arteries",
@@ -5269,7 +6283,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 226,
+   "id": 265,
    "name": "Peduncle of flocculus.l",
    "label": "Peduncle of flocculus",
    "category": "cerebellum",
@@ -5290,7 +6304,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 227,
+   "id": 266,
    "name": "Peduncle of flocculus.r",
    "label": "Peduncle of flocculus",
    "category": "cerebellum",
@@ -5311,7 +6325,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 228,
+   "id": 267,
    "name": "Pericallosal artery.l",
    "label": "Pericallosal artery",
    "category": "arteries",
@@ -5332,7 +6346,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 229,
+   "id": 268,
    "name": "Pericallosal artery.r",
    "label": "Pericallosal artery",
    "category": "arteries",
@@ -5353,7 +6367,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 230,
+   "id": 269,
    "name": "Postcentral gyrus.l",
    "label": "Postcentral gyrus",
    "category": "cortex",
@@ -5378,7 +6392,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 231,
+   "id": 270,
    "name": "Postcentral gyrus.r",
    "label": "Postcentral gyrus",
    "category": "cortex",
@@ -5403,7 +6417,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 232,
+   "id": 271,
    "name": "Posterior cerebral artery.l",
    "label": "Posterior cerebral artery",
    "category": "arteries",
@@ -5424,7 +6438,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 233,
+   "id": 272,
    "name": "Posterior cerebral artery.r",
    "label": "Posterior cerebral artery",
    "category": "arteries",
@@ -5445,7 +6459,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 234,
+   "id": 273,
    "name": "Posterior commissure",
    "label": "Posterior commissure",
    "category": "diencephalon",
@@ -5468,7 +6482,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 235,
+   "id": 274,
    "name": "Posterior communicating artery.l",
    "label": "Posterior communicating artery",
    "category": "arteries",
@@ -5487,7 +6501,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 236,
+   "id": 275,
    "name": "Posterior communicating artery.r",
    "label": "Posterior communicating artery",
    "category": "arteries",
@@ -5506,7 +6520,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 237,
+   "id": 276,
    "name": "Posterior division of mandibular nerve.l",
    "label": "Posterior division of mandibular nerve",
    "category": "cranial_nerves",
@@ -5528,7 +6542,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 238,
+   "id": 277,
    "name": "Posterior division of mandibular nerve.r",
    "label": "Posterior division of mandibular nerve",
    "category": "cranial_nerves",
@@ -5550,7 +6564,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 239,
+   "id": 278,
    "name": "Posterior hypothalamus.l",
    "label": "Posterior hypothalamus",
    "category": "diencephalon",
@@ -5574,7 +6588,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 240,
+   "id": 279,
    "name": "Posterior hypothalamus.r",
    "label": "Posterior hypothalamus",
    "category": "diencephalon",
@@ -5598,7 +6612,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 241,
+   "id": 280,
    "name": "Posterior inferior cerebellar artery.l",
    "label": "Posterior inferior cerebellar artery",
    "category": "arteries",
@@ -5619,7 +6633,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 242,
+   "id": 281,
    "name": "Posterior inferior cerebellar artery.r",
    "label": "Posterior inferior cerebellar artery",
    "category": "arteries",
@@ -5640,7 +6654,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 243,
+   "id": 282,
+   "name": "Posterior thalamic radiation.l",
+   "label": "Posterior thalamic radiation",
+   "category": "tracts",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical projection; does not cross the midline."
+  },
+  {
+   "id": 283,
+   "name": "Posterior thalamic radiation.r",
+   "label": "Posterior thalamic radiation",
+   "category": "tracts",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical projection; does not cross the midline."
+  },
+  {
+   "id": 284,
    "name": "Precentral gyrus.l",
    "label": "Precentral gyrus",
    "category": "cortex",
@@ -5665,7 +6731,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 244,
+   "id": 285,
    "name": "Precentral gyrus.r",
    "label": "Precentral gyrus",
    "category": "cortex",
@@ -5690,7 +6756,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 245,
+   "id": 286,
    "name": "Precuneus.l",
    "label": "Precuneus",
    "category": "cortex",
@@ -5715,7 +6781,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 246,
+   "id": 287,
    "name": "Precuneus.r",
    "label": "Precuneus",
    "category": "cortex",
@@ -5740,7 +6806,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 247,
+   "id": 288,
    "name": "Preoptic hypothalamus.l",
    "label": "Preoptic hypothalamus",
    "category": "diencephalon",
@@ -5764,7 +6830,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 248,
+   "id": 289,
    "name": "Preoptic hypothalamus.r",
    "label": "Preoptic hypothalamus",
    "category": "diencephalon",
@@ -5788,7 +6854,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 249,
+   "id": 290,
    "name": "Pulvinar.l",
    "label": "Pulvinar",
    "category": "diencephalon",
@@ -5812,7 +6878,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 250,
+   "id": 291,
    "name": "Pulvinar.r",
    "label": "Pulvinar",
    "category": "diencephalon",
@@ -5836,7 +6902,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 251,
+   "id": 292,
    "name": "Red nucleus.l",
    "label": "Red nucleus",
    "category": "brainstem",
@@ -5861,7 +6927,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 252,
+   "id": 293,
    "name": "Red nucleus.r",
    "label": "Red nucleus",
    "category": "brainstem",
@@ -5886,7 +6952,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 253,
+   "id": 294,
+   "name": "Reticulospinal tract.l",
+   "label": "Reticulospinal tract",
+   "category": "tracts",
+   "side": "left",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Medial (pontine) reticulospinal fibres descend largely uncrossed; the lateral (medullary) component projects bilaterally."
+  },
+  {
+   "id": 295,
+   "name": "Reticulospinal tract.r",
+   "label": "Reticulospinal tract",
+   "category": "tracts",
+   "side": "right",
+   "region": "Brainstem",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Medial (pontine) reticulospinal fibres descend largely uncrossed; the lateral (medullary) component projects bilaterally."
+  },
+  {
+   "id": 296,
    "name": "Septal nuclei",
    "label": "Septal nuclei",
    "category": "deep_grey",
@@ -5909,7 +7027,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 254,
+   "id": 297,
    "name": "Inferior frontal sulcus.l",
    "label": "Inferior frontal sulcus",
    "category": "cortex",
@@ -5934,7 +7052,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 255,
+   "id": 298,
    "name": "Inferior frontal sulcus.r",
    "label": "Inferior frontal sulcus",
    "category": "cortex",
@@ -5959,7 +7077,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 256,
+   "id": 299,
    "name": "Inferior temporal sulcus.l",
    "label": "Inferior temporal sulcus",
    "category": "cortex",
@@ -5984,7 +7102,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 257,
+   "id": 300,
    "name": "Inferior temporal sulcus.r",
    "label": "Inferior temporal sulcus",
    "category": "cortex",
@@ -6009,7 +7127,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 258,
+   "id": 301,
    "name": "Intraparietal sulcus.l",
    "label": "Intraparietal sulcus",
    "category": "cortex",
@@ -6034,7 +7152,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 259,
+   "id": 302,
    "name": "Intraparietal sulcus.r",
    "label": "Intraparietal sulcus",
    "category": "cortex",
@@ -6059,7 +7177,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 260,
+   "id": 303,
    "name": "Olfactory sulcus.l",
    "label": "Olfactory sulcus",
    "category": "cortex",
@@ -6084,7 +7202,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 261,
+   "id": 304,
    "name": "Olfactory sulcus.r",
    "label": "Olfactory sulcus",
    "category": "cortex",
@@ -6109,7 +7227,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 262,
+   "id": 305,
    "name": "Opercular part of inferior frontal gyrus.l",
    "label": "Opercular part of inferior frontal gyrus",
    "category": "cortex",
@@ -6135,7 +7253,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 263,
+   "id": 306,
    "name": "Opercular part of inferior frontal gyrus.r",
    "label": "Opercular part of inferior frontal gyrus",
    "category": "cortex",
@@ -6161,7 +7279,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 264,
+   "id": 307,
    "name": "Paracentral sulcus.l",
    "label": "Paracentral sulcus",
    "category": "cortex",
@@ -6186,7 +7304,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 265,
+   "id": 308,
    "name": "Paracentral sulcus.r",
    "label": "Paracentral sulcus",
    "category": "cortex",
@@ -6211,7 +7329,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 266,
+   "id": 309,
    "name": "Parieto-occipital sulcus.l",
    "label": "Parieto-occipital sulcus",
    "category": "cortex",
@@ -6236,7 +7354,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 267,
+   "id": 310,
    "name": "Parieto-occipital sulcus.r",
    "label": "Parieto-occipital sulcus",
    "category": "cortex",
@@ -6261,7 +7379,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 268,
+   "id": 311,
    "name": "Pineal gland",
    "label": "Pineal gland",
    "category": "diencephalon",
@@ -6285,7 +7403,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 269,
+   "id": 312,
    "name": "Pons.l",
    "label": "Pons",
    "category": "brainstem",
@@ -6307,7 +7425,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 270,
+   "id": 313,
    "name": "Pons.r",
    "label": "Pons",
    "category": "brainstem",
@@ -6329,7 +7447,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 271,
+   "id": 314,
    "name": "Postcentral sulcus.l",
    "label": "Postcentral sulcus",
    "category": "cortex",
@@ -6354,7 +7472,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 272,
+   "id": 315,
    "name": "Postcentral sulcus.r",
    "label": "Postcentral sulcus",
    "category": "cortex",
@@ -6379,7 +7497,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 273,
+   "id": 316,
    "name": "Posterior intercavernous sinus",
    "label": "Posterior intercavernous sinus",
    "category": "veins_sinuses",
@@ -6398,7 +7516,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 274,
+   "id": 317,
    "name": "Posterior quadrangular lobule.l",
    "label": "Posterior quadrangular lobule",
    "category": "cerebellum",
@@ -6419,7 +7537,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 275,
+   "id": 318,
    "name": "Posterior quadrangular lobule.r",
    "label": "Posterior quadrangular lobule",
    "category": "cerebellum",
@@ -6440,7 +7558,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 276,
+   "id": 319,
    "name": "Precentral sulcus (inferior part)*.l",
    "label": "Precentral sulcus (inferior part)",
    "category": "cortex",
@@ -6465,7 +7583,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 277,
+   "id": 320,
    "name": "Precentral sulcus (inferior part)*.r",
    "label": "Precentral sulcus (inferior part)",
    "category": "cortex",
@@ -6490,7 +7608,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 278,
+   "id": 321,
    "name": "Precentral sulcus (Superior part)*.l",
    "label": "Precentral sulcus (Superior part)",
    "category": "cortex",
@@ -6515,7 +7633,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 279,
+   "id": 322,
    "name": "Precentral sulcus (Superior part)*.r",
    "label": "Precentral sulcus (Superior part)",
    "category": "cortex",
@@ -6540,7 +7658,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 280,
+   "id": 323,
    "name": "Proximal lateral striate branches.l",
    "label": "Proximal lateral striate branches",
    "category": "arteries",
@@ -6561,7 +7679,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 281,
+   "id": 324,
    "name": "Proximal lateral striate branches.r",
    "label": "Proximal lateral striate branches",
    "category": "arteries",
@@ -6582,7 +7700,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 282,
+   "id": 325,
    "name": "Putamen.l",
    "label": "Putamen",
    "category": "deep_grey",
@@ -6607,7 +7725,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 283,
+   "id": 326,
    "name": "Putamen.r",
    "label": "Putamen",
    "category": "deep_grey",
@@ -6632,7 +7750,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 284,
+   "id": 327,
    "name": "Pyramid of medulla oblongata.l",
    "label": "Pyramid of medulla oblongata",
    "category": "brainstem",
@@ -6654,7 +7772,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 285,
+   "id": 328,
    "name": "Pyramid of medulla oblongata.r",
    "label": "Pyramid of medulla oblongata",
    "category": "brainstem",
@@ -6676,7 +7794,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 286,
+   "id": 329,
    "name": "Pyramis of vermis",
    "label": "Pyramis of vermis",
    "category": "cerebellum",
@@ -6697,7 +7815,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 287,
+   "id": 330,
    "name": "Sensory root of trigeminal nerve.l",
    "label": "Sensory root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -6719,7 +7837,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 288,
+   "id": 331,
    "name": "Sensory root of trigeminal nerve.r",
    "label": "Sensory root of trigeminal nerve",
    "category": "cranial_nerves",
@@ -6741,7 +7859,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 289,
+   "id": 332,
    "name": "Septum pellucidum",
    "label": "Septum pellucidum",
    "category": "ventricles",
@@ -6765,7 +7883,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 290,
+   "id": 333,
    "name": "Sigmoid sinus.l",
    "label": "Sigmoid sinus",
    "category": "veins_sinuses",
@@ -6784,7 +7902,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 291,
+   "id": 334,
    "name": "Sigmoid sinus.r",
    "label": "Sigmoid sinus",
    "category": "veins_sinuses",
@@ -6803,7 +7921,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 292,
+   "id": 335,
    "name": "Straight gyrus (Gyrus rectus).l",
    "label": "Straight gyrus (Gyrus rectus)",
    "category": "cortex",
@@ -6828,7 +7946,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 293,
+   "id": 336,
    "name": "Straight gyrus (Gyrus rectus).r",
    "label": "Straight gyrus (Gyrus rectus)",
    "category": "cortex",
@@ -6853,7 +7971,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 294,
+   "id": 337,
    "name": "Straight sinus",
    "label": "Straight sinus",
    "category": "veins_sinuses",
@@ -6872,7 +7990,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 295,
+   "id": 338,
    "name": "Stria medullaris thalami.l",
    "label": "Stria medullaris thalami",
    "category": "diencephalon",
@@ -6895,7 +8013,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 296,
+   "id": 339,
    "name": "Stria medullaris thalami.r",
    "label": "Stria medullaris thalami",
    "category": "diencephalon",
@@ -6918,7 +8036,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 297,
+   "id": 340,
    "name": "Stria terminalis.l",
    "label": "Stria terminalis",
    "category": "white_matter",
@@ -6942,7 +8060,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 298,
+   "id": 341,
    "name": "Stria terminalis.r",
    "label": "Stria terminalis",
    "category": "white_matter",
@@ -6966,7 +8084,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 299,
+   "id": 342,
    "name": "Subparietal sulcus.l",
    "label": "Subparietal sulcus",
    "category": "cortex",
@@ -6991,7 +8109,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 300,
+   "id": 343,
    "name": "Subparietal sulcus.r",
    "label": "Subparietal sulcus",
    "category": "cortex",
@@ -7016,7 +8134,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 301,
+   "id": 344,
    "name": "Substantia nigra.l",
    "label": "Substantia nigra",
    "category": "deep_grey",
@@ -7041,7 +8159,7 @@
    "source": "CIT168 (Pauli 2018)"
   },
   {
-   "id": 302,
+   "id": 345,
    "name": "Substantia nigra.r",
    "label": "Substantia nigra",
    "category": "deep_grey",
@@ -7066,7 +8184,7 @@
    "source": "CIT168 (Pauli 2018)"
   },
   {
-   "id": 303,
+   "id": 346,
    "name": "Subthalamic nucleus.l",
    "label": "Subthalamic nucleus",
    "category": "deep_grey",
@@ -7091,7 +8209,7 @@
    "source": "CIT168 (Pauli 2018)"
   },
   {
-   "id": 304,
+   "id": 347,
    "name": "Subthalamic nucleus.r",
    "label": "Subthalamic nucleus",
    "category": "deep_grey",
@@ -7116,7 +8234,7 @@
    "source": "CIT168 (Pauli 2018)"
   },
   {
-   "id": 305,
+   "id": 348,
    "name": "Sulcus interm_prim-Jensen.l",
    "label": "Sulcus interm prim-Jensen",
    "category": "cortex",
@@ -7141,7 +8259,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 306,
+   "id": 349,
    "name": "Sulcus interm_prim-Jensen.r",
    "label": "Sulcus interm prim-Jensen",
    "category": "cortex",
@@ -7166,7 +8284,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 307,
+   "id": 350,
    "name": "Superior cerebellar artery.l",
    "label": "Superior cerebellar artery",
    "category": "arteries",
@@ -7187,7 +8305,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 308,
+   "id": 351,
    "name": "Superior cerebellar artery.r",
    "label": "Superior cerebellar artery",
    "category": "arteries",
@@ -7208,7 +8326,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 309,
+   "id": 352,
    "name": "Base of peduncle.l",
    "label": "Base of peduncle",
    "category": "cerebellum",
@@ -7231,7 +8349,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 310,
+   "id": 353,
    "name": "Base of peduncle.r",
    "label": "Base of peduncle",
    "category": "cerebellum",
@@ -7254,7 +8372,33 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 311,
+   "id": 354,
+   "name": "Superior cerebellar peduncle",
+   "label": "Superior cerebellar peduncle",
+   "category": "tracts",
+   "side": "median",
+   "region": "Cerebellum",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Its efferent fibres cross at the decussation of the superior cerebellar peduncle in the caudal midbrain."
+  },
+  {
+   "id": 355,
    "name": "Superior cerebellar peduncle.l",
    "label": "Superior cerebellar peduncle",
    "category": "cerebellum",
@@ -7275,7 +8419,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 312,
+   "id": 356,
    "name": "Superior cerebellar peduncle.r",
    "label": "Superior cerebellar peduncle",
    "category": "cerebellum",
@@ -7296,7 +8440,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 313,
+   "id": 357,
    "name": "Superior colliculus.l",
    "label": "Superior colliculus",
    "category": "brainstem",
@@ -7320,7 +8464,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 314,
+   "id": 358,
    "name": "Superior colliculus.r",
    "label": "Superior colliculus",
    "category": "brainstem",
@@ -7344,7 +8488,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 315,
+   "id": 359,
    "name": "Superior frontal gyrus.l",
    "label": "Superior frontal gyrus",
    "category": "cortex",
@@ -7369,7 +8513,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 316,
+   "id": 360,
    "name": "Superior frontal gyrus.r",
    "label": "Superior frontal gyrus",
    "category": "cortex",
@@ -7394,7 +8538,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 317,
+   "id": 361,
    "name": "Superior frontal sulcus.l",
    "label": "Superior frontal sulcus",
    "category": "cortex",
@@ -7419,7 +8563,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 318,
+   "id": 362,
    "name": "Superior frontal sulcus.r",
    "label": "Superior frontal sulcus",
    "category": "cortex",
@@ -7444,7 +8588,163 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 319,
+   "id": 363,
+   "name": "Superior longitudinal fasciculus I.l",
+   "label": "Superior longitudinal fasciculus I",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 364,
+   "name": "Superior longitudinal fasciculus I.r",
+   "label": "Superior longitudinal fasciculus I",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 365,
+   "name": "Superior longitudinal fasciculus II.l",
+   "label": "Superior longitudinal fasciculus II",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 366,
+   "name": "Superior longitudinal fasciculus II.r",
+   "label": "Superior longitudinal fasciculus II",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 367,
+   "name": "Superior longitudinal fasciculus III.l",
+   "label": "Superior longitudinal fasciculus III",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 368,
+   "name": "Superior longitudinal fasciculus III.r",
+   "label": "Superior longitudinal fasciculus III",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 369,
    "name": "Superior occipital gyri.l",
    "label": "Superior occipital gyri",
    "category": "cortex",
@@ -7469,7 +8769,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 320,
+   "id": 370,
    "name": "Superior occipital gyri.r",
    "label": "Superior occipital gyri",
    "category": "cortex",
@@ -7494,7 +8794,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 321,
+   "id": 371,
    "name": "Superior parietal lobule.l",
    "label": "Superior parietal lobule",
    "category": "cortex",
@@ -7519,7 +8819,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 322,
+   "id": 372,
    "name": "Superior parietal lobule.r",
    "label": "Superior parietal lobule",
    "category": "cortex",
@@ -7544,7 +8844,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 323,
+   "id": 373,
    "name": "Superior petrosal sinus.l",
    "label": "Superior petrosal sinus",
    "category": "veins_sinuses",
@@ -7563,7 +8863,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 324,
+   "id": 374,
    "name": "Superior petrosal sinus.r",
    "label": "Superior petrosal sinus",
    "category": "veins_sinuses",
@@ -7582,7 +8882,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 325,
+   "id": 375,
    "name": "Superior sagittal sinus",
    "label": "Superior sagittal sinus",
    "category": "veins_sinuses",
@@ -7601,7 +8901,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 326,
+   "id": 376,
    "name": "Superior salivatory nucleus.l",
    "label": "Superior salivatory nucleus",
    "category": "brainstem",
@@ -7625,7 +8925,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 327,
+   "id": 377,
    "name": "Superior salivatory nucleus.r",
    "label": "Superior salivatory nucleus",
    "category": "brainstem",
@@ -7649,7 +8949,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 328,
+   "id": 378,
    "name": "Superior semilunar lobule.l",
    "label": "Superior semilunar lobule",
    "category": "cerebellum",
@@ -7670,7 +8970,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 329,
+   "id": 379,
    "name": "Superior semilunar lobule.r",
    "label": "Superior semilunar lobule",
    "category": "cerebellum",
@@ -7691,7 +8991,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 330,
+   "id": 380,
    "name": "Superior temporal gyrus (Lateral part).l",
    "label": "Superior temporal gyrus (Lateral part)",
    "category": "cortex",
@@ -7717,7 +9017,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 331,
+   "id": 381,
    "name": "Superior temporal gyrus (Lateral part).r",
    "label": "Superior temporal gyrus (Lateral part)",
    "category": "cortex",
@@ -7743,7 +9043,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 332,
+   "id": 382,
    "name": "Superior temporal sulcus.l",
    "label": "Superior temporal sulcus",
    "category": "cortex",
@@ -7768,7 +9068,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 333,
+   "id": 383,
    "name": "Superior temporal sulcus.r",
    "label": "Superior temporal sulcus",
    "category": "cortex",
@@ -7793,7 +9093,59 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 334,
+   "id": 384,
+   "name": "Superior thalamic radiation.l",
+   "label": "Superior thalamic radiation",
+   "category": "tracts",
+   "side": "left",
+   "region": "Diencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical projection (carries somatosensory fibres to S1); does not cross the midline."
+  },
+  {
+   "id": 385,
+   "name": "Superior thalamic radiation.r",
+   "label": "Superior thalamic radiation",
+   "category": "tracts",
+   "side": "right",
+   "region": "Diencephalon",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Ipsilateral thalamocortical projection (carries somatosensory fibres to S1); does not cross the midline."
+  },
+  {
+   "id": 386,
    "name": "Supramarginal gyrus.l",
    "label": "Supramarginal gyrus",
    "category": "cortex",
@@ -7819,7 +9171,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 335,
+   "id": 387,
    "name": "Supramarginal gyrus.r",
    "label": "Supramarginal gyrus",
    "category": "cortex",
@@ -7845,7 +9197,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 336,
+   "id": 388,
    "name": "Temporal branches of middle cerebral artery.l",
    "label": "Temporal branches of middle cerebral artery",
    "category": "arteries",
@@ -7866,7 +9218,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 337,
+   "id": 389,
    "name": "Temporal branches of middle cerebral artery.r",
    "label": "Temporal branches of middle cerebral artery",
    "category": "arteries",
@@ -7887,7 +9239,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 338,
+   "id": 390,
    "name": "Temporal plane.l",
    "label": "Temporal plane",
    "category": "cortex",
@@ -7913,7 +9265,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 339,
+   "id": 391,
    "name": "Temporal plane.r",
    "label": "Temporal plane",
    "category": "cortex",
@@ -7939,7 +9291,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 340,
+   "id": 392,
    "name": "Temporal pole.l",
    "label": "Temporal pole",
    "category": "cortex",
@@ -7965,7 +9317,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 341,
+   "id": 393,
    "name": "Temporal pole.r",
    "label": "Temporal pole",
    "category": "cortex",
@@ -7990,7 +9342,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 342,
+   "id": 394,
    "name": "Tentorium cerebelli.l",
    "label": "Tentorium cerebelli",
    "category": "meninges_dura",
@@ -8013,7 +9365,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 343,
+   "id": 395,
    "name": "Tentorium cerebelli.r",
    "label": "Tentorium cerebelli",
    "category": "meninges_dura",
@@ -8036,7 +9388,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 344,
+   "id": 396,
    "name": "Third ventricle",
    "label": "Third ventricle",
    "category": "ventricles",
@@ -8059,7 +9411,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 345,
+   "id": 397,
    "name": "Tonsil of cerebellum.l",
    "label": "Tonsil of cerebellum",
    "category": "cerebellum",
@@ -8080,7 +9432,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 346,
+   "id": 398,
    "name": "Tonsil of cerebellum.r",
    "label": "Tonsil of cerebellum",
    "category": "cerebellum",
@@ -8101,7 +9453,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 347,
+   "id": 399,
    "name": "Transverse frontopolar gyrus and sulcus*.l",
    "label": "Transverse frontopolar gyrus and sulcus",
    "category": "cortex",
@@ -8126,7 +9478,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 348,
+   "id": 400,
    "name": "Transverse frontopolar gyrus and sulcus*.r",
    "label": "Transverse frontopolar gyrus and sulcus",
    "category": "cortex",
@@ -8151,7 +9503,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 349,
+   "id": 401,
    "name": "Transverse occipital sulcus.l",
    "label": "Transverse occipital sulcus",
    "category": "cortex",
@@ -8176,7 +9528,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 350,
+   "id": 402,
    "name": "Transverse occipital sulcus.r",
    "label": "Transverse occipital sulcus",
    "category": "cortex",
@@ -8201,7 +9553,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 351,
+   "id": 403,
    "name": "Transverse sinus.l",
    "label": "Transverse sinus",
    "category": "veins_sinuses",
@@ -8220,7 +9572,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 352,
+   "id": 404,
    "name": "Transverse sinus.r",
    "label": "Transverse sinus",
    "category": "veins_sinuses",
@@ -8239,7 +9591,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 353,
+   "id": 405,
    "name": "Transverse temporal gyri.l",
    "label": "Transverse temporal gyri",
    "category": "cortex",
@@ -8265,7 +9617,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 354,
+   "id": 406,
    "name": "Transverse temporal gyri.r",
    "label": "Transverse temporal gyri",
    "category": "cortex",
@@ -8291,7 +9643,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 355,
+   "id": 407,
    "name": "Triangular part of inferior frontal gyrus.l",
    "label": "Triangular part of inferior frontal gyrus",
    "category": "cortex",
@@ -8317,7 +9669,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 356,
+   "id": 408,
    "name": "Triangular part of inferior frontal gyrus.r",
    "label": "Triangular part of inferior frontal gyrus",
    "category": "cortex",
@@ -8343,7 +9695,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 357,
+   "id": 409,
    "name": "Trigeminal nerve (V).l",
    "label": "Trigeminal nerve (V)",
    "category": "cranial_nerves",
@@ -8365,7 +9717,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 358,
+   "id": 410,
    "name": "Trigeminal nerve (V).r",
    "label": "Trigeminal nerve (V)",
    "category": "cranial_nerves",
@@ -8387,7 +9739,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 359,
+   "id": 411,
    "name": "Trochlear nerve (IV).l",
    "label": "Trochlear nerve (IV)",
    "category": "cranial_nerves",
@@ -8408,7 +9760,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 360,
+   "id": 412,
    "name": "Trochlear nerve (IV).r",
    "label": "Trochlear nerve (IV)",
    "category": "cranial_nerves",
@@ -8429,7 +9781,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 361,
+   "id": 413,
    "name": "Tuber of vermis",
    "label": "Tuber of vermis",
    "category": "cerebellum",
@@ -8450,7 +9802,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 362,
+   "id": 414,
    "name": "Tuberal hypothalamus.l",
    "label": "Tuberal hypothalamus",
    "category": "diencephalon",
@@ -8474,7 +9826,7 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 363,
+   "id": 415,
    "name": "Tuberal hypothalamus.r",
    "label": "Tuberal hypothalamus",
    "category": "diencephalon",
@@ -8498,7 +9850,59 @@
    "parent": "Hypothalamus"
   },
   {
-   "id": 364,
+   "id": 416,
+   "name": "Uncinate fasciculus.l",
+   "label": "Uncinate fasciculus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract (hooking frontal to anterior temporal); does not cross the midline."
+  },
+  {
+   "id": 417,
+   "name": "Uncinate fasciculus.r",
+   "label": "Uncinate fasciculus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [
+    "Bonus collection",
+    "Brain",
+    "Central nervous system",
+    "Cerebrum",
+    "Commissural fibres of telencephalon",
+    "Corpus callosum",
+    "Head",
+    "Main divisions",
+    "Nervous system",
+    "Regions of human body",
+    "Scene Collection",
+    "Telencephalon",
+    "White matter of telencephalon"
+   ],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract (hooking frontal to anterior temporal); does not cross the midline."
+  },
+  {
+   "id": 418,
    "name": "Uvula of vermis",
    "label": "Uvula of vermis",
    "category": "cerebellum",
@@ -8519,7 +9923,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 365,
+   "id": 419,
    "name": "Vagus nerve (X).l",
    "label": "Vagus nerve (X)",
    "category": "cranial_nerves",
@@ -8543,7 +9947,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 366,
+   "id": 420,
    "name": "Vagus nerve (X).r",
    "label": "Vagus nerve (X)",
    "category": "cranial_nerves",
@@ -8567,7 +9971,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 367,
+   "id": 421,
    "name": "Ventral anterior nucleus.l",
    "label": "Ventral anterior nucleus",
    "category": "diencephalon",
@@ -8591,7 +9995,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 368,
+   "id": 422,
    "name": "Ventral anterior nucleus.r",
    "label": "Ventral anterior nucleus",
    "category": "diencephalon",
@@ -8615,7 +10019,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 369,
+   "id": 423,
    "name": "Ventral laterodorsal nucleus.l",
    "label": "Ventral laterodorsal nucleus",
    "category": "diencephalon",
@@ -8639,7 +10043,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 370,
+   "id": 424,
    "name": "Ventral laterodorsal nucleus.r",
    "label": "Ventral laterodorsal nucleus",
    "category": "diencephalon",
@@ -8663,7 +10067,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 371,
+   "id": 425,
    "name": "Ventral lateroventral nucleus.l",
    "label": "Ventral lateroventral nucleus",
    "category": "diencephalon",
@@ -8687,7 +10091,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 372,
+   "id": 426,
    "name": "Ventral lateroventral nucleus.r",
    "label": "Ventral lateroventral nucleus",
    "category": "diencephalon",
@@ -8711,7 +10115,7 @@
    "parent": "Thalamus"
   },
   {
-   "id": 373,
+   "id": 427,
    "name": "Vertebral artery.l",
    "label": "Vertebral artery",
    "category": "arteries",
@@ -8733,7 +10137,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 374,
+   "id": 428,
    "name": "Vertebral artery.r",
    "label": "Vertebral artery",
    "category": "arteries",
@@ -8755,7 +10159,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 375,
+   "id": 429,
    "name": "Vestibular nerve.l",
    "label": "Vestibular nerve",
    "category": "cranial_nerves",
@@ -8778,7 +10182,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 376,
+   "id": 430,
    "name": "Vestibular nerve.r",
    "label": "Vestibular nerve",
    "category": "cranial_nerves",
@@ -8800,7 +10204,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 377,
+   "id": 431,
    "name": "Vestibular nuclei.l",
    "label": "Vestibular nuclei",
    "category": "brainstem",
@@ -8825,7 +10229,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 378,
+   "id": 432,
    "name": "Vestibular nuclei.r",
    "label": "Vestibular nuclei",
    "category": "brainstem",
@@ -8850,7 +10254,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 379,
+   "id": 433,
    "name": "White matter of telencephalon.l",
    "label": "White matter of telencephalon",
    "category": "white_matter",
@@ -8874,7 +10278,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 380,
+   "id": 434,
    "name": "White matter of telencephalon.r",
    "label": "White matter of telencephalon",
    "category": "white_matter",
@@ -8898,7 +10302,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 381,
+   "id": 435,
    "name": "Wing of central lobule.l",
    "label": "Wing of central lobule",
    "category": "cerebellum",
@@ -8919,7 +10323,7 @@
    "source": "Z-Anatomy / BodyParts3D"
   },
   {
-   "id": 382,
+   "id": 436,
    "name": "Wing of central lobule.r",
    "label": "Wing of central lobule",
    "category": "cerebellum",
@@ -8952,6 +10356,10 @@
   "brainstem": {
    "label": "Brainstem",
    "count": 30
+  },
+  "tracts": {
+   "label": "White-matter tracts (pathways)",
+   "count": 54
   },
   "diencephalon": {
    "label": "Diencephalon (thalamus, hypothalamus)",

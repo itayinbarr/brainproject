@@ -205,21 +205,24 @@ bpy.context.view_layer.update()
 # Phase 1: bake every curve's tube mesh up front. Removing objects mid-loop would
 # invalidate the shared depsgraph and silently yield empty meshes, so bake first.
 dg = bpy.context.evaluated_depsgraph_get()
-pending = []   # (name, mesh, matrix_world, collection)
+pending = []   # (name, mesh, matrix_world, collection, custom_props)
 for o in list(curves):
     me = bpy.data.meshes.new_from_object(o.evaluated_get(dg))
     if me is None or len(me.polygons) == 0:
         continue
     coll = o.users_collection[0] if o.users_collection else bpy.context.scene.collection
-    pending.append((o.name, me, o.matrix_world.copy(), coll))
+    props = {k: str(o[k]) for k in o.keys() if k.startswith("_nuc_")}  # carry tags onto the baked mesh
+    pending.append((o.name, me, o.matrix_world.copy(), coll, props))
 
 # Phase 2: now swap curves for their baked meshes (no depsgraph use here)
-for name, me, mw, coll in pending:
+for name, me, mw, coll, props in pending:
     if name in bpy.data.objects:
         bpy.data.objects.remove(bpy.data.objects[name], do_unlink=True)
     nob = bpy.data.objects.new(name, me)
     nob.matrix_world = mw
     coll.objects.link(nob)
+    for k in props:
+        nob[k] = props[k]
 print(f"[curves] baked {len(pending)}/{len(curves)} curves to tube meshes")
 
 # Re-resolve selection set against current datablocks (curves are now meshes)
@@ -306,6 +309,7 @@ CAT_LABELS = {
     "arteries": "Arteries (circle of Willis)",
     "veins_sinuses": "Dural venous sinuses & veins",
     "cranial_nerves": "Cranial nerves (I–XII)",
+    "tracts": "White-matter tracts (pathways)",
     "other": "Other structures",
 }
 CORE_CATS = {"cortex","white_matter","deep_grey","diencephalon","brainstem","cerebellum","ventricles"}
@@ -332,6 +336,11 @@ for i, o in enumerate(sel):
     source = take("_nuc_source") or "Z-Anatomy / BodyParts3D"
     parent = take("_nuc_parent")
     reg_override = take("_nuc_region")
+    cat_override = take("_nuc_cat")
+    decussation = take("_nuc_decussation")
+    if cat_override:                     # tracts host in an existing collection; category is explicit
+        cat = cat_override
+        is_core = cat in CORE_CATS
     if reg_override:
         region = reg_override
     # glTF extras -> three.js object.userData (survives name sanitization & dedup)
@@ -344,6 +353,8 @@ for i, o in enumerate(sel):
     o["bx_source"]= source
     if parent:
         o["bx_parent"] = parent
+    if decussation:
+        o["bx_decussation"] = decussation
     node = {
         "id": i, "name": raw, "label": lab, "category": cat,
         "side": sd, "region": region, "core": is_core, "ta2": anc,
@@ -351,6 +362,8 @@ for i, o in enumerate(sel):
     }
     if parent:
         node["parent"] = parent
+    if decussation:
+        node["decussation"] = decussation
     manifest["nodes"].append(node)
 
 by_cat = defaultdict(list)

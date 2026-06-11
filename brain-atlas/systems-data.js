@@ -36,10 +36,11 @@
     cingulate:    { label: 'Cingulate gyrus', cat: 'cortex', real: ['Cingulate gyrus and sulcus (Middle anterior part)'] },
     hippocampus:  { label: 'Hippocampus', cat: 'cortex', real: ['Hippocampus'] },
 
-    /* ---- white matter (some tracts have no individual mesh here) ---- */
-    arcuate:      { label: 'Arcuate fasciculus', cat: 'white_matter', real: [] },
+    /* ---- white matter & registered tracts ---- */
+    arcuate:      { label: 'Arcuate fasciculus', cat: 'tracts', real: ['Arcuate fasciculus'] },
     fornix:       { label: 'Fornix', cat: 'white_matter', real: ['Fornix'] },
-    cst:          { label: 'Corticospinal tract', cat: 'white_matter', real: [] },
+    cst:          { label: 'Corticospinal tract', cat: 'tracts', real: ['Corticospinal tract'] },
+    drtt:         { label: 'Dentatorubrothalamic tract', cat: 'tracts', short: 'Dentatorubrothalamic', real: ['Dentatorubrothalamic tract'] },
 
     /* ---- deep grey / basal ganglia ---- */
     striatum:     { label: 'Striatum (caudate + putamen)', cat: 'deep_grey', short: 'Striatum', real: ['Caudate nucleus', 'Putamen'] },

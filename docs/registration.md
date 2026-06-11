@@ -190,6 +190,53 @@ surface to line up better.
 > clean upgrade is to replace `T` with a nonlinear warp (mesh <-> MNI) and keep the
 > rest of the pipeline unchanged.
 
+### 5c. Add a white-matter tract as a centerline tube
+
+Tracts are not closed solids; they are pathways, so they are rendered as **tubes swept
+along a centerline** (the same curve->tube path the cranial nerves use) rather than
+marching-cubed blobs. The source is the **HCP1065 population-averaged tractography
+atlas** (Yeh 2022, CC BY-SA 4.0, ICBM/MNI152 space; release `hcp1065`, file
+`hcp1065_avg_tracts_nifti.zip`, ~3.4 MB), unzipped into `scripts/atlas_data/tracts/`.
+
+Each averaged tract is a binary envelope of the whole bundle. `scripts/build_tracts.py`
+turns it into a centerline by skeletonising the envelope, taking the longest geodesic
+path through the medial axis (the trunk; fans drop out), smoothing it with a spline, and
+mapping the points MNI mm -> mesh world with the **same affine** the nuclei use (loaded
+from `registration_affine.json`, never refitted). `scripts/build_with_tracts.py` sweeps
+each centerline into a Blender curve with a bevel and tags it `_nuc_cat=tracts` plus a
+`_nuc_decussation` note; the curve bakes to a tube and lands in the new `tracts` UI
+category, with the crossing note carried through to `bx_decussation` and the Learn card.
+
+**Clipping to the cortex.** The affine is anchored on deep grey and stretches laterally
+(per-axis ~`[1.26, 1.06, 0.68]`), so a tract reaching the lateral cortex overshoots the
+narrower BodyParts3D surface and the tube pokes out the side. `scripts/export_shell.py`
+dumps the parenchyma as a solid mesh (`brain_shell.npz`) plus per-structure centroids
+(`mesh_centroids.json`); `build_tracts.py` voxelises the shell into an inside/outside
+mask and **snaps any out-of-brain centerline point inward to the nearest in-brain
+location**, so the tube hugs the surface instead of piercing it. It then prints an
+**endpoint-validation table**: the nearest named structure to each tract end (e.g. CST =
+Pons <-> motor cortex, dentatorubrothalamic = superior cerebellar peduncle <-> thalamo-
+cortical, optic radiation = lingual gyrus <-> geniculate), a quick sanity check that each
+pathway starts and ends where it should.
+
+```bash
+blender Z-Anatomy/Startup_nuclei.blend --background --python scripts/export_shell.py   # shell + centroids
+python scripts/build_tracts.py                                            # -> tract_artifacts.json (clipped + validated)
+blender Z-Anatomy/Startup_nuclei.blend --background --python scripts/build_with_tracts.py
+blender Z-Anatomy/Startup_tracts.blend  --background --python scripts/export_brain.py
+python scripts/gen_data.py                                                # adds tracts palette/depth/descriptions
+# then Draco-compress as in section 4
+```
+
+54 tract tubes are produced (corticospinal, corticobulbar, corticopontine x3,
+corticostriatal x3, thalamic radiations x3, medial lemniscus, optic & acoustic
+radiations, reticulospinal, dentatorubrothalamic, the three cerebellar peduncles, and
+the major association tracts: arcuate, SLF I-III, IFOF, ILF, MdLF, uncinate, frontal
+aslant). A single centerline is a deliberate simplification of sheet-like tracts (OR,
+SLF) and of fanning ones (CST loses its corona-radiata spread); it inherits the global
+affine's ~7 mm error, worse near the cortex (the surface was not a landmark). Treat the
+tubes as schematic pathways, not tractography.
+
 ## 6. What has been added, and what was deferred (and why)
 
 Built so far, all as **closed solids** (see the closed-surface note in section 4):
@@ -204,6 +251,13 @@ Built so far, all as **closed solids** (see the closed-surface note in section 4
   merged from the Neudorfer 2020 atlas (CC BY 4.0, Zenodo `3942115`); only the 13
   true hypothalamic nuclei are used (its commissures, fornix, mammillary, STN/SN/RN,
   BNST, nucleus basalis etc. are dropped to avoid duplicating model structures).
+
+White-matter tracts were added as centerline tubes (section 5c) from the HCP1065 atlas
+(CC BY-SA 4.0). The small brainstem motor tracts that no open in-vivo atlas resolves -
+**rubrospinal, vestibulospinal, tectospinal, bulbospinal**, and the **spinothalamic
+tract, lateral lemniscus, medial longitudinal fasciculus and central tegmental tract** -
+are simply absent from HCP1065 and were not authored by hand. (The only richer brainstem
+source, the Tang 23-bundle atlas, is non-commercial, the same blocker as SUIT below.)
 
 Two requested regions were deliberately **not** added:
 - **Cerebellar deep nuclei** (dentate, interposed, fastigial): the standard atlas
