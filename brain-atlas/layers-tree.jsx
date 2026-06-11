@@ -1,4 +1,4 @@
-/* Brain Atlas - layers tree (subsystem accordion + structure browser) */
+/* Brain Project - layers tree (subsystem accordion + structure browser) */
 
 function hl(text, q) {
   if (!q) return text;

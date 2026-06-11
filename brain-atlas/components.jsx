@@ -1,4 +1,4 @@
-/* Brain Atlas - UI atoms + icons (Lucide-style geometric glyphs) */
+/* Brain Project - UI atoms + icons (Lucide-style geometric glyphs) */
 
 const ICONS = {
   search: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',

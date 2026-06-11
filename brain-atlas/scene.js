@@ -1,5 +1,5 @@
 /* ============================================================
-   Brain Atlas - REAL specimen scene (Three.js r137 global)
+   Brain Project - REAL specimen scene (Three.js r137 global)
    Loads the 344-structure Z-Anatomy brain.glb and exposes the
    exact same window.BrainScene API the procedural mock used -    but every mesh carries its real bx_id, so picking, selection,
    isolate and focus are per-structure, not per-category.
@@ -449,7 +449,7 @@
       // top wordmark
       ctx.textBaseline = 'alphabetic';
       ctx.font = '600 26px "JetBrains Mono", monospace'; ctx.fillStyle = ons; ctx.globalAlpha = 0.85;
-      ctx.fillText('BRAIN ATLAS', 64, 86); ctx.globalAlpha = 1;
+      ctx.fillText('BRAIN PROJECT', 64, 86); ctx.globalAlpha = 1;
       // bottom scrim
       const sg = ctx.createLinearGradient(0, H - 380, 0, H);
       sg.addColorStop(0, 'rgba(0,0,0,0)'); sg.addColorStop(1, 'rgba(0,0,0,0.55)');

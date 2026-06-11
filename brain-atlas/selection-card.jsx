@@ -1,4 +1,4 @@
-/* Brain Atlas - selection info card */
+/* Brain Project - selection info card */
 
 function Breadcrumb({ crumb, leaf, color }) {
   return (

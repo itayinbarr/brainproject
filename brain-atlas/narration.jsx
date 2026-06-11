@@ -1,4 +1,4 @@
-/* Brain Atlas - cinematic narration card + stepper (Systems & Learn).
+/* Brain Project - cinematic narration card + stepper (Systems & Learn).
    Docked bottom-centre over the real 3D specimen. The structures named in
    each stage glow on the actual brain; the chips select the true mesh. */
 

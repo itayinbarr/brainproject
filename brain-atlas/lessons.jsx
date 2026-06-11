@@ -1,4 +1,4 @@
-/* Brain Atlas - lesson player chrome: intro, quiz (incl. "find this
+/* Brain Project - lesson player chrome: intro, quiz (incl. "find this
    structure" on the real 3D brain) and completion. Plays over the stage. */
 
 function lessonSys(lesson) { return window.SYS.SYSTEMS.find(s => s.id === lesson.system); }

@@ -1,4 +1,4 @@
-/* Brain Atlas - app composition, state & scene wiring */
+/* Brain Project - app composition, state & scene wiring */
 
 const CAT_ORDER = window.BRAIN.depth; // outer -> inner peel order
 const SHORT = {
@@ -33,17 +33,27 @@ const PRESETS = [
   { id: 'dura',   label: 'Meninges & dura',  color: 'var(--c-meninges_dura)',  on: ['meninges_dura','veins_sinuses'],   cortex: 0.30, focus: null },
 ];
 
-// Curated 11-subsystem palettes. Each keeps loose clinical conventions (arteries warm,
-// veins/sinuses cool-blue, ventricles cyan/CSF, nerves yellow, cortex light-neutral) while
-// staying internally harmonious - consistent chroma/value, hues spread around the wheel.
+// Shuffle palettes - 12 subsystems incl. white-matter tracts. These are deliberately
+// far apart from each other (cortex tone, saturation and overall mood all shift) so a
+// single tap on "Palette" is an unmistakable change, not a subtle nudge. The page default
+// lives in data.js (window.BRAIN.palette); a refresh always returns to it.
 const PALETTES = [
-  { name: 'Jewel',   colors: { cortex:'#E7DEC9', white_matter:'#D7DDE8', deep_grey:'#B57BE0', diencephalon:'#7E8CF2', brainstem:'#E8B24A', cerebellum:'#F0894E', ventricles:'#3FC8D6', arteries:'#F05068', veins_sinuses:'#5078E8', cranial_nerves:'#D9D24A', meninges_dura:'#CC63CC' } },
-  { name: 'Candy',   colors: { cortex:'#F0DCC8', white_matter:'#E3DCEA', deep_grey:'#A86CF0', diencephalon:'#5C7CFF', brainstem:'#FFC23D', cerebellum:'#FF8A5C', ventricles:'#2BD9D9', arteries:'#FF5573', veins_sinuses:'#5A78FF', cranial_nerves:'#FFE04A', meninges_dura:'#E85CD0' } },
-  { name: 'Aurora',  colors: { cortex:'#DCE3D8', white_matter:'#D2E0E6', deep_grey:'#7C8BE0', diencephalon:'#4FA0E0', brainstem:'#E8C24A', cerebellum:'#F09B5A', ventricles:'#34D6B0', arteries:'#F25C7A', veins_sinuses:'#4A7BE0', cranial_nerves:'#CFE04A', meninges_dura:'#B566D6' } },
-  { name: 'Sunset',  colors: { cortex:'#ECD9C2', white_matter:'#E0D6DA', deep_grey:'#9D6BD6', diencephalon:'#6E7BE6', brainstem:'#F2A93C', cerebellum:'#F2734E', ventricles:'#39C2C8', arteries:'#F0455F', veins_sinuses:'#5C6FE0', cranial_nerves:'#F0C84A', meninges_dura:'#D85AA8' } },
-  { name: 'Neon',    colors: { cortex:'#DDE6EE', white_matter:'#CCD6E2', deep_grey:'#9A7CF5', diencephalon:'#5B8DF5', brainstem:'#F5C24A', cerebellum:'#F58A4A', ventricles:'#33E0E0', arteries:'#FF4D6D', veins_sinuses:'#4D7AFF', cranial_nerves:'#E8E04A', meninges_dura:'#D24DD2' } },
-  { name: 'Muted',   colors: { cortex:'#D8CBB6', white_matter:'#C9D0D8', deep_grey:'#9685C0', diencephalon:'#7C8AC0', brainstem:'#D4A94E', cerebellum:'#D88A5E', ventricles:'#5AB6BE', arteries:'#D85C70', veins_sinuses:'#6E80C8', cranial_nerves:'#C6BE5A', meninges_dura:'#B673B6' } },
-  { name: 'Spectrum',colors: { cortex:'#E8DAC0', white_matter:'#D6DEE8', deep_grey:'#A35CE0', diencephalon:'#5C6CE8', brainstem:'#F0B23C', cerebellum:'#F07A3C', ventricles:'#2CC8C8', arteries:'#F0405C', veins_sinuses:'#3C6CE8', cranial_nerves:'#E0D43C', meninges_dura:'#D44CC4' } },
+  // Jewel - saturated, gem-bright on a warm-cream cortex
+  { name: 'Jewel',    colors: { cortex:'#E7DEC9', white_matter:'#D7DDE8', deep_grey:'#B57BE0', diencephalon:'#7E8CF2', brainstem:'#E8B24A', cerebellum:'#F0894E', ventricles:'#3FC8D6', arteries:'#F05068', veins_sinuses:'#5078E8', cranial_nerves:'#D9D24A', meninges_dura:'#CC63CC', tracts:'#46C2B0' } },
+  // Ice - cool monochrome blues/teals, cortex a pale frost, one warm rescue (arteries)
+  { name: 'Ice',      colors: { cortex:'#D6E2EC', white_matter:'#C4D4E2', deep_grey:'#6E86C8', diencephalon:'#4F9AD6', brainstem:'#3FB0C4', cerebellum:'#56C8C0', ventricles:'#7FE0E4', arteries:'#F2756A', veins_sinuses:'#3E72C8', cranial_nerves:'#9ED0E0', meninges_dura:'#8C9ED8', tracts:'#34C0D8' } },
+  // Ember - earthy, warm clay & amber; cool structures pulled toward terracotta
+  { name: 'Ember',    colors: { cortex:'#E8CDA8', white_matter:'#D8C4B0', deep_grey:'#C2683E', diencephalon:'#B8884A', brainstem:'#E0982E', cerebellum:'#E8743A', ventricles:'#C9A86A', arteries:'#E03C3C', veins_sinuses:'#8C5A86', cranial_nerves:'#F0C44A', meninges_dura:'#A85C4A', tracts:'#C98A3E' } },
+  // Neon - electric, fully saturated against a cool-slate cortex
+  { name: 'Neon',     colors: { cortex:'#C7D2DE', white_matter:'#AEBCCE', deep_grey:'#B14DFF', diencephalon:'#3D8BFF', brainstem:'#FFD23D', cerebellum:'#FF7A2E', ventricles:'#1EE0E0', arteries:'#FF2D6B', veins_sinuses:'#3A5DFF', cranial_nerves:'#EAFF3D', meninges_dura:'#FF4DE0', tracts:'#2DFFB0' } },
+  // Bloom - soft pastels, gentle and desaturated, lavender-tinted cortex
+  { name: 'Bloom',    colors: { cortex:'#EADFE8', white_matter:'#DCD6E6', deep_grey:'#B79CDE', diencephalon:'#9CB4E6', brainstem:'#E6C68A', cerebellum:'#E8A88C', ventricles:'#9CD8D2', arteries:'#E892A2', veins_sinuses:'#9CAEE0', cranial_nerves:'#D8D08C', meninges_dura:'#D29ECE', tracts:'#92CFC4' } },
+  // Forest - greens, teals and ambers; mossy cortex, earthy and organic
+  { name: 'Forest',   colors: { cortex:'#D8DEC2', white_matter:'#C6D2BE', deep_grey:'#7A9E6E', diencephalon:'#4F9E86', brainstem:'#D2A23C', cerebellum:'#E0883C', ventricles:'#46C2A0', arteries:'#D8543C', veins_sinuses:'#3E7E8C', cranial_nerves:'#C6C23C', meninges_dura:'#8E9E5C', tracts:'#5CB87E' } },
+  // Mono - near-greyscale with a single bold accent per cool/warm; stark and editorial
+  { name: 'Mono',     colors: { cortex:'#DEDEDE', white_matter:'#C8C8C8', deep_grey:'#8E8E96', diencephalon:'#9A9AA2', brainstem:'#B0AEA6', cerebellum:'#A6A6AA', ventricles:'#7FC2C8', arteries:'#E64A5C', veins_sinuses:'#5A78C8', cranial_nerves:'#D8C84A', meninges_dura:'#9A8EA2', tracts:'#6ABFB8' } },
+  // Spectrum - the full wheel, maximally varied hue per subsystem
+  { name: 'Spectrum', colors: { cortex:'#E8DAC0', white_matter:'#D6DEE8', deep_grey:'#A35CE0', diencephalon:'#5C6CE8', brainstem:'#F0B23C', cerebellum:'#F07A3C', ventricles:'#2CC8C8', arteries:'#F0405C', veins_sinuses:'#3C6CE8', cranial_nerves:'#E0D43C', meninges_dura:'#D44CC4', tracts:'#2CC86A' } },
 ];
 
 const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
@@ -397,11 +407,11 @@ function App() {
       const sub = selNode
         ? ((selNode.crumb && selNode.crumb.length ? selNode.crumb.join('  ·  ') : cats[selNode.category].label)
            + (selNode.side !== 'median' ? '  ·  ' + (selNode.side === 'left' ? 'Left' : 'Right') : ''))
-        : 'Interactive 3D brain atlas';
+        : 'The most detailed interactive 3D brain';
       const url = s.capturePoster(2400, 1500, { title, subtitle: sub, color: selNode ? PAL[selNode.category] : t.accent });
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'brain-atlas-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
+      a.download = 'brain-project-' + title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') + '.png';
       document.body.appendChild(a); a.click(); a.remove();
     } catch (e) { console.error('poster failed', e); }
     setPosterBusy(false);
@@ -482,7 +492,8 @@ function App() {
       <canvas ref={canvasRef} className="three" />
 
       {/* corner toolbar: save poster · credits · shuffle palette · subsystem key */}
-      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onCopyLink={copyShareLink} onRandomPalette={randomizePalette} onZoom={zoom} mobile={mobile} />
+      <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onCopyLink={copyShareLink} onZoom={zoom} mobile={mobile}
+        autorotate={t.autorotate} onToggleSpin={() => setTweak('autorotate', !t.autorotate)} />
 
       {hint && consent && !mobile && (
         <div className="pop" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 12,
@@ -610,12 +621,10 @@ function Toast({ msg }) {
   );
 }
 
-/* stage toolbar: subsystem key, share (link / poster), palette, about (mobile: zoom + about, top-right) */
-function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onRandomPalette, onZoom, mobile }) {
-  const [open, setOpen] = React.useState(false);     // subsystem key
+/* stage toolbar: spin toggle, share (link / poster), palette, about (mobile: zoom + about, top-right) */
+function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onZoom, mobile, autorotate, onToggleSpin }) {
   const [cred, setCred] = React.useState(false);     // credits
   const [share, setShare] = React.useState(false);   // share menu (link / poster)
-  const visible = groups.filter(g => layerOn[g.cat]);
   const pill = {
     display: 'flex', alignItems: 'center', gap: 7, padding: '8px 13px', borderRadius: 99, border: '1px solid var(--glass-edge)',
     color: 'var(--ink-soft)', fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 600, cursor: 'pointer',
@@ -633,17 +642,22 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onRandomPal
     <div className="glass pop scroll" style={{ padding: '14px 15px', width: 290, maxHeight: '70vh', overflowY: 'auto' }}>
       <div className="eyebrow" style={{ marginBottom: 9 }}>About</div>
       <p style={{ margin: '0 0 12px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
-        I'm a visual learner, and I always wished for a tool to <b style={{ color: 'var(--ink)' }}>see
-        and explore</b> the brain myself - deeper than just its main components. So I built it.
-        An open 3D brain you can spin, search and peel apart: all
-        <b style={{ color: 'var(--ink)' }}> 344 structures</b> individually named and toggleable -         the granularity neuroscientists actually need, free for everyone.
+        The <b style={{ color: 'var(--ink)' }}>most detailed interactive 3D brain</b> available to date, and
+        it's <b style={{ color: 'var(--ink)' }}>constantly growing</b>. Free for everyone.
+      </p>
+      <p style={{ margin: '0 0 12px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
+        The <a href="https://www.reddit.com/r/neuro/comments/1tyfydj/the_lack_of_a_proper_brain_map_drove_me_nuts_when/" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'none', fontWeight: 600 }}>r/neuro community</a> gave
+        it a warm welcome - that meant a lot.
       </p>
       <div className="eyebrow" style={{ marginBottom: 9 }}>Credits</div>
-      <a href="https://github.com/itayinbarr" target="_blank" rel="noopener noreferrer" style={{ ...credLink, marginBottom: 11 }}><Icon name="github" size={14} /> Built by Itay Inbar</a>
-      <p style={{ margin: '0 0 9px', fontSize: 12.5, lineHeight: 1.55, color: 'var(--ink-soft)' }}>
-        3D anatomy from <b style={{ color: 'var(--ink)' }}>Z-Anatomy</b>, built on BodyParts3D / DBCLS - licensed <span className="mono" style={{ fontSize: 11 }}>CC&nbsp;BY-SA&nbsp;4.0</span>.
+      <a href="https://github.com/itayinbarr" target="_blank" rel="noopener noreferrer" style={{ ...credLink, marginBottom: 10 }}><Icon name="github" size={14} /> Built by Itay Inbar</a>
+      <p style={{ margin: 0, fontSize: 10.5, lineHeight: 1.5, color: 'var(--ink-faint)' }}>
+        initial 3D anatomy from z anatomy, built on BodyParts3D / DBCLS (CC&nbsp;BY-SA&nbsp;4.0). Deep nuclei,
+        hypothalamus and white-matter tracts registered from open MRI atlases: CIT168 (Pauli&nbsp;et&nbsp;al.
+        2018; Tyszka&nbsp;&amp;&nbsp;Pauli 2016), the Najdenovska&nbsp;et&nbsp;al. 2018 thalamic atlas,
+        the Neudorfer&nbsp;et&nbsp;al. 2020 hypothalamic atlas, and HCP1065 tract templates. Approximate and
+        educational - not for clinical use.
       </p>
-      <a href="https://www.z-anatomy.com/" target="_blank" rel="noopener noreferrer" style={credLink}><Icon name="globe" size={14} /> z-anatomy.com</a>
     </div>
   );
 
@@ -662,22 +676,9 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onRandomPal
     );
   }
 
+  const spinPill = autorotate ? { ...pill, borderColor: 'var(--accent)', color: 'var(--accent)' } : pill;
   return (
     <div style={{ position: 'absolute', right: 16, bottom: 16, zIndex: 12, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
-      {open && (
-        <div className="glass pop" style={{ padding: '12px 14px', width: 210 }}>
-          <div className="eyebrow" style={{ marginBottom: 9 }}>Subsystem key</div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 7 }}>
-            {groups.map(g => (
-              <div key={g.cat} style={{ display: 'flex', alignItems: 'center', gap: 9, opacity: layerOn[g.cat] ? 1 : 0.35 }}>
-                <Dot color={g.color} size={10} />
-                <span style={{ flex: 1, fontSize: 12, color: 'var(--ink-soft)', fontWeight: 500 }}>{g.label.split(/[\u2013(]/)[0].trim()}</span>
-                <span className="mono" style={{ fontSize: 10, color: 'var(--ink-ghost)' }}>{g.count}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       {cred && about}
       {share && !mobile && (
         <div className="glass pop" style={{ padding: 8, width: 232 }}>
@@ -691,24 +692,17 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onRandomPal
       )}
       <div style={{ display: 'flex', gap: 8 }}>
         {!mobile && (
-          <button onClick={() => { setShare(s => !s); setOpen(false); setCred(false); }} className="glass" style={pill} title="Share this view: copy a link or download a poster">
+          <button onClick={() => { setShare(s => !s); setCred(false); }} className="glass" style={pill} title="Share this view: copy a link or download a poster">
             <Icon name="share" size={14} /> Share
           </button>
         )}
-        <button onClick={() => { setCred(c => !c); setOpen(false); setShare(false); }} className="glass" style={pill} title="About this project · credits & licence">
+        <button onClick={() => { setCred(c => !c); setShare(false); }} className="glass" style={pill} title="About this project · credits & licence">
           <Icon name="info" size={14} /> About
         </button>
         {!mobile && (
-          <button onClick={onRandomPalette} className="glass" style={pill} title="Shuffle the colour palette">
-            <Icon name="palette" size={14} /> Palette
-          </button>
-        )}
-        {!mobile && (
-          <button onClick={() => { setOpen(o => !o); setCred(false); }} className="glass" style={pill}>
-            <Icon name="info" size={14} /> Key
-            <span style={{ display: 'flex', marginLeft: 2 }}>
-              {visible.slice(0, 6).map((g, i) => <span key={g.cat} style={{ width: 9, height: 9, borderRadius: 99, background: g.color, marginLeft: i ? -3 : 0, boxShadow: '0 0 0 1.5px var(--glass)' }} />)}
-            </span>
+          <button onClick={onToggleSpin} className="glass" style={spinPill}
+            title={autorotate ? 'Stop the automatic spin' : 'Resume the automatic spin'}>
+            <Icon name="rotate" size={14} /> {autorotate ? 'Spinning' : 'Spin'}
           </button>
         )}
       </div>

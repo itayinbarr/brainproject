@@ -1,5 +1,5 @@
 /* ============================================================
-   Brain Atlas - Systems & Lessons content
+   Brain Project - Systems & Lessons content
    ------------------------------------------------------------
    Functional pathways and guided lessons that drive the REAL
    3D specimen. Each pathway "node" is a schematic landmark that

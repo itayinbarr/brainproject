@@ -1,5 +1,5 @@
 /* ============================================================
-   Brain Atlas - Firebase / Google Analytics with Consent Mode v2.
+   Brain Project - Firebase / Google Analytics with Consent Mode v2.
    Analytics initialises immediately but with consent DEFAULTED TO
    DENIED, so a visitor who declines still produces anonymous,
    cookieless pings (rough enter counts) - no cookies/identifiers
