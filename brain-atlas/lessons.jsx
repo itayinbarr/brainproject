@@ -25,7 +25,7 @@ function LessonIntro({ lesson, onBegin, onClose, mobile }) {
       <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 18, flexWrap: 'wrap' }}>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--on-stage)' }}><Icon name="layers" size={14} style={{ color: 'var(--on-stage-soft)' }} />{steps} stages</span>
         <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--on-stage)' }}><Icon name="clock" size={14} style={{ color: 'var(--on-stage-soft)' }} />{lesson.minutes} min</span>
-        {lesson.quiz && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--on-stage)' }}><Icon name="helpCircle" size={14} style={{ color: 'var(--on-stage-soft)' }} />{lesson.quiz.length}-question check</span>}
+        {lesson.quiz && lesson.quiz.length > 0 && <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 12, fontWeight: 600, color: 'var(--on-stage)' }}><Icon name="helpCircle" size={14} style={{ color: 'var(--on-stage-soft)' }} />{lesson.quiz.length}-question bank</span>}
       </div>
       <button onClick={onBegin} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, width: '100%', padding: '13px', borderRadius: 12, border: 'none', background: 'var(--accent)', color: '#fff', fontFamily: 'var(--font)', fontSize: 14.5, fontWeight: 700, cursor: 'pointer' }}>
         <Icon name="play" size={16} /> Begin lesson
@@ -35,8 +35,10 @@ function LessonIntro({ lesson, onBegin, onClose, mobile }) {
 }
 
 /* ---------------- Lesson quiz ---------------- */
-function LessonQuiz({ lesson, qIdx, setQIdx, answers, setAnswers, onFinish, pickFromStage, mobile }) {
-  const q = lesson.quiz[qIdx];
+function LessonQuiz({ lesson, quiz, qIdx, setQIdx, answers, setAnswers, onFinish, pickFromStage, mobile }) {
+  quiz = quiz || lesson.quiz || [];
+  const q = quiz[qIdx];
+  if (!q) return null;
   const given = answers[qIdx];
   const answered = given !== undefined;
   const correct = given === q.answer;
@@ -45,7 +47,7 @@ function LessonQuiz({ lesson, qIdx, setQIdx, answers, setAnswers, onFinish, pick
   // expose a stage-pick handler for "find" questions so a click on the brain answers
   React.useEffect(() => { pickFromStage.current = (q.type === 'find' && !answered) ? answer : null; return () => { pickFromStage.current = null; }; }, [qIdx, answered]);
 
-  const last = qIdx >= lesson.quiz.length - 1;
+  const last = qIdx >= quiz.length - 1;
   const cardStyle = mobile
     ? { position: 'absolute', left: 8, right: 8, bottom: 8, zIndex: 42, padding: '16px 16px 18px' }
     : { position: 'absolute', left: '50%', bottom: 22, transform: 'translateX(-50%)', width: 'min(620px, calc(100vw - 48px))', zIndex: 42, padding: '18px 20px 20px' };
@@ -53,7 +55,7 @@ function LessonQuiz({ lesson, qIdx, setQIdx, answers, setAnswers, onFinish, pick
     <div className="glass-dark fade" style={cardStyle}>
       <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 12 }}>
         <Icon name="helpCircle" size={16} style={{ color: 'var(--accent)' }} />
-        <span className="eyebrow eyebrow-light" style={{ flex: 1 }}>Check understanding · {qIdx + 1} of {lesson.quiz.length}</span>
+        <span className="eyebrow eyebrow-light" style={{ flex: 1 }}>Check understanding · {qIdx + 1} of {quiz.length}</span>
         <span className="mono" style={{ fontSize: 11, color: 'var(--on-stage-soft)' }}>{lesson.title}</span>
       </div>
       <h3 style={{ margin: '0 0 4px', fontSize: mobile ? 16 : 18, fontWeight: 800, letterSpacing: '-0.015em', color: 'var(--on-stage)', lineHeight: 1.25, textWrap: 'pretty' }}>{q.q}</h3>
@@ -103,23 +105,29 @@ function LessonQuiz({ lesson, qIdx, setQIdx, answers, setAnswers, onFinish, pick
 }
 
 /* ---------------- Lesson completion ---------------- */
-function LessonComplete({ lesson, score, total, onReplay, onClose, onShare, mobile }) {
+function LessonComplete({ lesson, score, total, tally, bankSize, onMore, onReplay, onClose, onShare, mobile }) {
+  const hasQuiz = lesson.quiz && lesson.quiz.length > 0;
   const cardStyle = mobile
     ? { position: 'absolute', left: 8, right: 8, bottom: 8, zIndex: 42, padding: '20px 18px', textAlign: 'center' }
     : { position: 'absolute', left: '50%', bottom: 22, transform: 'translateX(-50%)', width: 'min(540px, calc(100vw - 48px))', zIndex: 42, padding: '22px 22px 22px', textAlign: 'center' };
+  // the running tally across rounds (so a learner who keeps going sees their full progress)
+  const multi = tally && tally.asked > total;
   return (
     <div className="glass-dark fade" style={cardStyle}>
       <div style={{ width: 56, height: 56, borderRadius: 99, margin: '0 auto 14px', display: 'grid', placeItems: 'center', background: 'rgba(95,208,138,0.16)', border: '1px solid rgba(95,208,138,0.4)' }}>
         <Icon name="checkCircle" size={30} style={{ color: '#5fd08a' }} />
       </div>
-      <div className="eyebrow eyebrow-light" style={{ marginBottom: 8 }}>Lesson complete</div>
+      <div className="eyebrow eyebrow-light" style={{ marginBottom: 8 }}>{multi ? 'Round complete' : 'Lesson complete'}</div>
       <h2 style={{ margin: '0 0 6px', fontSize: 23, fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--on-stage)', lineHeight: 1.15 }}>{lesson.title}</h2>
-      {lesson.quiz && <p style={{ margin: '0 0 18px', fontSize: 14, color: 'var(--on-stage-soft)' }}>You scored <b style={{ color: 'var(--on-stage)' }}>{score} / {total}</b> on the check.</p>}
-      {!lesson.quiz && <p style={{ margin: '0 0 18px', fontSize: 14, color: 'var(--on-stage-soft)' }}>Nicely done, that pathway is yours now.</p>}
+      {hasQuiz && <p style={{ margin: '0 0 6px', fontSize: 14, color: 'var(--on-stage-soft)' }}>You scored <b style={{ color: 'var(--on-stage)' }}>{score} / {total}</b> this round.</p>}
+      {hasQuiz && multi && <p style={{ margin: '0 0 14px', fontSize: 12.5, color: 'var(--on-stage-soft)' }}>Across {tally.asked} questions so far: <b style={{ color: 'var(--on-stage)' }}>{tally.correct} correct</b>.</p>}
+      {hasQuiz && !multi && <p style={{ margin: '0 0 14px', fontSize: 12.5, color: 'var(--on-stage-soft)' }}>Keep going — there are <b style={{ color: 'var(--on-stage)' }}>{bankSize}</b> questions in this bank.</p>}
+      {!hasQuiz && <p style={{ margin: '0 0 18px', fontSize: 14, color: 'var(--on-stage-soft)' }}>Nicely done, that pathway is yours now.</p>}
       <div style={{ display: 'flex', gap: 9, justifyContent: 'center', flexWrap: 'wrap' }}>
+        {hasQuiz && onMore && <button onClick={onMore} style={completeBtn(true)}><Icon name="sparkles" size={15} /> Ask me more</button>}
         <button onClick={onShare} style={completeBtn(false)}><Icon name="share" size={15} /> Share</button>
         <button onClick={onReplay} style={completeBtn(false)}><Icon name="rotate" size={15} /> Replay</button>
-        <button onClick={onClose} style={completeBtn(true)}><Icon name="book" size={15} /> More lessons</button>
+        <button onClick={onClose} style={completeBtn(false)}><Icon name="book" size={15} /> More lessons</button>
       </div>
     </div>
   );

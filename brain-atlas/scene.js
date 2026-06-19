@@ -325,6 +325,124 @@
       autoRot = false; idleTimer = 0;
     }
 
+    /* ============================================================
+       VR (WebXR) — beta. Drops the specimen into a floor-anchored
+       hologram you can physically walk around (room-scale), spin and
+       resize with the thumbsticks, and pick apart by pointing a
+       controller and pulling the trigger. Same meshes, same picking
+       as the desktop view - just presented in immersive space.
+       ============================================================ */
+    renderer.xr.enabled = true;
+    let inVR = false, vrHovered = null;
+    const VR_DIST = -0.85, VR_HEIGHT = 1.45, VR_SCALE = 0.22;   // a graspable ~0.75 m brain at eye level
+    const savedRoot = { px: 0, py: 0, pz: 0, rx: 0, ry: 0, rz: 0, s: 1 };
+    let vrGrid = null;
+    const controllers = [];
+    const xrRay = new T.Raycaster();
+    const tmpMat = new T.Matrix4();
+
+    function buildControllers() {
+      if (controllers.length) return;
+      const rayGeo = new T.BufferGeometry().setFromPoints([new T.Vector3(0, 0, 0), new T.Vector3(0, 0, -1)]);
+      for (let i = 0; i < 2; i++) {
+        const c = renderer.xr.getController(i);
+        c.addEventListener('selectstart', () => onVRSelect(c));
+        const line = new T.Line(rayGeo, new T.LineBasicMaterial({ color: 0x8ee0ff, transparent: true, opacity: 0.85 }));
+        line.scale.z = 5; line.name = 'ray';
+        c.add(line);
+        const tip = new T.Mesh(new T.SphereGeometry(0.012, 12, 12), new T.MeshBasicMaterial({ color: 0x8ee0ff }));
+        tip.name = 'tip'; c.add(tip);
+        scene.add(c);
+        controllers.push(c);
+      }
+    }
+
+    function controllerHit(c) {
+      tmpMat.identity().extractRotation(c.matrixWorld);
+      xrRay.ray.origin.setFromMatrixPosition(c.matrixWorld);
+      xrRay.ray.direction.set(0, 0, -1).applyMatrix4(tmpMat).normalize();
+      const cand = allMeshes.filter(m => m.visible && m.material.opacity > 0.14);
+      const hits = xrRay.intersectObjects(cand, false);
+      return hits.length ? hits[0] : null;
+    }
+
+    function onVRSelect(c) {
+      const hit = controllerHit(c);
+      if (opts.onPick) opts.onPick(hit ? hit.object.userData.nodeId : null, hit ? hit.object : null);
+    }
+
+    // thumbsticks: right = spin + resize, left = spin + move nearer/farther
+    function pollVR(dt) {
+      const session = renderer.xr.getSession(); if (!session) return;
+      let yaw = 0, scaleDelta = 0, distDelta = 0;
+      for (const src of session.inputSources) {
+        const gp = src.gamepad; if (!gp || !gp.axes) continue;
+        const ax = gp.axes;
+        let sx = ax.length >= 4 ? ax[2] : ax[0];
+        let sy = ax.length >= 4 ? ax[3] : ax[1];
+        if (Math.abs(sx) < 0.16) sx = 0;
+        if (Math.abs(sy) < 0.16) sy = 0;
+        yaw += sx;
+        if (src.handedness === 'left') distDelta += sy; else scaleDelta += sy;
+      }
+      if (yaw) root.rotation.y -= yaw * dt * 1.6;
+      if (scaleDelta) root.scale.setScalar(Math.max(0.06, Math.min(0.9, root.scale.x * (1 - scaleDelta * dt * 0.7))));
+      if (distDelta) root.position.z = Math.max(-2.4, Math.min(-0.4, root.position.z + distDelta * dt * 0.6));
+      // hover glow + ray length from whichever controller is closest to a structure
+      let best = null;
+      controllers.forEach(c => {
+        const h = controllerHit(c);
+        const ray = c.getObjectByName('ray'); if (ray) ray.scale.z = h ? h.distance : 5;
+        if (h && (!best || h.distance < best.distance)) best = h;
+      });
+      vrHovered = best ? best.object : null;
+      hovered = vrHovered;   // reuse the desktop emissive-boost path for the pointed-at mesh
+    }
+
+    function enterVRRig() {
+      inVR = true;
+      savedRoot.px = root.position.x; savedRoot.py = root.position.y; savedRoot.pz = root.position.z;
+      savedRoot.rx = root.rotation.x; savedRoot.ry = root.rotation.y; savedRoot.rz = root.rotation.z;
+      savedRoot.s = root.scale.x;
+      root.position.set(0, VR_HEIGHT, VR_DIST);
+      root.scale.setScalar(VR_SCALE);
+      scene.background = new T.Color(0x05070d);
+      if (!vrGrid) { vrGrid = new T.GridHelper(12, 24, 0x2a3550, 0x161c2c); vrGrid.material.transparent = true; vrGrid.material.opacity = 0.45; }
+      scene.add(vrGrid);
+      buildControllers();
+      autoRot = false;
+      if (opts.onVR) opts.onVR(true);
+    }
+
+    function exitVRRig() {
+      inVR = false;
+      root.position.set(savedRoot.px, savedRoot.py, savedRoot.pz);
+      root.rotation.set(savedRoot.rx, savedRoot.ry, savedRoot.rz);
+      root.scale.setScalar(savedRoot.s);
+      scene.background = null;
+      if (vrGrid) scene.remove(vrGrid);
+      hovered = null; vrHovered = null;
+      autoRot = opts.autorotate !== false;
+      if (opts.onVR) opts.onVR(false);
+    }
+
+    renderer.xr.addEventListener('sessionstart', enterVRRig);
+    renderer.xr.addEventListener('sessionend', exitVRRig);
+
+    const vr = {
+      supported() {
+        if (!navigator.xr || !navigator.xr.isSessionSupported) return Promise.resolve(false);
+        return navigator.xr.isSessionSupported('immersive-vr').catch(() => false);
+      },
+      enter() {
+        if (!navigator.xr) return Promise.reject(new Error('WebXR unavailable'));
+        return navigator.xr.requestSession('immersive-vr', { optionalFeatures: ['local-floor', 'bounded-floor', 'hand-tracking'] })
+          .then(session => { renderer.xr.setReferenceSpaceType('local-floor'); return renderer.xr.setSession(session); });
+      },
+      exit() { const s = renderer.xr.getSession(); if (s) return s.end(); },
+      isActive() { return inVR; },
+    };
+
     /* ---------------- resize + loop ---------------- */
     function resize() {
       const r = dom.getBoundingClientRect();
@@ -336,18 +454,18 @@
     const ro = new ResizeObserver(resize); ro.observe(dom.parentElement || dom);
     resize();
 
-    let raf = 0, t0 = performance.now();
+    let t0 = performance.now();
     function loop(now) {
-      raf = requestAnimationFrame(loop);
       const dt = Math.min(0.05, (now - t0) / 1000); t0 = now;
       idleTimer += dt;
+      if (inVR) pollVR(dt);
       if (autoRot && !dragging && idleTimer > 1.2) sphGoal.theta += dt * 0.11;
       const k = 1 - Math.pow(0.0016, dt);
       sph.radius += (sphGoal.radius - sph.radius) * k;
       sph.phi += (sphGoal.phi - sph.phi) * k;
       sph.theta += (sphGoal.theta - sph.theta) * k;
       target.lerp(tgtGoal, k);
-      applyCamera();
+      if (!renderer.xr.isPresenting) applyCamera();   // in VR the headset pose drives the camera
 
       if (loaded && hiOn) {
         // ---- functional-system highlight pass ----
@@ -406,7 +524,7 @@
       }
       renderer.render(scene, camera);
     }
-    raf = requestAnimationFrame(loop);
+    renderer.setAnimationLoop(loop);   // setAnimationLoop (not rAF) so WebXR can drive the frame loop in VR
 
     /* ---------------- live re-palette ---------------- */
     function setPalette(map) {
@@ -472,8 +590,8 @@
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
       selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset, zoom,
       setHighlight, clearHighlight, frameNodes,
-      setAutoRotate, setExposure, setBackground, setPalette, capturePoster,
-      dispose() { cancelAnimationFrame(raf); ro.disconnect(); renderer.dispose(); },
+      setAutoRotate, setExposure, setBackground, setPalette, capturePoster, vr,
+      dispose() { try { const s = renderer.xr.getSession(); if (s) s.end(); } catch (e) {} renderer.setAnimationLoop(null); ro.disconnect(); renderer.dispose(); },
     };
   }
 

@@ -142,6 +142,9 @@ function App() {
   // ---- modes: explore (structural) · systems (functional) · learn (lessons) ----
   const [mode, setMode] = React.useState('explore');
   const [sceneReady, setSceneReady] = React.useState(false);
+  // VR (WebXR beta)
+  const [vrSupported, setVrSupported] = React.useState(false);
+  const [vrActive, setVrActive] = React.useState(false);
   // systems
   const [activeSystem, setActiveSystem] = React.useState(null);
   const [sysStep, setSysStep] = React.useState(0);
@@ -153,6 +156,9 @@ function App() {
   const [lessonPlaying, setLessonPlaying] = React.useState(false);
   const [qIdx, setQIdx] = React.useState(0);
   const [answers, setAnswers] = React.useState({});
+  const [quizSet, setQuizSet] = React.useState([]);            // questions in the current round (drawn from the bank)
+  const [quizTally, setQuizTally] = React.useState({ asked: 0, correct: 0 });  // running totals across rounds
+  const quizSeenRef = React.useRef(new Set());                 // bank questions already used this session (avoid repeats)
   const [completed, setCompleted] = React.useState(() => {
     try { return new Set(JSON.parse(localStorage.getItem('ba_completed') || '[]')); } catch (e) { return new Set(); }
   });
@@ -208,8 +214,10 @@ function App() {
         if (id != null) { setSelectedId(id); setHint(false); } else setSelectedId(null);
       },
       onHover: (id) => setHover(h => id != null ? { id } : null),
+      onVR: (active) => setVrActive(active),
     });
     sceneRef.current = s; window.__BA = s;
+    s.vr.supported().then(setVrSupported).catch(() => {});
     return () => s.dispose();
   }, []);
 
@@ -274,6 +282,11 @@ function App() {
   };
   const focusCat = (cat) => sceneRef.current && sceneRef.current.focusCategory(cat);
   const zoom = (dir) => sceneRef.current && sceneRef.current.zoom(dir);
+  const enterVR = () => {
+    const s = sceneRef.current; if (!s) return;
+    s.vr.enter().catch(err => flash('Could not start VR: ' + ((err && err.message) || err)));
+  };
+  const exitVR = () => { const s = sceneRef.current; if (s) s.vr.exit(); };
   const reset = () => {
     setActivePreset('whole'); applyPreset(PRESETS[0], false);
     setHemisphere('left'); setIsolatedIds(null); setSearch(''); setSelectedId(null); setFocusedId(null);
@@ -302,8 +315,9 @@ function App() {
 
   // lesson "find this structure" challenge -> candidate keys glow on the brain
   let quizFind = null;
-  if (lesson && phase === 'quiz' && lesson.quiz[qIdx] && lesson.quiz[qIdx].type === 'find' && answers[qIdx] === undefined) {
-    quizFind = { keys: lesson.quiz[qIdx].options, answerKey: lesson.quiz[qIdx].answer };
+  const curQ = phase === 'quiz' ? quizSet[qIdx] : null;
+  if (lesson && curQ && curQ.type === 'find' && answers[qIdx] === undefined) {
+    quizFind = { keys: curQ.options, answerKey: curQ.answer };
   }
   const playerOpen = !!stageActive || (lesson && (phase === 'quiz' || phase === 'done'));
 
@@ -338,24 +352,51 @@ function App() {
   };
   const closeSystem = () => { setActiveSystem(null); setSysPlaying(false); if (!mobile) setCollapsed(false); sceneRef.current && sceneRef.current.reset(); };
 
+  // ---- quiz round drawing (a short randomised round pulled from the lesson's bank) ----
+  const QUIZ_ROUND = 4;   // questions asked per round before we offer "more"
+  const shuffle = (arr) => {
+    const a = arr.slice();
+    for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  };
+  // draw the next round of unseen questions; once the bank is exhausted, reshuffle the whole bank
+  const drawRound = (bank) => {
+    const want = Math.min(QUIZ_ROUND, bank.length);
+    let pool = bank.filter(q => !quizSeenRef.current.has(q));
+    if (pool.length < want) { quizSeenRef.current = new Set(); pool = bank.slice(); }
+    const round = shuffle(pool).slice(0, want);
+    round.forEach(q => quizSeenRef.current.add(q));
+    return round;
+  };
+  const startQuizRound = (bank) => {
+    setQuizSet(drawRound(bank)); setQIdx(0); setAnswers({}); setPhase('quiz');
+  };
+
   // ---- lesson actions ----
   const openLesson = (id) => {
     if (!window.SYS.LESSONS.some(l => l.id === id)) return;
+    quizSeenRef.current = new Set();
     setOpenLessonId(id); setPhase('intro'); setLessonStep(0); setLessonPlaying(false);
-    setQIdx(0); setAnswers({}); setSelectedId(null); setActiveSystem(null); setMode('learn');
+    setQIdx(0); setAnswers({}); setQuizSet([]); setQuizTally({ asked: 0, correct: 0 });
+    setSelectedId(null); setActiveSystem(null); setMode('learn');
     if (!mobile) setCollapsed(true);
   };
   const beginLesson = () => { setPhase('playing'); setLessonStep(0); setLessonPlaying(true); };
   const finishStages = () => {
-    if (lesson && lesson.quiz) { setPhase('quiz'); setQIdx(0); setAnswers({}); setLessonPlaying(false); }
+    if (lesson && lesson.quiz && lesson.quiz.length) { setLessonPlaying(false); startQuizRound(lesson.quiz); }
     else completeLesson();
   };
+  // finish the current round: bank this round's score into the running tally, then show completion
   const completeLesson = () => {
+    const correct = quizSet.reduce((a, q, i) => a + (answers[i] === q.answer ? 1 : 0), 0);
+    setQuizTally(t => ({ asked: t.asked + quizSet.length, correct: t.correct + correct }));
     setLessonPlaying(false); setPhase('done');
     setCompleted(c => new Set([...c, openLessonId]));
   };
+  // "Ask me more": draw a fresh round from the bank and return to the quiz
+  const moreQuestions = () => { if (lesson && lesson.quiz) { setLessonPlaying(false); startQuizRound(lesson.quiz); } };
   const closeLesson = () => { setOpenLessonId(null); setPhase(null); setLessonPlaying(false); if (!mobile) setCollapsed(false); sceneRef.current && sceneRef.current.reset(); };
-  const replayLesson = () => { setPhase('playing'); setLessonStep(0); setQIdx(0); setAnswers({}); setLessonPlaying(true); };
+  const replayLesson = () => { quizSeenRef.current = new Set(); setQuizTally({ asked: 0, correct: 0 }); setQuizSet([]); setPhase('playing'); setLessonStep(0); setQIdx(0); setAnswers({}); setLessonPlaying(true); };
 
   // ---- mode switching (stop whatever the other modes were running) ----
   const switchMode = (m) => {
@@ -392,9 +433,12 @@ function App() {
   const selNode = selectedId != null ? nodeById[selectedId] : null;
   const related = React.useMemo(() => {
     if (!selNode) return [];
-    return nodes.filter(n => n.id !== selNode.id && n.category === selNode.category && n.region === selNode.region)
+    // only suggest structures that are actually visible on the stage: when a single
+    // hemisphere is shown, drop the opposite side (median structures show on both).
+    const sideOk = (s) => hemisphere === 'both' || s === 'median' || s === hemisphere;
+    return nodes.filter(n => n.id !== selNode.id && n.category === selNode.category && n.region === selNode.region && sideOk(n.side))
       .slice(0, 5).map(n => ({ id: n.id, label: n.label, side: n.side }));
-  }, [selectedId]);
+  }, [selectedId, hemisphere]);
   const description = selNode ? (DESC[selNode.label] || ('A structure of the ' + cats[selNode.category].label.toLowerCase() + ', located in the ' + selNode.region.replace(/_/g, ' ') + '.')) : '';
 
   // ---- high-definition poster export (features the selection if any) ----
@@ -505,6 +549,8 @@ function App() {
         </div>
       )}
 
+      {vrSupported && <VRBeta active={vrActive} onEnter={enterVR} onExit={exitVR} mobile={mobile} />}
+
       <ControlPanel
         mode={mode} setMode={switchMode}
         activeSystem={activeSystem} onStartSystem={startSystem}
@@ -549,12 +595,13 @@ function App() {
           isLesson={true} lessonTitle={lesson.title} onFinish={finishStages} mobile={mobile} />
       )}
       {lesson && phase === 'quiz' && (
-        <LessonQuiz lesson={lesson} qIdx={qIdx} setQIdx={setQIdx} answers={answers} setAnswers={setAnswers}
+        <LessonQuiz lesson={lesson} quiz={quizSet} qIdx={qIdx} setQIdx={setQIdx} answers={answers} setAnswers={setAnswers}
           onFinish={completeLesson} pickFromStage={quizPickRef} mobile={mobile} />
       )}
       {lesson && phase === 'done' && (
-        <LessonComplete lesson={lesson} score={lesson.quiz ? lesson.quiz.reduce((a, q, i) => a + (answers[i] === q.answer ? 1 : 0), 0) : 0}
-          total={lesson.quiz ? lesson.quiz.length : 0} onReplay={replayLesson} onClose={closeLesson} onShare={copyShareLink} mobile={mobile} />
+        <LessonComplete lesson={lesson} score={quizSet.reduce((a, q, i) => a + (answers[i] === q.answer ? 1 : 0), 0)}
+          total={quizSet.length} tally={quizTally} bankSize={lesson.quiz ? lesson.quiz.length : 0}
+          onMore={moreQuestions} onReplay={replayLesson} onClose={closeLesson} onShare={copyShareLink} mobile={mobile} />
       )}
 
       <Toast msg={toast} />
@@ -604,6 +651,39 @@ function ConsentBanner({ onAccept, onDecline }) {
           color: '#fff', fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 700, cursor: 'pointer',
         }}>Accept</button>
       </div>
+    </div>
+  );
+}
+
+/* bottom-left "Try in VR (beta)" entry pill. Only mounted when the browser
+   reports immersive-vr support (e.g. a Quest/PCVR headset browser). Entering
+   VR is a user gesture, so the click handler calls into scene.vr.enter(). */
+function VRBeta({ active, onEnter, onExit, mobile }) {
+  const wrap = { position: 'absolute', left: mobile ? 8 : 16, bottom: mobile ? 8 : 16, zIndex: 24, display: 'flex', alignItems: 'center', gap: 8 };
+  const pill = {
+    display: 'flex', alignItems: 'center', gap: 8, padding: '9px 14px', borderRadius: 99,
+    border: '1px solid var(--accent)', background: 'var(--accent)', color: '#fff',
+    fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 700, cursor: 'pointer',
+    boxShadow: '0 6px 20px rgba(58,102,255,0.35)',
+  };
+  const tag = {
+    fontSize: 9, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
+    padding: '2px 5px', borderRadius: 5, background: 'rgba(255,255,255,0.22)', color: '#fff',
+  };
+  if (active) {
+    return (
+      <div style={wrap}>
+        <button onClick={onExit} className="glass" style={{ ...pill, border: '1px solid var(--glass-edge)', background: 'rgba(8,11,18,0.6)', color: 'var(--on-stage)', boxShadow: 'none' }}>
+          <Icon name="headset" size={15} /> In VR · Exit
+        </button>
+      </div>
+    );
+  }
+  return (
+    <div style={wrap}>
+      <button onClick={onEnter} style={pill} title="Enter immersive VR — walk around, spin and pick apart the brain in your headset">
+        <Icon name="headset" size={16} /> Try in VR <span style={tag}>beta</span>
+      </button>
     </div>
   );
 }
