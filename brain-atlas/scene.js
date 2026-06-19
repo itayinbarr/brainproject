@@ -353,16 +353,35 @@
     const tmpQ = new T.Quaternion();
     const vUp = new T.Vector3(0, 1, 0), vRight = new T.Vector3(), vDir = new T.Vector3(), vFwd = new T.Vector3();
 
-    /* ---- in-scene UI (canvas-textured panels visible inside the headset) ---- */
-    let vrUI = null, infoPanel = null, ctrlPanel = null, exitBtn = null;
-    function makePanel(wMeters, pxW, pxH) {
+    /* ============================================================
+       In-scene UI - interactive canvas panels visible in the headset.
+       Each panel carries hit-test "regions"; a pinch (tap) on a region
+       fires its action via opts.onVRAction, so the web UI's controls work
+       in VR. Panels (all anchored relative to the brain):
+         · info      - selected structure + Related buttons   (brain's right, top)
+         · side      - how-to + Exit VR                        (brain's right, under info)
+         · controls  - hemisphere / layers / views            (brain's left)
+         · narration - Systems/Learn step card                 (below the brain)
+       ============================================================ */
+    const FS = 'sans-serif';
+    let vrUI = null;
+    const panels = {};            // key -> panel
+    const ipanels = [];           // panels in hit-test order
+    let vrInfo = null, vrControls = null, vrNarration = null;
+    const pinchUI = [null, null]; // region/'bg'/null that each pinch began on
+    const grabHand = [false, false];
+    const act = (type, val) => { if (opts.onVRAction) opts.onVRAction(type, val); };
+
+    function makePanel(key, wMeters, pxW, pxH) {
       const canvas = document.createElement('canvas'); canvas.width = pxW; canvas.height = pxH;
       const ctx = canvas.getContext('2d');
       const tex = new T.CanvasTexture(canvas); tex.anisotropy = 4;
       const mat = new T.MeshBasicMaterial({ map: tex, transparent: true, side: T.DoubleSide, depthTest: false });
       const mesh = new T.Mesh(new T.PlaneGeometry(wMeters, wMeters * pxH / pxW), mat);
       mesh.renderOrder = 10;
-      return { mesh, canvas, ctx, tex };
+      const p = { key, mesh, canvas, ctx, tex, w: pxW, h: pxH, regions: [] };
+      panels[key] = p; ipanels.push(p);
+      return p;
     }
     function roundRect(ctx, x, y, w, h, r) {
       ctx.beginPath(); ctx.moveTo(x + r, y);
@@ -374,68 +393,143 @@
       for (const w of words) { const t = line ? line + ' ' + w : w; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t; }
       if (line) lines.push(line); return lines;
     }
-    function drawInfo(info) {
-      if (!infoPanel) return;
-      const { ctx, canvas, tex } = infoPanel; const W = canvas.width, H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = 'rgba(10,14,24,0.92)'; roundRect(ctx, 6, 6, W - 12, H - 12, 26); ctx.fill();
+    function clearPanel(p, alpha) {
+      const { ctx, canvas } = p; ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(10,14,24,' + (alpha == null ? 0.92 : alpha) + ')'; roundRect(ctx, 6, 6, canvas.width - 12, canvas.height - 12, 26); ctx.fill();
       ctx.strokeStyle = 'rgba(255,255,255,0.10)'; ctx.lineWidth = 2; ctx.stroke();
-      const pad = 38;
-      // accent dot + side chip
-      ctx.fillStyle = info.color || '#3A66FF'; ctx.beginPath(); ctx.arc(pad + 12, 56, 13, 0, Math.PI * 2); ctx.fill();
-      if (info.side) {
-        ctx.font = '600 24px "Hanken Grotesk", sans-serif'; const sw = ctx.measureText(info.side).width;
-        ctx.fillStyle = 'rgba(255,255,255,0.08)'; roundRect(ctx, W - pad - sw - 30, 36, sw + 30, 40, 20); ctx.fill();
-        ctx.fillStyle = 'rgba(233,237,246,0.85)'; ctx.fillText(info.side, W - pad - sw - 15, 64);
-      }
-      ctx.fillStyle = '#E9EDF6'; ctx.font = '800 40px "Hanken Grotesk", sans-serif';
-      wrap(ctx, info.title || '', W - pad * 2 - 40).slice(0, 2).forEach((l, i) => ctx.fillText(l, pad + 40, 70 + i * 46));
-      ctx.fillStyle = 'rgba(180,190,210,0.92)'; ctx.font = '400 27px "Hanken Grotesk", sans-serif';
-      const body = wrap(ctx, info.body || '', W - pad * 2);
-      let y = 168; body.slice(0, 8).forEach(l => { ctx.fillText(l, pad, y); y += 36; });
-      tex.needsUpdate = true;
+      p.regions = [];
     }
-    function drawCtrl() {
-      if (!ctrlPanel) return;
-      const { ctx, canvas, tex } = ctrlPanel; const W = canvas.width, H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = 'rgba(10,14,24,0.86)'; roundRect(ctx, 6, 6, W - 12, H - 12, 22); ctx.fill();
-      const items = [['Pinch', 'select a structure'], ['Pinch + move', 'grab & move the brain'], ['Two hands', 'pull apart to resize'], ['Walk', 'step around it freely']];
-      const colW = W / 2;
-      items.forEach((it, i) => {
-        const x = 34 + (i % 2) * colW, y = 52 + Math.floor(i / 2) * 84;
-        ctx.fillStyle = '#8ee0ff'; ctx.font = '700 28px "Hanken Grotesk", sans-serif'; ctx.fillText(it[0], x, y);
-        ctx.fillStyle = 'rgba(200,208,222,0.85)'; ctx.font = '400 24px "Hanken Grotesk", sans-serif'; ctx.fillText(it[1], x, y + 34);
-      });
-      tex.needsUpdate = true;
-    }
-    function drawExit(hot) {
-      if (!exitBtn) return;
-      const { ctx, canvas, tex } = exitBtn; const W = canvas.width, H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = hot ? 'rgba(240,80,104,0.95)' : 'rgba(200,60,84,0.85)';
-      roundRect(ctx, 6, 6, W - 12, H - 12, H / 2 - 6); ctx.fill();
-      ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 3; ctx.stroke();
-      ctx.fillStyle = '#fff'; ctx.font = '800 56px "Hanken Grotesk", sans-serif';
-      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('✕  Exit VR', W / 2, H / 2 + 4);
+    // draw a button + register its hit region; o: {bg,fg,border,dot,font,r,center,action}
+    function chip(p, x, y, w, h, label, o) {
+      o = o || {}; const ctx = p.ctx;
+      ctx.fillStyle = o.bg || 'rgba(255,255,255,0.06)'; roundRect(ctx, x, y, w, h, o.r != null ? o.r : 12); ctx.fill();
+      if (o.border) { ctx.strokeStyle = o.border; ctx.lineWidth = 2; ctx.stroke(); }
+      if (o.dot) { ctx.fillStyle = o.dot; ctx.beginPath(); ctx.arc(x + 20, y + h / 2, 7, 0, Math.PI * 2); ctx.fill(); }
+      ctx.fillStyle = o.fg || '#E9EDF6'; ctx.font = o.font || '600 24px ' + FS;
+      ctx.textBaseline = 'middle'; ctx.textAlign = o.center ? 'center' : 'left';
+      ctx.fillText(label, o.center ? x + w / 2 : x + (o.dot ? 38 : 16), y + h / 2 + 1);
       ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
-      tex.needsUpdate = true;
+      if (o.action) p.regions.push({ x, y, w, h, action: o.action });
     }
-    function setVRInfo(info) {
-      vrInfo = info || null;
-      if (infoPanel) infoPanel.mesh.visible = !!info;
-      if (info) drawInfo(info);
+
+    function drawInfo() {
+      const p = panels.info; if (!p) return;
+      const info = vrInfo; p.mesh.visible = !!info;
+      if (!info) { p.regions = []; return; }
+      const { ctx } = p; const W = p.w, pad = 38;
+      clearPanel(p, 0.92);
+      ctx.fillStyle = info.color || '#3A66FF'; ctx.beginPath(); ctx.arc(pad + 12, 54, 13, 0, Math.PI * 2); ctx.fill();
+      if (info.side) {
+        ctx.font = '600 24px ' + FS; const sw = ctx.measureText(info.side).width;
+        ctx.fillStyle = 'rgba(255,255,255,0.08)'; roundRect(ctx, W - pad - sw - 30, 34, sw + 30, 40, 20); ctx.fill();
+        ctx.fillStyle = 'rgba(233,237,246,0.85)'; ctx.fillText(info.side, W - pad - sw - 15, 62);
+      }
+      ctx.fillStyle = '#E9EDF6'; ctx.font = '800 40px ' + FS;
+      const tl = wrap(ctx, info.title || '', W - pad * 2 - 40).slice(0, 2);
+      tl.forEach((l, i) => ctx.fillText(l, pad + 40, 66 + i * 46));
+      let y = 66 + tl.length * 46 + 22;
+      ctx.fillStyle = 'rgba(180,190,210,0.92)'; ctx.font = '400 27px ' + FS;
+      wrap(ctx, info.body || '', W - pad * 2).slice(0, 6).forEach(l => { ctx.fillText(l, pad, y); y += 36; });
+      if (info.related && info.related.length) {
+        y += 10; ctx.fillStyle = 'rgba(150,160,180,0.9)'; ctx.font = '700 20px ' + FS;
+        ctx.fillText('RELATED STRUCTURES', pad, y); y += 26;
+        let x = pad; const ch = 46;
+        info.related.forEach(r => {
+          const lbl = r.label + (r.side && r.side !== 'median' ? '  ' + (r.side === 'left' ? 'L' : 'R') : '');
+          ctx.font = '600 22px ' + FS; const w = Math.min(W - pad * 2, ctx.measureText(lbl).width + 28);
+          if (x + w > W - pad) { x = pad; y += ch + 12; }
+          chip(p, x, y, w, ch, lbl, { bg: 'rgba(255,255,255,0.07)', border: 'rgba(255,255,255,0.14)', font: '600 22px ' + FS, action: () => act('select', r.id) });
+          x += w + 12;
+        });
+      }
+      p.tex.needsUpdate = true;
     }
-    let vrInfo = null;
+    function drawSide() {
+      const p = panels.side; if (!p) return;
+      clearPanel(p, 0.88);
+      const { ctx } = p; const W = p.w, pad = 30;
+      ctx.fillStyle = '#8ee0ff'; ctx.font = '700 22px ' + FS; ctx.fillText('HOW TO', pad, 42);
+      const rows = [['Pinch', 'select · press a button'], ['Pinch + move', 'grab & move the brain'], ['Two hands', 'pull apart to resize']];
+      let y = 80;
+      rows.forEach(r => {
+        ctx.fillStyle = '#cfe8ff'; ctx.font = '700 23px ' + FS; ctx.fillText(r[0], pad, y);
+        ctx.fillStyle = 'rgba(200,208,222,0.8)'; ctx.font = '400 21px ' + FS; ctx.fillText(r[1], pad + 200, y);
+        y += 36;
+      });
+      const bh = 60, bw = W - pad * 2;
+      chip(p, pad, p.h - bh - 24, bw, bh, '✕  Exit VR', { bg: 'rgba(200,60,84,0.92)', border: 'rgba(255,255,255,0.25)', fg: '#fff', font: '800 30px ' + FS, r: bh / 2, center: true, action: () => endSession() });
+      p.tex.needsUpdate = true;
+    }
+    function drawControls() {
+      const p = panels.controls; if (!p) return;
+      const c = vrControls; p.mesh.visible = !!c;
+      if (!c) { p.regions = []; return; }
+      clearPanel(p, 0.92);
+      const { ctx } = p; const W = p.w, pad = 28; let y = 40;
+      ctx.fillStyle = '#E9EDF6'; ctx.font = '800 32px ' + FS; ctx.fillText('Controls', pad, y); y += 30;
+      ctx.fillStyle = 'rgba(150,160,180,0.9)'; ctx.font = '700 18px ' + FS; ctx.fillText('HEMISPHERE', pad, y); y += 16;
+      const segW = (W - pad * 2 - 16) / 3;
+      [['left', 'Left'], ['both', 'Both'], ['right', 'Right']].forEach((o, i) => {
+        const on = c.hemisphere === o[0];
+        chip(p, pad + i * (segW + 8), y, segW, 52, o[1], { bg: on ? '#3A66FF' : 'rgba(255,255,255,0.06)', fg: on ? '#fff' : '#cdd5e4', font: '700 22px ' + FS, center: true, action: () => act('hemisphere', o[0]) });
+      });
+      y += 52 + 26;
+      ctx.fillStyle = 'rgba(150,160,180,0.9)'; ctx.font = '700 18px ' + FS; ctx.fillText('LAYERS', pad, y); y += 16;
+      (c.layers || []).forEach(L => {
+        const h = 48;
+        chip(p, pad, y, W - pad * 2, h, L.label, { bg: L.on ? 'rgba(255,255,255,0.11)' : 'rgba(255,255,255,0.035)', dot: L.color, fg: L.on ? '#E9EDF6' : 'rgba(160,168,184,0.8)', font: '600 22px ' + FS, action: () => act('toggleLayer', L.cat) });
+        // on/off check at the right edge
+        ctx.fillStyle = L.on ? '#5fd08a' : 'rgba(255,255,255,0.16)';
+        roundRect(ctx, pad + (W - pad * 2) - 40, y + h / 2 - 12, 24, 24, 7); ctx.fill();
+        y += h + 8;
+      });
+      y += 8;
+      const bw = (W - pad * 2 - 16) / 3;
+      [['showAll', 'Show all'], ['hideAll', 'Hide all'], ['reset', 'Reset']].forEach((o, i) => {
+        chip(p, pad + i * (bw + 8), y, bw, 50, o[1], { bg: 'rgba(255,255,255,0.06)', fg: '#cdd5e4', font: '600 20px ' + FS, center: true, action: () => act(o[0]) });
+      });
+      y += 50 + 26;
+      ctx.fillStyle = 'rgba(150,160,180,0.9)'; ctx.font = '700 18px ' + FS; ctx.fillText('VIEWS', pad, y); y += 16;
+      let x = pad;
+      (c.presets || []).forEach(pr => {
+        ctx.font = '600 20px ' + FS; const w = ctx.measureText(pr.label).width + 28;
+        if (x + w > W - pad) { x = pad; y += 48; }
+        chip(p, x, y, w, 42, pr.label, { bg: pr.active ? '#3A66FF' : 'rgba(255,255,255,0.06)', fg: pr.active ? '#fff' : '#cdd5e4', font: '600 20px ' + FS, action: () => act('preset', pr.id) });
+        x += w + 10;
+      });
+      p.tex.needsUpdate = true;
+    }
+    function drawNarration() {
+      const p = panels.narration; if (!p) return;
+      const n = vrNarration; p.mesh.visible = !!n;
+      if (!n) { p.regions = []; return; }
+      clearPanel(p, 0.92);
+      const { ctx } = p; const W = p.w, pad = 34;
+      ctx.fillStyle = '#8ee0ff'; ctx.font = '700 20px ' + FS;
+      ctx.fillText((n.kind || 'Step').toUpperCase() + ' · ' + (n.step + 1) + ' / ' + n.total, pad, 40);
+      ctx.fillStyle = '#E9EDF6'; ctx.font = '800 32px ' + FS;
+      ctx.fillText(wrap(ctx, n.title || '', W - pad * 2)[0] || '', pad, 80);
+      ctx.fillStyle = 'rgba(190,200,216,0.9)'; ctx.font = '400 24px ' + FS;
+      wrap(ctx, n.body || '', W - pad * 2).slice(0, 4).forEach((l, i) => ctx.fillText(l, pad, 120 + i * 32));
+      const bh = 56, by = p.h - bh - 22, bw = 170;
+      chip(p, pad, by, bw, bh, '‹ Prev', { fg: '#cdd5e4', font: '700 24px ' + FS, center: true, action: () => act('narrPrev') });
+      chip(p, pad + bw + 12, by, bw, bh, n.last ? (n.isLesson ? 'To quiz ›' : 'Done') : 'Next ›', { bg: '#3A66FF', fg: '#fff', font: '700 24px ' + FS, center: true, action: () => act('narrNext') });
+      chip(p, W - pad - 160, by, 160, bh, '✕ Close', { fg: '#cdd5e4', font: '700 24px ' + FS, center: true, action: () => act('narrClose') });
+      p.tex.needsUpdate = true;
+    }
+    function setVRInfo(info) { vrInfo = info || null; if (panels.info) drawInfo(); }
+    function setVRControls(c) { vrControls = c || null; if (panels.controls) drawControls(); }
+    function setVRNarration(n) { vrNarration = n || null; if (panels.narration) drawNarration(); }
 
     function buildVRUI() {
       if (vrUI) return;
       vrUI = new T.Group(); scene.add(vrUI);
-      infoPanel = makePanel(0.42, 760, 600); infoPanel.mesh.visible = false; vrUI.add(infoPanel.mesh);
-      ctrlPanel = makePanel(0.5, 900, 230); vrUI.add(ctrlPanel.mesh);
-      exitBtn = makePanel(0.26, 520, 150); vrUI.add(exitBtn.mesh);
-      drawCtrl(); drawExit(false);
+      makePanel('info', 0.44, 800, 660); panels.info.mesh.visible = false;
+      makePanel('side', 0.44, 800, 300);
+      makePanel('controls', 0.34, 640, 1180);
+      makePanel('narration', 0.6, 1100, 360); panels.narration.mesh.visible = false;
+      Object.values(panels).forEach(p => vrUI.add(p.mesh));
+      drawSide(); drawInfo(); drawControls(); drawNarration();
     }
 
     function buildControllers() {
@@ -467,10 +561,19 @@
       const hits = xrRay.intersectObjects(cand, false);
       return hits.length ? hits[0] : null;
     }
-    function uiHit(c, mesh) {                                  // does this hand/controller point at a UI panel?
-      if (!mesh) return false;
+    // which UI region (if any) does this hand point at? returns region | 'bg' | null
+    function regionAt(c) {
       setRay(c);
-      return xrRay.intersectObject(mesh, false).length > 0;
+      for (const p of ipanels) {
+        if (!p.mesh.visible) continue;
+        const h = xrRay.intersectObject(p.mesh, false);
+        if (h.length && h[0].uv) {
+          const u = h[0].uv, px = u.x * p.w, py = (1 - u.y) * p.h;
+          const r = p.regions.find(rg => px >= rg.x && px <= rg.x + rg.w && py >= rg.y && py <= rg.y + rg.h);
+          return r || 'bg';
+        }
+      }
+      return null;
     }
     function endSession() { const s = renderer.xr.getSession(); if (s) s.end(); }
 
@@ -501,31 +604,25 @@
       tmpMat.decompose(root.position, root.quaternion, root.scale);
       if (root.scale.x < 0.05 || root.scale.x > 1.4) root.scale.setScalar(Math.max(0.05, Math.min(1.4, root.scale.x)));
     }
-    function pinchedList() { return controllers.filter(c => pinched[c.userData.idx]); }
 
-    // ---- gesture handlers: pinch = tap-to-select or drag-to-grab; two pinches = resize/rotate ----
+    // ---- gesture handlers: pinch a panel = press a button; pinch a structure = select;
+    // pinch-drag empty = grab/move; two free pinches = resize/rotate ----
     function onPinchStart(c) {
       const i = c.userData.idx;
       pinched[i] = true; pinchMoved[i] = 0;
       pinchStart[i].setFromMatrixPosition(c.matrixWorld);
-      // a pinch aimed at the in-world Exit button leaves the session
-      if (exitBtn && uiHit(c, exitBtn.mesh)) { pinchHit[i] = 'exit'; return; }
-      pinchHit[i] = controllerHit(c);
-      const list = pinchedList();
-      if (list.length >= 2) beginGrab(2, list[0], list[1]);          // second hand joins -> two-hand resize/rotate
+      const ui = regionAt(c); pinchUI[i] = ui;
+      pinchHit[i] = ui ? null : controllerHit(c);   // only target a structure when not on a panel
     }
     function onPinchEnd(c) {
       const i = c.userData.idx;
       pinched[i] = false;
-      if (pinchHit[i] === 'exit') { if (pinchMoved[i] < TAP) endSession(); }
-      else if (grab.mode !== 1 && pinchMoved[i] < TAP) {            // a pinch that barely moved is a tap: select/deselect
+      const ui = pinchUI[i]; pinchUI[i] = null;
+      if (ui) { if (ui !== 'bg' && pinchMoved[i] < TAP && ui.action) ui.action(); }   // button press
+      else if (!grabHand[i] && pinchMoved[i] < TAP) {                                  // tap on a structure = select
         const hit = pinchHit[i];
         if (opts.onPick) opts.onPick(hit ? hit.object.userData.nodeId : null, hit ? hit.object : null);
       }
-      const list = pinchedList();
-      if (list.length >= 2) beginGrab(2, list[0], list[1]);
-      else if (list.length === 1) beginGrab(1, list[0]);
-      else { grab.mode = 0; grab.hand = null; grab.pair = null; }
     }
 
     function layoutVRUI() {
@@ -533,34 +630,35 @@
       const xrCam = renderer.xr.getCamera(camera);
       xrCam.getWorldPosition(headPos);
       const center = root.position;                          // model is centered on root's origin
-      const radius = root.scale.x * 1.7 + 0.16;
-      // info panel: floats beside the brain so it sits next to what you're inspecting
+      const radius = root.scale.x * 1.7;
       vDir.subVectors(center, headPos); vDir.y = 0; if (vDir.lengthSq() < 1e-5) vDir.set(0, 0, -1); vDir.normalize();
-      vRight.crossVectors(vUp, vDir).normalize();
-      infoPanel.mesh.position.copy(center).addScaledVector(vRight, -(radius + 0.12)).setY(center.y + 0.04);
-      infoPanel.mesh.lookAt(headPos);
-      // controls + Exit: a HUD anchored to the user's gaze so they're ALWAYS visible,
-      // wherever the brain has been moved. Forward = where the head looks (flattened).
-      xrCam.getWorldDirection(vFwd); vFwd.y = 0; if (vFwd.lengthSq() < 1e-5) vFwd.set(0, 0, -1); vFwd.normalize();
-      vRight.crossVectors(vUp, vFwd).normalize();
-      ctrlPanel.mesh.position.copy(headPos).addScaledVector(vFwd, 1.1).addScaledVector(vRight, -0.12).setY(headPos.y - 0.42);
-      ctrlPanel.mesh.lookAt(headPos.x, ctrlPanel.mesh.position.y, headPos.z);
-      exitBtn.mesh.position.copy(headPos).addScaledVector(vFwd, 1.1).addScaledVector(vRight, 0.42).setY(headPos.y - 0.30);
-      exitBtn.mesh.lookAt(headPos.x, exitBtn.mesh.position.y, headPos.z);
-      // light up Exit when a hand points at it
-      const exitHot = controllers.some(c => uiHit(c, exitBtn.mesh));
-      if (exitHot !== exitBtn.hot) { exitBtn.hot = exitHot; drawExit(exitHot); }
+      vRight.crossVectors(vUp, vDir).normalize();            // unit vector to the brain's right (from the viewer)
+      const rx = radius + 0.30;
+      // right column: description on top, how-to + Exit beneath it (fixed offsets so the
+      // how-to stays put even when nothing is selected and the description is hidden)
+      panels.info.mesh.position.copy(center).addScaledVector(vRight, -rx).setY(center.y + 0.18);
+      panels.side.mesh.position.copy(center).addScaledVector(vRight, -rx).setY(center.y - 0.16);
+      // left column: the control panel
+      panels.controls.mesh.position.copy(center).addScaledVector(vRight, radius + 0.34).setY(center.y);
+      // below: the Systems/Learn narration card
+      panels.narration.mesh.position.copy(center).setY(center.y - (radius + 0.30));
+      Object.values(panels).forEach(p => { if (p.mesh.visible) p.mesh.lookAt(headPos); });
     }
 
     function pollVR(dt) {
       const session = renderer.xr.getSession(); if (!session) return;
-      // measure pinch travel, and promote a one-hand pinch to a grab once it drags past TAP
+      // measure pinch travel for grab/tap discrimination (panel pinches never grab)
       controllers.forEach(c => {
         const i = c.userData.idx;
-        if (pinched[i] && pinchHit[i] !== 'exit') { pA.setFromMatrixPosition(c.matrixWorld); pinchMoved[i] = Math.max(pinchMoved[i], pA.distanceTo(pinchStart[i])); }
+        if (pinched[i] && !pinchUI[i]) { pA.setFromMatrixPosition(c.matrixWorld); pinchMoved[i] = Math.max(pinchMoved[i], pA.distanceTo(pinchStart[i])); }
       });
-      const list = pinchedList();
-      if (grab.mode === 0 && list.length === 1 && pinchHit[list[0].userData.idx] !== 'exit' && pinchMoved[list[0].userData.idx] >= TAP) beginGrab(1, list[0]);
+      const gh = controllers.filter(c => pinched[c.userData.idx] && !pinchUI[c.userData.idx]);
+      if (gh.length >= 2) { if (grab.mode !== 2) beginGrab(2, gh[0], gh[1]); }
+      else if (gh.length === 1) { const i = gh[0].userData.idx; if (grab.mode === 2) beginGrab(1, gh[0]); else if (grab.mode === 0 && pinchMoved[i] >= TAP) beginGrab(1, gh[0]); }
+      else { grab.mode = 0; grab.hand = null; grab.pair = null; }
+      grabHand[0] = grabHand[1] = false;
+      if (grab.mode === 1 && grab.hand) grabHand[grab.hand.userData.idx] = true;
+      if (grab.mode === 2 && grab.pair) { grabHand[grab.pair[0].userData.idx] = true; grabHand[grab.pair[1].userData.idx] = true; }
       applyGrab();
 
       // thumbsticks (controllers only - hands have no gamepad). Disabled while grabbing.
@@ -614,7 +712,8 @@
     function exitVRRig() {
       inVR = false;
       grab.mode = 0; grab.hand = null; grab.pair = null;
-      pinched[0] = pinched[1] = false; pinchHit[0] = pinchHit[1] = null;
+      pinched[0] = pinched[1] = false; pinchHit[0] = pinchHit[1] = null; pinchUI[0] = pinchUI[1] = null;
+      grabHand[0] = grabHand[1] = false;
       root.position.set(savedRoot.px, savedRoot.py, savedRoot.pz);
       root.rotation.set(savedRoot.rx, savedRoot.ry, savedRoot.rz);
       root.scale.setScalar(savedRoot.s);
@@ -641,6 +740,17 @@
       },
       exit() { const s = renderer.xr.getSession(); if (s) return s.end(); },
       isActive() { return inVR; },
+      // test hook: build the panels + draw sample data outside a session and report the
+      // number of clickable regions per panel (validates the in-VR UI without a headset).
+      _test(payload) {
+        buildVRUI(); vrUI.visible = false;
+        payload = payload || {};
+        setVRInfo(payload.info || null);
+        setVRControls(payload.controls || null);
+        setVRNarration(payload.narration || null);
+        const count = k => (panels[k] && panels[k].mesh.visible ? panels[k].regions.length : (panels[k] ? panels[k].regions.length : -1));
+        return { info: count('info'), side: count('side'), controls: count('controls'), narration: count('narration') };
+      },
     };
 
     /* ---------------- resize + loop ---------------- */
@@ -796,7 +906,7 @@
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
       selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset, zoom,
       setHighlight, clearHighlight, frameNodes,
-      setAutoRotate, setExposure, setBackground, setPalette, capturePoster, vr, setVRInfo,
+      setAutoRotate, setExposure, setBackground, setPalette, capturePoster, vr, setVRInfo, setVRControls, setVRNarration,
       dispose() { try { const s = renderer.xr.getSession(); if (s) s.end(); } catch (e) {} renderer.setAnimationLoop(null); ro.disconnect(); renderer.dispose(); },
     };
   }

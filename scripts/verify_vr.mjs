@@ -33,17 +33,37 @@ await page.waitForTimeout(1500); // let the model load + selection apply
 const checks = await page.evaluate(() => {
   const s = window.__BA; const out = {};
   out.hasSetVRInfo = typeof s.setVRInfo === 'function';
+  out.hasSetVRControls = typeof s.setVRControls === 'function';
+  out.hasSetVRNarration = typeof s.setVRNarration === 'function';
   out.hasVrApi = !!(s.vr && typeof s.vr.enter === 'function' && typeof s.vr.exit === 'function');
-  // calling setVRInfo before any VR session must be a no-op (no panel yet) and must not throw
+  // calling the setters before any VR session must be a no-op (no panel yet) and must not throw
   let threw = false;
-  try { s.setVRInfo({ title: 'Test', side: 'Left', body: 'A '.repeat(80), color: '#3A66FF' }); s.setVRInfo(null); }
-  catch (e) { threw = true; out.err = e.message; }
-  out.setVRInfoSafe = !threw;
+  try {
+    s.setVRInfo({ title: 'Test', side: 'Left', body: 'A '.repeat(80), color: '#3A66FF' }); s.setVRInfo(null);
+    s.setVRControls({ hemisphere: 'left', layers: [{ cat: 'cortex', label: 'Cortex', on: true, color: '#888' }], presets: [{ id: 'whole', label: 'Whole', active: true }] }); s.setVRControls(null);
+    s.setVRNarration({ kind: 'System', title: 'Step', body: 'x', step: 0, total: 3, last: false, isLesson: false }); s.setVRNarration(null);
+  } catch (e) { threw = true; out.err = e.message; }
+  out.settersSafe = !threw;
+  // build the panels via the test hook and confirm each panel produces clickable regions
+  out.regions = s.vr._test({
+    info: { title: 'Hippocampus', side: 'Left', body: 'A structure of the cortex.', color: '#3A66FF',
+            related: [{ id: 1, label: 'Amygdala', side: 'left' }, { id: 2, label: 'Fornix', side: 'left' }, { id: 3, label: 'Cingulate', side: 'left' }] },
+    controls: { hemisphere: 'left',
+                layers: ['cortex', 'deep_grey', 'brainstem', 'cerebellum'].map(c => ({ cat: c, label: c, on: c === 'cortex', color: '#888' })),
+                presets: [{ id: 'whole', label: 'Whole', active: true }, { id: 'vasc', label: 'Vasculature', active: false }] },
+    narration: { kind: 'System', title: 'The command', body: 'The plan converges on M1.', step: 0, total: 6, last: false, isLesson: false },
+  });
   return out;
 });
 
 await browser.close(); server.close();
 console.log(JSON.stringify({ errors, checks }, null, 2));
-const ok = errors.length === 0 && checks.hasSetVRInfo && checks.hasVrApi && checks.setVRInfoSafe;
+const r = checks.regions || {};
+const ok = errors.length === 0 && checks.hasSetVRInfo && checks.hasSetVRControls && checks.hasSetVRNarration
+  && checks.hasVrApi && checks.settersSafe
+  && r.info >= 3            // 3 related-structure buttons
+  && r.side === 1          // Exit VR button
+  && r.controls >= 3 + 4 + 3 + 2  // hemisphere(3) + layers(4) + show/hide/reset(3) + presets(2)
+  && r.narration === 3;    // prev / next / close
 console.log(ok ? '\nVR WIRING OK' : '\nVR WIRING FAILED');
 process.exit(ok ? 0 : 1);

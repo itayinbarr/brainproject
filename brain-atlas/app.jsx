@@ -145,6 +145,7 @@ function App() {
   // VR (WebXR beta)
   const [vrSupported, setVrSupported] = React.useState(false);
   const [vrActive, setVrActive] = React.useState(false);
+  const vrActionRef = React.useRef(null);   // current handler for in-VR panel button presses (kept fresh each render)
   // systems
   const [activeSystem, setActiveSystem] = React.useState(null);
   const [sysStep, setSysStep] = React.useState(0);
@@ -215,6 +216,7 @@ function App() {
       },
       onHover: (id) => setHover(h => id != null ? { id } : null),
       onVR: (active) => setVrActive(active),
+      onVRAction: (type, val) => vrActionRef.current && vrActionRef.current(type, val),
     });
     sceneRef.current = s; window.__BA = s;
     s.vr.supported().then(setVrSupported).catch(() => {});
@@ -441,16 +443,69 @@ function App() {
   }, [selectedId, hemisphere]);
   const description = selNode ? (DESC[selNode.label] || ('A structure of the ' + cats[selNode.category].label.toLowerCase() + ', located in the ' + selNode.region.replace(/_/g, ' ') + '.')) : '';
 
-  // mirror the selection into the in-headset 3D info panel (the HTML card isn't visible in VR)
+  // mirror the selection into the in-headset 3D info panel (the HTML card isn't visible in VR),
+  // including the same Related-structures buttons the web card shows
   React.useEffect(() => {
     const s = sceneRef.current; if (!s || !s.setVRInfo) return;
     if (selNode) {
       const side = selNode.side === 'median' ? 'Midline' : (selNode.side === 'left' ? 'Left' : 'Right');
-      s.setVRInfo({ title: selNode.label, side, body: description, color: PAL[selNode.category] });
+      s.setVRInfo({ title: selNode.label, side, body: description, color: PAL[selNode.category], related });
     } else {
       s.setVRInfo(null);
     }
-  }, [selectedId, description]);
+  }, [selectedId, description, related]);
+
+  // mirror the control panel (hemisphere / layers / views) into the left in-VR panel
+  React.useEffect(() => {
+    const s = sceneRef.current; if (!s || !s.setVRControls || !vrActive) return;
+    s.setVRControls({
+      hemisphere,
+      layers: CAT_ORDER.map(cat => ({ cat, label: SHORT[cat] || (cats[cat] && cats[cat].label) || cat, on: !!layerOn[cat], color: PAL[cat] })),
+      presets: PRESETS.map(p => ({ id: p.id, label: p.label, active: activePreset === p.id })),
+    });
+  }, [vrActive, hemisphere, layerOn, activePreset]);
+
+  // mirror the Systems/Learn step card into the in-VR narration panel (below the brain)
+  React.useEffect(() => {
+    const s = sceneRef.current; if (!s || !s.setVRNarration || !vrActive) return;
+    let narr = null;
+    if (lesson && phase === 'playing') {
+      const sys = window.SYS.SYSTEMS.find(x => x.id === lessonSysId);
+      if (sys && sys.stages[lessonStep]) { const st = sys.stages[lessonStep]; narr = { kind: 'Lesson', title: st.title, body: st.body, step: lessonStep, total: sys.stages.length, last: lessonStep >= sys.stages.length - 1, isLesson: true }; }
+    } else if (activeSystem) {
+      const sys = window.SYS.SYSTEMS.find(x => x.id === activeSystem);
+      if (sys && sys.stages[sysStep]) { const st = sys.stages[sysStep]; narr = { kind: 'System', title: st.title, body: st.body, step: sysStep, total: sys.stages.length, last: sysStep >= sys.stages.length - 1, isLesson: false }; }
+    }
+    s.setVRNarration(narr);
+  }, [vrActive, activeSystem, sysStep, openLessonId, phase, lessonStep, lessonSysId]);
+
+  // handle button presses coming back from the in-VR panels (kept fresh each render so it
+  // closes over current state). Routes to the same handlers the web UI uses.
+  const vrNarrStep = (dir) => {
+    if (lesson && phase === 'playing') {
+      const sys = window.SYS.SYSTEMS.find(x => x.id === lessonSysId); const len = sys ? sys.stages.length : 0;
+      if (dir > 0) { if (lessonStep >= len - 1) finishStages(); else setLessonStep(lessonStep + 1); } else setLessonStep(Math.max(0, lessonStep - 1));
+    } else if (activeSystem) {
+      const sys = window.SYS.SYSTEMS.find(x => x.id === activeSystem); const len = sys ? sys.stages.length : 0;
+      setSysStep(dir > 0 ? Math.min(len - 1, sysStep + 1) : Math.max(0, sysStep - 1));
+    }
+  };
+  vrActionRef.current = (type, val) => {
+    switch (type) {
+      case 'exit': exitVR(); break;
+      case 'select': selectNode(val); break;
+      case 'toggleLayer': toggleLayer(val); break;
+      case 'hemisphere': setHemisphere(val); break;
+      case 'preset': { const p = PRESETS.find(x => x.id === val); if (p) applyPreset(p); break; }
+      case 'showAll': showAll(); break;
+      case 'hideAll': hideAll(); break;
+      case 'reset': reset(); break;
+      case 'narrPrev': vrNarrStep(-1); break;
+      case 'narrNext': vrNarrStep(1); break;
+      case 'narrClose': if (openLessonId) closeLesson(); else closeSystem(); break;
+      default: break;
+    }
+  };
 
   // ---- high-definition poster export (features the selection if any) ----
   const savePoster = async () => {
