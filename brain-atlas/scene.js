@@ -338,15 +338,23 @@
     const savedRoot = { px: 0, py: 0, pz: 0, rx: 0, ry: 0, rz: 0, s: 1 };
     let vrGrid = null;
     const controllers = [];
-    const grip = [false, false];          // squeeze state per controller
-    const grab = { c: null, offset: new T.Matrix4() };   // active grab: which controller holds the brain
+    // gesture state - works for hand-tracking pinches AND controller triggers, since
+    // WebXR maps a hand pinch to the same 'select' action a trigger fires.
+    const pinched = [false, false];
+    const pinchStart = [new T.Vector3(), new T.Vector3()];
+    const pinchMoved = [0, 0];
+    const pinchHit = [null, null];
+    const TAP = 0.045;                     // hand travel (m) below which a pinch is a tap (select) not a grab
+    const grab = { mode: 0, hand: null, pair: null, offset: new T.Matrix4() };   // 0 none · 1 one-hand · 2 two-hand
     const xrRay = new T.Raycaster();
-    const tmpMat = new T.Matrix4();
+    const tmpMat = new T.Matrix4(), frameM = new T.Matrix4();
     const headPos = new T.Vector3();
-    const vUp = new T.Vector3(0, 1, 0), vRight = new T.Vector3(), vDir = new T.Vector3();
+    const pA = new T.Vector3(), pB = new T.Vector3(), midV = new T.Vector3(), scV = new T.Vector3();
+    const tmpQ = new T.Quaternion();
+    const vUp = new T.Vector3(0, 1, 0), vRight = new T.Vector3(), vDir = new T.Vector3(), vFwd = new T.Vector3();
 
     /* ---- in-scene UI (canvas-textured panels visible inside the headset) ---- */
-    let vrUI = null, infoPanel = null, ctrlPanel = null;
+    let vrUI = null, infoPanel = null, ctrlPanel = null, exitBtn = null;
     function makePanel(wMeters, pxW, pxH) {
       const canvas = document.createElement('canvas'); canvas.width = pxW; canvas.height = pxH;
       const ctx = canvas.getContext('2d');
@@ -392,13 +400,26 @@
       const { ctx, canvas, tex } = ctrlPanel; const W = canvas.width, H = canvas.height;
       ctx.clearRect(0, 0, W, H);
       ctx.fillStyle = 'rgba(10,14,24,0.86)'; roundRect(ctx, 6, 6, W - 12, H - 12, 22); ctx.fill();
-      const items = [['Trigger', 'select a structure'], ['Grip', 'grab & move the brain'], ['Thumbstick', 'spin · zoom · slide'], ['Walk', 'step around it freely']];
+      const items = [['Pinch', 'select a structure'], ['Pinch + move', 'grab & move the brain'], ['Two hands', 'pull apart to resize'], ['Walk', 'step around it freely']];
       const colW = W / 2;
       items.forEach((it, i) => {
         const x = 34 + (i % 2) * colW, y = 52 + Math.floor(i / 2) * 84;
         ctx.fillStyle = '#8ee0ff'; ctx.font = '700 28px "Hanken Grotesk", sans-serif'; ctx.fillText(it[0], x, y);
         ctx.fillStyle = 'rgba(200,208,222,0.85)'; ctx.font = '400 24px "Hanken Grotesk", sans-serif'; ctx.fillText(it[1], x, y + 34);
       });
+      tex.needsUpdate = true;
+    }
+    function drawExit(hot) {
+      if (!exitBtn) return;
+      const { ctx, canvas, tex } = exitBtn; const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = hot ? 'rgba(240,80,104,0.95)' : 'rgba(200,60,84,0.85)';
+      roundRect(ctx, 6, 6, W - 12, H - 12, H / 2 - 6); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.25)'; ctx.lineWidth = 3; ctx.stroke();
+      ctx.fillStyle = '#fff'; ctx.font = '800 56px "Hanken Grotesk", sans-serif';
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('✕  Exit VR', W / 2, H / 2 + 4);
+      ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
       tex.needsUpdate = true;
     }
     function setVRInfo(info) {
@@ -413,7 +434,8 @@
       vrUI = new T.Group(); scene.add(vrUI);
       infoPanel = makePanel(0.42, 760, 600); infoPanel.mesh.visible = false; vrUI.add(infoPanel.mesh);
       ctrlPanel = makePanel(0.5, 900, 230); vrUI.add(ctrlPanel.mesh);
-      drawCtrl();
+      exitBtn = makePanel(0.26, 520, 150); vrUI.add(exitBtn.mesh);
+      drawCtrl(); drawExit(false);
     }
 
     function buildControllers() {
@@ -422,9 +444,8 @@
       for (let i = 0; i < 2; i++) {
         const c = renderer.xr.getController(i);
         c.userData.idx = i;
-        c.addEventListener('selectstart', () => onVRSelect(c));
-        c.addEventListener('squeezestart', () => onGrabStart(c));
-        c.addEventListener('squeezeend', () => onGrabEnd(c));
+        c.addEventListener('selectstart', () => onPinchStart(c));
+        c.addEventListener('selectend', () => onPinchEnd(c));
         const line = new T.Line(rayGeo, new T.LineBasicMaterial({ color: 0x8ee0ff, transparent: true, opacity: 0.9 }));
         line.scale.z = 5; line.name = 'ray';
         c.add(line);
@@ -435,34 +456,76 @@
       }
     }
 
-    function controllerHit(c) {
+    function setRay(c) {
       tmpMat.identity().extractRotation(c.matrixWorld);
       xrRay.ray.origin.setFromMatrixPosition(c.matrixWorld);
       xrRay.ray.direction.set(0, 0, -1).applyMatrix4(tmpMat).normalize();
+    }
+    function controllerHit(c) {
+      setRay(c);
       const cand = allMeshes.filter(m => m.visible && m.material.opacity > 0.14);
       const hits = xrRay.intersectObjects(cand, false);
       return hits.length ? hits[0] : null;
     }
-
-    function onVRSelect(c) {
-      const hit = controllerHit(c);
-      if (opts.onPick) opts.onPick(hit ? hit.object.userData.nodeId : null, hit ? hit.object : null);
+    function uiHit(c, mesh) {                                  // does this hand/controller point at a UI panel?
+      if (!mesh) return false;
+      setRay(c);
+      return xrRay.intersectObject(mesh, false).length > 0;
     }
+    function endSession() { const s = renderer.xr.getSession(); if (s) s.end(); }
 
-    // squeeze to grab: the brain follows this controller's pose until released
-    function onGrabStart(c) {
-      grip[c.userData.idx] = true;
-      if (grab.c) return;
-      grab.c = c;
-      grab.offset.copy(c.matrixWorld).invert().multiply(root.matrixWorld);  // root pose relative to controller
-    }
-    function onGrabEnd(c) {
-      grip[c.userData.idx] = false;
-      if (grab.c === c) {
-        grab.c = null;
-        const other = controllers.find(o => o !== c && grip[o.userData.idx]);   // hand off to the other hand if still held
-        if (other) onGrabStart(other);
+    // ---- grab math: drive the brain from a "grab frame" (one hand = its pose;
+    // two hands = a handlebar whose length scales the brain) ----
+    function frameFor(out, mode, a, b) {
+      if (mode === 2) {
+        pA.setFromMatrixPosition(a.matrixWorld); pB.setFromMatrixPosition(b.matrixWorld);
+        midV.addVectors(pA, pB).multiplyScalar(0.5);
+        const dist = Math.max(0.0001, pA.distanceTo(pB));
+        const angle = Math.atan2(pB.x - pA.x, pB.z - pA.z);
+        tmpQ.setFromAxisAngle(vUp, angle);
+        return out.compose(midV, tmpQ, scV.set(dist, dist, dist));   // the handlebar length carries the resize
       }
+      return out.copy(a.matrixWorld);                                 // one hand: pose only, size unchanged
+    }
+    function beginGrab(mode, a, b) {
+      grab.mode = mode; grab.hand = mode === 1 ? a : null; grab.pair = mode === 2 ? [a, b] : null;
+      frameFor(frameM, mode, a, b);
+      grab.offset.copy(frameM).invert().multiply(root.matrixWorld);   // root pose relative to the grab frame
+    }
+    function applyGrab() {
+      if (!grab.mode) return;
+      const a = grab.mode === 2 ? grab.pair[0] : grab.hand;
+      const b = grab.mode === 2 ? grab.pair[1] : null;
+      frameFor(frameM, grab.mode, a, b);
+      tmpMat.multiplyMatrices(frameM, grab.offset);
+      tmpMat.decompose(root.position, root.quaternion, root.scale);
+      if (root.scale.x < 0.05 || root.scale.x > 1.4) root.scale.setScalar(Math.max(0.05, Math.min(1.4, root.scale.x)));
+    }
+    function pinchedList() { return controllers.filter(c => pinched[c.userData.idx]); }
+
+    // ---- gesture handlers: pinch = tap-to-select or drag-to-grab; two pinches = resize/rotate ----
+    function onPinchStart(c) {
+      const i = c.userData.idx;
+      pinched[i] = true; pinchMoved[i] = 0;
+      pinchStart[i].setFromMatrixPosition(c.matrixWorld);
+      // a pinch aimed at the in-world Exit button leaves the session
+      if (exitBtn && uiHit(c, exitBtn.mesh)) { pinchHit[i] = 'exit'; return; }
+      pinchHit[i] = controllerHit(c);
+      const list = pinchedList();
+      if (list.length >= 2) beginGrab(2, list[0], list[1]);          // second hand joins -> two-hand resize/rotate
+    }
+    function onPinchEnd(c) {
+      const i = c.userData.idx;
+      pinched[i] = false;
+      if (pinchHit[i] === 'exit') { if (pinchMoved[i] < TAP) endSession(); }
+      else if (grab.mode !== 1 && pinchMoved[i] < TAP) {            // a pinch that barely moved is a tap: select/deselect
+        const hit = pinchHit[i];
+        if (opts.onPick) opts.onPick(hit ? hit.object.userData.nodeId : null, hit ? hit.object : null);
+      }
+      const list = pinchedList();
+      if (list.length >= 2) beginGrab(2, list[0], list[1]);
+      else if (list.length === 1) beginGrab(1, list[0]);
+      else { grab.mode = 0; grab.hand = null; grab.pair = null; }
     }
 
     function layoutVRUI() {
@@ -471,39 +534,53 @@
       xrCam.getWorldPosition(headPos);
       const center = root.position;                          // model is centered on root's origin
       const radius = root.scale.x * 1.7 + 0.16;
+      // info panel: floats beside the brain so it sits next to what you're inspecting
       vDir.subVectors(center, headPos); vDir.y = 0; if (vDir.lengthSq() < 1e-5) vDir.set(0, 0, -1); vDir.normalize();
-      vRight.crossVectors(vUp, vDir).normalize();            // points to the user's right of the brain
+      vRight.crossVectors(vUp, vDir).normalize();
       infoPanel.mesh.position.copy(center).addScaledVector(vRight, -(radius + 0.12)).setY(center.y + 0.04);
       infoPanel.mesh.lookAt(headPos);
-      ctrlPanel.mesh.position.copy(center).addScaledVector(vUp, -(radius + 0.14));
-      ctrlPanel.mesh.lookAt(headPos);
+      // controls + Exit: a HUD anchored to the user's gaze so they're ALWAYS visible,
+      // wherever the brain has been moved. Forward = where the head looks (flattened).
+      xrCam.getWorldDirection(vFwd); vFwd.y = 0; if (vFwd.lengthSq() < 1e-5) vFwd.set(0, 0, -1); vFwd.normalize();
+      vRight.crossVectors(vUp, vFwd).normalize();
+      ctrlPanel.mesh.position.copy(headPos).addScaledVector(vFwd, 1.1).addScaledVector(vRight, -0.12).setY(headPos.y - 0.42);
+      ctrlPanel.mesh.lookAt(headPos.x, ctrlPanel.mesh.position.y, headPos.z);
+      exitBtn.mesh.position.copy(headPos).addScaledVector(vFwd, 1.1).addScaledVector(vRight, 0.42).setY(headPos.y - 0.30);
+      exitBtn.mesh.lookAt(headPos.x, exitBtn.mesh.position.y, headPos.z);
+      // light up Exit when a hand points at it
+      const exitHot = controllers.some(c => uiHit(c, exitBtn.mesh));
+      if (exitHot !== exitBtn.hot) { exitBtn.hot = exitHot; drawExit(exitHot); }
     }
 
-    // thumbsticks: right = spin + resize, left = slide (depth / sideways). Grab (grip) overrides.
     function pollVR(dt) {
       const session = renderer.xr.getSession(); if (!session) return;
-      // grabbed: drive the brain straight from the controller pose
-      if (grab.c) {
-        tmpMat.multiplyMatrices(grab.c.matrixWorld, grab.offset);
-        tmpMat.decompose(root.position, root.quaternion, root.scale);
-      }
-      let yaw = 0, scaleDelta = 0, slideZ = 0, slideX = 0;
-      for (const src of session.inputSources) {
-        const gp = src.gamepad; if (!gp || !gp.axes) continue;
-        const ax = gp.axes;
-        let sx = ax.length >= 4 ? ax[2] : ax[0];
-        let sy = ax.length >= 4 ? ax[3] : ax[1];
-        if (Math.abs(sx) < 0.18) sx = 0;
-        if (Math.abs(sy) < 0.18) sy = 0;
-        if (src.handedness === 'left') { slideX += sx; slideZ += sy; } else { yaw += sx; scaleDelta += sy; }
-      }
-      if (!grab.c) {
+      // measure pinch travel, and promote a one-hand pinch to a grab once it drags past TAP
+      controllers.forEach(c => {
+        const i = c.userData.idx;
+        if (pinched[i] && pinchHit[i] !== 'exit') { pA.setFromMatrixPosition(c.matrixWorld); pinchMoved[i] = Math.max(pinchMoved[i], pA.distanceTo(pinchStart[i])); }
+      });
+      const list = pinchedList();
+      if (grab.mode === 0 && list.length === 1 && pinchHit[list[0].userData.idx] !== 'exit' && pinchMoved[list[0].userData.idx] >= TAP) beginGrab(1, list[0]);
+      applyGrab();
+
+      // thumbsticks (controllers only - hands have no gamepad). Disabled while grabbing.
+      if (!grab.mode) {
+        let yaw = 0, scaleDelta = 0, slideZ = 0, slideX = 0;
+        for (const src of session.inputSources) {
+          const gp = src.gamepad; if (!gp || !gp.axes) continue;
+          const ax = gp.axes;
+          let sx = ax.length >= 4 ? ax[2] : ax[0];
+          let sy = ax.length >= 4 ? ax[3] : ax[1];
+          if (Math.abs(sx) < 0.18) sx = 0;
+          if (Math.abs(sy) < 0.18) sy = 0;
+          if (src.handedness === 'left') { slideX += sx; slideZ += sy; } else { yaw += sx; scaleDelta += sy; }
+        }
         if (yaw) root.rotation.y -= yaw * dt * 2.4;
         if (slideZ) root.position.z = Math.max(-3, Math.min(-0.2, root.position.z + slideZ * dt * 1.3));
         if (slideX) root.position.x = Math.max(-1.6, Math.min(1.6, root.position.x + slideX * dt * 1.3));
+        if (scaleDelta) root.scale.setScalar(Math.max(0.05, Math.min(1.3, root.scale.x * (1 - scaleDelta * dt * 1.3))));
       }
-      if (scaleDelta) root.scale.setScalar(Math.max(0.05, Math.min(1.3, root.scale.x * (1 - scaleDelta * dt * 1.3))));
-      // hover glow + ray length from whichever controller is closest to a structure
+      // hover glow + ray length from whichever hand/controller is closest to a structure
       let best = null;
       controllers.forEach(c => {
         const h = controllerHit(c);
@@ -536,7 +613,8 @@
 
     function exitVRRig() {
       inVR = false;
-      grab.c = null; grip[0] = grip[1] = false;
+      grab.mode = 0; grab.hand = null; grab.pair = null;
+      pinched[0] = pinched[1] = false; pinchHit[0] = pinchHit[1] = null;
       root.position.set(savedRoot.px, savedRoot.py, savedRoot.pz);
       root.rotation.set(savedRoot.rx, savedRoot.ry, savedRoot.rz);
       root.scale.setScalar(savedRoot.s);

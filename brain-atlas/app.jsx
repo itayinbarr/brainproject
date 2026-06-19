@@ -548,7 +548,8 @@ function App() {
 
       {/* corner toolbar: save poster · credits · shuffle palette · subsystem key */}
       <Legend groups={groups} layerOn={layerOn} onPoster={savePoster} posterBusy={posterBusy} onCopyLink={copyShareLink} onZoom={zoom} mobile={mobile}
-        autorotate={t.autorotate} onToggleSpin={() => setTweak('autorotate', !t.autorotate)} />
+        autorotate={t.autorotate} onToggleSpin={() => setTweak('autorotate', !t.autorotate)}
+        vrSupported={vrSupported} vrActive={vrActive} onEnterVR={enterVR} onExitVR={exitVR} />
 
       {hint && consent && !mobile && (
         <div className="pop" style={{ position: 'absolute', bottom: 18, left: '50%', transform: 'translateX(-50%)', zIndex: 12,
@@ -559,8 +560,6 @@ function App() {
           Drag to rotate · scroll to zoom · click a structure to inspect
         </div>
       )}
-
-      {vrSupported && <VRBeta active={vrActive} onEnter={enterVR} onExit={exitVR} mobile={mobile} />}
 
       <ControlPanel
         mode={mode} setMode={switchMode}
@@ -666,39 +665,6 @@ function ConsentBanner({ onAccept, onDecline }) {
   );
 }
 
-/* bottom-left "Try in VR (beta)" entry pill. Only mounted when the browser
-   reports immersive-vr support (e.g. a Quest/PCVR headset browser). Entering
-   VR is a user gesture, so the click handler calls into scene.vr.enter(). */
-function VRBeta({ active, onEnter, onExit, mobile }) {
-  const wrap = { position: 'absolute', left: mobile ? 8 : 16, bottom: mobile ? 8 : 16, zIndex: 24, display: 'flex', alignItems: 'center', gap: 8 };
-  const pill = {
-    display: 'flex', alignItems: 'center', gap: 8, padding: '9px 14px', borderRadius: 99,
-    border: '1px solid var(--accent)', background: 'var(--accent)', color: '#fff',
-    fontFamily: 'var(--font)', fontSize: 12.5, fontWeight: 700, cursor: 'pointer',
-    boxShadow: '0 6px 20px rgba(58,102,255,0.35)',
-  };
-  const tag = {
-    fontSize: 9, fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase',
-    padding: '2px 5px', borderRadius: 5, background: 'rgba(255,255,255,0.22)', color: '#fff',
-  };
-  if (active) {
-    return (
-      <div style={wrap}>
-        <button onClick={onExit} className="glass" style={{ ...pill, border: '1px solid var(--glass-edge)', background: 'rgba(8,11,18,0.6)', color: 'var(--on-stage)', boxShadow: 'none' }}>
-          <Icon name="headset" size={15} /> In VR · Exit
-        </button>
-      </div>
-    );
-  }
-  return (
-    <div style={wrap}>
-      <button onClick={onEnter} style={pill} title="Enter immersive VR — walk around, spin and pick apart the brain in your headset">
-        <Icon name="headset" size={16} /> Try in VR <span style={tag}>beta</span>
-      </button>
-    </div>
-  );
-}
-
 /* small toast confirmation (e.g. "Link copied") */
 function Toast({ msg }) {
   if (!msg) return null;
@@ -713,7 +679,7 @@ function Toast({ msg }) {
 }
 
 /* stage toolbar: spin toggle, share (link / poster), palette, about (mobile: zoom + about, top-right) */
-function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onZoom, mobile, autorotate, onToggleSpin }) {
+function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onZoom, mobile, autorotate, onToggleSpin, vrSupported, vrActive, onEnterVR, onExitVR }) {
   const [cred, setCred] = React.useState(false);     // credits
   const [share, setShare] = React.useState(false);   // share menu (link / poster)
   const pill = {
@@ -752,12 +718,25 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onZoom, mob
     </div>
   );
 
+  // "Try in VR (beta)" pill - only rendered when the browser reports immersive-vr
+  // support (i.e. a real headset/VR browser like the Quest browser), so it never
+  // shows on a plain desktop. Sits in this bottom-right (mobile: top-right) row.
+  const vrBtn = vrSupported ? (
+    <button onClick={vrActive ? onExitVR : onEnterVR} className="glass"
+      style={vrActive ? { ...pill, borderColor: 'var(--accent)', color: 'var(--accent)' } : pill}
+      title={vrActive ? 'Exit immersive VR' : 'Enter immersive VR (beta) — walk around and pick the brain apart in your headset'}>
+      <Icon name="headset" size={14} /> {vrActive ? 'Exit VR' : 'VR'}
+      {!vrActive && <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.05em', textTransform: 'uppercase', padding: '2px 5px', borderRadius: 5, background: 'var(--accent)', color: '#fff' }}>beta</span>}
+    </button>
+  ) : null;
+
   // mobile: pinned top-right - zoom −/+ then About, with the panel opening downward
   if (mobile) {
     const zoomBtn = { width: 38, height: 38, display: 'grid', placeItems: 'center', borderRadius: 99, border: '1px solid var(--glass-edge)', color: 'var(--ink-soft)', cursor: 'pointer' };
     return (
       <div style={{ position: 'absolute', right: 8, top: 8, zIndex: 22, display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 8 }}>
         <div style={{ display: 'flex', gap: 8 }}>
+          {vrBtn}
           <button onClick={() => onZoom(-1)} className="glass" style={zoomBtn} title="Zoom in"><Icon name="plus" size={16} /></button>
           <button onClick={() => onZoom(1)} className="glass" style={zoomBtn} title="Zoom out"><Icon name="minus" size={16} /></button>
           <button onClick={() => setCred(c => !c)} className="glass" style={pill}><Icon name="info" size={14} /> About</button>
@@ -782,6 +761,7 @@ function Legend({ groups, layerOn, onPoster, posterBusy, onCopyLink, onZoom, mob
         </div>
       )}
       <div style={{ display: 'flex', gap: 8 }}>
+        {vrBtn}
         {!mobile && (
           <button onClick={() => { setShare(s => !s); setCred(false); }} className="glass" style={pill} title="Share this view: copy a link or download a poster">
             <Icon name="share" size={14} /> Share
