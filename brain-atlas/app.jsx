@@ -441,6 +441,17 @@ function App() {
   }, [selectedId, hemisphere]);
   const description = selNode ? (DESC[selNode.label] || ('A structure of the ' + cats[selNode.category].label.toLowerCase() + ', located in the ' + selNode.region.replace(/_/g, ' ') + '.')) : '';
 
+  // mirror the selection into the in-headset 3D info panel (the HTML card isn't visible in VR)
+  React.useEffect(() => {
+    const s = sceneRef.current; if (!s || !s.setVRInfo) return;
+    if (selNode) {
+      const side = selNode.side === 'median' ? 'Midline' : (selNode.side === 'left' ? 'Left' : 'Right');
+      s.setVRInfo({ title: selNode.label, side, body: description, color: PAL[selNode.category] });
+    } else {
+      s.setVRInfo(null);
+    }
+  }, [selectedId, description]);
+
   // ---- high-definition poster export (features the selection if any) ----
   const savePoster = async () => {
     const s = sceneRef.current; if (!s || posterBusy) return;

@@ -334,20 +334,98 @@
        ============================================================ */
     renderer.xr.enabled = true;
     let inVR = false, vrHovered = null;
-    const VR_DIST = -0.85, VR_HEIGHT = 1.45, VR_SCALE = 0.22;   // a graspable ~0.75 m brain at eye level
+    const VR_DIST = -0.7, VR_HEIGHT = 1.4, VR_SCALE = 0.24;   // a graspable ~0.8 m brain at eye level
     const savedRoot = { px: 0, py: 0, pz: 0, rx: 0, ry: 0, rz: 0, s: 1 };
     let vrGrid = null;
     const controllers = [];
+    const grip = [false, false];          // squeeze state per controller
+    const grab = { c: null, offset: new T.Matrix4() };   // active grab: which controller holds the brain
     const xrRay = new T.Raycaster();
     const tmpMat = new T.Matrix4();
+    const headPos = new T.Vector3();
+    const vUp = new T.Vector3(0, 1, 0), vRight = new T.Vector3(), vDir = new T.Vector3();
+
+    /* ---- in-scene UI (canvas-textured panels visible inside the headset) ---- */
+    let vrUI = null, infoPanel = null, ctrlPanel = null;
+    function makePanel(wMeters, pxW, pxH) {
+      const canvas = document.createElement('canvas'); canvas.width = pxW; canvas.height = pxH;
+      const ctx = canvas.getContext('2d');
+      const tex = new T.CanvasTexture(canvas); tex.anisotropy = 4;
+      const mat = new T.MeshBasicMaterial({ map: tex, transparent: true, side: T.DoubleSide, depthTest: false });
+      const mesh = new T.Mesh(new T.PlaneGeometry(wMeters, wMeters * pxH / pxW), mat);
+      mesh.renderOrder = 10;
+      return { mesh, canvas, ctx, tex };
+    }
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath(); ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath();
+    }
+    function wrap(ctx, text, maxW) {
+      const words = (text || '').split(/\s+/); const lines = []; let line = '';
+      for (const w of words) { const t = line ? line + ' ' + w : w; if (ctx.measureText(t).width > maxW && line) { lines.push(line); line = w; } else line = t; }
+      if (line) lines.push(line); return lines;
+    }
+    function drawInfo(info) {
+      if (!infoPanel) return;
+      const { ctx, canvas, tex } = infoPanel; const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(10,14,24,0.92)'; roundRect(ctx, 6, 6, W - 12, H - 12, 26); ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.10)'; ctx.lineWidth = 2; ctx.stroke();
+      const pad = 38;
+      // accent dot + side chip
+      ctx.fillStyle = info.color || '#3A66FF'; ctx.beginPath(); ctx.arc(pad + 12, 56, 13, 0, Math.PI * 2); ctx.fill();
+      if (info.side) {
+        ctx.font = '600 24px "Hanken Grotesk", sans-serif'; const sw = ctx.measureText(info.side).width;
+        ctx.fillStyle = 'rgba(255,255,255,0.08)'; roundRect(ctx, W - pad - sw - 30, 36, sw + 30, 40, 20); ctx.fill();
+        ctx.fillStyle = 'rgba(233,237,246,0.85)'; ctx.fillText(info.side, W - pad - sw - 15, 64);
+      }
+      ctx.fillStyle = '#E9EDF6'; ctx.font = '800 40px "Hanken Grotesk", sans-serif';
+      wrap(ctx, info.title || '', W - pad * 2 - 40).slice(0, 2).forEach((l, i) => ctx.fillText(l, pad + 40, 70 + i * 46));
+      ctx.fillStyle = 'rgba(180,190,210,0.92)'; ctx.font = '400 27px "Hanken Grotesk", sans-serif';
+      const body = wrap(ctx, info.body || '', W - pad * 2);
+      let y = 168; body.slice(0, 8).forEach(l => { ctx.fillText(l, pad, y); y += 36; });
+      tex.needsUpdate = true;
+    }
+    function drawCtrl() {
+      if (!ctrlPanel) return;
+      const { ctx, canvas, tex } = ctrlPanel; const W = canvas.width, H = canvas.height;
+      ctx.clearRect(0, 0, W, H);
+      ctx.fillStyle = 'rgba(10,14,24,0.86)'; roundRect(ctx, 6, 6, W - 12, H - 12, 22); ctx.fill();
+      const items = [['Trigger', 'select a structure'], ['Grip', 'grab & move the brain'], ['Thumbstick', 'spin · zoom · slide'], ['Walk', 'step around it freely']];
+      const colW = W / 2;
+      items.forEach((it, i) => {
+        const x = 34 + (i % 2) * colW, y = 52 + Math.floor(i / 2) * 84;
+        ctx.fillStyle = '#8ee0ff'; ctx.font = '700 28px "Hanken Grotesk", sans-serif'; ctx.fillText(it[0], x, y);
+        ctx.fillStyle = 'rgba(200,208,222,0.85)'; ctx.font = '400 24px "Hanken Grotesk", sans-serif'; ctx.fillText(it[1], x, y + 34);
+      });
+      tex.needsUpdate = true;
+    }
+    function setVRInfo(info) {
+      vrInfo = info || null;
+      if (infoPanel) infoPanel.mesh.visible = !!info;
+      if (info) drawInfo(info);
+    }
+    let vrInfo = null;
+
+    function buildVRUI() {
+      if (vrUI) return;
+      vrUI = new T.Group(); scene.add(vrUI);
+      infoPanel = makePanel(0.42, 760, 600); infoPanel.mesh.visible = false; vrUI.add(infoPanel.mesh);
+      ctrlPanel = makePanel(0.5, 900, 230); vrUI.add(ctrlPanel.mesh);
+      drawCtrl();
+    }
 
     function buildControllers() {
       if (controllers.length) return;
       const rayGeo = new T.BufferGeometry().setFromPoints([new T.Vector3(0, 0, 0), new T.Vector3(0, 0, -1)]);
       for (let i = 0; i < 2; i++) {
         const c = renderer.xr.getController(i);
+        c.userData.idx = i;
         c.addEventListener('selectstart', () => onVRSelect(c));
-        const line = new T.Line(rayGeo, new T.LineBasicMaterial({ color: 0x8ee0ff, transparent: true, opacity: 0.85 }));
+        c.addEventListener('squeezestart', () => onGrabStart(c));
+        c.addEventListener('squeezeend', () => onGrabEnd(c));
+        const line = new T.Line(rayGeo, new T.LineBasicMaterial({ color: 0x8ee0ff, transparent: true, opacity: 0.9 }));
         line.scale.z = 5; line.name = 'ray';
         c.add(line);
         const tip = new T.Mesh(new T.SphereGeometry(0.012, 12, 12), new T.MeshBasicMaterial({ color: 0x8ee0ff }));
@@ -371,32 +449,71 @@
       if (opts.onPick) opts.onPick(hit ? hit.object.userData.nodeId : null, hit ? hit.object : null);
     }
 
-    // thumbsticks: right = spin + resize, left = spin + move nearer/farther
+    // squeeze to grab: the brain follows this controller's pose until released
+    function onGrabStart(c) {
+      grip[c.userData.idx] = true;
+      if (grab.c) return;
+      grab.c = c;
+      grab.offset.copy(c.matrixWorld).invert().multiply(root.matrixWorld);  // root pose relative to controller
+    }
+    function onGrabEnd(c) {
+      grip[c.userData.idx] = false;
+      if (grab.c === c) {
+        grab.c = null;
+        const other = controllers.find(o => o !== c && grip[o.userData.idx]);   // hand off to the other hand if still held
+        if (other) onGrabStart(other);
+      }
+    }
+
+    function layoutVRUI() {
+      if (!vrUI) return;
+      const xrCam = renderer.xr.getCamera(camera);
+      xrCam.getWorldPosition(headPos);
+      const center = root.position;                          // model is centered on root's origin
+      const radius = root.scale.x * 1.7 + 0.16;
+      vDir.subVectors(center, headPos); vDir.y = 0; if (vDir.lengthSq() < 1e-5) vDir.set(0, 0, -1); vDir.normalize();
+      vRight.crossVectors(vUp, vDir).normalize();            // points to the user's right of the brain
+      infoPanel.mesh.position.copy(center).addScaledVector(vRight, -(radius + 0.12)).setY(center.y + 0.04);
+      infoPanel.mesh.lookAt(headPos);
+      ctrlPanel.mesh.position.copy(center).addScaledVector(vUp, -(radius + 0.14));
+      ctrlPanel.mesh.lookAt(headPos);
+    }
+
+    // thumbsticks: right = spin + resize, left = slide (depth / sideways). Grab (grip) overrides.
     function pollVR(dt) {
       const session = renderer.xr.getSession(); if (!session) return;
-      let yaw = 0, scaleDelta = 0, distDelta = 0;
+      // grabbed: drive the brain straight from the controller pose
+      if (grab.c) {
+        tmpMat.multiplyMatrices(grab.c.matrixWorld, grab.offset);
+        tmpMat.decompose(root.position, root.quaternion, root.scale);
+      }
+      let yaw = 0, scaleDelta = 0, slideZ = 0, slideX = 0;
       for (const src of session.inputSources) {
         const gp = src.gamepad; if (!gp || !gp.axes) continue;
         const ax = gp.axes;
         let sx = ax.length >= 4 ? ax[2] : ax[0];
         let sy = ax.length >= 4 ? ax[3] : ax[1];
-        if (Math.abs(sx) < 0.16) sx = 0;
-        if (Math.abs(sy) < 0.16) sy = 0;
-        yaw += sx;
-        if (src.handedness === 'left') distDelta += sy; else scaleDelta += sy;
+        if (Math.abs(sx) < 0.18) sx = 0;
+        if (Math.abs(sy) < 0.18) sy = 0;
+        if (src.handedness === 'left') { slideX += sx; slideZ += sy; } else { yaw += sx; scaleDelta += sy; }
       }
-      if (yaw) root.rotation.y -= yaw * dt * 1.6;
-      if (scaleDelta) root.scale.setScalar(Math.max(0.06, Math.min(0.9, root.scale.x * (1 - scaleDelta * dt * 0.7))));
-      if (distDelta) root.position.z = Math.max(-2.4, Math.min(-0.4, root.position.z + distDelta * dt * 0.6));
+      if (!grab.c) {
+        if (yaw) root.rotation.y -= yaw * dt * 2.4;
+        if (slideZ) root.position.z = Math.max(-3, Math.min(-0.2, root.position.z + slideZ * dt * 1.3));
+        if (slideX) root.position.x = Math.max(-1.6, Math.min(1.6, root.position.x + slideX * dt * 1.3));
+      }
+      if (scaleDelta) root.scale.setScalar(Math.max(0.05, Math.min(1.3, root.scale.x * (1 - scaleDelta * dt * 1.3))));
       // hover glow + ray length from whichever controller is closest to a structure
       let best = null;
       controllers.forEach(c => {
         const h = controllerHit(c);
-        const ray = c.getObjectByName('ray'); if (ray) ray.scale.z = h ? h.distance : 5;
+        const ray = c.getObjectByName('ray');
+        if (ray) { ray.scale.z = h ? h.distance : 5; ray.material.color.setHex(h ? 0xffffff : 0x8ee0ff); }
         if (h && (!best || h.distance < best.distance)) best = h;
       });
       vrHovered = best ? best.object : null;
       hovered = vrHovered;   // reuse the desktop emissive-boost path for the pointed-at mesh
+      layoutVRUI();
     }
 
     function enterVRRig() {
@@ -410,17 +527,22 @@
       if (!vrGrid) { vrGrid = new T.GridHelper(12, 24, 0x2a3550, 0x161c2c); vrGrid.material.transparent = true; vrGrid.material.opacity = 0.45; }
       scene.add(vrGrid);
       buildControllers();
+      buildVRUI();
+      vrUI.visible = true;
+      setVRInfo(vrInfo);
       autoRot = false;
       if (opts.onVR) opts.onVR(true);
     }
 
     function exitVRRig() {
       inVR = false;
+      grab.c = null; grip[0] = grip[1] = false;
       root.position.set(savedRoot.px, savedRoot.py, savedRoot.pz);
       root.rotation.set(savedRoot.rx, savedRoot.ry, savedRoot.rz);
       root.scale.setScalar(savedRoot.s);
       scene.background = null;
       if (vrGrid) scene.remove(vrGrid);
+      if (vrUI) vrUI.visible = false;
       hovered = null; vrHovered = null;
       autoRot = opts.autorotate !== false;
       if (opts.onVR) opts.onVR(false);
@@ -499,6 +621,7 @@
         });
       } else if (loaded) {
         const fade = 1 - Math.pow(0.0022, dt);
+        const pulse = 0.5 + 0.5 * Math.sin(now * 0.005);   // gentle breathing glow for VR feedback
         allMeshes.forEach(m => {
           const c = cats[m.userData.cat];
           const want = c && c.want && !m.userData.hemiHidden && !m.userData.isoHidden && !m.userData.subsetHidden;
@@ -510,13 +633,18 @@
           // translucent meshes must not write depth, or they cull what's behind them
           m.material.depthWrite = m.material.opacity >= 0.98;
           m.visible = m.material.opacity > 0.012;
-          if (isSel) {
+          if (isSel && inVR) {
+            // in VR (dark stage, no HTML card) a darker shade reads as "vanished" -
+            // so the selection BRIGHTENS and breathes to clearly stand out instead
+            m.material.color.copy(m.userData.baseColor);
+            m.material.emissive.copy(m.userData.baseColor).multiplyScalar(Math.min(1.2, m.userData.baseEmiss * 2.2 + 0.5 + pulse * 0.25));
+          } else if (isSel) {
             // selected: render as a noticeably DARKER shade of its own colour
             m.material.color.copy(m.userData.baseColor).multiplyScalar(0.38);
             m.material.emissive.copy(m.userData.baseColor).multiplyScalar(m.userData.baseEmiss * 0.5);
           } else {
             m.material.color.copy(m.userData.baseColor);
-            let e = m.userData.baseEmiss + (m === hovered ? 0.2 : 0);
+            let e = m.userData.baseEmiss + (m === hovered ? (inVR ? 0.35 : 0.2) : 0);
             m.material.emissive.copy(m.userData.baseColor).multiplyScalar(e);
           }
           m.renderOrder = isSel ? 2 : 0;
@@ -590,7 +718,7 @@
       setLayer, setLayers, setHemisphere, focusCategory, focusNode,
       selectNode, clearSelect, reset, frameSphere, snap, isolate, setSubset, zoom,
       setHighlight, clearHighlight, frameNodes,
-      setAutoRotate, setExposure, setBackground, setPalette, capturePoster, vr,
+      setAutoRotate, setExposure, setBackground, setPalette, capturePoster, vr, setVRInfo,
       dispose() { try { const s = renderer.xr.getSession(); if (s) s.end(); } catch (e) {} renderer.setAnimationLoop(null); ro.disconnect(); renderer.dispose(); },
     };
   }
