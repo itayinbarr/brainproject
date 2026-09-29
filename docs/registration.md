@@ -237,6 +237,71 @@ SLF) and of fanning ones (CST loses its corona-radiata spread); it inherits the 
 affine's ~7 mm error, worse near the cortex (the surface was not a landmark). Treat the
 tubes as schematic pathways, not tractography.
 
+### 5d. Extending without Blender (recover the affine from `brain.glb`)
+
+`scripts/atlas_data/` (and with it `registration_affine.json`) is gitignored, and the
+Blender passes need the Z-Anatomy `.blend`. For additions that only *add* structures, the
+whole loop can run on the shipped `brain.glb` instead:
+
+```bash
+pip install nibabel numpy scipy scikit-image trimesh fast_simplification rtree
+# atlases (into scripts/atlas_data/, gitignored). TemplateFlow redistributes both the
+# Najdenovska SPAMs and MASSP 2.0 in MNI152NLin2009cAsym:
+B=https://templateflow.s3.amazonaws.com/tpl-MNI152NLin2009cAsym
+curl -O $B/tpl-MNI152NLin2009cAsym_res-01_atlas-MIAL67ThalamicNuclei_probseg.nii.gz
+curl -O $B/tpl-MNI152NLin2009cAsym_res-01_atlas-MASSP20_dseg.nii.gz
+# + hcp1065_avg_tracts_nifti.zip unzipped into scripts/atlas_data/tracts/ (section 5c)
+
+node scripts/glb_io.mjs dump brain-atlas/models/brain.glb scripts/atlas_data/glb_dump.json
+python scripts/recover_affine.py          # -> registration_affine_glb.json (+ Blender-frame copy)
+python scripts/build_extra.py             # -> extra_artifacts.json + a scoring table
+node scripts/glb_io.mjs merge brain-atlas/models/brain.glb scripts/atlas_data/extra_artifacts.json \
+     brain-atlas/models/manifest.json brain-atlas/models/brain.glb
+python scripts/gen_data.py
+node scripts/verify_extra.mjs /tmp/shots   # boots the app headless, checks + screenshots
+```
+
+**Recovering `T` exactly.** The seven Najdenovska thalamic nuclei per side in the GLB are
+`T` applied to meshes marching-cubed in MNI space, and TemplateFlow's `MIAL67ThalamicNuclei`
+is the same SPAM volume. The volume centroid of a closed mesh is affine-equivariant, so
+regenerating the 14 solids exactly as `build_nuclei.py` does gives 14 exact MNI <-> mesh
+pairs for the 12-parameter affine. Result: **0.000 mm residual**, 0.000886 mesh units/mm, and
+the held-out red nucleus again comes out at **7.2 mm**, i.e. the original registration,
+bit-for-bit, not a new fit. `recover_affine.py` refuses to write an affine if the residual
+exceeds 0.5 mm. The GLB stores glTF (Y-up) coordinates: glTF `(x, y, z)` = Blender `(x, z, -y)`.
+
+**Tracts reproduce too.** `build_extra.py` imports `build_tracts.py`'s centerline and spline
+code unchanged; only the clipping shell is rebuilt from the GLB (see below). Regenerating
+all 54 *existing* tracts this way lands on the shipped tubes with a median distance of
+exactly 1.10 mm (= the tube radius, i.e. identical centerlines) and a worst 95th percentile
+of 4.4 mm (a clipped uncinate end).
+
+**Shell from the GLB.** The cortex in the GLB is a set of gyrus/sulcus surface patches with
+sub-voxel gaps, so a plain hole-fill of their union leaks (only 67% of the shipped tube
+vertices test as inside it). A morphological closing of 2 voxels (2.4 mm) before the fill
+seals it and is what reproduces the shipped tubes; containment *scores* use a 3-voxel
+closing, which is stable across hemispheres. `trimesh.voxelized()` runs out of memory on the
+full cortex, so `build_extra.py` voxelises by dense surface sampling instead.
+
+**How each addition is scored** (printed by `build_extra.py`, all from the run that shipped):
+
+| Check | Result |
+|---|---|
+| MASSP 2.0 vs the structures already registered from CIT168 / Najdenovska (same affine) | STN 0.4, SN 0.6-0.7, GPi 1.0-1.4, thalamus 0.8-1.8, GPe 2.9-3.0, accumbens 3.2-3.4, amygdala 3.5-4.0 mm |
+| MASSP 2.0 vs Z-Anatomy geometry (held-out, like the red nucleus) | red nucleus 7.2, caudate 5.7-6.1, colliculi 6.1-6.8, putamen 9.1-9.2 mm |
+| Every new solid inside the brain parenchyma | 100% (all 13) |
+| Brainstem nuclei inside the Z-Anatomy brainstem | VTA 96-97%, PAG 98%, PPN / dorsal & median raphe 100% |
+| PAG centroid vs Z-Anatomy aqueduct centroid | 1.8 mm |
+| VTA medial to SN (abs(x) in MNI) | 3.8-4.5 mm vs 9.4-9.5 mm - yes, both sides |
+| Buried in existing meshes | VTA 27-28% inside the Z-Anatomy red nucleus; internal capsule 21% inside the Z-Anatomy putamen; everything else <= 5% |
+
+The two overlaps are the known BodyParts3D-vs-MNI proportion mismatch, not new error: the
+Z-Anatomy red nucleus is the held-out control that already sits 7.2 mm from its atlas
+position, and the Z-Anatomy putamen is ~9 mm off. Against the *atlas-placed* neighbours
+(GP, thalamus, SN) the new structures sit where the atlases put them (medial -> lateral:
+thalamus, caudate, internal capsule, putamen, claustrum). Renders of each group from the
+real viewer are in [`docs/extra/`](extra/) (`verify_extra.mjs`).
+
 ## 6. What has been added, and what was deferred (and why)
 
 Built so far, all as **closed solids** (see the closed-surface note in section 4):
@@ -271,6 +336,29 @@ Two requested regions were deliberately **not** added:
   sub-millimetre laminae along a curved structure that ~7 mm affine registration
   would misrepresent. A defensible non-atlas alternative is a geometric head/body/
   tail split of the existing hippocampus mesh, if that is ever wanted.
+
+Added later without Blender (section 5d), all as closed solids unless noted:
+- MASSP 2.0 (Alkemade & Bazin, 7T AHEAD data, CC BY 4.0; TemplateFlow
+  `atlas-MASSP20`): ventral tegmental area, periaqueductal grey, pedunculopontine
+  nucleus, dorsal and median raphe nuclei, basal forebrain cholinergic nuclei (Ch1-Ch4,
+  mostly the nucleus basalis of Meynert), claustrum (0.6-voxel pre-blur so the 1-2 mm sheet
+  does not mesh as lace), internal capsule. Structures MASSP shares with the model are not
+  re-added; its hippocampal subfields stay deferred for the reasons above.
+- HCP1065 tubes: the five cingulum segments (frontal-parietal, frontal-parahippocampal,
+  parahippocampal, parahippocampal-parietal, parolfactory), the parietal aslant tract and the
+  vertical occipital fasciculus. **Extreme capsule was left out on purpose**: HCP1065's EMC
+  envelope and trunk run from the inferior frontal gyrus up to the superior parietal
+  lobule (MNI z ~ 80), not along the classic fronto-temporal course, so a tube would teach
+  the wrong path.
+- Not added yet, only because OSF and Zenodo were unreachable from the sandbox this pass
+  ran in: the SNc/SNr split and ventral pallidum (CIT168 labels) and BNST / zona incerta
+  (Neudorfer labels). Both atlases are CC BY and already used here, so these are a few
+  lines in `build_nuclei.py`'s label tables (or `build_extra.py`) once the files are local.
+
+Observation, not changed: MASSP 2.0's lateral and medial geniculate nuclei sit ~18 mm
+from the hand-placed geniculate bodies (section 1b of `build_with_nuclei.py`), mostly
+because the atlas puts them ~15 mm more inferior, i.e. below rather than on the dorso-lateral
+pulvinar. Worth revisiting if the geniculates are ever re-placed from an atlas.
 
 When merging atlas labels into a functional group, union the label masks first and
 march the **single** combined mask, so each group is one watertight solid rather

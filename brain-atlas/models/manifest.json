@@ -10342,6 +10342,319 @@
     "Scene Collection"
    ],
    "source": "Z-Anatomy / BodyParts3D"
+  },
+  {
+   "id": 437,
+   "name": "Ventral tegmental area.l",
+   "label": "Ventral tegmental area",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Mesencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 438,
+   "name": "Ventral tegmental area.r",
+   "label": "Ventral tegmental area",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Mesencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 439,
+   "name": "Periaqueductal grey",
+   "label": "Periaqueductal grey",
+   "category": "brainstem",
+   "side": "median",
+   "region": "Brainstem",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 440,
+   "name": "Pedunculopontine nucleus.l",
+   "label": "Pedunculopontine nucleus",
+   "category": "brainstem",
+   "side": "left",
+   "region": "Brainstem",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 441,
+   "name": "Pedunculopontine nucleus.r",
+   "label": "Pedunculopontine nucleus",
+   "category": "brainstem",
+   "side": "right",
+   "region": "Brainstem",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 442,
+   "name": "Dorsal raphe nucleus",
+   "label": "Dorsal raphe nucleus",
+   "category": "brainstem",
+   "side": "median",
+   "region": "Brainstem",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)",
+   "parent": "Raphe nuclei"
+  },
+  {
+   "id": 443,
+   "name": "Median raphe nucleus",
+   "label": "Median raphe nucleus",
+   "category": "brainstem",
+   "side": "median",
+   "region": "Brainstem",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)",
+   "parent": "Raphe nuclei"
+  },
+  {
+   "id": 444,
+   "name": "Basal forebrain cholinergic nuclei.l",
+   "label": "Basal forebrain cholinergic nuclei",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 445,
+   "name": "Basal forebrain cholinergic nuclei.r",
+   "label": "Basal forebrain cholinergic nuclei",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 446,
+   "name": "Claustrum.l",
+   "label": "Claustrum",
+   "category": "deep_grey",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 447,
+   "name": "Claustrum.r",
+   "label": "Claustrum",
+   "category": "deep_grey",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 448,
+   "name": "Internal capsule.l",
+   "label": "Internal capsule",
+   "category": "white_matter",
+   "side": "left",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 449,
+   "name": "Internal capsule.r",
+   "label": "Internal capsule",
+   "category": "white_matter",
+   "side": "right",
+   "region": "Telencephalon",
+   "core": true,
+   "ta2": [],
+   "source": "MASSP 2.0 (Alkemade & Bazin, CC BY 4.0)"
+  },
+  {
+   "id": 450,
+   "name": "Cingulum (frontal-parietal).l",
+   "label": "Cingulum (frontal-parietal)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle running inside the cingulate gyrus; does not cross the midline."
+  },
+  {
+   "id": 451,
+   "name": "Cingulum (frontal-parietal).r",
+   "label": "Cingulum (frontal-parietal)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle running inside the cingulate gyrus; does not cross the midline."
+  },
+  {
+   "id": 452,
+   "name": "Cingulum (frontal-parahippocampal).l",
+   "label": "Cingulum (frontal-parahippocampal)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle arching from the frontal lobe round the splenium to the parahippocampal gyrus; does not cross the midline."
+  },
+  {
+   "id": 453,
+   "name": "Cingulum (frontal-parahippocampal).r",
+   "label": "Cingulum (frontal-parahippocampal)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle arching from the frontal lobe round the splenium to the parahippocampal gyrus; does not cross the midline."
+  },
+  {
+   "id": 454,
+   "name": "Cingulum (parahippocampal).l",
+   "label": "Cingulum (parahippocampal)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle (the temporal limb of the cingulum); does not cross the midline."
+  },
+  {
+   "id": 455,
+   "name": "Cingulum (parahippocampal).r",
+   "label": "Cingulum (parahippocampal)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle (the temporal limb of the cingulum); does not cross the midline."
+  },
+  {
+   "id": 456,
+   "name": "Cingulum (parahippocampal-parietal).l",
+   "label": "Cingulum (parahippocampal-parietal)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle linking the parahippocampal gyrus with the precuneus; does not cross the midline."
+  },
+  {
+   "id": 457,
+   "name": "Cingulum (parahippocampal-parietal).r",
+   "label": "Cingulum (parahippocampal-parietal)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle linking the parahippocampal gyrus with the precuneus; does not cross the midline."
+  },
+  {
+   "id": 458,
+   "name": "Cingulum (parolfactory).l",
+   "label": "Cingulum (parolfactory)",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle from the subcallosal/parolfactory area; does not cross the midline."
+  },
+  {
+   "id": 459,
+   "name": "Cingulum (parolfactory).r",
+   "label": "Cingulum (parolfactory)",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric limbic association bundle from the subcallosal/parolfactory area; does not cross the midline."
+  },
+  {
+   "id": 460,
+   "name": "Parietal aslant tract.l",
+   "label": "Parietal aslant tract",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 461,
+   "name": "Parietal aslant tract.r",
+   "label": "Parietal aslant tract",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Intrahemispheric association tract; does not cross the midline."
+  },
+  {
+   "id": 462,
+   "name": "Vertical occipital fasciculus.l",
+   "label": "Vertical occipital fasciculus",
+   "category": "tracts",
+   "side": "left",
+   "region": "Left cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Short intrahemispheric association tract linking dorsal and ventral visual cortex; does not cross the midline."
+  },
+  {
+   "id": 463,
+   "name": "Vertical occipital fasciculus.r",
+   "label": "Vertical occipital fasciculus",
+   "category": "tracts",
+   "side": "right",
+   "region": "Right cerebral hemisphere",
+   "core": false,
+   "ta2": [],
+   "source": "HCP1065 (Yeh 2022, CC BY-SA 4.0)",
+   "decussation": "Short intrahemispheric association tract linking dorsal and ventral visual cortex; does not cross the midline."
   }
  ],
  "categories": {
@@ -10355,11 +10668,11 @@
   },
   "brainstem": {
    "label": "Brainstem",
-   "count": 30
+   "count": 35
   },
   "tracts": {
    "label": "White-matter tracts (pathways)",
-   "count": 54
+   "count": 68
   },
   "diencephalon": {
    "label": "Diencephalon (thalamus, hypothalamus)",
@@ -10371,7 +10684,7 @@
   },
   "white_matter": {
    "label": "White matter & commissures",
-   "count": 9
+   "count": 11
   },
   "veins_sinuses": {
    "label": "Dural venous sinuses & veins",
@@ -10383,7 +10696,7 @@
   },
   "deep_grey": {
    "label": "Deep grey / basal ganglia",
-   "count": 23
+   "count": 29
   },
   "ventricles": {
    "label": "Ventricular system",

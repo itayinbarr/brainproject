@@ -100,18 +100,21 @@ you use it.
   want: calcarine sulcus, supramarginal and angular gyri, cuneus, precuneus, lingual gyrus,
   the fusiform (occipitotemporal) gyri, central/precentral/postcentral, parieto-occipital, etc.
 - **White-matter tracts** - the major association, projection and commissural pathways as
-  tube meshes (arcuate, cingulum, SLF/ILF/IFOF, uncinate, corticospinal tract, optic
-  radiations, fornix, and more), registered from HCP1065 tract templates.
+  tube meshes (arcuate, the five cingulum segments, SLF/ILF/IFOF, uncinate, frontal and
+  parietal aslant, vertical occipital fasciculus, corticospinal tract, optic radiations, and
+  more), registered from HCP1065 tract templates.
 - **Deep grey / basal ganglia** - caudate, putamen, globus pallidus (internal/external),
-  lentiform nucleus, amygdaloid body and its functional groups, claustrum-level structures,
-  plus the registered subthalamic nucleus, substantia nigra and nucleus accumbens.
+  lentiform nucleus, amygdaloid body and its functional groups, plus the registered
+  subthalamic nucleus, substantia nigra, nucleus accumbens, ventral tegmental area,
+  claustrum and the basal forebrain cholinergic nuclei (nucleus basalis of Meynert).
 - **Diencephalon** - thalamus (whole plus the seven nuclei groups), hypothalamus and its
   zones, medial & lateral geniculate bodies, mamillary bodies, optic chiasm/tract, habenula,
   red nucleus.
 - **Ventricles** - lateral (L/R), third, fourth, septum pellucidum, choroid plexus.
 - **White matter / commissures** - corpus callosum, fornix, anterior & hippocampal
   commissures, internal capsule, stria terminalis/medullaris.
-- **Brainstem** (midbrain/pons/medulla) with colliculi, peduncles, many cranial-nerve nuclei.
+- **Brainstem** (midbrain/pons/medulla) with colliculi, peduncles, many cranial-nerve nuclei,
+  and the registered periaqueductal grey, pedunculopontine nucleus and dorsal/median raphe.
 - **Cerebellum** with vermis/hemispheres/peduncles.
 - **Vasculature** - the circle of Willis in full (anterior/middle/posterior cerebral
   arteries incl. M1/M2/M3 segments, the communicating arteries, basilar, vertebral, internal
@@ -153,6 +156,10 @@ brainmodel/
 ├── scripts/
 │   ├── export_brain.py           ← Blender: Z-Anatomy .blend → named brain.glb + manifest
 │   ├── build_tracts.py           ← builds white-matter tract tubes from HCP1065 centerlines
+│   ├── recover_affine.py         ← rebuilds the MNI → mesh affine from brain.glb (no Blender)
+│   ├── build_extra.py            ← MASSP 2.0 nuclei + extra HCP1065 tracts, scored
+│   ├── glb_io.mjs                ← dump brain.glb for Python / merge new meshes into it
+│   ├── verify_extra.mjs          ← headless check + screenshots of the added structures
 │   ├── gen_data.py               ← manifest.json → data.js
 │   └── shot.mjs                  ← headless screenshot helper (Playwright)
 └── Z-Anatomy/                    ← source .blend (Startup.blend) + extracted inventory
@@ -228,8 +235,9 @@ relicense the model; keep this notice with the `.glb`.
 
 **Imaging-registered structures.** The globus pallidus internal/external split, the thalamic
 nuclei groups, the subthalamic nucleus, substantia nigra, nucleus accumbens, the amygdala
-functional groups, the hypothalamus zones and the white-matter tracts are not in the source
-model; they were registered from open MNI-space imaging atlases and remain **CC BY-SA 4.0**.
+functional groups, the hypothalamus zones, the ventral tegmental area, periaqueductal grey,
+pedunculopontine nucleus, raphe nuclei, basal forebrain nuclei, claustrum, internal capsule
+and the white-matter tracts are not in the source model; they were registered from open MNI-space imaging atlases and remain **CC BY-SA 4.0**.
 They are **approximate** (about 7 mm, educational, not for clinical use). How it's done and
 how to extend it: [`docs/registration.md`](docs/registration.md).
 
@@ -240,8 +248,12 @@ how to extend it: [`docs/registration.md`](docs/registration.md).
   (**CC BY-SA 4.0**) - https://doi.org/10.5281/zenodo.1405484
 - Neudorfer et al. 2020, hypothalamic region atlas, *Scientific Data*
   (**CC BY 4.0**) - https://doi.org/10.5281/zenodo.3942115
-- HCP1065 white-matter tract templates (population-averaged, from the Human Connectome
-  Project) used to build the tract centerlines.
+- MASSP 2.0 subcortical atlas - Alkemade, Bazin, Miletic & Forstmann (AHEAD 7T data)
+  (**CC BY 4.0**) - https://uvaauas.figshare.com/articles/dataset/MASSP_2_0_Lifespan_Probabilistic_Atlas/27291579 ;
+  the MNI152NLin2009cAsym label map used here is redistributed by TemplateFlow.
+- HCP1065 white-matter tract templates - Yeh 2022, *Nature Communications*
+  (**CC BY-SA 4.0**; population-averaged, from the Human Connectome Project) used to build
+  the tract centerlines.
 
 ## Contributing
 

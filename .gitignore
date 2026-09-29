@@ -18,3 +18,6 @@ scripts/shot_*.mjs
 
 # Raw reference atlases (CC BY) - not redistributed; only derived meshes ship
 scripts/atlas_data/
+
+# python bytecode
+__pycache__/

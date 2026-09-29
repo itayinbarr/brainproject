@@ -44,6 +44,18 @@ CRUMB_BY_LABEL = {
 }
 CRUMB_PITUITARY = ["Brain", "Cerebrum", "Diencephalon", "Hypophysis"]
 
+# Crumbs for the MASSP 2.0 structures added by build_extra.py.
+CRUMB_BY_LABEL.update({
+    "Ventral tegmental area":   ["Brain", "Brainstem", "Midbrain", "Tegmentum"],
+    "Periaqueductal grey":      ["Brain", "Brainstem", "Midbrain", "Tegmentum"],
+    "Pedunculopontine nucleus": ["Brain", "Brainstem", "Midbrain", "Tegmentum"],
+    "Dorsal raphe nucleus":     ["Brain", "Brainstem", "Midbrain", "Raphe nuclei"],
+    "Median raphe nucleus":     ["Brain", "Brainstem", "Pons", "Raphe nuclei"],
+    "Basal forebrain cholinergic nuclei": ["Brain", "Cerebrum", "Telencephalon", "Basal forebrain"],
+    "Claustrum":                ["Brain", "Cerebrum", "Telencephalon", "Basal nuclei"],
+    "Internal capsule":         ["Brain", "Cerebrum", "Telencephalon", "White matter of telencephalon"],
+})
+
 # Plain-language descriptions for the new sub-structures.
 descriptions.update({
     "Globus pallidus external":
@@ -126,6 +138,36 @@ descriptions.update({
         "Lobule IX of the cerebellar vermis, part of the spinocerebellum.",
     "Anterior cochlear nucleus":
         "First brainstem relay of the auditory nerve, in the rostral medulla.",
+    # MASSP 2.0 structures (build_extra.py)
+    "Ventral tegmental area":
+        "Midbrain dopamine cell group just medial to the substantia nigra; source of the "
+        "mesolimbic and mesocortical pathways of reward, motivation and learning.",
+    "Periaqueductal grey":
+        "Grey matter sleeve around the cerebral aqueduct; coordinates defensive "
+        "behaviour, pain suppression (descending analgesia), vocalisation and autonomic "
+        "responses.",
+    "Pedunculopontine nucleus":
+        "Cholinergic/glutamatergic nucleus of the upper pontine tegmentum in the "
+        "mesencephalic locomotor region; involved in gait, posture and REM sleep, and a "
+        "deep-brain-stimulation target for gait freezing in Parkinson's disease.",
+    "Dorsal raphe nucleus":
+        "Largest serotonin nucleus, in the midline of the midbrain below the aqueduct; "
+        "projects widely to the forebrain to regulate mood, sleep and arousal.",
+    "Median raphe nucleus":
+        "Midline serotonin nucleus of the upper pons; projects to the hippocampus and "
+        "septum, modulating memory, arousal and hippocampal rhythms.",
+    "Basal forebrain cholinergic nuclei":
+        "Cholinergic cell groups beneath the basal ganglia (Ch1-Ch4, largely the nucleus "
+        "basalis of Meynert); the main acetylcholine supply to the cortex, important for "
+        "attention and memory and degenerating early in Alzheimer's disease.",
+    "Claustrum":
+        "Thin sheet of grey matter between the putamen and the insula, reciprocally "
+        "connected with almost all of the cortex; thought to help coordinate attention "
+        "across cortical networks.",
+    "Internal capsule":
+        "Compact V-shaped white-matter band between the caudate/thalamus and the lentiform "
+        "nucleus; carries the corticospinal, corticobulbar and thalamocortical fibres, so "
+        "small strokes here cause large deficits.",
 })
 
 
@@ -172,7 +214,8 @@ for n in manifest["nodes"]:
 
 brain = {
     "generatedFrom": "Z-Anatomy / BodyParts3D (CC BY-SA 4.0); deep nuclei "
-                     "registered from CIT168 (CC BY 4.0) and Najdenovska 2018 (CC BY-SA 4.0)",
+                     "registered from CIT168 (CC BY 4.0), Najdenovska 2018 (CC BY-SA 4.0) "
+                     "and MASSP 2.0 (CC BY 4.0)",
     "categories": {c: {"label": v["label"], "count": v["count"]}
                    for c, v in manifest["categories"].items()},
     "palette": palette,
@@ -182,8 +225,8 @@ brain = {
 }
 
 header = ("/* Auto-generated from manifest.json by scripts/gen_data.py - Brain Atlas "
-          "dataset (CC BY-SA 4.0, Z-Anatomy/BodyParts3D; deep nuclei from CIT168 & "
-          "Najdenovska, see README). */\n")
+          "dataset (CC BY-SA 4.0, Z-Anatomy/BodyParts3D; deep nuclei from CIT168, "
+          "Najdenovska & MASSP 2.0, see README). */\n")
 with open(DATA, "w") as f:
     f.write(header)
     f.write("window.BRAIN = " + json.dumps(brain, ensure_ascii=False) + ";\n")
